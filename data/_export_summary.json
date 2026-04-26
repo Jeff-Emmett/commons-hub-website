@@ -1,0 +1,187 @@
+{
+  "tables": {
+    "accommodation_offerings": {
+      "rows": 4,
+      "file": "data/tables/accommodation_offerings.json"
+    },
+    "accommodation_prices": {
+      "rows": 4,
+      "file": "data/tables/accommodation_prices.json"
+    },
+    "accordion_items": {
+      "rows": 21,
+      "file": "data/tables/accordion_items.json"
+    },
+    "accordions": {
+      "rows": 10,
+      "file": "data/tables/accordions.json"
+    },
+    "addresses": {
+      "rows": 0,
+      "file": "data/tables/addresses.json"
+    },
+    "beds": {
+      "rows": 2,
+      "file": "data/tables/beds.json"
+    },
+    "carousel_items": {
+      "rows": 7,
+      "file": "data/tables/carousel_items.json"
+    },
+    "carousels": {
+      "rows": 2,
+      "file": "data/tables/carousels.json"
+    },
+    "categories": {
+      "rows": 9,
+      "file": "data/tables/categories.json"
+    },
+    "category_accordion": {
+      "rows": 3,
+      "file": "data/tables/category_accordion.json"
+    },
+    "category_carousel": {
+      "rows": 1,
+      "file": "data/tables/category_carousel.json"
+    },
+    "category_post": {
+      "rows": 2,
+      "file": "data/tables/category_post.json"
+    },
+    "countries": {
+      "rows": 249,
+      "file": "data/tables/countries.json"
+    },
+    "eventpages": {
+      "rows": 11,
+      "file": "data/tables/eventpages.json"
+    },
+    "identifications": {
+      "rows": 0,
+      "file": "data/tables/identifications.json"
+    },
+    "identities": {
+      "rows": 0,
+      "file": "data/tables/identities.json"
+    },
+    "locations": {
+      "rows": 1,
+      "file": "data/tables/locations.json"
+    },
+    "menu": {
+      "rows": 6,
+      "file": "data/tables/menu.json"
+    },
+    "organisations": {
+      "rows": 0,
+      "file": "data/tables/organisations.json"
+    },
+    "page_accordion": {
+      "rows": 8,
+      "file": "data/tables/page_accordion.json"
+    },
+    "page_carousel": {
+      "rows": 1,
+      "file": "data/tables/page_carousel.json"
+    },
+    "page_category": {
+      "rows": 11,
+      "file": "data/tables/page_category.json"
+    },
+    "page_images": {
+      "rows": 0,
+      "file": "data/tables/page_images.json"
+    },
+    "page_post": {
+      "rows": 0,
+      "file": "data/tables/page_post.json"
+    },
+    "pages": {
+      "rows": 12,
+      "file": "data/tables/pages.json"
+    },
+    "post_accordion": {
+      "rows": 0,
+      "file": "data/tables/post_accordion.json"
+    },
+    "post_carousel": {
+      "rows": 0,
+      "file": "data/tables/post_carousel.json"
+    },
+    "posts": {
+      "rows": 10,
+      "file": "data/tables/posts.json"
+    },
+    "profilepages": {
+      "rows": 0,
+      "file": "data/tables/profilepages.json"
+    },
+    "profiles": {
+      "rows": 0,
+      "file": "data/tables/profiles.json"
+    },
+    "progressbar": {
+      "rows": 0,
+      "file": "data/tables/progressbar.json"
+    },
+    "public_profiles": {
+      "rows": 96,
+      "file": "data/tables/public_profiles.json"
+    },
+    "role_permissions": {
+      "rows": 0,
+      "file": "data/tables/role_permissions.json"
+    },
+    "room_ao": {
+      "rows": 0,
+      "file": "data/tables/room_ao.json"
+    },
+    "rooms": {
+      "rows": 1,
+      "file": "data/tables/rooms.json"
+    },
+    "stake_links": {
+      "rows": 0,
+      "file": "data/tables/stake_links.json"
+    },
+    "subscribers": {
+      "rows": 0,
+      "file": "data/tables/subscribers.json"
+    },
+    "team_members": {
+      "rows": 3,
+      "file": "data/tables/team_members.json"
+    },
+    "user_roles": {
+      "status": "error"
+    }
+  },
+  "views": {
+    "carousel_items_with_images": {
+      "rows": 7,
+      "file": "data/views/carousel_items_with_images.json"
+    },
+    "homepage_with_related_data": {
+      "rows": 1,
+      "file": "data/views/homepage_with_related_data.json"
+    },
+    "page_with_related_data": {
+      "rows": 23,
+      "file": "data/views/page_with_related_data.json"
+    },
+    "user_roles_view": {
+      "rows": 2,
+      "file": "data/views/user_roles_view.json"
+    },
+    "website_images": {
+      "rows": 136,
+      "file": "data/views/website_images.json"
+    }
+  },
+  "storage": {
+    "bucket": "website-images",
+    "ok": 136,
+    "err": 0,
+    "total_unique_names": 136
+  }
+}

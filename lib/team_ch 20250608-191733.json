@@ -1,0 +1,38 @@
+[
+	{
+		"id": "49237bef-0313-4185-b70e-b7e48faf6dac",
+		"status": "published",
+		"sort": 1,
+		"name": "Felix Fritsch, PhD",
+		"role": "Co-Founder",
+		"bio": "<p>Combining expertise in political and economic theory with a passion for community organizing, I craft narratives that connect technological innovation with broader societal transformation. I thrive on uniting diverse perspectives to elevate discussions beyond technical matters. I am a founder of the Crypto Commons Association and a green-tech startup, and I recently completed my PhD on <em>The Emergence of the Crypto Commons</em>.</p>",
+		"profile_image": "bd2473bb-5223-43b3-85c9-d46feb66e1e7"
+	},
+	{
+		"id": "d8e0bfae-2021-478a-bea8-6c5e22953eae",
+		"status": "published",
+		"sort": 2,
+		"name": "Emil Fritsch",
+		"role": "Co-Founder",
+		"bio": "<p>Coming from a civil engineering background, I got into IT during the 2017 neural network chess engine revolution. In 2020, I saw Hirschwangerhof&rsquo;s potential and organized its first event&mdash;a 3-week hackathon and retreat&mdash;paving the way for the Commons Hub. I&rsquo;ve worked in computer vision, started a green tech company, and built validator nodes for the hub. I love starting cool projects and making things happen.</p>",
+		"profile_image": "7a1d8808-6eae-4fd9-904e-cb19e1514c7d"
+	},
+	{
+		"id": "dbfce1f8-5e1c-4a8e-b75f-a4db3ac7f8c1",
+		"status": "published",
+		"sort": 3,
+		"name": "Daniel Richard de Oliviera Figueiredo",
+		"role": "Hospitality Manager",
+		"bio": "<p>Daniel joined our team with a unique blend of practicality, intelligence, and charm. His exceptional problem-solving skills and calm approach to tackling tough situations have quickly made him an invaluable member of the group. With his upbeat attitude and ability to turn challenges into opportunities, Daniel plays a key role in our success and brings a positive energy to everything he does.&nbsp;</p>",
+		"profile_image": "9a05bd6a-2a09-4fd7-927a-11ad9b564c2e"
+	},
+	{
+		"id": "efb3640d-500d-4611-a4df-3eb603f7352c",
+		"status": "published",
+		"sort": 4,
+		"name": "Eva Gentner",
+		"role": "Remote Assistant",
+		"bio": "<p>Operating from different places around the globe, Eva is the remote assistant who keeps everything running smoothly. Balancing professionalism with warmth, she brings a personal touch to our small team. Eva has an interdisciplinary background in the humanities and is particularly interested in the intersection between disciplines, such as art, technology, and philosophy, and deeply cares about interpersonal relationships. This is also how she got involved with the Crypto Commons.</p>",
+		"profile_image": "5bd1705e-df93-4790-9748-c60a289ea833"
+	}
+]

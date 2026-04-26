@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1,
+    "status": "published",
+    "sort": 1,
+    "name": "Felix Fritsch, PhD",
+    "role": "Co-Founder",
+    "profile_image": "ea7b3476-3f53-48e9-8c0c-123833638f96",
+    "bio": "<p>Combining expertise in political and economic theory with a passion for community organizing, I craft narratives that connect technological innovation with broader societal transformation. I thrive on uniting diverse perspectives to elevate discussions beyond technical matters. I am a founder of the Crypto Commons Association and a green-tech startup, and I recently completed my PhD on <em>The Emergence of the Crypto Commons</em>.</p>",
+    "user_created": null,
+    "date_created": null,
+    "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "date_updated": "2025-07-01T13:34:40.204486+00:00"
+  },
+  {
+    "id": 2,
+    "status": "published",
+    "sort": 2,
+    "name": "Emil Fritsch",
+    "role": "Co-Founder",
+    "profile_image": "8af2a289-fd98-4941-90ed-d841b4311491",
+    "bio": "<p style=\"text-align: left\">Coming from a civil engineering background, I got into IT during the 2017 neural network chess engine revolution. In 2020, I saw Hirschwangerhof\u2019s potential and organized its first event\u2014a 3-week hackathon and retreat\u2014paving the way for the <strong>commons hub</strong>. I\u2019ve worked in computer vision, started a green tech company, and built validator nodes for the hub. I love starting cool projects and making things happen.</p>",
+    "user_created": null,
+    "date_created": null,
+    "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "date_updated": "2025-07-01T13:35:48.645916+00:00"
+  },
+  {
+    "id": 3,
+    "status": "published",
+    "sort": 3,
+    "name": "Daniel Richard de Oliviera Figueiredo",
+    "role": "Hospitality Manager",
+    "profile_image": "afc3dfbe-59a9-4f2f-b4b1-f14237dda6b0",
+    "bio": "<p>Daniel joined our team with a unique blend of practicality, intelligence, and charm. His exceptional problem-solving skills and calm approach to tackling tough situations have quickly made him an invaluable member of the group. With his upbeat attitude and ability to turn challenges into opportunities, Daniel plays a key role in our success and brings a positive energy to everything he does.&nbsp;</p>",
+    "user_created": null,
+    "date_created": null,
+    "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "date_updated": "2025-07-01T13:34:59.770411+00:00"
+  }
+]

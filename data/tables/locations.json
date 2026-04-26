@@ -1,0 +1,15 @@
+[
+  {
+    "id": 2,
+    "name": "Commons Hub Hirschwangerhof",
+    "description": "OG Hacker House",
+    "address": "Richard von Schoeller-Strasse 9",
+    "city": "Reichenau an der Rax",
+    "country_id": 15,
+    "is_active": true,
+    "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "created_at": "2025-07-11T22:51:50.366192+00:00",
+    "updated_at": "2025-07-11T22:51:50.366192+00:00"
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "id": 3,
+    "status": "published",
+    "user_created": null,
+    "date_created": null,
+    "user_updated": null,
+    "date_updated": null,
+    "name_not_used": "FOUNDATIONS-VISION-MISSION"
+  },
+  {
+    "id": 4,
+    "status": "published",
+    "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "date_created": "2025-07-01T11:27:47.247379+00:00",
+    "user_updated": "258593a6-4999-4401-8ea6-5959100f1278",
+    "date_updated": "2025-07-21T14:41:39.857911+00:00",
+    "name_not_used": "LODGING-EVENT HOSTING-EVENT ORGANIZATION"
+  },
+  {
+    "id": 5,
+    "status": "published",
+    "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "date_created": "2025-07-01T11:55:49.637934+00:00",
+    "user_updated": "258593a6-4999-4401-8ea6-5959100f1278",
+    "date_updated": "2025-09-25T15:32:11.508203+00:00",
+    "name_not_used": "COSMOS-REGEN"
+  },
+  {
+    "id": 6,
+    "status": "published",
+    "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "date_created": "2025-07-01T14:38:34.598694+00:00",
+    "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "date_updated": "2025-07-01T14:43:13.137447+00:00",
+    "name_not_used": "GUESTHOUSE_ACC"
+  },
+  {
+    "id": 7,
+    "status": "published",
+    "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "date_created": "2025-07-01T14:53:52.726626+00:00",
+    "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "date_updated": "2025-07-01T14:57:11.053571+00:00",
+    "name_not_used": "EVENT_LOCATION_ACC"
+  },
+  {
+    "id": 10,
+    "status": "published",
+    "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
+    "date_created": "2025-09-25T08:21:15.129167+00:00",
+    "user_updated": "258593a6-4999-4401-8ea6-5959100f1278",
+    "date_updated": "2025-09-25T11:49:31.183849+00:00",
+    "name_not_used": "HIKING & CLIMBING"
+  },
+  {
+    "id": 11,
+    "status": "published",
+    "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
+    "date_created": "2025-09-25T09:06:58.313209+00:00",
+    "user_updated": "258593a6-4999-4401-8ea6-5959100f1278",
+    "date_updated": "2025-09-25T10:17:33.746803+00:00",
+    "name_not_used": "(SUN)BATHING"
+  },
+  {
+    "id": 12,
+    "status": "published",
+    "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
+    "date_created": "2025-09-25T10:18:13.755511+00:00",
+    "user_updated": "258593a6-4999-4401-8ea6-5959100f1278",
+    "date_updated": "2025-09-25T11:49:59.519371+00:00",
+    "name_not_used": "CULTURE"
+  },
+  {
+    "id": 13,
+    "status": "published",
+    "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
+    "date_created": "2025-09-25T10:25:48.772437+00:00",
+    "user_updated": "258593a6-4999-4401-8ea6-5959100f1278",
+    "date_updated": "2025-09-25T11:14:52.038287+00:00",
+    "name_not_used": "FABLAB"
+  },
+  {
+    "id": 14,
+    "status": "published",
+    "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
+    "date_created": "2025-09-25T11:15:15.614903+00:00",
+    "user_updated": "258593a6-4999-4401-8ea6-5959100f1278",
+    "date_updated": "2025-09-25T11:23:33.217608+00:00",
+    "name_not_used": "GARDENING"
+  }
+]

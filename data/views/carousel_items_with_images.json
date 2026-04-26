@@ -1,0 +1,86 @@
+[
+  {
+    "id": 61,
+    "carousel_id": 55,
+    "image": "ca0e915b-5a61-4b82-a7e7-d8c4c61902f0",
+    "image_url": "https://zjddaiekqxxdejpcdbbp.supabase.co/storage/v1/object/public/website-images/1751301486616.jpg",
+    "quote": "<p style=\"text-align: center\"><em>\"The Commons Hub is a beautiful physical space which engenders equally beautiful social and intellectual spaces.\" &nbsp;</em></p><p style=\"text-align: center\"><strong>Dr Michael Zargham, BlockScience (CEO)</strong></p>",
+    "button_link": "",
+    "date_created": null,
+    "date_updated": null,
+    "user_created": null,
+    "user_updated": null
+  },
+  {
+    "id": 62,
+    "carousel_id": 55,
+    "image": "08f2faf5-2e8b-4659-88e5-ad9bf9c1c0e0",
+    "image_url": "https://zjddaiekqxxdejpcdbbp.supabase.co/storage/v1/object/public/website-images/1751301539314.jpg",
+    "quote": "<p style=\"text-align: center\"><em>\"Commons Hub is a bastion for IRL community and action learning commoning. The landscape and accommodations foster long-form thought, lively discourse, and meaningful relationship building.\"</em></p><p style=\"text-align: center\"><strong>Will Szal, Regen Foundation</strong></p>",
+    "button_link": "",
+    "date_created": null,
+    "date_updated": null,
+    "user_created": null,
+    "user_updated": null
+  },
+  {
+    "id": 63,
+    "carousel_id": 55,
+    "image": "c613c2dc-48fb-4d88-b3e6-243be43655c7",
+    "image_url": "https://zjddaiekqxxdejpcdbbp.supabase.co/storage/v1/object/public/website-images/1751301590060.png",
+    "quote": "<p style=\"text-align: center\"><em>\"The Commons Hub is pushing the boundaries of crypto and post-capitalism through imaginative experiments and productive dialogue. I\u2019ve seriously enjoyed my time at the Hub and benefited from the broader network this node has spawned.\"&nbsp;</em></p><p style=\"text-align: center\"><strong>Ori Shimony, d0rg (co-founder)</strong></p>",
+    "button_link": "",
+    "date_created": null,
+    "date_updated": null,
+    "user_created": null,
+    "user_updated": null
+  },
+  {
+    "id": 64,
+    "carousel_id": 56,
+    "image": "8fae4a22-bd3e-4571-bfa4-c5f837b0ec2d",
+    "image_url": "https://zjddaiekqxxdejpcdbbp.supabase.co/storage/v1/object/public/website-images/1751377219927.JPG",
+    "quote": "<p style=\"text-align: center\">The river Schwarza</p>",
+    "button_link": "",
+    "date_created": "2025-07-01T13:40:39.797775+00:00",
+    "date_updated": "2025-07-01T14:31:32.365701+00:00",
+    "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
+  },
+  {
+    "id": 65,
+    "carousel_id": 56,
+    "image": "3a067355-299b-4d68-a662-b1eadc74c38b",
+    "image_url": "https://zjddaiekqxxdejpcdbbp.supabase.co/storage/v1/object/public/website-images/1751377277770.JPG",
+    "quote": "<p style=\"text-align: center\">Rax in winter</p>",
+    "button_link": "",
+    "date_created": "2025-07-01T13:41:31.283154+00:00",
+    "date_updated": "2025-07-01T14:31:40.874017+00:00",
+    "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
+  },
+  {
+    "id": 66,
+    "carousel_id": 56,
+    "image": "dc537a4f-bfde-41d7-8b65-9fe0abcc7356",
+    "image_url": "https://zjddaiekqxxdejpcdbbp.supabase.co/storage/v1/object/public/website-images/1751377438008.jpg",
+    "quote": "<p style=\"text-align: center\">Hiking &amp; rock climbing paradise!</p>",
+    "button_link": "",
+    "date_created": "2025-07-01T13:44:23.650438+00:00",
+    "date_updated": "2025-07-01T14:31:46.624249+00:00",
+    "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
+  },
+  {
+    "id": 67,
+    "carousel_id": 56,
+    "image": "8a03d349-e9e2-4afd-b8b1-18a976594c13",
+    "image_url": "https://zjddaiekqxxdejpcdbbp.supabase.co/storage/v1/object/public/website-images/1751377667602.jpeg",
+    "quote": "<p style=\"text-align: center\">Getting ready for the hike!</p>",
+    "button_link": "",
+    "date_created": "2025-07-01T13:47:50.574853+00:00",
+    "date_updated": "2025-07-01T14:31:51.895062+00:00",
+    "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
+  }
+]

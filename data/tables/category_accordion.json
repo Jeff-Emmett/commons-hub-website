@@ -1,0 +1,26 @@
+[
+  {
+    "category_id": 88,
+    "accordion_id": 6,
+    "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "date_created": "2025-07-01T14:44:27.391773+00:00",
+    "user_updated": null,
+    "date_updated": null
+  },
+  {
+    "category_id": 89,
+    "accordion_id": 7,
+    "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "date_created": "2025-07-01T14:58:11.112834+00:00",
+    "user_updated": null,
+    "date_updated": null
+  },
+  {
+    "category_id": 93,
+    "accordion_id": 5,
+    "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
+    "date_created": "2025-09-25T14:40:21.711762+00:00",
+    "user_updated": null,
+    "date_updated": null
+  }
+]

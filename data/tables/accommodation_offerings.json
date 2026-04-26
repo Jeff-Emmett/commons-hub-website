@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "name": "Twin Room Main Season",
+    "accommodation_type": "twin",
+    "description": "",
+    "image": "5311da05-6442-40b5-a892-e90178c5fc3e",
+    "is_exclusive": false,
+    "is_active": true,
+    "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "created_at": "2025-07-12T10:53:01.586545+00:00",
+    "updated_at": "2025-07-12T10:53:01.586545+00:00"
+  },
+  {
+    "id": 2,
+    "name": "Single Room Main Season",
+    "accommodation_type": "single",
+    "description": "",
+    "image": "fbf80982-8235-48c0-9a5a-c70ee65d1a9f",
+    "is_exclusive": true,
+    "is_active": true,
+    "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "created_at": "2025-07-12T11:11:43.597954+00:00",
+    "updated_at": "2025-07-12T11:11:43.597954+00:00"
+  },
+  {
+    "id": 4,
+    "name": "Dormitory Main Season",
+    "accommodation_type": "dormitory",
+    "description": "",
+    "image": "80f5e81f-5b1a-4c06-b74d-be0c4f1cb62f",
+    "is_exclusive": false,
+    "is_active": true,
+    "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "created_at": "2025-07-12T11:17:21.203398+00:00",
+    "updated_at": "2025-07-12T11:17:21.203398+00:00"
+  },
+  {
+    "id": 5,
+    "name": "Double Room Main Season",
+    "accommodation_type": "double",
+    "description": "",
+    "image": "3e1f6de9-a123-403d-8347-135b43348364",
+    "is_exclusive": true,
+    "is_active": true,
+    "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "created_at": "2025-07-12T11:17:54.315113+00:00",
+    "updated_at": "2025-07-12T11:17:54.315113+00:00"
+  }
+]

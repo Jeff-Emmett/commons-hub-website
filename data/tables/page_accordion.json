@@ -1,0 +1,66 @@
+[
+  {
+    "page_id": 2,
+    "accordion_id": 3,
+    "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "date_created": "2025-07-01T09:28:00.508364+00:00",
+    "user_updated": null,
+    "date_updated": null
+  },
+  {
+    "page_id": 156,
+    "accordion_id": 4,
+    "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "date_created": "2025-07-01T11:33:01.035171+00:00",
+    "user_updated": null,
+    "date_updated": null
+  },
+  {
+    "page_id": 158,
+    "accordion_id": 5,
+    "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "date_created": "2025-07-01T11:58:07.601221+00:00",
+    "user_updated": null,
+    "date_updated": null
+  },
+  {
+    "page_id": 207,
+    "accordion_id": 10,
+    "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
+    "date_created": "2025-09-25T09:06:11.899927+00:00",
+    "user_updated": null,
+    "date_updated": null
+  },
+  {
+    "page_id": 207,
+    "accordion_id": 11,
+    "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
+    "date_created": "2025-09-25T11:24:17.136524+00:00",
+    "user_updated": null,
+    "date_updated": null
+  },
+  {
+    "page_id": 207,
+    "accordion_id": 12,
+    "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
+    "date_created": "2025-09-25T11:24:20.528045+00:00",
+    "user_updated": null,
+    "date_updated": null
+  },
+  {
+    "page_id": 207,
+    "accordion_id": 13,
+    "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
+    "date_created": "2025-09-25T11:24:21.875694+00:00",
+    "user_updated": null,
+    "date_updated": null
+  },
+  {
+    "page_id": 207,
+    "accordion_id": 14,
+    "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
+    "date_created": "2025-09-25T11:24:24.192657+00:00",
+    "user_updated": null,
+    "date_updated": null
+  }
+]

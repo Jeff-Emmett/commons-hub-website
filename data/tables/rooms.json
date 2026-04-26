@@ -1,0 +1,15 @@
+[
+  {
+    "id": 1,
+    "name": "Room 1",
+    "description": "This room offers two single rooms and a private basin",
+    "room_number": "1",
+    "image": "72451d6e-2a89-4823-8339-835c5b313726",
+    "location_id": 2,
+    "is_active": true,
+    "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "created_at": "2025-07-11T22:53:28.546812+00:00",
+    "updated_at": "2025-07-11T22:53:28.546812+00:00"
+  }
+]

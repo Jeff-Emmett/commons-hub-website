@@ -1,0 +1,26 @@
+services:
+  web:
+    container_name: commons-hub-web
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+      SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY}
+    networks:
+      - traefik-public
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik-public
+      - traefik.http.routers.commons-hub-web.rule=Host(`commons-hub.jeffemmett.com`)
+      - traefik.http.routers.commons-hub-web.entrypoints=web
+      - traefik.http.routers.commons-hub-web.service=commons-hub-web
+      - traefik.http.services.commons-hub-web.loadbalancer.server.port=3000
+
+networks:
+  traefik-public:
+    external: true
