@@ -16,7 +16,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.docker.network=traefik-public
-      - traefik.http.routers.commons-hub-web.rule=Host(`commons-hub.jeffemmett.com`)
+      - traefik.http.routers.commons-hub-web.rule=Host(`commons-hub.at`) || Host(`www.commons-hub.at`)
       - traefik.http.routers.commons-hub-web.entrypoints=web
       - traefik.http.routers.commons-hub-web.service=commons-hub-web
       - traefik.http.services.commons-hub-web.loadbalancer.server.port=3000

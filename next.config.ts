@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'zjddaiekqxxdejpcdbbp.supabase.co' },
-      { protocol: 'https', hostname: 'commons-hub-api.jeffemmett.com' },
+      { protocol: 'https', hostname: 'api.commons-hub.at' },
       { protocol: 'http',  hostname: 'localhost' },
     ],
     dangerouslyAllowSVG: true,
