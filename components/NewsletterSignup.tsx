@@ -1,8 +1,6 @@
-//added by windsurf start
 'use client';
 
 import { useState } from 'react';
-import { createClient } from '@/lib/supabase/client';
 
 export default function NewsletterSignup() {
   const [email, setEmail] = useState('');
@@ -12,38 +10,32 @@ export default function NewsletterSignup() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isSubmitting) return;
-    
+
     try {
       setIsSubmitting(true);
-      
-      // Email validation
+
       const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       if (!email || !emailRegex.test(email) || email.length > 255) {
         setStatus('Please enter a valid email address.');
         return;
       }
-      
-      // Create Supabase client
-      const supabase = createClient();
-      
-      // Insert subscriber directly
-      const { error } = await supabase
-        .from('subscribers')
-        .insert([{ email }]);
-      
-      if (error) {
-        // Check if it's a unique violation (duplicate email)
-        if (error.code === '23505') { // Postgres unique constraint violation
-          setStatus('Thank you for your interest!');
-          setEmail('');
-        } else {
-          console.error('Subscription error:', error);
-          setStatus('An error occurred. Please try again.');
-        }
-      } else {
-        setStatus('Thank you for subscribing!');
-        setEmail('');
+
+      const res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      const body = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setStatus(body.error ?? 'An error occurred. Please try again.');
+        return;
       }
+      setStatus(
+        body.welcomeEmailQueued === false
+          ? "Thanks for subscribing! Welcome email's on its way shortly."
+          : 'Thanks for subscribing! Check your inbox for a welcome message.',
+      );
+      setEmail('');
     } catch (error) {
       console.error('Subscription error:', error);
       setStatus('An error occurred. Please try again.');
@@ -104,4 +96,3 @@ export default function NewsletterSignup() {
     </div>
   );
 }
-//added by windsurf end

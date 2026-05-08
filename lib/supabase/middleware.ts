@@ -2,7 +2,6 @@ import { NextResponse, type NextRequest } from "next/server";
 import { ACCESS_COOKIE, REFRESH_COOKIE } from "@/lib/directus/cookies";
 
 const PUBLIC_PREFIXES = [
-  "/",
   "/page",
   "/category",
   "/post",
@@ -12,15 +11,13 @@ const PUBLIC_PREFIXES = [
   "/pitchdecks",
   "/brochures",
   "/auth",
-  "/api/auth",
-  "/api/og",
 ];
 
 function isPublic(pathname: string) {
   if (pathname === "/") return true;
-  return PUBLIC_PREFIXES.some(
-    (prefix) => prefix !== "/" && pathname.startsWith(prefix),
-  );
+  // API routes manage their own auth — no middleware redirects.
+  if (pathname.startsWith("/api/")) return true;
+  return PUBLIC_PREFIXES.some((prefix) => pathname.startsWith(prefix));
 }
 
 export async function updateSession(request: NextRequest) {
