@@ -8,6 +8,7 @@ services:
         NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
     restart: unless-stopped
     environment:
+      HOSTNAME: 0.0.0.0
       NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
       NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
       SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY}
@@ -21,6 +22,41 @@ services:
       - traefik.http.routers.commons-hub-web.service=commons-hub-web
       - traefik.http.services.commons-hub-web.loadbalancer.server.port=3000
 
+  # PostgREST replaces the archived Supabase stack: serves the original
+  # Supabase REST surface (/rest/v1/*) directly off the Directus PostgreSQL
+  # database. Directus admin (admin.commons-hub.at) is the editor; PostgREST
+  # is the read/write API the Next.js app speaks via @supabase/ssr.
+  # Roles required in the directus DB: authenticator (LOGIN), anon, authenticated, service_role.
+  postgrest:
+    container_name: commons-hub-postgrest
+    image: postgrest/postgrest:v12.2.3
+    restart: unless-stopped
+    mem_limit: 256m
+    environment:
+      PGRST_DB_URI: postgres://authenticator:${PGRST_AUTHENTICATOR_PW}@commons-hub-directus-db:5432/directus
+      PGRST_DB_SCHEMAS: public
+      PGRST_DB_ANON_ROLE: anon
+      PGRST_JWT_SECRET: ${PGRST_JWT_SECRET}
+      PGRST_DB_USE_LEGACY_GUCS: "false"
+      PGRST_DB_POOL: "5"
+      PGRST_OPENAPI_MODE: ignore-privileges
+      PGRST_SERVER_PORT: "3000"
+    networks:
+      - traefik-public
+      - commons-hub-directus-net
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik-public
+      - traefik.http.routers.commons-hub-postgrest.rule=Host(`api.commons-hub.at`) && PathPrefix(`/rest/v1`)
+      - traefik.http.routers.commons-hub-postgrest.entrypoints=web
+      - traefik.http.routers.commons-hub-postgrest.priority=200
+      - traefik.http.routers.commons-hub-postgrest.service=commons-hub-postgrest
+      - traefik.http.routers.commons-hub-postgrest.middlewares=commons-hub-postgrest-strip
+      - traefik.http.middlewares.commons-hub-postgrest-strip.stripprefix.prefixes=/rest/v1
+      - traefik.http.services.commons-hub-postgrest.loadbalancer.server.port=3000
+
 networks:
   traefik-public:
+    external: true
+  commons-hub-directus-net:
     external: true
