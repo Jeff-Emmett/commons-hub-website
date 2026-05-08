@@ -12,8 +12,10 @@ services:
       NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
       NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
       SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY}
+      DIRECTUS_URL: ${DIRECTUS_URL:-http://commons-hub-directus:8055}
     networks:
       - traefik-public
+      - commons-hub-directus-net
     labels:
       - traefik.enable=true
       - traefik.docker.network=traefik-public

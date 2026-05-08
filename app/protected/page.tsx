@@ -1,18 +1,18 @@
 import { redirect } from "next/navigation";
 import Image from "next/image";
-import { createClient } from "@/lib/supabase/server";
+import { getCurrentUser } from "@/lib/directus/auth";
 import WhiteOverlay from "@/components/WhiteOverlay";
 import ClientSideRout from "@/components/ClientSideRout";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import ScrollIndicator from "@/components/ScrollIndicator";
 
 export default async function ProtectedPage() {
-  const supabase = await createClient();
-
-  const { data, error } = await supabase.auth.getUser();
-  if (error || !data?.user) {
+  const user = await getCurrentUser();
+  if (!user) {
     redirect("/auth/login");
   }
+  const greetingName =
+    user.first_name?.trim() || user.email.split("@")[0] || "Member";
 
   return (
     <div className="section">
@@ -80,7 +80,7 @@ export default async function ProtectedPage() {
               </div>
               <div className="description-block relative overflow-hidden bg-slate-50 items-center">
                 <WhiteOverlay />
-                <h1 className="h1 mb-0 font-light">Welcome, {data.user.email?.split('@')[0] || 'Member'}!</h1>
+                <h1 className="h1 mb-0 font-light">Welcome, {greetingName}!</h1>
                 <span className="summary">
                   Your Commons Hub Portal is here. New features are on the way.
                 </span>
