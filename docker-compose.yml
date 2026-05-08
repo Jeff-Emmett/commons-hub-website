@@ -17,6 +17,11 @@ services:
       LISTMONK_TOKEN: ${LISTMONK_TOKEN}
       LISTMONK_LIST_ID: ${LISTMONK_LIST_ID}
       LISTMONK_TEMPLATE_ID: ${LISTMONK_TEMPLATE_ID}
+      # Optional. listmonk's `messenger` field on /api/tx only accepts
+      # the canonical messenger key (typically "email" for SMTP), not
+      # the per-connection display name. With one SMTP messenger
+      # configured, leave this unset so listmonk uses the default.
+      LISTMONK_MESSENGER: ${LISTMONK_MESSENGER:-}
     networks:
       - traefik-public
       - commons-hub-directus-net

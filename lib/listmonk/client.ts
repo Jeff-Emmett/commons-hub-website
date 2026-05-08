@@ -9,6 +9,11 @@ const LISTMONK_TEMPLATE_ID = Number.parseInt(
   process.env.LISTMONK_TEMPLATE_ID || "0",
   10,
 );
+// Multiple messengers may be configured on a shared instance (one per
+// co-located tenant). Pin the welcome send to the messenger that owns
+// the From: address, otherwise listmonk picks one round-robin and
+// mailcow rejects with "sender not owned by user".
+const LISTMONK_MESSENGER = process.env.LISTMONK_MESSENGER || "";
 
 type ListmonkResponse<T> = {
   data?: T;
@@ -108,11 +113,13 @@ export async function sendWelcome(email: string): Promise<void> {
   if (!LISTMONK_TEMPLATE_ID) {
     throw new Error("LISTMONK_TEMPLATE_ID is not configured");
   }
+  const txBody: Record<string, unknown> = {
+    template_id: LISTMONK_TEMPLATE_ID,
+    subscriber_email: email,
+  };
+  if (LISTMONK_MESSENGER) txBody.messenger = LISTMONK_MESSENGER;
   await listmonkRequest<true>("/api/tx", {
     method: "POST",
-    body: JSON.stringify({
-      template_id: LISTMONK_TEMPLATE_ID,
-      subscriber_email: email,
-    }),
+    body: JSON.stringify(txBody),
   });
 }
