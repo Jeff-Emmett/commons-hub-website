@@ -1,7 +1,7 @@
 import ClientSideRout from "./ClientSideRout";
 import { getEventPage } from "@/lib/actions/getEventPage";
 // import { Database } from "@/lib/database.types";
-import IconClientImage from "./IconImageClient";
+import IconImage from "./IconImage";
 
 type Props = {
   filter?: 'upcoming' | 'past';
@@ -60,8 +60,8 @@ export async function EventGrid({ filter = 'upcoming', title = "Events" }: Props
             >
               <article className="relative isolate flex flex-col gap-8 lg:flex-row pb-10 group">
                 <div className="relative aspect-square lg:w-64 lg:shrink-0 overflow-hidden rounded-2xl">
-                <IconClientImage 
-                  mainIcon={event.main_icon} 
+                <IconImage
+                  mainIcon={event.main_icon}
                   mainImage={event.main_image}
                   title={event.title}
                 />

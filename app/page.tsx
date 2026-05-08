@@ -95,9 +95,6 @@ export default async function Home() {
               <ClientSideRout route="page/services" key={1}>
                 <div className="hero-wrapper w-inline-block py-2 border-y border-gray-100">
                   <WhiteOverlay />
-                  <div className="video-box no-bottom-stroke">
-                    <div className="w-background-video w-background-video-atom w-full"></div>
-                  </div>
                   <div className="hero-content">
                     <div className="text-box">
                       <h2 className="heading h2">SERVICES</h2>

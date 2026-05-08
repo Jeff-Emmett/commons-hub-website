@@ -9,6 +9,7 @@ interface IconImageProps {
 }
 
 export default async function IconImage({ mainImage, mainIcon, title }: IconImageProps) {
+  if (!mainImage && !mainIcon) return null;
   return (
     <div className="hero-image w-embed relative overflow-hidden">
       <WhiteOverlay />

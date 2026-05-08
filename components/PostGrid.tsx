@@ -1,6 +1,6 @@
 import ClientSideRout from "./ClientSideRout";
 import { Database } from "@/lib/database.types";
-import IconClientImage from "./IconImageClient";
+import IconImage from "./IconImage";
 
 type Post = Database['public']['Tables']['posts']['Row'];
 
@@ -27,8 +27,8 @@ export default function PostGrid({ posts }: Props) {
           >
             <article className="relative isolate flex flex-col gap-8 lg:flex-row pb-10 group">
               <div className="relative aspect-square lg:w-64 lg:shrink-0 overflow-hidden rounded-2xl">
-                <IconClientImage 
-                  mainIcon={post.main_icon} 
+                <IconImage
+                  mainIcon={post.main_icon}
                   mainImage={post.main_image}
                   title={post.title}
                 />
