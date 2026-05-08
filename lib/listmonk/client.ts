@@ -1,7 +1,8 @@
 import "server-only";
 
 const LISTMONK_URL =
-  process.env.LISTMONK_URL?.replace(/\/$/, "") || "http://listmonk:9000";
+  process.env.LISTMONK_URL?.replace(/\/$/, "") ||
+  "http://commons-hub-listmonk:9000";
 const LISTMONK_TOKEN = process.env.LISTMONK_TOKEN || "";
 const LISTMONK_LIST_ID = Number.parseInt(process.env.LISTMONK_LIST_ID || "0", 10);
 const LISTMONK_TEMPLATE_ID = Number.parseInt(

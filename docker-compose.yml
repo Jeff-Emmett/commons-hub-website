@@ -13,14 +13,14 @@ services:
       NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
       SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY}
       DIRECTUS_URL: ${DIRECTUS_URL:-http://commons-hub-directus:8055}
-      LISTMONK_URL: ${LISTMONK_URL:-http://listmonk:9000}
+      LISTMONK_URL: ${LISTMONK_URL:-http://commons-hub-listmonk:9000}
       LISTMONK_TOKEN: ${LISTMONK_TOKEN}
       LISTMONK_LIST_ID: ${LISTMONK_LIST_ID}
       LISTMONK_TEMPLATE_ID: ${LISTMONK_TEMPLATE_ID}
     networks:
       - traefik-public
       - commons-hub-directus-net
-      - listmonk-internal
+      - commons-hub-listmonk-internal
     labels:
       - traefik.enable=true
       - traefik.docker.network=traefik-public
@@ -67,6 +67,5 @@ networks:
     external: true
   commons-hub-directus-net:
     external: true
-  listmonk-internal:
+  commons-hub-listmonk-internal:
     external: true
-    name: listmonk_listmonk-internal
