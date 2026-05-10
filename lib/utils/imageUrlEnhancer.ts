@@ -2,6 +2,13 @@
 
 import { createClient } from "@/lib/supabase/server";
 
+// Server-side: prefer the internal HTTP URL so the Next.js image optimizer
+// reaches Traefik's HTTP entrypoint (the websecure entrypoint has no router
+// for /storage/v1/object/public/website-images and serves a self-signed cert).
+const STORAGE_BASE_URL =
+  process.env.SUPABASE_INTERNAL_URL ||
+  process.env.NEXT_PUBLIC_SUPABASE_URL;
+
 /**
  * Enhances an array of items with image URLs by resolving image UUIDs to public URLs
  * 
@@ -51,7 +58,7 @@ export async function enhanceWithImageUrls<T extends Record<string, unknown>>(
     // Add the image URL as a new property
     if (imageId && imageMap[imageId]) {
       // Use type assertion to bypass TypeScript's index signature restriction
-      (result as Record<string, string>)[outputFieldName] = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${bucketName}/${imageMap[imageId]}`;
+      (result as Record<string, string>)[outputFieldName] = `${STORAGE_BASE_URL}/storage/v1/object/public/${bucketName}/${imageMap[imageId]}`;
     }
     
     return result as T & Record<string, string>;

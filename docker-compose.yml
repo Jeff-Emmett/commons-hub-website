@@ -6,11 +6,18 @@ services:
       args:
         NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
         NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+        # HTTP base for image URLs so the Next.js image optimizer reaches
+        # Traefik's HTTP entrypoint. The websecure entrypoint has no router
+        # for /storage/v1/object/public/website-images and serves a
+        # self-signed cert, which fails with DEPTH_ZERO_SELF_SIGNED_CERT.
+        NEXT_PUBLIC_IMAGE_BASE_URL: ${NEXT_PUBLIC_IMAGE_BASE_URL:-http://api.commons-hub.at}
     restart: unless-stopped
     environment:
       HOSTNAME: 0.0.0.0
       NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
       NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+      NEXT_PUBLIC_IMAGE_BASE_URL: ${NEXT_PUBLIC_IMAGE_BASE_URL:-http://api.commons-hub.at}
+      SUPABASE_INTERNAL_URL: ${SUPABASE_INTERNAL_URL:-http://api.commons-hub.at}
       SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY}
       DIRECTUS_URL: ${DIRECTUS_URL:-http://commons-hub-directus:8055}
       LISTMONK_URL: ${LISTMONK_URL:-http://commons-hub-listmonk:9000}

@@ -6,15 +6,21 @@ import { createClient } from '@/lib/supabase/server';
  * @param bucketName - The name of the bucket (defaults to 'website-images')
  * @returns The complete URL to the image
  */
+// SUPABASE_INTERNAL_URL routes to Traefik's HTTP entrypoint, which has a
+// /storage/v1/object/public/website-images router. The public HTTPS host
+// has no websecure router and serves a self-signed cert, so server-side
+// fetches (Next image optimizer) fail with DEPTH_ZERO_SELF_SIGNED_CERT.
+const baseUrl =
+  process.env.SUPABASE_INTERNAL_URL ||
+  process.env.NEXT_PUBLIC_SUPABASE_URL;
+
 export async function getImageUrl(imageIdOrName: string, bucketName: string = 'website-images'): Promise<string> {
   if (!imageIdOrName) return '';
-  
-  // Use hardcoded project ID for simplicity, or get it from environment
-  
+
   try {
     // Check if the input looks like a UUID (simple check for length and format)
     const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-    
+
     // If it's a UUID, fetch the actual filename from website_images view
     if (uuidPattern.test(imageIdOrName)) {
       const supabase = await createClient();
@@ -23,18 +29,16 @@ export async function getImageUrl(imageIdOrName: string, bucketName: string = 'w
         .select('name')
         .eq('id', imageIdOrName)
         .single();
-      
+
       if (error || !data) {
         console.error('Error fetching image filename:', error);
         return '';
       }
-      
-      // Use the fetched filename instead of the UUID
-      return `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${bucketName}/${data.name}`;
+
+      return `${baseUrl}/storage/v1/object/public/${bucketName}/${data.name}`;
     }
-    
-    // If it's not a UUID, assume it's already a filename
-    return `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${bucketName}/${imageIdOrName}`;
+
+    return `${baseUrl}/storage/v1/object/public/${bucketName}/${imageIdOrName}`;
   } catch (error) {
     console.error('Error in getImageUrl:', error);
     return '';

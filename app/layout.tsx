@@ -10,6 +10,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 const urbanist = Urbanist({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://commons-hub.at"),
   title: {
     default: "Event Venue & Co-Living in the Austrian Alps | Commons Hub",
     template: "%s | Commons Hub",
