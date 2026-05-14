@@ -12,7 +12,10 @@ import Youtube from '@tiptap/extension-youtube'
 import Link from '@tiptap/extension-link'
 import Image from '@tiptap/extension-image'
 import ImageSelector from '@/components/admin/ImageSelector';
-import { createClient } from '@/lib/supabase/client'
+
+const DIRECTUS_ASSET_BASE = (
+  process.env.NEXT_PUBLIC_DIRECTUS_URL || 'https://admin.commons-hub.at'
+).replace(/\/$/, '');
 
 
 // Define types for the FontSize extension
@@ -459,36 +462,11 @@ const TipTapEditor = ({ value, onChange }: { value: string, onChange: (value: st
               value=""
               onChange={(imageId) => {
                 if (imageId && editor) {
-                  // Get image URL from Supabase
-                  const getImageUrl = async () => {
-                    try {
-                      const supabase = createClient();
-                      const { data, error } = await supabase
-                        .from('website_images')
-                        .select('name')
-                        .eq('id', imageId)
-                        .single();
-                        
-                      if (error || !data || !data.name) {
-                        console.error('Error fetching image details:', error);
-                        return;
-                      }
-                      
-                      // Construct the URL
-                      const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/website-images/${data.name}`;
-                      
-                      // Insert image into editor
-                      editor.chain().focus().setImage({ src: imageUrl }).run();
-                      setIsImageModalOpen(false);
-                    } catch (err) {
-                      console.error('Error processing image selection:', err);
-                    }
-                  };
-                  
-                  getImageUrl();
+                  const imageUrl = `${DIRECTUS_ASSET_BASE}/assets/${imageId}`;
+                  editor.chain().focus().setImage({ src: imageUrl }).run();
+                  setIsImageModalOpen(false);
                 }
               }}
-              bucketName="website-images"
             />
           </div>
         </div>

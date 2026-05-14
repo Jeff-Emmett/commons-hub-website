@@ -122,3 +122,94 @@ export async function createItem<T>(
     return null;
   }
 }
+
+export async function updateItem<T>(
+  collection: string,
+  id: string | number,
+  payload: Partial<T>,
+  token?: string,
+): Promise<T | null> {
+  try {
+    const body = await request<{ data: T }>(`/items/${collection}/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(payload),
+      token,
+    });
+    return body.data ?? null;
+  } catch (err) {
+    console.error(`Directus updateItem(${collection}/${id}) failed:`, (err as Error).message);
+    throw err;
+  }
+}
+
+export async function deleteItem(
+  collection: string,
+  id: string | number,
+  token?: string,
+): Promise<boolean> {
+  try {
+    await request<unknown>(`/items/${collection}/${id}`, {
+      method: "DELETE",
+      token,
+    });
+    return true;
+  } catch (err) {
+    console.error(`Directus deleteItem(${collection}/${id}) failed:`, (err as Error).message);
+    throw err;
+  }
+}
+
+export async function deleteItems(
+  collection: string,
+  ids: (string | number)[],
+  token?: string,
+): Promise<boolean> {
+  if (!ids || ids.length === 0) return true;
+  try {
+    await request<unknown>(`/items/${collection}`, {
+      method: "DELETE",
+      body: JSON.stringify(ids),
+      token,
+    });
+    return true;
+  } catch (err) {
+    console.error(`Directus deleteItems(${collection}) failed:`, (err as Error).message);
+    throw err;
+  }
+}
+
+export async function countItems(
+  collection: string,
+  filter?: Record<string, unknown>,
+  token?: string,
+): Promise<number> {
+  try {
+    const params = new URLSearchParams();
+    params.set("aggregate[count]", "*");
+    if (filter) params.set("filter", JSON.stringify(filter));
+    const body = await request<{ data: Array<{ count: { "*": string | number } | string | number }> }>(
+      `/items/${collection}?${params}`,
+      { token },
+    );
+    const raw = body.data?.[0]?.count;
+    if (typeof raw === "object" && raw !== null) {
+      return Number((raw as { "*"?: string | number })["*"] ?? 0);
+    }
+    return Number(raw ?? 0);
+  } catch (err) {
+    console.error(`Directus countItems(${collection}) failed:`, (err as Error).message);
+    return 0;
+  }
+}
+
+export async function readItemsWithCount<T>(
+  collection: string,
+  query: DirectusQuery = {},
+  token?: string,
+): Promise<{ data: T[]; total: number }> {
+  const [data, total] = await Promise.all([
+    readItems<T>(collection, query, token),
+    countItems(collection, query.filter, token),
+  ]);
+  return { data, total };
+}
