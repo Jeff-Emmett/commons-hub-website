@@ -1,38 +1,35 @@
-import { createClient } from '@/lib/supabase/server'
-import { Database } from '@/lib/database.types'
+import "server-only";
 
-// Define types for menu with pages
-type Menu = Database['public']['Tables']['menu']['Row'] & {
+import { readItems } from "@/lib/directus/client";
+import { Database } from "@/lib/database.types";
+
+type Menu = Database["public"]["Tables"]["menu"]["Row"] & {
   pages: {
-    id: number
-    title: string | null
-    slug: string | null
-  } | null
+    id: number;
+    title: string | null;
+    slug: string | null;
+  } | null;
+};
+
+interface DirectusMenuRow {
+  id: number;
+  menu_order: number | null;
+  page_id:
+    | { id: number; title: string | null; slug: string | null }
+    | number
+    | null;
+  [key: string]: unknown;
 }
 
 export async function getMenu(): Promise<Menu[] | undefined> {
-  try {
-    const supabase = await createClient()
-    
-    // First get the menu data
-    const { data: menuData, error: menuError } = await supabase
-      .from('menu')
-      .select('*, pages(id, title, slug)')
-      .order('menu_order', { ascending: true })
-    
-    if (menuError) {
-      console.error('Error fetching menu data:', menuError);
-      throw menuError;
-    }
-    
-    
-    if (!menuData || menuData.length === 0) {
-      return undefined;
-    }
-        
-    return menuData
-  } catch (error) {
-    console.error('Error fetching menus:', error)
-    return undefined
-  }
+  const rows = await readItems<DirectusMenuRow>("menu", {
+    fields: ["*", "page_id.id", "page_id.title", "page_id.slug"],
+    sort: "menu_order",
+    limit: -1,
+  });
+  if (!rows || rows.length === 0) return undefined;
+  return rows.map((row) => {
+    const page = typeof row.page_id === "object" && row.page_id ? row.page_id : null;
+    return { ...row, pages: page } as unknown as Menu;
+  });
 }

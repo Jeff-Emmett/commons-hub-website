@@ -15,14 +15,14 @@ export default async function IconImage({ mainImage, mainIcon, title }: IconImag
       <WhiteOverlay />
       {mainIcon ? (
         <Image
-          src={await getImageUrl(mainIcon, 'website-images')}
+          src={await getImageUrl(mainIcon)}
           alt={title || 'Icon'}
           width={400}
           height={400}
         />
       ) : mainImage && (
         <Image
-          src={await getImageUrl(mainImage, 'website-images')}
+          src={await getImageUrl(mainImage)}
           alt={title || 'Image'}
           width={1000}
           height={1000}

@@ -15,7 +15,7 @@ export default async function ImageIcon({ mainImage, mainIcon, title }: ImageIco
       <WhiteOverlay />
       {mainImage ? (
         <Image
-          src={await getImageUrl(mainImage, 'website-images')}
+          src={await getImageUrl(mainImage)}
           alt={title || 'Page image'}
           width={1000}
           height={1000}
@@ -23,7 +23,7 @@ export default async function ImageIcon({ mainImage, mainIcon, title }: ImageIco
         />
       ) : mainIcon && (
         <Image
-          src={await getImageUrl(mainIcon, 'website-images')}
+          src={await getImageUrl(mainIcon)}
           alt={title || 'Homepage icon'}
           width={400}
           height={400}

@@ -1,61 +1,25 @@
-// lib/actions/getTeam.tsx
 "use server";
 
-import { createClient } from "@/lib/supabase/server";
+import { readItems, readSingleton } from "@/lib/directus/client";
+import { Database } from "@/lib/database.types";
 
-/**
- * Fetches all team members
- * @returns Array of team member data objects
- */
-export async function getTeam() {
-  try {
-    const supabase = await createClient();
-    
-    const { data, error } = await supabase
-      .from('team_members')
-      .select('*')
-      .order('sort', { ascending: true });
-    
-    if (error) {
-      console.error('Error fetching team members:', error);
-      return [];
-    }
+type TeamRow = Database["public"]["Tables"]["team_members"]["Row"];
 
-    return data || [];
-  } catch (error) {
-    console.error('Unexpected error in getTeam:', error);
-    return [];
-  }
+export async function getTeam(): Promise<TeamRow[]> {
+  return readItems<TeamRow>("team_members", {
+    fields: ["*"],
+    sort: "sort",
+    limit: -1,
+  });
 }
 
-/**
- * Fetches a single team member by ID
- * @param id - The ID of the team member to fetch
- * @returns The team member data or null if not found
- */
-export async function getTeamMember(id: number) {
+export async function getTeamMember(id: number): Promise<TeamRow | null> {
   if (!id) {
-    console.error('Team member ID is required');
+    console.error("Team member ID is required");
     return null;
   }
-
-  try {
-    const supabase = await createClient();
-    
-    const { data, error } = await supabase
-      .from('team_members')
-      .select('*')
-      .eq('id', id)
-      .single();
-    
-    if (error) {
-      console.error('Error fetching team member:', error);
-      return null;
-    }
-
-    return data;
-  } catch (error) {
-    console.error('Unexpected error in getTeamMember:', error);
-    return null;
-  }
+  return readSingleton<TeamRow>("team_members", {
+    fields: ["*"],
+    filter: { id: { _eq: id } },
+  });
 }

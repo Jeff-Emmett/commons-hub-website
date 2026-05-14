@@ -165,7 +165,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                     {/* If main_image exists, use it */}
                     {Data?.main_image ? (
                       <Image
-                        src={await getImageUrl(Data.main_image, 'website-images')}
+                        src={await getImageUrl(Data.main_image)}
                         alt={Data?.title || 'Category image'}
                         width={700}
                         height={700}
@@ -175,7 +175,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                     /* If no main_image but main_icon exists, use icon */
                     Data?.main_icon ? (
                       <Image
-                        src={await getImageUrl(Data.main_icon, 'website-images')}
+                        src={await getImageUrl(Data.main_icon)}
                         alt={Data?.title || 'Category icon'}
                         width={400}
                         height={400}

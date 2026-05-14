@@ -33,17 +33,13 @@ export async function generatePageMetadata({
   // Get image URL (prioritize main image over icon)
   let imageUrl = "";
   if (image) {
-    imageUrl = await getImageUrl(image, 'website-images');
+    imageUrl = await getImageUrl(image);
   } else if (icon) {
-    imageUrl = await getImageUrl(icon, 'website-images');
+    imageUrl = await getImageUrl(icon);
   }
-  
-  // Optimize image URL for social media previews
-  // Most platforms recommend images under 1MB and with specific dimensions
-  if (imageUrl && imageUrl.includes('supabase.co/storage')) {
-    // Replace /object/ with /render/image/ in the URL path and add optimization parameters
-    imageUrl = imageUrl.replace('/object/', '/render/image/') + '?quality=60';
-    console.log("Optimized image URL for social media previews", imageUrl);
+
+  if (imageUrl && imageUrl.includes('/assets/')) {
+    imageUrl += '?quality=60';
   }
 
   // Default title fallback

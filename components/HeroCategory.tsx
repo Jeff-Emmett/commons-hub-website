@@ -14,7 +14,7 @@ export default async function HeroCategory({ category }: Props) {
       <div className="hero-content">
         {/* <div className="mb-2">
           <Image
-            src={await getImageUrl(category.main_image, 'website-images')}
+            src={await getImageUrl(category.main_image)}
             alt={category.title || 'Category image'}
             width={1000}
             height={600}
