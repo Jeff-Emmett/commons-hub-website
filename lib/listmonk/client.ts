@@ -123,3 +123,30 @@ export async function sendWelcome(email: string): Promise<void> {
     body: JSON.stringify(txBody),
   });
 }
+
+export interface TransactionalArgs {
+  templateId: number;
+  recipientEmail: string;
+  data?: Record<string, unknown>;
+  fromEmail?: string;
+}
+
+/**
+ * Generic transactional send. Caller supplies templateId and recipient;
+ * the template body references {{.Tx.Data.foo}} for variables. Use this
+ * for office-bound notifications (booking inquiries, etc.) — distinct
+ * from sendWelcome which targets new subscribers.
+ */
+export async function sendTransactional(args: TransactionalArgs): Promise<void> {
+  const txBody: Record<string, unknown> = {
+    template_id: args.templateId,
+    subscriber_email: args.recipientEmail,
+  };
+  if (args.data) txBody.data = args.data;
+  if (args.fromEmail) txBody.from_email = args.fromEmail;
+  if (LISTMONK_MESSENGER) txBody.messenger = LISTMONK_MESSENGER;
+  await listmonkRequest<true>("/api/tx", {
+    method: "POST",
+    body: JSON.stringify(txBody),
+  });
+}

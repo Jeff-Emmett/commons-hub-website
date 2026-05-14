@@ -2,9 +2,15 @@ import Image from "next/image";
 import WhiteOverlay from "@/components/WhiteOverlay";
 import ClientSideRout from "@/components/ClientSideRout";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import { BookingForm } from "@/components/bookings/BookingForm";
 
-export default async function BookingPage() {
+export const metadata = {
+  title: "Book your Stay | Commons Hub",
+  description:
+    "Reserve a single, twin, double or shared room at the Commons Hub — a guesthouse in the Austrian Alps. No front desk. Minimal rules. Maximum freedom.",
+};
 
+export default async function StayBookingPage() {
   return (
     <div className="section">
       <div className="content">
@@ -12,39 +18,56 @@ export default async function BookingPage() {
           <div className="scroll-block">
             <div className="scroll-block-element">
               <div className="p mb-8">
-                <h2 className="heading h2 mb-4">We are excited to welcome you!</h2>
-                <p className="mb-6"></p>
-              </div>
-
-              <div className="relative overflow-hidden bg-slate-50 p-6 rounded-lg mb-8">
-                <WhiteOverlay />
-                <h2 className="heading h2 mb-4">Prices:</h2>
-                <ul className="list-disc pl-6 mb-6">
-                  <li className="p mb-2">Dormitory (4-6 persons per room): 37.90€ per person per night</li>
-                  <li className="p mb-2">Twin Room: 47.90€ per person per night</li>
-                  <li className="p mb-2">Double Room: 57.90€ per person per night</li>
-                  <li className="p mb-2">Single Room: 87.90€ per person per night</li>
-                </ul>
-              </div>
-
-              <div className="relative overflow-hidden bg-slate-50 p-6 rounded-lg mb-8">
-                <WhiteOverlay />
-                <h2 className="heading h2 mb-4">How to Book:</h2>
-                <p className="p mb-4">
-                  We are working on a booking app, but for now you can book via email:
-                  <br />
-                  Send us an email at <a href="mailto:office@commons-hub.at" className="text-blue-600 hover:underline">office@commons-hub.at</a> with the subject &quot;Booking: Accommodation&quot; and following details:
+                <h2 className="heading h2 mb-4">No front desk. Minimal rules. Maximum freedom.</h2>
+                <p className="mb-2">
+                  The Commons Hub is not a traditional hotel. It&apos;s a communal guesthouse where
+                  guests share the kitchen, lounge, and garden. You&apos;ll feel more at home than
+                  at a chain — and you&apos;ll meet whoever else is staying.
                 </p>
-                <ul className="list-disc pl-6 mb-6">
-                  <li className="p mb-2">Number of persons</li>
-                  <li className="p mb-2">Room type (single, double, twin, multi-bed)</li>
-                  <li className="p mb-2">Arrival date</li>
-                  <li className="p mb-2">Departure date</li>
-                </ul>
-                <p className="p">Our team will respond shortly with the next steps.</p>
+                <p>
+                  One hour south of Vienna, on the edge of the Austrian Alps. Trail-side,
+                  vinyl, vegetable garden, fire bowl.
+                </p>
               </div>
-              
 
+              <div className="bg-slate-50 p-6 rounded-lg mb-8 relative overflow-hidden">
+                <WhiteOverlay />
+                <h2 className="heading h2 mb-4">Rooms &amp; rates</h2>
+                <p className="mb-4 text-sm text-slate-600">
+                  Per person, per night, excluding 10% VAT. City tax applies separately.
+                </p>
+                <ul className="space-y-2">
+                  <li className="flex justify-between border-b border-slate-200 py-2">
+                    <span>Single Room</span>
+                    <span className="tabular-nums">€85.00 + €4.70 tax</span>
+                  </li>
+                  <li className="flex justify-between border-b border-slate-200 py-2">
+                    <span>Double Room (twin beds)</span>
+                    <span className="tabular-nums">€91.00 + €9.40 tax</span>
+                  </li>
+                  <li className="flex justify-between border-b border-slate-200 py-2">
+                    <span>Double Room (kingsize bed)</span>
+                    <span className="tabular-nums">€91.00 + €9.40 tax</span>
+                  </li>
+                  <li className="flex justify-between py-2">
+                    <span>Shared room (4–6 beds)</span>
+                    <span className="tabular-nums">€35.20 + €4.70 tax</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="mb-8">
+                <h2 className="heading h2 mb-4">Send an inquiry</h2>
+                <BookingForm variant="stay" />
+              </div>
+
+              <p className="text-sm text-slate-500">
+                Prefer email? Write to{" "}
+                <a className="underline" href="mailto:office@commons-hub.at">
+                  office@commons-hub.at
+                </a>{" "}
+                with subject &quot;Booking: Accommodation&quot;.
+              </p>
             </div>
 
             <div className="footer">
@@ -54,10 +77,7 @@ export default async function BookingPage() {
                     <p className="bottom-link inline"> Commons Hub</p>
                   </div>
                   <div className="bottom-details">
-                    <ClientSideRout
-                      route={`/page/impressum`}
-                      ariaLabel="Impressum"
-                    >
+                    <ClientSideRout route={`/page/impressum`} ariaLabel="Impressum">
                       <p className="bottom-link">Impressum</p>
                     </ClientSideRout>
                   </div>
@@ -65,6 +85,7 @@ export default async function BookingPage() {
               </div>
             </div>
           </div>
+
           <div className="sticky-block">
             <div className="hero-block-content">
               <div className="heading-block">
@@ -83,7 +104,7 @@ export default async function BookingPage() {
               </div>
               <div className="description-block relative overflow-hidden bg-slate-50 items-center">
                 <WhiteOverlay />
-                <h1 className="h1 mb-0 font-light">BOOK YOUR STAY</h1>  
+                <h1 className="h1 mb-0 font-light">BOOK YOUR STAY</h1>
               </div>
             </div>
           </div>
