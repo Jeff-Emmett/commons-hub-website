@@ -1,5 +1,6 @@
-import Image from "next/image";
 import { getAllPublishedPosts } from "@/lib/actions/getPost";
+import { getPageBySlug } from "@/lib/actions/getPage";
+import ImageIcon from "@/components/ImageIcon";
 import WhiteOverlay from "@/components/WhiteOverlay";
 import ClientSideRout from "@/components/ClientSideRout";
 import ScrollIndicator from "@/components/ScrollIndicator";
@@ -15,7 +16,10 @@ export const metadata = {
 const INSTAGRAM_HANDLE = "commonshub";
 
 export default async function BlogIndex() {
-  const posts = await getAllPublishedPosts();
+  const [posts, page] = await Promise.all([
+    getAllPublishedPosts(),
+    getPageBySlug("blog"),
+  ]);
 
   return (
     <div className="section">
@@ -57,18 +61,11 @@ export default async function BlogIndex() {
           <div className="sticky-block">
             <div className="hero-block-content">
               <div className="heading-block">
-                <div className="icon-wrapper">
-                  <div className="icon-block">
-                    <div className="icon-image">
-                      <Image
-                        src="/logos/VERTICAL_commons_hub_LOGO_black.svg"
-                        alt="Commons Hub Logo"
-                        width={400}
-                        height={400}
-                      />
-                    </div>
-                  </div>
-                </div>
+                <ImageIcon
+                  mainImage={page?.main_image}
+                  mainIcon={page?.main_icon}
+                  title={page?.title ?? "Blog"}
+                />
               </div>
               <div className="description-block relative overflow-hidden bg-slate-50 items-center">
                 <WhiteOverlay />

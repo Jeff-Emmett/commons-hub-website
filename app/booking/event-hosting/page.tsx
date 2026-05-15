@@ -1,7 +1,8 @@
-import Image from "next/image";
 import WhiteOverlay from "@/components/WhiteOverlay";
 import ClientSideRout from "@/components/ClientSideRout";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import ImageIcon from "@/components/ImageIcon";
+import { getPageBySlug } from "@/lib/actions/getPage";
 import { BookingForm } from "@/components/bookings/BookingForm";
 
 export const metadata = {
@@ -11,6 +12,7 @@ export const metadata = {
 };
 
 export default async function EventBookingPage() {
+  const page = await getPageBySlug("venue");
   return (
     <div className="section">
       <div className="content">
@@ -96,18 +98,11 @@ export default async function EventBookingPage() {
           <div className="sticky-block">
             <div className="hero-block-content">
               <div className="heading-block">
-                <div className="icon-wrapper">
-                  <div className="icon-block">
-                    <div className="icon-image">
-                      <Image
-                        src="/logos/VERTICAL_commons_hub_LOGO_black.svg"
-                        alt="Commons Hub Logo"
-                        width={400}
-                        height={400}
-                      />
-                    </div>
-                  </div>
-                </div>
+                <ImageIcon
+                  mainImage={page?.main_image}
+                  mainIcon={page?.main_icon}
+                  title={page?.title ?? "Plan an Event"}
+                />
               </div>
               <div className="description-block relative overflow-hidden bg-slate-50 items-center">
                 <WhiteOverlay />
