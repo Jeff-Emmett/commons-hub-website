@@ -8,6 +8,7 @@ const PUBLIC_PREFIXES = [
   "/booking",
   "/linktree",
   "/events",
+  "/blog",
   "/pitchdecks",
   "/brochures",
   "/auth",

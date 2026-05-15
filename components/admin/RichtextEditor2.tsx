@@ -90,6 +90,17 @@ const TipTapEditor = ({ value, onChange }: { value: string, onChange: (value: st
   const [youtubeWidth, setYoutubeWidth] = useState<number | string>(640)
   const [youtubeHeight, setYoutubeHeight] = useState<number | string>(480)
   const [isImageModalOpen, setIsImageModalOpen] = useState(false)
+  const [isFullscreen, setIsFullscreen] = useState(false)
+
+  // ESC exits fullscreen for convenience.
+  useEffect(() => {
+    if (!isFullscreen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsFullscreen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [isFullscreen])
   const editor = useEditor({
     extensions: [
       StarterKit, 
@@ -140,8 +151,28 @@ const TipTapEditor = ({ value, onChange }: { value: string, onChange: (value: st
   }
 
   return (
-    <div className="richtext-editor border rounded-md overflow-hidden">
-      <div className="flex flex-wrap bg-gray-50 p-2 border-b gap-1">
+    <div
+      className={
+        isFullscreen
+          ? 'richtext-editor fixed inset-0 z-40 flex flex-col bg-white'
+          : 'richtext-editor border rounded-md overflow-hidden flex flex-col'
+      }
+    >
+      <div
+        className={
+          isFullscreen
+            ? 'sticky top-0 z-10 flex flex-wrap bg-gray-50 p-2 border-b gap-1 shadow-sm'
+            : 'sticky top-0 z-10 flex flex-wrap bg-gray-50 p-2 border-b gap-1'
+        }
+      >
+        <button
+          type="button"
+          onClick={() => setIsFullscreen((v) => !v)}
+          className="p-2 rounded hover:bg-gray-200 ml-auto order-last"
+          title={isFullscreen ? 'Exit fullscreen (Esc)' : 'Fullscreen'}
+        >
+          {isFullscreen ? '⤓' : '⛶'}
+        </button>
         {/* Text formatting */}
         <button
           type="button"
@@ -438,7 +469,7 @@ const TipTapEditor = ({ value, onChange }: { value: string, onChange: (value: st
           </button>
         </div>
       </div>
-      <div className="p-4">
+      <div className={isFullscreen ? 'p-4 flex-1 overflow-auto' : 'p-4'}>
         <EditorContent editor={editor} />
       </div>
       
