@@ -1,178 +1,123 @@
-import ClientSideRout from "@/components/ClientSideRout";
-import HeroCategory from "@/components/HeroCategory";
-import WhiteOverlay from "@/components/WhiteOverlay";
-import ScrollIndicator from "@/components/ScrollIndicator";
-import { Carousel } from "@/components/Carousel";
+import { getHomePage } from "@/lib/actions/getHomePage";
+import { getAllPublishedPosts } from "@/lib/actions/getPost";
+import { getEventPage } from "@/lib/actions/getEventPage";
+import { readSingleton } from "@/lib/directus/client";
+import { HeroCarousel, type HeroSlide } from "@/components/home/HeroCarousel";
+import { NavTiles } from "@/components/home/NavTiles";
 import PostGrid from "@/components/PostGrid";
 import NewsletterSignup from "@/components/NewsletterSignup";
-import { getHomePage } from "@/lib/actions/getPage";  
-import { getAllPublishedPosts } from "@/lib/actions/getPost";
-import { getCarousels } from "@/lib/actions/getCarousels";
-import { getAccordions } from "@/lib/actions/getAccordions";
-import { getCategories } from "@/lib/actions/getCategory";
-import { Database } from "@/lib/database.types";
-import ImageIcon from "@/components/ImageIcon";
-import Accordion_ch from "@/components/Accordion_ch";
+import ClientSideRout from "@/components/ClientSideRout";
+
+const DIRECTUS_ASSET_BASE = (
+  process.env.NEXT_PUBLIC_DIRECTUS_URL || "https://admin.commons-hub.at"
+).replace(/\/$/, "");
+
+interface CarouselSlideRow {
+  id: number;
+  image: string | null;
+  quote: string | null;
+}
+interface NamedCarousel {
+  id: number;
+  title: string | null;
+  carousel_items?: CarouselSlideRow[];
+}
+
+const SPEC_FALLBACK_SLIDES: HeroSlide[] = [
+  {
+    imageUrl: "/images/hero-1.jpg",
+    body: "<p>Welcome to the <strong>Commons Hub</strong> — a communal guesthouse and events venue in the Austrian Alps, one hour south of Vienna.</p>",
+  },
+  {
+    imageUrl: "/images/hero-2.jpg",
+    body: "<p>The Commons Hub harbours artists, dreamers, hackers and tinkerers weaving sustainable perspectives across technology, economy, society and nature.</p>",
+  },
+  {
+    imageUrl: "/images/hero-3.jpg",
+    body: "<p><em>Laid back, but intentional. Minimal formalities. Maximum freedom.</em></p>",
+  },
+  {
+    imageUrl: "/images/hero-4.jpg",
+    body: "<p>Stay a night, host a gathering, or drop in for one of our events. The garden, the fire bowl and the kitchen are open.</p>",
+  },
+];
+
+async function loadHeroSlides(fallbackImage?: string | null): Promise<HeroSlide[]> {
+  const carousel = await readSingleton<NamedCarousel>("carousels", {
+    fields: ["id", "title", "carousel_items.id", "carousel_items.image", "carousel_items.quote"],
+    filter: { title: { _eq: "home_hero" } },
+  });
+
+  if (carousel?.carousel_items && carousel.carousel_items.length > 0) {
+    return carousel.carousel_items.slice(0, 4).map((item) => ({
+      imageUrl: item.image
+        ? `${DIRECTUS_ASSET_BASE}/assets/${item.image}`
+        : fallbackImage
+        ? `${DIRECTUS_ASSET_BASE}/assets/${fallbackImage}`
+        : "/images/hero-1.jpg",
+      body: item.quote ?? "",
+    }));
+  }
+
+  // No CMS carousel yet — use the spec defaults, swapping in the page's
+  // main_image (if any) as a single visual until editors add a "home_hero"
+  // carousel with 4 slides.
+  if (fallbackImage) {
+    const fallbackUrl = `${DIRECTUS_ASSET_BASE}/assets/${fallbackImage}`;
+    return SPEC_FALLBACK_SLIDES.map((s) => ({ ...s, imageUrl: fallbackUrl }));
+  }
+  return SPEC_FALLBACK_SLIDES;
+}
+
 export default async function Home() {
+  const [page, posts, upcoming] = await Promise.all([
+    getHomePage(),
+    getAllPublishedPosts(),
+    getEventPage("upcoming"),
+  ]);
 
-  
-  const Data=await getHomePage();
-  
-  // Fetch all published posts
-  const posts = await getAllPublishedPosts();
+  const slides = await loadHeroSlides(page?.main_image ?? null);
+  const nextEvent = upcoming[0];
 
-  let carousels: Database['public']['Tables']['carousels']['Row'][] = [];
-  if (Data && Data.page_carousel && Array.isArray(Data.page_carousel)) {
-    // Extract all carousel IDs
-    const carouselIds = Data.page_carousel
-      .map((relation: { carousel_id: number }) => relation.carousel_id)
-      .filter(Boolean);
+  return (
+    <main className="home">
+      <HeroCarousel slides={slides} />
 
-    // Fetch all carousels in a single query
-    if (carouselIds.length > 0) {
-      carousels = await getCarousels(carouselIds);
-    }
-  }
+      <NavTiles
+        upcomingEventImage={
+          nextEvent?.main_image
+            ? `${DIRECTUS_ASSET_BASE}/assets/${nextEvent.main_image}`
+            : null
+        }
+        upcomingEventTitle={nextEvent?.title ?? null}
+        upcomingEventSlug={nextEvent?.slug ?? null}
+      />
 
-  let accordions: Database['public']['Tables']['accordions']['Row'][] = [];
-  if (Data && Data.page_accordion && Array.isArray(Data.page_accordion)) {
-    // Extract all accordion IDs
-    const accordionIds = Data.page_accordion
-      .map((relation: { accordion_id: number }) => relation.accordion_id)
-      .filter(Boolean);
-    
-    // Fetch all accordions in a single query
-    if (accordionIds.length > 0) {
-      accordions = await getAccordions(accordionIds);
-    }
-  }
+      {posts.length > 0 && (
+        <section className="latest-posts p-6">
+          <h2 className="text-2xl font-semibold mb-4 px-2">Latest from the blog</h2>
+          <PostGrid posts={posts.slice(0, 2)} />
+        </section>
+      )}
 
-  let categories: Database['public']['Tables']['categories']['Row'][] = [];
-  if (Data && Data.page_category && Array.isArray(Data.page_category)) {
-    // Extract all category IDs
-    const categoryIds = Data.page_category
-      .map((relation: { category_id: number }) => relation.category_id)
-      .filter(Boolean);
-    
-    // Fetch all categories in a single query
-    if (categoryIds.length > 0) {
-      categories = await getCategories(categoryIds);
-    }
-  }
+      <section id="newsletter" className="p-6">
+        <NewsletterSignup />
+      </section>
 
-  if (Data) {
-    return (
-      <div className="section">
-        <div className="content">
-          <div className="grid-block">
-            <div className="scroll-block">
-              {/* Only render PostGrid if there are published posts */}
-              
-              {posts.length > 0 && (
-                <PostGrid posts={posts} />
-              )}
-
-              {Data?.body && (
-                <div
-                  className="scroll-block-element prose-lg"
-                  dangerouslySetInnerHTML={{
-                    __html: Data?.body,
-                  }}
-                ></div>
-              )}
-
-              {carousels.length > 0 &&
-                carousels.map((carousel) => (
-                  <Carousel key={carousel.id} carousel={carousel} />
-                ))}
-
-              {accordions.length > 0 &&
-                accordions.map((accordion) => (
-                  <Accordion_ch key={accordion.id} accordion={accordion} />
-                ))}
-
-            
-              <ClientSideRout route="page/services" key={1}>
-                <div className="hero-wrapper w-inline-block py-2 border-y border-gray-100">
-                  <WhiteOverlay />
-                  <div className="hero-content">
-                    <div className="text-box">
-                      <h2 className="heading h2">SERVICES</h2>
-                      <p>
-                        The Commons Hub serves as a versatile event space that
-                        offers lodging, support with event
-                        organization as well as its own event series. If you
-                        can’t find what you’re looking for, just contact us!
-                      </p>
-                    </div>
-                  </div>
-                </div>
+      <footer className="footer">
+        <div className="footer-wrapper">
+          <div className="footer-bottom">
+            <div className="bottom-details">
+              <p className="bottom-link inline"> Commons Hub</p>
+            </div>
+            <div className="bottom-details">
+              <ClientSideRout route={`/page/impressum`} ariaLabel="Impressum">
+                <p className="bottom-link">Impressum</p>
               </ClientSideRout>
-
-              {categories.length > 0 && categories.map((category) => (
-                <ClientSideRout
-                  route={`/category/${category.slug}`}
-                  key={category.id}
-                >
-                  <HeroCategory category={category} />
-                </ClientSideRout>
-              ))}
-
-              {<div id="newsletter">
-                <NewsletterSignup />
-              </div> }
-
-              <div className="footer">
-                <div className="footer-wrapper">
-                  <div
-                    data-w-id="cf718504-e160-62a0-2401-3ebec51b24b9"
-                    className="footer-bottom"
-                  >
-                    <div className="bottom-details">
-                      <p className="bottom-link inline"> Commonshub</p>
-                    </div>
-                    <div className="bottom-details">
-                      <ClientSideRout
-                        route={`/page/impressum`}
-                        ariaLabel="Impressum"
-                      >
-                        <p className="bottom-link">Impressum</p>
-                      </ClientSideRout>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
-
-            <div
-              className="sticky-block"
-            >
-              <div
-                className="hero-block-content"
-              >
-                <div className="heading-block">
-                  <ImageIcon 
-                    mainImage={Data?.main_image} 
-                    mainIcon={Data?.main_icon} 
-                    title={Data?.title} 
-                  />
-                </div>
-                <div
-                  className="description-block relative overflow-hidden bg-slate-50 items-center"
-                >
-                  <WhiteOverlay />
-                  {Data?.summary && (
-                    <span className="font-extralight max-w-xl mt-4 text-3xl md:text-4xl text-center">
-                      {Data?.summary.replace(/<\/?p>/g, "")}
-                    </span>
-                  )}
-                </div>
-              </div>
-            </div>
-            <ScrollIndicator />
           </div>
         </div>
-      </div>
-    );
-  }
+      </footer>
+    </main>
+  );
 }
