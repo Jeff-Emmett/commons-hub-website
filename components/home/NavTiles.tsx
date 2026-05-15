@@ -15,12 +15,17 @@ interface Tile {
   subline?: string;
 }
 
-// Placeholder image paths for the three static tiles. Drop a real
-// 1:1 jpg/webp at each path in /public/images/ to fill them in; until
-// then the tile falls back to a slate background.
-const TILE_ACCOMMODATION = "/images/tile-accommodation.jpg";
-const TILE_EVENTS = "/images/tile-events.jpg";
-const TILE_ABOUT = "/images/tile-about.jpg";
+// Default images for the three static tiles, pulled from Directus
+// (these UUIDs are the existing "LODGING", "EVENT HOSTING" and
+// "HIKING & CLIMBING" accordion item images). Replace via Directus
+// admin if you'd like a different photo per tile.
+const DIRECTUS_ASSET_BASE = (
+  process.env.NEXT_PUBLIC_DIRECTUS_URL || "https://admin.commons-hub.at"
+).replace(/\/$/, "");
+
+const TILE_ACCOMMODATION = `${DIRECTUS_ASSET_BASE}/assets/496f4b23-4e16-47f7-a508-5c270e7aaea2`;
+const TILE_EVENTS = `${DIRECTUS_ASSET_BASE}/assets/f6e38335-40a6-4b4c-bfc3-6471c067c38f`;
+const TILE_ABOUT = `${DIRECTUS_ASSET_BASE}/assets/5c842eca-49ad-4afc-b48d-f90734bd0f2a`;
 
 export function NavTiles({
   upcomingEventImage,
