@@ -54,7 +54,9 @@ export function PinnedCarousel({ slides, headline }: PinnedCarouselProps) {
     };
   }, [n]);
 
-  const active = Math.round(offset);
+  // Snap to whole slides: scrolling advances to the full next image
+  // (animated) rather than continuously panning through partials.
+  const active = Math.min(n - 1, Math.max(0, Math.round(offset)));
 
   return (
     // Tall wrapper gives the scroll distance to page through every slide.
@@ -71,8 +73,8 @@ export function PinnedCarousel({ slides, headline }: PinnedCarouselProps) {
           className="flex h-full"
           style={{
             width: `${n * 100}%`,
-            transform: `translateX(-${(offset / n) * 100}%)`,
-            transition: 'transform 120ms linear',
+            transform: `translateX(-${(active / n) * 100}%)`,
+            transition: 'transform 650ms cubic-bezier(0.22, 1, 0.36, 1)',
           }}
         >
           {slides.map((s, i) => (
@@ -99,7 +101,7 @@ export function PinnedCarousel({ slides, headline }: PinnedCarouselProps) {
                     </p>
                   )}
                   <div
-                    className="text-2xl md:text-3xl lg:text-4xl font-light leading-snug text-slate-900 home-hero-copy"
+                    className="text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight text-slate-900 home-hero-copy"
                     dangerouslySetInnerHTML={{ __html: s.body }}
                   />
                 </div>

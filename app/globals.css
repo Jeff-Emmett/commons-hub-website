@@ -115,6 +115,21 @@
     line-height: 2rem;
   }
 
+  /* Carousel side-text: the global `p` rule pins CMS paragraphs to
+     18px / weight-300, which would shrink the large bold hero copy.
+     Inside .home-hero-copy let paragraphs inherit the wrapper's size,
+     weight and line-height instead. */
+  .home-hero-copy p {
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    line-height: inherit !important;
+    color: inherit;
+    margin-bottom: 0.5em !important;
+  }
+  .home-hero-copy p:last-child {
+    margin-bottom: 0 !important;
+  }
+
   .h1 {
     color: var(--color-1);
     text-transform: uppercase;
