@@ -2,6 +2,22 @@
 // Copy is verbatim from the spec; image values are Directus file UUIDs
 // (swap any UUID here to change a photo — no code changes needed).
 import type { SideSlide } from "@/components/SideCarousel";
+import type { PinnedSlide } from "@/components/journey/PinnedCarousel";
+
+const ASSET_BASE = (
+  process.env.NEXT_PUBLIC_DIRECTUS_URL || "https://admin.commons-hub.at"
+).replace(/\/$/, "");
+
+/** Resolve {image: uuid, title, body} -> PinnedCarousel slide. */
+export function toPinned(slides: SideSlide[]): PinnedSlide[] {
+  return slides.map((s) => ({
+    imageUrl: s.image.startsWith("http")
+      ? s.image
+      : `${ASSET_BASE}/assets/${s.image}`,
+    title: s.title,
+    body: s.body,
+  }));
+}
 
 // Shared by both the Accommodation and Event Venue pages (spec).
 export const COMMON_AREAS: SideSlide[] = [

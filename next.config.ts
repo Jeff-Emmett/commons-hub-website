@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
       { source: "/page/accommodation", destination: "/accommodation", permanent: true },
       { source: "/page/venue", destination: "/event-venue", permanent: true },
       { source: "/page/events", destination: "/events", permanent: true },
+      { source: "/page/about", destination: "/about", permanent: true },
       { source: "/booking/stay", destination: "/accommodation", permanent: true },
       { source: "/booking/event-hosting", destination: "/event-venue", permanent: true },
     ];

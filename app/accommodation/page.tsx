@@ -1,6 +1,6 @@
-import { SideCarousel } from "@/components/SideCarousel";
+import { PinnedCarousel } from "@/components/journey/PinnedCarousel";
 import { BookingForm } from "@/components/bookings/BookingForm";
-import { COMMON_AREAS, ROOMS } from "@/lib/content/venue";
+import { COMMON_AREAS, ROOMS, toPinned } from "@/lib/content/venue";
 import ClientSideRout from "@/components/ClientSideRout";
 
 export const metadata = {
@@ -28,17 +28,11 @@ export default function AccommodationPage() {
         </p>
       </section>
 
-      {/* Section 2 — Common Areas */}
-      <section className="px-6 py-12 max-w-5xl mx-auto">
-        <h2 className="h2 mb-6">Common Areas</h2>
-        <SideCarousel headline="Common Areas" slides={COMMON_AREAS} />
-      </section>
+      {/* Section 2 — Common Areas (scroll-pinned, same model as Home) */}
+      <PinnedCarousel headline="Common Areas" slides={toPinned(COMMON_AREAS)} />
 
-      {/* Section 3 — Our Rooms */}
-      <section className="px-6 py-12 max-w-5xl mx-auto">
-        <h2 className="h2 mb-6">Our Rooms</h2>
-        <SideCarousel headline="Our Rooms" slides={ROOMS} />
-      </section>
+      {/* Section 3 — Our Rooms (scroll-pinned) */}
+      <PinnedCarousel headline="Our Rooms" slides={toPinned(ROOMS)} />
 
       {/* Section 4 — Book your stay */}
       <section className="px-6 py-12 max-w-4xl mx-auto">

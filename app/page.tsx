@@ -69,7 +69,7 @@ export default async function Home() {
       href: "/events",
       imageUrl: asset(nextEvent?.main_image) ?? asset(TILE_EVENT),
     },
-    { label: "Read More", href: "/page/about", imageUrl: asset(TILE_ABOUT) },
+    { label: "Read More", href: "/about", imageUrl: asset(TILE_ABOUT) },
   ];
 
   const postTiles: HomePost[] = posts.slice(0, 2).map((p) => ({

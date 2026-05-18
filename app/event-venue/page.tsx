@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { SideCarousel } from "@/components/SideCarousel";
+import { PinnedCarousel } from "@/components/journey/PinnedCarousel";
 import { BookingForm } from "@/components/bookings/BookingForm";
-import { COMMON_AREAS, EVENT_SPACES } from "@/lib/content/venue";
+import { COMMON_AREAS, EVENT_SPACES, toPinned } from "@/lib/content/venue";
 import ClientSideRout from "@/components/ClientSideRout";
 
 export const metadata = {
@@ -23,15 +23,11 @@ export default function EventVenuePage() {
         </p>
       </section>
 
-      {/* Section 2 — Common Areas */}
-      <section className="px-6 py-12 max-w-5xl mx-auto">
-        <SideCarousel headline="Common Areas" slides={COMMON_AREAS} />
-      </section>
+      {/* Section 2 — Common Areas (scroll-pinned, same model as Home) */}
+      <PinnedCarousel headline="Common Areas" slides={toPinned(COMMON_AREAS)} />
 
-      {/* Section 3 — Event Spaces */}
-      <section className="px-6 py-12 max-w-5xl mx-auto">
-        <SideCarousel headline="Event Spaces" slides={EVENT_SPACES} />
-      </section>
+      {/* Section 3 — Event Spaces (scroll-pinned) */}
+      <PinnedCarousel headline="Event Spaces" slides={toPinned(EVENT_SPACES)} />
 
       {/* Section 4 — Book Event Space */}
       <section className="px-6 py-12 max-w-4xl mx-auto">

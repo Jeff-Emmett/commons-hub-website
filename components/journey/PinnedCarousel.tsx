@@ -5,6 +5,8 @@ import { useEffect, useRef, useState, type ReactNode } from 'react';
 
 export interface PinnedSlide {
   imageUrl: string;
+  /** Optional per-slide sub-title (e.g. "Lounge"). */
+  title?: string;
   /** Rendered to the right of the image (verbatim HTML). */
   body: string;
 }
@@ -100,8 +102,13 @@ export function PinnedCarousel({ slides, headline }: PinnedCarouselProps) {
                       {headline}
                     </p>
                   )}
+                  {s.title && (
+                    <h3 className="text-2xl md:text-3xl font-medium text-slate-900 mb-3">
+                      {s.title}
+                    </h3>
+                  )}
                   <div
-                    className="text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight text-slate-900 home-hero-copy"
+                    className="text-xl md:text-2xl lg:text-3xl font-normal leading-snug text-slate-800 home-hero-copy"
                     dangerouslySetInnerHTML={{ __html: s.body }}
                   />
                 </div>
