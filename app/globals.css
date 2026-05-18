@@ -130,6 +130,23 @@
     margin-bottom: 0 !important;
   }
 
+  /* Content images: clickable tiles that expand (ContentLightbox). */
+  .scroll-block-element img,
+  .about-bio img,
+  .post-detail img,
+  .summary img,
+  .prose img {
+    cursor: zoom-in;
+    border-radius: 0.75rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .scroll-block-element img:hover,
+  .post-detail img:hover,
+  .prose img:hover {
+    transform: scale(1.01);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
   .h1 {
     color: var(--color-1);
     text-transform: uppercase;

@@ -6,6 +6,7 @@ import { getMenu } from "@/lib/actions/getMenu";
 import { AuthProvider } from "@/lib/auth/AuthProvider";
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import ContentLightbox from "@/components/ContentLightbox"
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -74,6 +75,7 @@ export default async function RootLayout({
             <Header2 menus={menus} />
           </div>
           {children}
+          <ContentLightbox />
           <Analytics />
           <SpeedInsights />
         </AuthProvider>

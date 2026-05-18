@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { SectionNav } from '@/components/SectionNav';
 
 export interface TeamMember {
   name: string;
@@ -19,59 +19,12 @@ const SECTIONS = [
 ];
 
 export function AboutGuide({ team }: { team: TeamMember[] }) {
-  const [active, setActive] = useState('team');
-  const refs = useRef<Record<string, HTMLElement | null>>({});
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActive(visible.target.id);
-      },
-      { rootMargin: '-30% 0px -55% 0px', threshold: [0, 0.25, 0.5, 1] },
-    );
-    SECTIONS.forEach((s) => {
-      const el = refs.current[s.id];
-      if (el) obs.observe(el);
-    });
-    return () => obs.disconnect();
-  }, []);
-
-  const go = (id: string) => {
-    refs.current[id]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
-
   return (
     <div className="max-w-6xl mx-auto px-6 py-12 flex gap-12">
-      {/* Left index / guide */}
-      <nav className="hidden md:block w-44 shrink-0">
-        <div className="sticky top-28 space-y-1">
-          {SECTIONS.map((s) => (
-            <button
-              key={s.id}
-              type="button"
-              onClick={() => go(s.id)}
-              className={`block w-full text-left px-3 py-2 rounded-md text-sm transition-colors ${
-                active === s.id
-                  ? 'bg-slate-900 text-white font-medium'
-                  : 'text-slate-600 hover:bg-slate-100'
-              }`}
-            >
-              {s.label}
-            </button>
-          ))}
-        </div>
-      </nav>
+      <SectionNav sections={SECTIONS} />
 
-      {/* Content */}
       <div className="flex-1 min-w-0 space-y-20">
-        <section
-          id="team"
-          ref={(el) => { refs.current.team = el; }}
-          className="scroll-mt-28"
-        >
+        <section id="team" className="scroll-mt-28">
           <h2 className="h1 mb-8">Team</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {team.map((m) => (
@@ -102,11 +55,7 @@ export function AboutGuide({ team }: { team: TeamMember[] }) {
           </div>
         </section>
 
-        <section
-          id="community"
-          ref={(el) => { refs.current.community = el; }}
-          className="scroll-mt-28"
-        >
+        <section id="community" className="scroll-mt-28">
           <h2 className="h1 mb-6">Community</h2>
           <p className="text-lg text-slate-700 mb-4">
             The commons hub harbors artists, dreamers, hackers and tinkerers —
@@ -120,11 +69,7 @@ export function AboutGuide({ team }: { team: TeamMember[] }) {
           </Link>
         </section>
 
-        <section
-          id="history"
-          ref={(el) => { refs.current.history = el; }}
-          className="scroll-mt-28"
-        >
+        <section id="history" className="scroll-mt-28">
           <h2 className="h1 mb-6">History</h2>
           <p className="text-lg text-slate-700">
             From a former guesthouse in Hirschwang to a communal hub for
@@ -133,11 +78,7 @@ export function AboutGuide({ team }: { team: TeamMember[] }) {
           </p>
         </section>
 
-        <section
-          id="contact"
-          ref={(el) => { refs.current.contact = el; }}
-          className="scroll-mt-28"
-        >
+        <section id="contact" className="scroll-mt-28">
           <h2 className="h1 mb-6">Contact</h2>
           <address className="not-italic text-lg text-slate-700 leading-relaxed">
             Commons Hub<br />

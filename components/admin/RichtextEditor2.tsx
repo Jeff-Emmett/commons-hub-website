@@ -19,7 +19,7 @@ const DIRECTUS_ASSET_BASE = (
 
 
 // Define types for the FontSize extension
-import { Command } from '@tiptap/core'
+import { Command, Extension } from '@tiptap/core'
 
 interface FontSizeOptions {
   types: string[]
@@ -74,6 +74,58 @@ const FontSize = TextStyle.extend<FontSizeOptions>({
   },
 })
 
+// Adjustable line spacing on paragraphs and headings.
+declare module '@tiptap/core' {
+  interface Commands<ReturnType> {
+    lineHeight: {
+      setLineHeight: (lineHeight: string) => ReturnType
+      unsetLineHeight: () => ReturnType
+    }
+  }
+}
+
+const LineHeight = Extension.create({
+  name: 'lineHeight',
+  addOptions() {
+    return { types: ['paragraph', 'heading'] }
+  },
+  addGlobalAttributes() {
+    return [
+      {
+        types: this.options.types,
+        attributes: {
+          lineHeight: {
+            default: null,
+            parseHTML: (element) => element.style.lineHeight || null,
+            renderHTML: (attributes) =>
+              attributes.lineHeight
+                ? { style: `line-height: ${attributes.lineHeight}` }
+                : {},
+          },
+        },
+      },
+    ]
+  },
+  addCommands() {
+    return {
+      setLineHeight:
+        (lineHeight: string): Command =>
+        ({ chain }) =>
+          chain()
+            .updateAttributes('paragraph', { lineHeight })
+            .updateAttributes('heading', { lineHeight })
+            .run(),
+      unsetLineHeight:
+        (): Command =>
+        ({ chain }) =>
+          chain()
+            .updateAttributes('paragraph', { lineHeight: null })
+            .updateAttributes('heading', { lineHeight: null })
+            .run(),
+    }
+  },
+})
+
 // We'll use a helper function to insert button links
 const insertButtonLink = (editor: ReturnType<typeof useEditor>, url: string, text: string) => {
   // Create a wrapper span to isolate the button from other styling
@@ -87,6 +139,7 @@ const insertButtonLink = (editor: ReturnType<typeof useEditor>, url: string, tex
 
 const TipTapEditor = ({ value, onChange }: { value: string, onChange: (value: string) => void }) => {
   const [fontSize, setFontSize] = useState('normal')
+  const [lineHeight, setLineHeightState] = useState('normal')
   const [youtubeWidth, setYoutubeWidth] = useState<number | string>(640)
   const [youtubeHeight, setYoutubeHeight] = useState<number | string>(480)
   const [isImageModalOpen, setIsImageModalOpen] = useState(false)
@@ -107,6 +160,7 @@ const TipTapEditor = ({ value, onChange }: { value: string, onChange: (value: st
       Underline,
       TextStyle.configure({ mergeNestedSpanStyles: true }),
       FontSize,
+      LineHeight,
       Color,
       Youtube.configure({
         controls: true,
@@ -315,7 +369,30 @@ const TipTapEditor = ({ value, onChange }: { value: string, onChange: (value: st
             <option value="large">Large</option>
           </select>
         </div>
-        
+
+        {/* Line spacing */}
+        <div className="flex border-l pl-1 ml-1">
+          <select
+            className="p-1 rounded border hover:bg-gray-100"
+            value={lineHeight}
+            onChange={(e) => {
+              setLineHeightState(e.target.value);
+              if (e.target.value === 'normal') {
+                editor.chain().focus().unsetLineHeight().run();
+              } else {
+                editor.chain().focus().setLineHeight(e.target.value).run();
+              }
+            }}
+            title="Line spacing"
+          >
+            <option value="normal">Spacing</option>
+            <option value="1">Tight (1.0)</option>
+            <option value="1.5">1.5</option>
+            <option value="2">Double (2.0)</option>
+            <option value="2.5">2.5</option>
+          </select>
+        </div>
+
         {/* Heading buttons */}
         <div className="flex border-l pl-1 ml-1">
           {[1, 2, 3, 4, 5, 6].map((level) => (
