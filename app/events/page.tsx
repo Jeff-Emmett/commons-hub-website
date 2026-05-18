@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getEventPage } from "@/lib/actions/getEventPage";
 import { EventRow, type EventCard } from "@/components/events/EventRow";
 import SiteFooter from "@/components/SiteFooter";
+import { SectionNav } from "@/components/SectionNav";
 
 const DIRECTUS_ASSET_BASE = (
   process.env.NEXT_PUBLIC_DIRECTUS_URL || "https://admin.commons-hub.at"
@@ -59,16 +60,25 @@ export default async function EventsIndex() {
   );
 
   return (
-    <main className="max-w-6xl mx-auto px-6 py-12">
-      <h1 className="h1 mb-10">Events</h1>
+    <>
+      <div className="max-w-6xl mx-auto px-6 py-12 flex gap-12">
+        <SectionNav
+          sections={[
+            { id: "upcoming", label: "Upcoming Events" },
+            { id: "calendar", label: "Event Calendar" },
+            { id: "past", label: "Past Events" },
+          ]}
+        />
+        <div className="flex-1 min-w-0">
+          <h1 className="h1 mb-10">Events</h1>
 
-      <section className="mb-16">
-        <h2 className="h2 mb-6 text-center">Upcoming Events</h2>
-        <EventRow events={toCards(upcoming)} />
-      </section>
+          <section id="upcoming" className="mb-16 scroll-mt-28">
+            <h2 className="h2 mb-6 text-center">Upcoming Events</h2>
+            <EventRow events={toCards(upcoming)} />
+          </section>
 
-      <section className="mb-16">
-        <h2 className="h2 mb-4">Event Calendar</h2>
+          <section id="calendar" className="mb-16 scroll-mt-28">
+            <h2 className="h2 mb-4">Event Calendar</h2>
         <details className="rounded-lg border border-slate-200 bg-white" open>
           <summary className="cursor-pointer select-none px-4 py-3 font-medium text-slate-800 hover:bg-slate-50">
             All planned events ({allPlanned.length})
@@ -97,11 +107,13 @@ export default async function EventsIndex() {
         </details>
       </section>
 
-      <section className="mb-16">
-        <h2 className="h2 mb-6 text-center">Past Events</h2>
-        <EventRow events={toCards(past)} />
-      </section>
+          <section id="past" className="mb-16 scroll-mt-28">
+            <h2 className="h2 mb-6 text-center">Past Events</h2>
+            <EventRow events={toCards(past)} />
+          </section>
+        </div>
+      </div>
       <SiteFooter />
-    </main>
+    </>
   );
 }

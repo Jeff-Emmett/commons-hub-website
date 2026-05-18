@@ -8,6 +8,7 @@ import { getAccordions } from "@/lib/actions/getAccordions";
 import { Database } from "@/lib/database.types";
 import Accordion_ch from "@/components/Accordion_ch";
 import SiteFooter from "@/components/SiteFooter";
+import { AutoSectionNav } from "@/components/AutoSectionNav";
 import { generatePageMetadata } from "@/lib/utils/generatePageMetadata";
 
 // Generate dynamic metadata for each category
@@ -84,9 +85,10 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
 
   if (Data) {
     return (
-      <div className="section">
-        <div className="content">
-          <div className="full-block max-w-5xl mx-auto px-6 py-10">
+      <>
+        <div className="max-w-6xl mx-auto px-6 py-12 flex gap-12">
+          <AutoSectionNav containerId="cms-content" />
+          <div id="cms-content" className="flex-1 min-w-0">
             {(Data?.title || Data?.summary) && (
               <header className="mb-10 border-b border-gray-100 pb-6">
                 {Data?.title && (
@@ -122,7 +124,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
           </div>
         </div>
         <SiteFooter />
-      </div>
+      </>
     );
   }
 }
