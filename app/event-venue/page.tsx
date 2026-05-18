@@ -2,7 +2,7 @@ import Link from "next/link";
 import { PinnedCarousel } from "@/components/journey/PinnedCarousel";
 import { BookingForm } from "@/components/bookings/BookingForm";
 import { COMMON_AREAS, EVENT_SPACES, toPinned } from "@/lib/content/venue";
-import ClientSideRout from "@/components/ClientSideRout";
+import SiteFooter from "@/components/SiteFooter";
 
 export const metadata = {
   title: "Event Venue | Commons Hub",
@@ -59,21 +59,7 @@ export default function EventVenuePage() {
           </p>
         </div>
       </section>
-
-      <footer className="footer">
-        <div className="footer-wrapper">
-          <div className="footer-bottom">
-            <div className="bottom-details">
-              <p className="bottom-link inline"> Commons Hub</p>
-            </div>
-            <div className="bottom-details">
-              <ClientSideRout route={`/page/impressum`} ariaLabel="Impressum">
-                <p className="bottom-link">Impressum</p>
-              </ClientSideRout>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

@@ -1,4 +1,4 @@
-import ClientSideRout from "@/components/ClientSideRout";
+import SiteFooter from "@/components/SiteFooter";
 
 export const metadata = {
   title: "Event Organizer Toolbox | Commons Hub",
@@ -37,21 +37,7 @@ export default function EventToolboxPage() {
           to the individual items.
         </p>
       </section>
-
-      <footer className="footer">
-        <div className="footer-wrapper">
-          <div className="footer-bottom">
-            <div className="bottom-details">
-              <p className="bottom-link inline"> Commons Hub</p>
-            </div>
-            <div className="bottom-details">
-              <ClientSideRout route={`/page/impressum`} ariaLabel="Impressum">
-                <p className="bottom-link">Impressum</p>
-              </ClientSideRout>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

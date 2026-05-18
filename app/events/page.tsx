@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getEventPage } from "@/lib/actions/getEventPage";
 import { EventRow, type EventCard } from "@/components/events/EventRow";
-import ClientSideRout from "@/components/ClientSideRout";
+import SiteFooter from "@/components/SiteFooter";
 
 const DIRECTUS_ASSET_BASE = (
   process.env.NEXT_PUBLIC_DIRECTUS_URL || "https://admin.commons-hub.at"
@@ -101,21 +101,7 @@ export default async function EventsIndex() {
         <h2 className="h2 mb-6 text-center">Past Events</h2>
         <EventRow events={toCards(past)} />
       </section>
-
-      <footer className="footer">
-        <div className="footer-wrapper">
-          <div className="footer-bottom">
-            <div className="bottom-details">
-              <p className="bottom-link inline"> Commons Hub</p>
-            </div>
-            <div className="bottom-details">
-              <ClientSideRout route={`/page/impressum`} ariaLabel="Impressum">
-                <p className="bottom-link">Impressum</p>
-              </ClientSideRout>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

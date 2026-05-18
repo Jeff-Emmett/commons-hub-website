@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { PinnedCarousel } from '@/components/journey/PinnedCarousel';
 import NewsletterSignup from '@/components/NewsletterSignup';
+import SiteFooter from '@/components/SiteFooter';
 
 export interface HomeSlide {
   imageUrl: string;
@@ -138,21 +139,9 @@ export function HomeJourney({ slides, tiles, posts }: HomeJourneyProps) {
           </div>
         </div>
 
-        <footer className="footer mt-12">
-          <div className="footer-wrapper">
-            <div className="footer-bottom">
-              <div className="bottom-details">
-                <p className="bottom-link inline"> Commons Hub</p>
-              </div>
-              <div className="bottom-details">
-                <Link href="/page/impressum" aria-label="Impressum">
-                  <p className="bottom-link">Impressum</p>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </footer>
       </section>
+
+      <SiteFooter />
     </main>
   );
 }

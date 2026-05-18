@@ -1,4 +1,5 @@
 import ClientSideRout from "@/components/ClientSideRout";
+import SiteFooter from "@/components/SiteFooter";
 import HeroCategory from "@/components/HeroCategory";
 import WhiteOverlay from "@/components/WhiteOverlay";
 import { Carousel } from "@/components/Carousel";
@@ -216,28 +217,9 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                 ))
             }
 
-            <div className="footer">
-              <div className="footer-wrapper">
-                <div
-                  data-w-id="cf718504-e160-62a0-2401-3ebec51b24b9"
-                  className="footer-bottom"
-                >
-                  <div className="bottom-details">
-                    <p className="bottom-link inline"> Commonshub</p>
-                  </div>
-                  <div className="bottom-details">
-                    <ClientSideRout
-                      route={`/page/impressum`}
-                      ariaLabel="Impressum"
-                    >
-                      <p className="bottom-link">Impressum</p>
-                    </ClientSideRout>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
+        <SiteFooter />
       </div>
     </div>
   );

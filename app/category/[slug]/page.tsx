@@ -1,17 +1,13 @@
-import ClientSideRout from "@/components/ClientSideRout";
-import WhiteOverlay from "@/components/WhiteOverlay";
-import ScrollIndicator from "@/components/ScrollIndicator";
 import { Carousel } from "@/components/Carousel";
-import Image from "next/image";
 import { Metadata } from "next";
 import PostGrid from "@/components/PostGrid";
-import { getCategoryBySlug } from "@/lib/actions/getCategory";  
+import { getCategoryBySlug } from "@/lib/actions/getCategory";
 import { getPosts } from "@/lib/actions/getPost";
 import { getCarousels } from "@/lib/actions/getCarousels";
 import { getAccordions } from "@/lib/actions/getAccordions";
 import { Database } from "@/lib/database.types";
-import { getImageUrl } from "@/lib/utils/getImageUrl";
 import Accordion_ch from "@/components/Accordion_ch";
+import SiteFooter from "@/components/SiteFooter";
 import { generatePageMetadata } from "@/lib/utils/generatePageMetadata";
 
 // Generate dynamic metadata for each category
@@ -90,113 +86,42 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
     return (
       <div className="section">
         <div className="content">
-          <div className="grid-block">
-            <div className="scroll-block">
-              <div className="rich-text-wrapper border-b-0"> 
-
-              {carousels.length > 0 &&
-                carousels.map((carousel) => (
-                  <Carousel key={carousel.id} carousel={carousel} />
-                ))}
-
-              {Data?.body && (
-                <div
-                  className="scroll-block-element"
-                  dangerouslySetInnerHTML={{
-                    __html: Data?.body,
-                  }}
-                >
-                </div>
-              )}
-
-              {accordions.length > 0 &&
-                accordions.map((accordion) => (
-                  <Accordion_ch key={accordion.id} accordion={accordion} />
-                ))}
-
-              {posts.length > 0 && (
-                <PostGrid posts={posts} />
-              )}
-
-              </div>
-              <div className="footer">
-                <div className="footer-wrapper">
-                  <div
-                    // data-w-id="cf718504-e160-62a0-2401-3ebec51b24b9"
-                    className="footer-bottom"
-                  >
-                    <div className="bottom-details">
-                      <p className="bottom-link inline"> Commonshub</p>
-                    </div>
-                    <div className="bottom-details">
-                      <ClientSideRout
-                        route={`/page/impressum`}
-                        ariaLabel="Impressum"
-                      >
-                        <p className="bottom-link">Impressum</p>
-                      </ClientSideRout>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div
-              className="sticky-block"
-            >
-              <div
-                className="hero-block-content"
-              >
-                <div className="heading-block">
-                  <div className="hero-image w-embed relative overflow-hidden">
-                    <WhiteOverlay />
-                    {/* If main_image exists, use it */}
-                    {Data?.main_image ? (
-                      <Image
-                        src={await getImageUrl(Data.main_image)}
-                        alt={Data?.title || 'Category image'}
-                        width={700}
-                        height={700}
-                        className="rounded-lg shadow-md"
-                      />
-                    ) : 
-                    /* If no main_image but main_icon exists, use icon */
-                    Data?.main_icon ? (
-                      <Image
-                        src={await getImageUrl(Data.main_icon)}
-                        alt={Data?.title || 'Category icon'}
-                        width={400}
-                        height={400}
-                      />
-                    ) : null}
-                  </div>
-                </div>
-                <div
-                  id="w-node-ebbdefe2-e329-0455-5c4a-042b182fa946-39b7cd48"
-                  className="description-block relative overflow-hidden bg-slate-50 items-center"
-                >
-                  <WhiteOverlay />
-                  {Data?.title && (
-                    <h1
-                      className="heading h1 no-margin-bottom font-light"
-                      >
-                        {Data.title}
-                      </h1>
-                  )}
-                {Data?.summary && (
-                  <span
-                    className="summary"
-                    dangerouslySetInnerHTML={{
-                      __html: Data.summary,
-                    }}
-                  ></span>
+          <div className="full-block max-w-5xl mx-auto px-6 py-10">
+            {(Data?.title || Data?.summary) && (
+              <header className="mb-10 border-b border-gray-100 pb-6">
+                {Data?.title && (
+                  <h1 className="h2 md:h1 mb-3 font-light">{Data.title}</h1>
                 )}
-                </div>
-              </div>
-            </div>
-            <ScrollIndicator />
+                {Data?.summary && (
+                  <div
+                    className="summary"
+                    dangerouslySetInnerHTML={{ __html: Data.summary }}
+                  ></div>
+                )}
+              </header>
+            )}
+
+            {carousels.length > 0 &&
+              carousels.map((carousel) => (
+                <Carousel key={carousel.id} carousel={carousel} />
+              ))}
+
+            {Data?.body && (
+              <div
+                className="scroll-block-element"
+                dangerouslySetInnerHTML={{ __html: Data?.body }}
+              ></div>
+            )}
+
+            {accordions.length > 0 &&
+              accordions.map((accordion) => (
+                <Accordion_ch key={accordion.id} accordion={accordion} />
+              ))}
+
+            {posts.length > 0 && <PostGrid posts={posts} />}
           </div>
         </div>
+        <SiteFooter />
       </div>
     );
   }
