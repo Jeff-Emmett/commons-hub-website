@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-export default function NewsletterSignup() {
+export default function NewsletterSignup({ compact = false }: { compact?: boolean }) {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -59,6 +59,40 @@ export default function NewsletterSignup() {
     });
   };
 
+  if (compact) {
+    return (
+      <div>
+        <h2 className="text-xl font-semibold mb-3">Sign up for our newsletter</h2>
+        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 items-start">
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+            required
+            maxLength={255}
+            disabled={isSubmitting}
+            className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md p-2 w-full sm:w-72"
+          />
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="button whitespace-nowrap"
+          >
+            {isSubmitting ? 'Subscribing...' : 'Subscribe'}
+          </button>
+        </form>
+        {status && (
+          <p
+            className={`mt-2 text-sm ${status.includes('error') || status.includes('failed') ? 'text-red-600' : 'text-green-600'}`}
+            dangerouslySetInnerHTML={{ __html: sanitizeHtml(status) }}
+          />
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="hero-wrapper w-inline-block py-2 border-y border-gray-100">
       <div className="hero-content">
@@ -86,7 +120,7 @@ export default function NewsletterSignup() {
             {isSubmitting ? 'Subscribing...' : 'Subscribe'}
           </button>
           {status && (
-            <p 
+            <p
               className={`mt-2 text-sm ${status.includes('error') || status.includes('failed') ? 'text-red-600' : 'text-green-600'}`}
               dangerouslySetInnerHTML={{ __html: sanitizeHtml(status) }}
             />
