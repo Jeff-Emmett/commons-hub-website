@@ -90,7 +90,6 @@ export default async function Home() {
             : null
         }
         upcomingEventTitle={nextEvent?.title ?? null}
-        upcomingEventSlug={nextEvent?.slug ?? null}
       />
 
       {posts.length > 0 && (

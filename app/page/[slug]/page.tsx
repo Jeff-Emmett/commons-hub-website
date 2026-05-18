@@ -1,7 +1,6 @@
 import ClientSideRout from "@/components/ClientSideRout";
 import HeroCategory from "@/components/HeroCategory";
 import WhiteOverlay from "@/components/WhiteOverlay";
-import ScrollIndicator from "@/components/ScrollIndicator";
 import { Carousel } from "@/components/Carousel";
 import { TeamClient } from "@/components/TeamClient";
 import { getTeam } from "@/lib/actions/getTeam";
@@ -13,7 +12,6 @@ import { getPosts } from "@/lib/actions/getPost";
 import { getCarousels } from "@/lib/actions/getCarousels";
 import { getAccordions } from "@/lib/actions/getAccordions";
 import { getCategories } from "@/lib/actions/getCategory";
-import ImageIcon from "@/components/ImageIcon";
 import TrainDirections from "@/components/TrainDirections";
 import { Metadata } from "next";
 import { generatePageMetadata } from "@/lib/utils/generatePageMetadata";
@@ -115,8 +113,22 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   return (
     <div className="section">
       <div className="content">
-        <div className="grid-block">
+        <div className="full-block max-w-5xl mx-auto px-6 py-10">
           <div className="scroll-block">
+
+            {(page?.title || page?.summary) && (
+              <header className="mb-10 border-b border-gray-100 pb-6">
+                {page?.title && (
+                  <h1 className="h2 md:h1 mb-3 font-light">{page.title}</h1>
+                )}
+                {page?.summary && (
+                  <div
+                    className="summary"
+                    dangerouslySetInnerHTML={{ __html: page.summary }}
+                  ></div>
+                )}
+              </header>
+            )}
 
             {/* Upcoming Events Section */}
             {page?.is_eventpage && (
@@ -225,42 +237,6 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
               </div>
             </div>
           </div>
-          <div
-            className="sticky-block"
-          >
-            <div
-              className="hero-block-content"
-            >
-              <div className="heading-block">
-                <ImageIcon
-                  mainImage={page?.main_image}
-                  mainIcon={page?.main_icon}
-                  title={page?.title}
-                />
-              </div>
-              <div
-                className="description-block relative overflow-hidden bg-slate-50 items-center"
-              >
-                <WhiteOverlay />
-                {page?.title && (
-                  <h1
-                    className="h2 md:h1 mb-0 font-light "
-                  >
-                    {page.title}
-                  </h1>
-                )}
-                {page?.summary && (
-                  <span
-                    className="summary"
-                    dangerouslySetInnerHTML={{
-                      __html: page.summary,
-                    }}
-                  ></span>
-                )}
-              </div>
-            </div>
-          </div>
-          <ScrollIndicator />
         </div>
       </div>
     </div>

@@ -9,8 +9,7 @@ import * as z from 'zod';
 // Pricing (source of truth: spec doc)
 // ─────────────────────────────────────────────────────────────
 
-const STAY_VAT_RATE = 0.10;
-const EVENT_VAT_RATE = 0.20;
+// Listed prices are VAT-inclusive (stay 10%, event 20%) — see PriceSummary notes.
 
 interface RoomRate {
   key: 'single' | 'double_twin' | 'double_king' | 'shared';
@@ -123,10 +122,11 @@ function StayForm() {
   const nights = nightsBetween(watched.check_in || '', watched.check_out || '');
   const guests = Number(watched.guests) || 0;
   const rate = ROOM_RATES.find((r) => r.key === watched.room_type) ?? ROOM_RATES[0];
-  const lodgingExclVat = rate.nightly_excl_vat * guests * nights;
-  const vat = lodgingExclVat * STAY_VAT_RATE;
+  // Listed room price already includes 10% VAT. City tax is added on top
+  // (it is part of the total, just itemised — never a separate add-on note).
+  const lodging = rate.nightly_excl_vat * guests * nights;
   const cityTax = rate.city_tax_per_night * guests * nights;
-  const total = lodgingExclVat + vat + cityTax;
+  const total = lodging + cityTax;
 
   const onSubmit = async (data: StayValues) => {
     setSubmitState('sending');
@@ -156,10 +156,8 @@ function StayForm() {
   if (submitState === 'ok') {
     return (
       <div className="bg-green-50 border border-green-200 rounded-lg p-6">
-        <h3 className="font-semibold text-green-900 mb-2">Thanks — we received your inquiry.</h3>
-        <p className="text-green-800">
-          Our team will be in touch shortly. If urgent, email{' '}
-          <a className="underline" href="mailto:office@commons-hub.at">office@commons-hub.at</a>.
+        <p className="text-green-900 text-lg">
+          Thanks for your inquiry. Our team will get back to you shortly to discuss the next steps.
         </p>
       </div>
     );
@@ -182,7 +180,7 @@ function StayForm() {
         <FieldSelect label="Room type" error={errors.room_type?.message} {...register('room_type')}>
           {ROOM_RATES.map((r) => (
             <option key={r.key} value={r.key}>
-              {r.label} — {formatEur(r.nightly_excl_vat)}/night + {formatEur(r.city_tax_per_night)} tax
+              {r.label} ({formatEur(r.nightly_excl_vat)} + {formatEur(r.city_tax_per_night)} city tax)
             </option>
           ))}
         </FieldSelect>
@@ -192,11 +190,11 @@ function StayForm() {
 
       <PriceSummary
         rows={[
-          { label: `${formatEur(rate.nightly_excl_vat)} × ${guests} guest(s) × ${nights} night(s)`, amount: lodgingExclVat },
-          { label: 'VAT (10%)', amount: vat },
+          { label: `${formatEur(rate.nightly_excl_vat)} × ${guests} guest(s) × ${nights} night(s)`, amount: lodging },
           { label: `City tax (${formatEur(rate.city_tax_per_night)} × ${guests} × ${nights})`, amount: cityTax },
         ]}
         total={total}
+        note="*Prices include 10% VAT."
       />
 
       {submitState === 'error' && (
@@ -233,9 +231,9 @@ function EventForm() {
   const watched = useWatch({ control });
   const days = Math.max(1, nightsBetween(watched.check_in || '', watched.check_out || ''));
   const pkg = EVENT_PACKAGES.find((p) => p.key === watched.event_size_package) ?? EVENT_PACKAGES[0];
-  const venueExclVat = pkg.day_rate_excl_vat * days;
-  const vat = venueExclVat * EVENT_VAT_RATE;
-  const total = venueExclVat + vat;
+  // Package day-rate already includes 20% VAT — never added on top.
+  const venue = pkg.day_rate_excl_vat * days;
+  const total = venue;
   const isCallVariant = pkg.key === 'call';
 
   const onSubmit = async (data: EventValues) => {
@@ -266,10 +264,8 @@ function EventForm() {
   if (submitState === 'ok') {
     return (
       <div className="bg-green-50 border border-green-200 rounded-lg p-6">
-        <h3 className="font-semibold text-green-900 mb-2">Thanks — we received your inquiry.</h3>
-        <p className="text-green-800">
-          We&apos;ll get back to you soon to scope the event. For urgent questions, email{' '}
-          <a className="underline" href="mailto:office@commons-hub.at">office@commons-hub.at</a>.
+        <p className="text-green-900 text-lg">
+          Thanks for your inquiry. Our team will get back to you shortly to discuss the next steps.
         </p>
       </div>
     );
@@ -306,10 +302,10 @@ function EventForm() {
       {!isCallVariant && (
         <PriceSummary
           rows={[
-            { label: `${pkg.label} package — ${formatEur(pkg.day_rate_excl_vat)} × ${days} day(s)`, amount: venueExclVat },
-            { label: 'VAT (20%)', amount: vat },
+            { label: `${pkg.label} package — ${formatEur(pkg.day_rate_excl_vat)} / day × ${days} day(s)`, amount: venue },
           ]}
           total={total}
+          note="*Prices include 20% VAT."
         />
       )}
 
@@ -397,7 +393,7 @@ interface PriceRow {
   amount: number;
 }
 
-function PriceSummary({ rows, total }: { rows: PriceRow[]; total: number }) {
+function PriceSummary({ rows, total, note }: { rows: PriceRow[]; total: number; note?: string }) {
   if (total <= 0) return null;
   return (
     <div className="bg-slate-50 rounded-lg p-4 text-sm">
@@ -413,7 +409,7 @@ function PriceSummary({ rows, total }: { rows: PriceRow[]; total: number }) {
           <span className="tabular-nums">{formatEur(total)}</span>
         </li>
       </ul>
-      <p className="mt-3 text-xs text-slate-500">Final invoice may vary — this is a guide.</p>
+      {note && <p className="mt-3 text-xs text-slate-500">{note}</p>}
     </div>
   );
 }

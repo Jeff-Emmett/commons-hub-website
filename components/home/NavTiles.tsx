@@ -4,7 +4,6 @@ import Link from 'next/link';
 export interface NavTilesProps {
   upcomingEventImage?: string | null;
   upcomingEventTitle?: string | null;
-  upcomingEventSlug?: string | null;
 }
 
 interface Tile {
@@ -12,7 +11,6 @@ interface Tile {
   href: string;
   imageUrl?: string | null;
   imageAlt?: string;
-  subline?: string;
 }
 
 // Default images for the three static tiles, pulled from Directus
@@ -30,27 +28,26 @@ const TILE_ABOUT = `${DIRECTUS_ASSET_BASE}/assets/5c842eca-49ad-4afc-b48d-f90734
 export function NavTiles({
   upcomingEventImage,
   upcomingEventTitle,
-  upcomingEventSlug,
 }: NavTilesProps) {
   const tiles: Tile[] = [
     {
       label: 'Book your Stay',
-      href: '/booking/stay',
+      href: '/accommodation',
       imageUrl: TILE_ACCOMMODATION,
       imageAlt: 'Accommodation at the Commons Hub',
     },
     {
       label: 'Plan an Event',
-      href: '/booking/event-hosting',
+      href: '/event-venue',
       imageUrl: TILE_EVENTS,
       imageAlt: 'Event venue at the Commons Hub',
     },
     {
+      // Always the Events page (spec) — only the photo comes from the next event.
       label: 'Upcoming Events',
-      href: upcomingEventSlug ? `/events/${upcomingEventSlug}` : '/page/events',
+      href: '/events',
       imageUrl: upcomingEventImage,
       imageAlt: upcomingEventTitle ?? 'Upcoming event',
-      subline: upcomingEventTitle ?? undefined,
     },
     {
       label: 'Read More',
@@ -84,9 +81,6 @@ export function NavTiles({
             <p className="text-white text-lg font-semibold tracking-wide uppercase">
               {tile.label}
             </p>
-            {tile.subline && (
-              <p className="text-white/80 text-sm mt-1 truncate">{tile.subline}</p>
-            )}
           </div>
         </Link>
       ))}

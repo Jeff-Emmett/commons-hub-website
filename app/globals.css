@@ -97,6 +97,24 @@
     line-height: 2rem;
   }
 
+  /* Empty paragraphs from the rich-text editor must act as blank-line
+     spacing instead of collapsing to zero height. TipTap emits a bare
+     <p></p> for an empty line; without a forced height it renders 0px
+     and consecutive ones margin-collapse, so multiple blank lines
+     vanish. Force each empty paragraph to occupy one line. */
+  p:empty {
+    min-height: 2rem;
+  }
+  p:empty::before {
+    content: "\00a0";
+    display: inline-block;
+  }
+  /* <p><br></p> is the other "empty line" shape — already one line tall,
+     just make sure its bottom margin is preserved. */
+  p > br:only-child {
+    line-height: 2rem;
+  }
+
   .h1 {
     color: var(--color-1);
     text-transform: uppercase;
