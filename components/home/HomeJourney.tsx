@@ -102,40 +102,42 @@ export function HomeJourney({ slides, tiles, posts }: HomeJourneyProps) {
         </div>
       </section>
 
-      {/* Section 3 — latest 2 blog tiles + newsletter */}
+      {/* Section 3 — all published blog posts (scrollable) + newsletter */}
       <section className="bg-white px-8 md:px-16 py-16">
         <div className="max-w-5xl mx-auto w-full">
           <h2 className="text-2xl font-semibold mb-6">Latest from the blog</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            {posts.slice(0, 2).map((p) => (
-              <Link
-                key={p.slug}
-                href={`/post/${p.slug}`}
-                className="group block overflow-hidden rounded-xl bg-slate-100 hover:shadow-lg transition-shadow"
-              >
-                <div
-                  className="relative bg-slate-200"
-                  style={{ aspectRatio: '16 / 9' }}
+          {posts.length > 0 && (
+            <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 -mx-2 px-2">
+              {posts.map((p) => (
+                <Link
+                  key={p.slug}
+                  href={`/post/${p.slug}`}
+                  className="group block shrink-0 w-72 sm:w-80 snap-start overflow-hidden rounded-xl bg-slate-100 hover:shadow-lg transition-shadow"
                 >
-                  {p.imageUrl && (
-                    <Image
-                      src={p.imageUrl}
-                      alt={p.title}
-                      fill
-                      sizes="(max-width: 640px) 100vw, 40vw"
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                  )}
-                </div>
-                <div className="p-4">
-                  <h3 className="text-lg font-semibold leading-tight">{p.title}</h3>
-                </div>
-              </Link>
-            ))}
-          </div>
+                  <div
+                    className="relative bg-slate-200"
+                    style={{ aspectRatio: '16 / 9' }}
+                  >
+                    {p.imageUrl && (
+                      <Image
+                        src={p.imageUrl}
+                        alt={p.title}
+                        fill
+                        sizes="320px"
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    )}
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-lg font-semibold leading-tight">{p.title}</h3>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
 
-          <div className="mt-12 border-t border-gray-100 pt-8">
-            <NewsletterSignup compact />
+          <div className="mt-12 border-t border-gray-100 pt-8 text-center">
+            <NewsletterSignup compact center />
           </div>
         </div>
 

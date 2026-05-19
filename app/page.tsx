@@ -72,7 +72,7 @@ export default async function Home() {
     { label: "Read More", href: "/about", imageUrl: asset(TILE_ABOUT) },
   ];
 
-  const postTiles: HomePost[] = posts.slice(0, 2).map((p) => ({
+  const postTiles: HomePost[] = posts.map((p) => ({
     title: p.title ?? "",
     slug: p.slug ?? "",
     imageUrl: asset(p.main_image) ?? asset(p.main_icon),

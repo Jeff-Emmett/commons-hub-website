@@ -2,7 +2,13 @@
 
 import { useState } from 'react';
 
-export default function NewsletterSignup({ compact = false }: { compact?: boolean }) {
+export default function NewsletterSignup({
+  compact = false,
+  center = false,
+}: {
+  compact?: boolean;
+  center?: boolean;
+}) {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -61,9 +67,16 @@ export default function NewsletterSignup({ compact = false }: { compact?: boolea
 
   if (compact) {
     return (
-      <div>
-        <h2 className="text-xl font-semibold mb-3">Sign up for our newsletter</h2>
-        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 items-start">
+      <div className={center ? 'flex flex-col items-center' : undefined}>
+        <h2 className="text-xl font-semibold mb-3">
+          Subscribe for new events &amp; announcements from the Commons Hub
+        </h2>
+        <form
+          onSubmit={handleSubmit}
+          className={`flex flex-col sm:flex-row gap-3 ${
+            center ? 'items-center justify-center' : 'items-start'
+          }`}
+        >
           <input
             type="email"
             name="email"
