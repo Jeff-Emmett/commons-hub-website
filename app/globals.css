@@ -4,6 +4,18 @@
 
 /* We'll use global styles instead of prose-specific styles */
 
+/* Gentle section-to-section snap: only nudges to the nearest boundary
+   when the user is already close, never hijacks long scrolls. Header is
+   fixed 5rem tall, so offset snap target by that. */
+html {
+  scroll-snap-type: y proximity;
+  scroll-padding-top: 5rem;
+}
+main.home > *,
+main.page-sections > * {
+  scroll-snap-align: start;
+}
+
 @layer base {
   :root {
     --color-1: #000000; /* text, headings,  */

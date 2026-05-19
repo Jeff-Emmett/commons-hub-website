@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -20,10 +20,12 @@ interface RoomRate {
 
 const ROOM_RATES: RoomRate[] = [
   { key: 'single',      label: 'Single Room',                    nightly_excl_vat: 85,    city_tax_per_night: 4.70 },
-  { key: 'double_twin', label: 'Double Room (twin beds)',        nightly_excl_vat: 91,    city_tax_per_night: 9.40 },
-  { key: 'double_king', label: 'Double Room (kingsize bed)',     nightly_excl_vat: 91,    city_tax_per_night: 9.40 },
+  { key: 'double_twin', label: 'Double Room (twin beds)',        nightly_excl_vat: 45.50, city_tax_per_night: 4.70 },
+  { key: 'double_king', label: 'Double Room (kingsize bed)',     nightly_excl_vat: 45.50, city_tax_per_night: 4.70 },
   { key: 'shared',      label: 'Shared (4–6 beds)',              nightly_excl_vat: 35.20, city_tax_per_night: 4.70 },
 ];
+
+const DOUBLE_ROOM_KEYS = new Set(['double_twin', 'double_king']);
 
 interface EventPackage {
   key: 'small' | 'medium' | 'large' | 'xlarge' | 'call';
@@ -33,11 +35,11 @@ interface EventPackage {
 }
 
 const EVENT_PACKAGES: EventPackage[] = [
-  { key: 'small',  label: 'Small',                  capacity: 'up to 20 guests',  day_rate_excl_vat: 200 },
-  { key: 'medium', label: 'Medium',                 capacity: 'up to 30 guests',  day_rate_excl_vat: 500 },
-  { key: 'large',  label: 'Large',                  capacity: 'up to 65 guests',  day_rate_excl_vat: 700 },
-  { key: 'xlarge', label: 'Extra Large',            capacity: 'up to 100 guests', day_rate_excl_vat: 1000 },
-  { key: 'call',   label: "I don't know yet — let's have a call", capacity: '',  day_rate_excl_vat: 0 },
+  { key: 'small',  label: 'Small',                  capacity: 'max. 20 guests',  day_rate_excl_vat: 200 },
+  { key: 'medium', label: 'Medium',                 capacity: 'max. 30 guests',  day_rate_excl_vat: 500 },
+  { key: 'large',  label: 'Large',                  capacity: 'max. 65 guests',  day_rate_excl_vat: 700 },
+  { key: 'xlarge', label: 'Extra Large',            capacity: 'max. 100 guests', day_rate_excl_vat: 1000 },
+  { key: 'call',   label: "I don't know yet",       capacity: '',                day_rate_excl_vat: 0 },
 ];
 
 // ─────────────────────────────────────────────────────────────
@@ -111,6 +113,7 @@ function StayForm() {
     register,
     handleSubmit,
     control,
+    setValue,
     formState: { errors, isSubmitting },
     reset,
   } = useForm<StayValues>({
@@ -119,6 +122,23 @@ function StayForm() {
   });
 
   const watched = useWatch({ control });
+
+  // Double rooms are sold per pair: snap guests -> 2 when the user picks
+  // (or switches into) a double-bed option. Field stays editable so a
+  // couple bringing a cot/baby can override.
+  const prevRoomTypeRef = useRef<string | undefined>(undefined);
+  useEffect(() => {
+    const rt = watched.room_type;
+    if (
+      rt &&
+      rt !== prevRoomTypeRef.current &&
+      DOUBLE_ROOM_KEYS.has(rt)
+    ) {
+      setValue('guests', 2, { shouldValidate: true });
+    }
+    prevRoomTypeRef.current = rt;
+  }, [watched.room_type, setValue]);
+
   const nights = nightsBetween(watched.check_in || '', watched.check_out || '');
   const guests = Number(watched.guests) || 0;
   const rate = ROOM_RATES.find((r) => r.key === watched.room_type) ?? ROOM_RATES[0];
