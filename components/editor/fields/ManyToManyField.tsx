@@ -3,6 +3,7 @@ import { useField } from './FieldContext';
 import { RelationManyToManyFieldDef } from '../FormTypes';
 import { dataService } from '@/lib/services/DataService';
 import { Controller } from 'react-hook-form';
+import { formatCellValue } from '@/lib/utils/formatCellValue';
 
 export const ManyToManyField: React.FC = () => {
   const { field, form } = useField();
@@ -34,7 +35,10 @@ export const ManyToManyField: React.FC = () => {
             
             // Create label from displayFields
             if (m2mField.displayFields && m2mField.displayFields.length > 0) {
-              label = m2mField.displayFields.map(field => (item as Record<string, unknown>)[field]).filter(Boolean).join(' - ');
+              label = m2mField.displayFields
+                .map(field => formatCellValue((item as Record<string, unknown>)[field]))
+                .filter(Boolean)
+                .join(' - ');
             } else {
               label = String((item as Record<string, unknown>)[valueField]);
             }

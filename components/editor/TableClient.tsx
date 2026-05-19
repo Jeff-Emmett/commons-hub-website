@@ -6,6 +6,7 @@ import { Tables, OrderDirection } from '@/lib/services/DataTypes';
 import { useRouter } from 'next/navigation';
 import { ChevronsUpDown } from 'lucide-react';
 import { TableConfig } from '@/lib/types/tablesConfigTypes';
+import { formatCellValue } from '@/lib/utils/formatCellValue';
 
 interface TableClientProps {
   configs: Record<string, TableConfig>;
@@ -332,16 +333,14 @@ function renderCellContent(value: unknown, fieldName: string): React.ReactNode {
       <span className="text-red-600">No</span>;
   }
   
-  // Handle long text
-  if (typeof value === 'string' && value.length > 100) {
-    return `${value.substring(0, 100)}...`;
+  // Relations (id arrays / nested objects) and files: render a readable
+  // label instead of [object Object] / ["61","62"] / raw ids.
+  const text = formatCellValue(value);
+  if (text === '') {
+    return <span className="text-gray-400">-</span>;
   }
-  
-  // Convert any non-renderable values to strings
-  if (typeof value === 'object') {
-    return JSON.stringify(value);
+  if (text.length > 100) {
+    return `${text.substring(0, 100)}...`;
   }
-  
-  // Return primitive values directly
-  return String(value);
+  return text;
 }

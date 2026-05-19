@@ -4,6 +4,7 @@ import EditorClient from './EditorClient';
 import { TableConfig } from '@/lib/types/tablesConfigTypes';
 import { useTableConfig } from '@/lib/contexts/TableConfigContext';
 import { Tables } from '@/lib/services/DataTypes';
+import { formatCellValue } from '@/lib/utils/formatCellValue';
 
 interface RelatedItemsPanelProps {
   configs: Record<string, TableConfig>;
@@ -265,7 +266,7 @@ const RelatedItemsPanel: React.FC<RelatedItemsPanelProps> = ({
             if (titleFields && Array.isArray(titleFields) && titleFields.length > 0) {
               // Build title from multiple fields
               const titleParts = titleFields.map(field => {
-                return item[field] !== undefined && item[field] !== null ? item[field].toString() : '';
+                return formatCellValue(item[field]);
               }).filter(part => part !== '');
               
               if (titleParts.length > 0) {
@@ -334,7 +335,7 @@ const RelatedItemsPanel: React.FC<RelatedItemsPanelProps> = ({
                           {fieldName.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}:
                         </span>
                         <span className="text-gray-800 w-2/3">
-                          {item[fieldName]?.toString() || '-'}
+                          {formatCellValue(item[fieldName]) || '-'}
                         </span>
                       </div>
                     ))}
