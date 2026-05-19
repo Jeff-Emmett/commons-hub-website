@@ -1,4 +1,4 @@
-import { Carousel } from "@/components/Carousel";
+import { CarouselOrGallery } from "@/components/CarouselOrGallery";
 import PostGrid from "@/components/PostGrid";
 import { getPostBySlug } from "@/lib/actions/getPost";
 import { getPosts } from "@/lib/actions/getPost";
@@ -119,7 +119,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
             {carousels.length > 0 &&
               carousels.map((carousel) => (
-                <Carousel key={carousel.id} carousel={carousel} />
+                <CarouselOrGallery key={carousel.id} carousel={carousel} />
               ))}
 
             {Data?.body && (

@@ -1,4 +1,4 @@
-import { Carousel } from "@/components/Carousel";
+import { CarouselOrGallery } from "@/components/CarouselOrGallery";
 import { Metadata } from "next";
 import PostGrid from "@/components/PostGrid";
 import { getCategoryBySlug } from "@/lib/actions/getCategory";
@@ -105,7 +105,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
 
             {carousels.length > 0 &&
               carousels.map((carousel) => (
-                <Carousel key={carousel.id} carousel={carousel} />
+                <CarouselOrGallery key={carousel.id} carousel={carousel} />
               ))}
 
             {Data?.body && (

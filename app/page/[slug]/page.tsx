@@ -3,7 +3,7 @@ import SiteFooter from "@/components/SiteFooter";
 import { AutoSectionNav } from "@/components/AutoSectionNav";
 import HeroCategory from "@/components/HeroCategory";
 import WhiteOverlay from "@/components/WhiteOverlay";
-import { Carousel } from "@/components/Carousel";
+import { CarouselOrGallery } from "@/components/CarouselOrGallery";
 import { TeamClient } from "@/components/TeamClient";
 import { getTeam } from "@/lib/actions/getTeam";
 import { EventGrid } from "@/components/EventGrid";
@@ -144,7 +144,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
             {carousels.length > 0 &&
               carousels.map((carousel) => (
-                <Carousel key={carousel.id} carousel={carousel} />
+                <CarouselOrGallery key={carousel.id} carousel={carousel} />
               ))}
 
             {page?.is_team && teamMembers.length > 0 && (
