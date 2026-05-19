@@ -7,6 +7,8 @@ import { AuthProvider } from "@/lib/auth/AuthProvider";
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import ContentLightbox from "@/components/ContentLightbox"
+import ScrollIndicator from "@/components/ScrollIndicator"
+import { CarouselVisibilityProvider } from "@/lib/contexts/CarouselVisibilityContext"
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -67,17 +69,24 @@ export default async function RootLayout({
     <html lang="en" prefix="og: http://ogp.me/ns#">
       <body className={`${urbanist.className} antialiased`}>
         <AuthProvider>
-          {/* Header placeholder to maintain layout flow */}
-          <div className="h-20"></div>
-          
-          {/* Fixed header */}
-          <div className="fixed top-0 left-0 w-full z-50">
-            <Header2 menus={menus} />
-          </div>
-          {children}
-          <ContentLightbox />
-          <Analytics />
-          <SpeedInsights />
+          <CarouselVisibilityProvider>
+            {/* Header placeholder to maintain layout flow */}
+            <div className="h-20"></div>
+
+            {/* Fixed header */}
+            <div className="fixed top-0 left-0 w-full z-50">
+              <Header2 menus={menus} />
+            </div>
+
+            {/* Global left-hand social sidebar — present on every page,
+                self-hides while a viewport-occupying carousel is live. */}
+            <ScrollIndicator />
+
+            {children}
+            <ContentLightbox />
+            <Analytics />
+            <SpeedInsights />
+          </CarouselVisibilityProvider>
         </AuthProvider>
       </body>
     </html>

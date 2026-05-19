@@ -20,6 +20,17 @@ type Props = {
   menus: Menu[];
 };
 
+// Header-only label overrides, keyed by page slug. Keeps the live Directus
+// page title (and its SEO/heading) intact while showing a shorter nav label.
+const HEADER_LABEL_OVERRIDES: Record<string, string> = {
+  venue: "VENUE",
+};
+
+function headerLabel(menuItem: Menu): string {
+  const slug = menuItem.pages?.slug ?? "";
+  return HEADER_LABEL_OVERRIDES[slug] ?? menuItem.pages?.title ?? "";
+}
+
 function Header2({ menus }: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -80,7 +91,7 @@ function Header2({ menus }: Props) {
                 <LazyMotion features={domAnimation} key={menuItem.id}>
                   <ClientSideRout
                     route={`/page/${menuItem.pages?.slug}`}
-                    ariaLabel={menuItem.pages?.title || ''}
+                    ariaLabel={headerLabel(menuItem) || ''}
                   >
                     <m.div
                       whileHover={{
@@ -91,7 +102,7 @@ function Header2({ menus }: Props) {
                       className="bg-animate relative text-sm flex md:w-24 lg:w-32 xl:w-40 h-full justify-center items-center font-semibold tracking-wider uppercase cursor-pointer border-l border-gray-200 no-underline"
                     >
                       <div className="absolute inset-0 z-0"> </div>
-                      <div className="relative">{menuItem.pages?.title}</div>
+                      <div className="relative">{headerLabel(menuItem)}</div>
                     </m.div>
                   </ClientSideRout>
                 </LazyMotion>
@@ -172,10 +183,10 @@ function Header2({ menus }: Props) {
                         <div key={menuItem.id} onClick={toggleMenu}>
                           <ClientSideRout
                             route={`/page/${menuItem.pages?.slug}`}
-                            ariaLabel={menuItem.pages?.title || ''}
+                            ariaLabel={headerLabel(menuItem) || ''}
                           >
                             <div className="text-xl font-semibold cursor-pointer hover:text-gray-600 transition-colors">
-                              {menuItem.pages?.title}
+                              {headerLabel(menuItem)}
                             </div>
                           </ClientSideRout>
                         </div>

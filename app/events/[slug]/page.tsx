@@ -1,6 +1,5 @@
 import ClientSideRout from "@/components/ClientSideRout";
 import WhiteOverlay from "@/components/WhiteOverlay";
-import ScrollIndicator from "@/components/ScrollIndicator";
 import { getEventPageBySlug } from "@/lib/actions/getEventPage";
 import ImageIcon from "@/components/ImageIcon";
 import { Metadata } from "next";
@@ -145,7 +144,6 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
               </div>
             </div>
           </div>
-          <ScrollIndicator />
         </div>
       </div>
     </div>

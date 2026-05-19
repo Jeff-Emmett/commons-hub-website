@@ -4,7 +4,6 @@ import { getCurrentUser } from "@/lib/directus/auth";
 import WhiteOverlay from "@/components/WhiteOverlay";
 import ClientSideRout from "@/components/ClientSideRout";
 import NewsletterSignup from "@/components/NewsletterSignup";
-import ScrollIndicator from "@/components/ScrollIndicator";
 
 export default async function ProtectedPage() {
   const user = await getCurrentUser();
@@ -12,7 +11,7 @@ export default async function ProtectedPage() {
     redirect("/auth/login");
   }
   const greetingName =
-    user.first_name?.trim() || user.email.split("@")[0] || "Member";
+    user.first_name?.trim() || user.email?.split("@")[0] || "Member";
 
   return (
     <div className="section">
@@ -87,7 +86,6 @@ export default async function ProtectedPage() {
               </div>
             </div>
           </div>
-          <ScrollIndicator />
         </div>
       </div>
     </div>

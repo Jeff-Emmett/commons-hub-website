@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useRegisterLiveCarousel } from '@/lib/contexts/CarouselVisibilityContext';
 
 export interface PinnedSlide {
   imageUrl: string;
@@ -28,7 +29,23 @@ interface PinnedCarouselProps {
 export function PinnedCarousel({ slides, headline }: PinnedCarouselProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [offset, setOffset] = useState(0); // 0..(n-1), fractional
+  const [inView, setInView] = useState(false);
   const n = Math.max(1, slides.length);
+
+  // Tell the global social sidebar to step aside while this full-bleed
+  // carousel is on screen.
+  useRegisterLiveCarousel(inView);
+
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    const io = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   useEffect(() => {
     const el = wrapRef.current;

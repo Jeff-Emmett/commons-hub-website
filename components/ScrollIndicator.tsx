@@ -1,9 +1,14 @@
 "use client";
 
 import { motion, useScroll } from "framer-motion";
+import { useCarouselLive } from "@/lib/contexts/CarouselVisibilityContext";
 
 export default function ScrollIndicator() {
   const { scrollYProgress } = useScroll();
+  const carouselLive = useCarouselLive();
+
+  // Hide the left rail while a full-bleed carousel occupies the viewport.
+  if (carouselLive) return null;
 
   return (
     <div className="scroll-indicator">
