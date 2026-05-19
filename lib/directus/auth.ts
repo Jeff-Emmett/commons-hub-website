@@ -12,7 +12,7 @@ export type DirectusUser = {
   email: string;
   first_name: string | null;
   last_name: string | null;
-  role: { id: string; name: string; admin_access: boolean } | null;
+  role: { id: string; name: string } | null;
 };
 
 type LoginResponse = {
@@ -94,7 +94,12 @@ export async function getCurrentUser(): Promise<DirectusUser | null> {
   const refreshToken = jar.get(REFRESH_COOKIE)?.value;
   if (!access && !refreshToken) return null;
 
-  const meQuery = "?fields=id,email,first_name,last_name,role.id,role.name,role.admin_access";
+  // NOTE: Directus 11 has no `directus_roles.admin_access` field (it moved
+  // to `directus_policies`). Including an invalid field here makes Directus
+  // silently return only `{ id }` — dropping email/first_name/role and
+  // breaking the greeting and all role gating. Admin status is derived from
+  // role.name via ROLE_ALIASES in AuthContext, so we only need safe fields.
+  const meQuery = "?fields=id,email,first_name,last_name,role.id,role.name";
 
   const fetchMe = async (token: string) =>
     directusFetch<{ data: DirectusUser }>(`/users/me${meQuery}`, { token });

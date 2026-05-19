@@ -14,7 +14,7 @@ export type DirectusAuthUser = {
   email: string;
   first_name: string | null;
   last_name: string | null;
-  role: { id: string; name: string; admin_access: boolean } | null;
+  role: { id: string; name: string } | null;
 };
 
 const ROLE_ALIASES: Record<string, string> = {
@@ -31,7 +31,7 @@ const ROLE_ALIASES: Record<string, string> = {
 function normalizeRole(user: DirectusAuthUser | null): string | null {
   if (!user) return null;
   const name = user.role?.name?.trim().toLowerCase();
-  if (!name) return user.role?.admin_access ? "admin" : null;
+  if (!name) return null;
   return ROLE_ALIASES[name] ?? name;
 }
 
@@ -74,7 +74,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (!res.ok) throw new Error(`auth/me ${res.status}`);
       const { user } = (await res.json()) as { user: DirectusAuthUser | null };
       const userRole = normalizeRole(user);
-      const isAdmin = userRole === "admin" || !!user?.role?.admin_access;
+      const isAdmin = userRole === "admin";
       const isManager = userRole === "manager" || isAdmin;
       const isFrontdesk = userRole === "frontdesk" || isManager;
       const isEventOrganiser = userRole === "event organiser" || isManager;
