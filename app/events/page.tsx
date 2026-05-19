@@ -38,14 +38,15 @@ function fmtDateRange(start: string | null, end: string | null): string {
   return `${s.toLocaleDateString("en-GB", opts)} – ${e.toLocaleDateString("en-GB", opts)}`;
 }
 
+// Used when an event has no main_image set, so a tile is never blank.
+const FALLBACK_IMAGE = "f6e38335-40a6-4b4c-bfc3-6471c067c38f";
+
 function toCards(rows: EventRowData[]): EventCard[] {
   return rows.map((ev) => ({
     slug: ev.slug,
     title: ev.title ?? "Untitled",
     dateLabel: fmtDateRange(ev.startdatetime, ev.enddatetime),
-    imageUrl: ev.main_image
-      ? `${DIRECTUS_ASSET_BASE}/assets/${ev.main_image}`
-      : null,
+    imageUrl: `${DIRECTUS_ASSET_BASE}/assets/${ev.main_image ?? FALLBACK_IMAGE}`,
   }));
 }
 
