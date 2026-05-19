@@ -25,19 +25,19 @@ export const COMMON_AREAS: SideSlide[] = [
     image: "48c365d2-e9f7-42ce-bc4e-49cca6b8299c",
     title: "Lounge",
     body:
-      "The heart of the house — vintage couches, a vinyl record player, board games, and a community library with gems on the commons, radical finance, and systems change.",
+      "The heart of the house — vintage couches, a vinyl record player, board games, and a community library.",
   },
   {
     image: "80f5e81f-5b1a-4c06-b74d-be0c4f1cb62f",
     title: "Kitchen",
     body:
-      "Once a restaurant kitchen — now home to late-night cooking sessions. Stocked with utensils, spices, oils, and enough pots and pans to feed a small revolution.",
+      "Once a restaurant kitchen — now home to late-night cooking sessions. Stocked with enough pots and pans to feed a small revolution.",
   },
   {
     image: "8b60bc3d-0411-40c7-9970-832d583aef24",
     title: "Garden",
     body:
-      "Spacious enough for frisbee sessions, with a fire bowl, veggie gardens, and a hand-crafted spa area with views on the nearby mountain tops <em>(spa area available at extra cost)</em>.",
+      "Spacious enough for frisbee sessions, with a fire bowl, veggie gardens, and a hand-crafted spa area* with views on the nearby mountain tops <em>(*optional access)</em>.",
   },
 ];
 
@@ -45,7 +45,7 @@ export const ROOMS: SideSlide[] = [
   {
     image: "496f4b23-4e16-47f7-a508-5c270e7aaea2",
     title: "Double Room (twin beds)",
-    body: "Two single beds, a desk and a window on the valley. Comfortable for colleagues or friends travelling together.",
+    body: "Two single beds, a cupboard, a desk and a sink. Comfortable for colleagues or friends travelling together.",
   },
   {
     image: "80f5e81f-5b1a-4c06-b74d-be0c4f1cb62f",
@@ -67,20 +67,20 @@ export const ROOMS: SideSlide[] = [
 export const EVENT_SPACES: SideSlide[] = [
   {
     image: "f6e38335-40a6-4b4c-bfc3-6471c067c38f",
-    title: "90m² Conference Hall",
+    title: "90 m² Conference Hall",
     body:
-      "60 chairs, three couches, 133'' projector, 4000 W sound system, full live-stream setup and stage lighting.",
+      "With stage, piano, A/V, lights & livestream setup.",
   },
   {
     image: "4e7c8805-b7f5-4743-ba18-aa44ebf99568",
-    title: "90m² Maker Hall",
+    title: "90 m² Maker Hall",
     body:
-      "Laser cutter, 3D printer, A3 laser printer, sewing station, sound lab, music instruments, a massive whiteboard, pingpong and foosball.",
+      "With laser cutter, 3D printer, sound lab, ping-pong & foosball.",
   },
   {
     image: "01de3901-23c4-4369-9854-9c6fe05ff9fb",
-    title: "45m² Seminar Room",
+    title: "45 m² Seminar Room",
     body:
-      "20 chairs, flexible tables, TV screen and flipchart — ideal for classes, breakout sessions, focused group work and smaller workshops.",
+      "With TV screen and flipchart — ideal for classes and smaller workshops.",
   },
 ];

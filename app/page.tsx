@@ -63,7 +63,7 @@ export default async function Home() {
 
   const tiles: HomeTile[] = [
     { label: "Book your Stay", href: "/accommodation", imageUrl: asset(TILE_ACCOMMODATION) },
-    { label: "Plan an Event", href: "/event-venue", imageUrl: asset(TILE_EVENT) },
+    { label: "Plan your Retreat", href: "/event-venue", imageUrl: asset(TILE_EVENT) },
     {
       label: "Upcoming Events",
       href: "/events",

@@ -37,7 +37,7 @@ export function NavTiles({
       imageAlt: 'Accommodation at the Commons Hub',
     },
     {
-      label: 'Plan an Event',
+      label: 'Plan your Retreat',
       href: '/event-venue',
       imageUrl: TILE_EVENTS,
       imageAlt: 'Event venue at the Commons Hub',

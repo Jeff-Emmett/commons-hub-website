@@ -13,20 +13,10 @@ export const metadata = {
 export default function EventVenuePage() {
   return (
     <main className="page-sections">
-      {/* Section 1 — Philosophy (text verbatim from spec) */}
-      <section className="px-6 py-20 max-w-3xl mx-auto text-center">
-        <p className="text-2xl md:text-3xl font-light leading-relaxed">
-          Our philosophy: We believe in events as commons,<br />
-          shaped by mutual care and respect among peers.<br />
-          The magic starts where structures fade<br />
-          and give way to surprise.
-        </p>
-      </section>
-
-      {/* Section 2 — Common Areas (scroll-pinned, same model as Home) */}
+      {/* Section 1 — Common Areas (scroll-pinned, same model as Home) */}
       <PinnedCarousel headline="Common Areas" slides={toPinned(COMMON_AREAS)} />
 
-      {/* Section 3 — Event Spaces (scroll-pinned) */}
+      {/* Section 2 — Event Spaces (scroll-pinned) */}
       <PinnedCarousel headline="Event Spaces" slides={toPinned(EVENT_SPACES)} />
 
       {/* Section 4 — Book Event Space */}

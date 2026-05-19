@@ -66,42 +66,6 @@ export function HomeJourney({ slides, tiles, posts }: HomeJourneyProps) {
         </div>
       </section>
 
-      {/* Section 2b — more about the Hub, with links out */}
-      <section className="bg-white px-8 md:px-16 py-16 border-t border-gray-100">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
-          <div>
-            <h3 className="text-xl font-semibold mb-2">Stay with us</h3>
-            <p className="text-slate-600 mb-3">
-              A communal guesthouse, not a hotel — rooms, shared common areas,
-              and space to slow down in the Austrian Alps.
-            </p>
-            <Link href="/accommodation" className="text-slate-900 font-medium hover:underline">
-              Accommodation →
-            </Link>
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold mb-2">Host an event</h3>
-            <p className="text-slate-600 mb-3">
-              Halls, a maker space and seminar room for gatherings from intimate
-              retreats to week-long conferences.
-            </p>
-            <Link href="/event-venue" className="text-slate-900 font-medium hover:underline">
-              Event Venue →
-            </Link>
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold mb-2">Join the community</h3>
-            <p className="text-slate-600 mb-3">
-              Artists, dreamers, hackers and tinkerers — plus the events,
-              partners and history behind the Hub.
-            </p>
-            <Link href="/page/community" className="text-slate-900 font-medium hover:underline">
-              Community &amp; About →
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* Section 3 — all published blog posts (scrollable) + newsletter */}
       <section className="bg-white px-8 md:px-16 py-16">
         <div className="max-w-5xl mx-auto w-full">
