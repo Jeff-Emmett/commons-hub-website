@@ -184,47 +184,54 @@ function StayForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 bg-white p-6 rounded-lg shadow-md">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <FieldText label="Your name *" error={errors.name?.message} {...register('name')} />
-        <FieldText label="Email *" type="email" error={errors.email?.message} {...register('email')} />
-        <FieldText label="Check-in *" type="date" min={today} error={errors.check_in?.message} {...register('check_in')} />
-        <FieldText label="Check-out *" type="date" min={today} error={errors.check_out?.message} {...register('check_out')} />
-        <FieldText
-          label="Number of guests *"
-          type="number"
-          min={1}
-          error={errors.guests?.message}
-          {...register('guests', { valueAsNumber: true })}
-        />
-        <FieldSelect label="Room type" error={errors.room_type?.message} {...register('room_type')}>
-          {ROOM_RATES.map((r) => (
-            <option key={r.key} value={r.key}>
-              {r.label} ({formatEur(r.nightly_excl_vat)} + {formatEur(r.city_tax_per_night)} city tax)
-            </option>
-          ))}
-        </FieldSelect>
-      </div>
+    <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-6 rounded-lg shadow-md">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-2 space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <FieldText label="Your name *" error={errors.name?.message} {...register('name')} />
+            <FieldText label="Email *" type="email" error={errors.email?.message} {...register('email')} />
+            <FieldText label="Check-in *" type="date" min={today} error={errors.check_in?.message} {...register('check_in')} />
+            <FieldText label="Check-out *" type="date" min={today} error={errors.check_out?.message} {...register('check_out')} />
+            <FieldText
+              label="Number of guests *"
+              type="number"
+              min={1}
+              error={errors.guests?.message}
+              {...register('guests', { valueAsNumber: true })}
+            />
+            <FieldSelect label="Room type" error={errors.room_type?.message} {...register('room_type')}>
+              {ROOM_RATES.map((r) => (
+                <option key={r.key} value={r.key}>
+                  {r.label} ({formatEur(r.nightly_excl_vat)} + {formatEur(r.city_tax_per_night)} city tax)
+                </option>
+              ))}
+            </FieldSelect>
+          </div>
 
-      <FieldTextarea label="Anything we should know?" {...register('message')} />
+          <FieldTextarea label="Anything we should know?" {...register('message')} />
 
-      <PriceSummary
-        rows={[
-          { label: `${formatEur(rate.nightly_excl_vat)} × ${guests} guest(s) × ${nights} night(s)`, amount: lodging },
-          { label: `City tax (${formatEur(rate.city_tax_per_night)} × ${guests} × ${nights})`, amount: cityTax },
-        ]}
-        total={total}
-        note="*Prices include 10% VAT."
-      />
+          {submitState === 'error' && (
+            <p className="text-red-600 text-sm" role="alert">{submitError}</p>
+          )}
 
-      {submitState === 'error' && (
-        <p className="text-red-600 text-sm" role="alert">{submitError}</p>
-      )}
-
-      <div className="flex justify-center mt-8">
-        <button type="submit" disabled={isSubmitting} className="button w-full md:w-auto">
-          {isSubmitting ? 'Sending…' : 'Send inquiry'}
-        </button>
+          <div className="flex justify-start">
+            <button type="submit" disabled={isSubmitting} className="button w-full sm:w-auto">
+              {isSubmitting ? 'Sending…' : 'Send inquiry'}
+            </button>
+          </div>
+        </div>
+        <aside className="lg:col-span-1">
+          <div className="lg:sticky lg:top-24">
+            <PriceSummary
+              rows={[
+                { label: `${formatEur(rate.nightly_excl_vat)} × ${guests} guest(s) × ${nights} night(s)`, amount: lodging },
+                { label: `City tax (${formatEur(rate.city_tax_per_night)} × ${guests} × ${nights})`, amount: cityTax },
+              ]}
+              total={total}
+              note="*Prices include 10% VAT."
+            />
+          </div>
+        </aside>
       </div>
     </form>
   );
@@ -292,57 +299,63 @@ function EventForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 bg-white p-6 rounded-lg shadow-md">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <FieldText label="Your name *" error={errors.name?.message} {...register('name')} />
-        <FieldText label="Email *" type="email" error={errors.email?.message} {...register('email')} />
-        <FieldText label="Start date *" type="date" min={today} error={errors.check_in?.message} {...register('check_in')} />
-        <FieldText label="End date *" type="date" min={today} error={errors.check_out?.message} {...register('check_out')} />
-        <FieldSelect
-          label="Event size *"
-          error={errors.event_size_package?.message}
-          {...register('event_size_package')}
-        >
-          {EVENT_PACKAGES.map((p) => (
-            <option key={p.key} value={p.key}>
-              {p.label}
-              {p.day_rate_excl_vat > 0 ? ` — ${formatEur(p.day_rate_excl_vat)}/day, ${p.capacity}` : ''}
-            </option>
-          ))}
-        </FieldSelect>
-        <FieldText label="Event title (optional)" {...register('event_title')} />
-      </div>
+    <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-6 rounded-lg shadow-md">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-2 space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <FieldText label="Your name *" error={errors.name?.message} {...register('name')} />
+            <FieldText label="Email *" type="email" error={errors.email?.message} {...register('email')} />
+            <FieldText label="Start date *" type="date" min={today} error={errors.check_in?.message} {...register('check_in')} />
+            <FieldText label="End date *" type="date" min={today} error={errors.check_out?.message} {...register('check_out')} />
+            <FieldSelect
+              label="Event size *"
+              error={errors.event_size_package?.message}
+              {...register('event_size_package')}
+            >
+              {EVENT_PACKAGES.map((p) => (
+                <option key={p.key} value={p.key}>
+                  {p.label}
+                  {p.day_rate_excl_vat > 0 ? ` — ${formatEur(p.day_rate_excl_vat)}/day, ${p.capacity}` : ''}
+                </option>
+              ))}
+            </FieldSelect>
+            <FieldText label="Event title (optional)" {...register('event_title')} />
+          </div>
 
-      <FieldTextarea
-        label="Tell us about the event"
-        placeholder="Tone, audience, programme, anything we should know..."
-        {...register('event_description')}
-      />
+          <FieldTextarea
+            label="Tell us about the event"
+            placeholder="Tone, audience, programme, anything we should know..."
+            {...register('event_description')}
+          />
 
-      {!isCallVariant && (
-        <PriceSummary
-          rows={[
-            { label: `${pkg.label} package — ${formatEur(pkg.day_rate_excl_vat)} / day × ${days} day(s)`, amount: venue },
-          ]}
-          total={total}
-          note="*Prices include 20% VAT."
-        />
-      )}
+          {submitState === 'error' && (
+            <p className="text-red-600 text-sm" role="alert">{submitError}</p>
+          )}
 
-      {isCallVariant && (
-        <div className="bg-slate-50 rounded-lg p-4 text-sm text-slate-700">
-          No need to estimate now — we&apos;ll figure out the right setup on a call.
+          <div className="flex justify-start">
+            <button type="submit" disabled={isSubmitting} className="button w-full sm:w-auto">
+              {isSubmitting ? 'Sending…' : 'Send inquiry'}
+            </button>
+          </div>
         </div>
-      )}
-
-      {submitState === 'error' && (
-        <p className="text-red-600 text-sm" role="alert">{submitError}</p>
-      )}
-
-      <div className="flex justify-center mt-8">
-        <button type="submit" disabled={isSubmitting} className="button w-full md:w-auto">
-          {isSubmitting ? 'Sending…' : 'Send inquiry'}
-        </button>
+        <aside className="lg:col-span-1">
+          <div className="lg:sticky lg:top-24 space-y-4">
+            {!isCallVariant && (
+              <PriceSummary
+                rows={[
+                  { label: `${pkg.label} package — ${formatEur(pkg.day_rate_excl_vat)} / day × ${days} day(s)`, amount: venue },
+                ]}
+                total={total}
+                note="*Prices include 20% VAT."
+              />
+            )}
+            {isCallVariant && (
+              <div className="bg-slate-50 rounded-lg p-4 text-sm text-slate-700">
+                No need to estimate now — we&apos;ll figure out the right setup on a call.
+              </div>
+            )}
+          </div>
+        </aside>
       </div>
     </form>
   );

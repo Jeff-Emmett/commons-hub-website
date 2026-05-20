@@ -19,20 +19,9 @@ export default function EventVenuePage() {
       {/* Section 2 — Event Spaces (scroll-pinned) */}
       <PinnedCarousel headline="Event Spaces" slides={toPinned(EVENT_SPACES)} />
 
-      {/* Section 4 — Book Event Space */}
-      <section className="px-6 py-12 max-w-4xl mx-auto">
+      {/* Section 3 — Book Event Space (form left, sticky price calc right) */}
+      <section className="px-6 py-12 max-w-6xl mx-auto">
         <h2 className="h2 mb-6">Book Event Space</h2>
-
-        <div className="bg-slate-50 rounded-lg p-5 mb-8 text-sm leading-relaxed">
-          <p className="font-medium mb-2">Event Space Packages</p>
-          <ul className="space-y-1 list-disc pl-5">
-            <li>Small (€200 / day, 20 persons max.): Seminar Room + Common Areas</li>
-            <li>Medium (€500 / day, 30 persons max.): Both Halls, Seminar Room + Common Areas</li>
-            <li>Large (€700 / day, 65 persons max.): Spa Area, Both Halls, Seminar Room + Common Areas</li>
-            <li>Extra Large (€1.000 / day, 100 persons max.): Spa Area, Both Halls, Seminar Room + Common Areas</li>
-            <li>I don&apos;t know yet - let&apos;s have a call and talk it through</li>
-          </ul>
-        </div>
 
         <BookingForm variant="event" />
 
@@ -44,7 +33,7 @@ export default function EventVenuePage() {
             Event Organizer Toolbox
           </Link>
           <p className="mt-3 text-slate-600">
-            Need help with organizing? We got ample experience - check our free
+            Need help with organizing? We got ample experience — check our free
             templates.
           </p>
         </div>

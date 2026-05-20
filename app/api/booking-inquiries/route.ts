@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { createItem } from "@/lib/directus/client";
 import { sendTransactional } from "@/lib/listmonk/client";
+import { sendMail } from "@/lib/mail/mailer";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const ISO_DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
@@ -79,8 +80,58 @@ export async function POST(request: Request) {
     );
   }
 
-  // Best-effort office notification. Skip silently if listmonk transactional
-  // template + office subscriber haven't been provisioned yet.
+  // Best-effort SMTP notification to the office. From is our Mailcow-
+  // authenticated sender; Reply-To is the customer so a "Reply" replies
+  // directly to them. Skips silently when SMTP env isn't configured.
+  const officeTo = process.env.MAIL_TO_OFFICE;
+  if (officeTo) {
+    const lines: string[] = [];
+    const push = (label: string, value: unknown) => {
+      if (value !== undefined && value !== null && value !== "") {
+        lines.push(`${label}: ${String(value)}`);
+      }
+    };
+    push("Name", data.name);
+    push("Email", data.email);
+    if (data.inquiry_type === "stay") {
+      push("Guests", data.guests);
+      push("Room type", data.room_type);
+      push("Check-in", data.check_in);
+      push("Check-out", data.check_out);
+    } else {
+      push("Event size", data.event_size_package);
+      push("Event title", data.event_title);
+      push("Start", data.check_in);
+      push("End", data.check_out);
+      push("Description", data.event_description);
+    }
+    push("Estimated total (EUR)", data.estimated_total_eur);
+    push("Message", data.message);
+    push("Directus inquiry id", created?.id);
+    const text = lines.join("\n");
+    const safe = text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+    const subject =
+      data.inquiry_type === "stay"
+        ? `Stay inquiry — ${data.name}`
+        : `Event inquiry — ${data.name}${
+            data.event_title ? ` (${data.event_title})` : ""
+          }`;
+    await sendMail({
+      to: officeTo,
+      subject,
+      text,
+      html:
+        `<p>New ${data.inquiry_type} inquiry on commons-hub.at:</p>` +
+        `<pre style="font-family:ui-monospace,monospace;font-size:13px;background:#f6f6f6;padding:12px;border-radius:6px;white-space:pre-wrap">${safe}</pre>`,
+      replyTo: data.email,
+    });
+  }
+
+  // Optional legacy path: Listmonk transactional. Skip silently if not
+  // provisioned (template id + office subscriber).
   if (LISTMONK_BOOKING_TEMPLATE_ID && LISTMONK_OFFICE_EMAIL) {
     try {
       await sendTransactional({

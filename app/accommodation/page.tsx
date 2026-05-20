@@ -18,8 +18,8 @@ export default function AccommodationPage() {
       {/* Section 2 — Our Rooms (scroll-pinned) */}
       <PinnedCarousel headline="Our Rooms" slides={toPinned(ROOMS)} />
 
-      {/* Section 4 — Book your stay */}
-      <section className="px-6 py-12 max-w-4xl mx-auto">
+      {/* Section 3 — Book your stay (form left, sticky price calc right) */}
+      <section className="px-6 py-12 max-w-6xl mx-auto">
         <h2 className="h2 mb-6">Book your stay</h2>
         <BookingForm variant="stay" />
       </section>

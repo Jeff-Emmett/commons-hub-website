@@ -19,6 +19,15 @@ services:
       # the per-connection display name. With one SMTP messenger
       # configured, leave this unset so listmonk uses the default.
       LISTMONK_MESSENGER: ${LISTMONK_MESSENGER:-}
+      # Booking inquiry notification to office@commons-hub.at via Mailcow
+      # SMTP. Reply-To on each message is set to the customer's email so
+      # office staff can reply directly to them.
+      MAIL_SMTP_HOST: ${MAIL_SMTP_HOST:-}
+      MAIL_SMTP_PORT: ${MAIL_SMTP_PORT:-587}
+      MAIL_SMTP_USER: ${MAIL_SMTP_USER:-}
+      MAIL_SMTP_PASS: ${MAIL_SMTP_PASS:-}
+      MAIL_FROM: ${MAIL_FROM:-}
+      MAIL_TO_OFFICE: ${MAIL_TO_OFFICE:-}
     networks:
       - traefik-public
       - commons-hub-directus-net
