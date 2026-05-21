@@ -26,9 +26,9 @@ interface NamedCarousel {
   carousel_items?: CarouselSlideRow[];
 }
 
-const TILE_ACCOMMODATION = "496f4b23-4e16-47f7-a508-5c270e7aaea2";
-const TILE_EVENT = "f6e38335-40a6-4b4c-bfc3-6471c067c38f";
-const TILE_ABOUT = "5c842eca-49ad-4afc-b48d-f90734bd0f2a";
+const TILE_ACCOMMODATION = "dfa256d9-8691-4491-aeeb-e21150921494";
+const TILE_EVENT = "7ec81ee4-28e4-40fe-ad00-f1fe0e4ddbbc";
+const TILE_ABOUT = "728e404d-4a88-4ce2-b623-1654d21cfef9";
 
 async function loadHeroSlides(): Promise<HomeSlide[]> {
   const carousel = await readSingleton<NamedCarousel>("carousels", {

@@ -22,19 +22,19 @@ export function toPinned(slides: SideSlide[]): PinnedSlide[] {
 // Shared by both the Accommodation and Event Venue pages (spec).
 export const COMMON_AREAS: SideSlide[] = [
   {
-    image: "48c365d2-e9f7-42ce-bc4e-49cca6b8299c",
+    image: "f785f6eb-8efa-4f52-8d53-9c58fb2f7034",
     title: "Lounge",
     body:
       "The heart of the house — vintage couches, a vinyl record player, board games, and a community library.",
   },
   {
-    image: "80f5e81f-5b1a-4c06-b74d-be0c4f1cb62f",
+    image: "8baf69c4-ca40-4662-9754-25c89c58f9e0",
     title: "Kitchen",
     body:
       "Once a restaurant kitchen — now home to late-night cooking sessions. Stocked with enough pots and pans to feed a small revolution.",
   },
   {
-    image: "8b60bc3d-0411-40c7-9970-832d583aef24",
+    image: "bba4dbc0-3e0a-4a4f-b449-66d38332baae",
     title: "Garden",
     body:
       "Spacious enough for frisbee sessions, with a fire bowl, veggie gardens, and a hand-crafted spa area* with views on the nearby mountain tops <em>(*optional access)</em>.",
@@ -43,22 +43,22 @@ export const COMMON_AREAS: SideSlide[] = [
 
 export const ROOMS: SideSlide[] = [
   {
-    image: "496f4b23-4e16-47f7-a508-5c270e7aaea2",
+    image: "d3ebf384-eade-4d7e-8ec9-26489219f357",
     title: "Double Room (twin beds)",
     body: "Two single beds, a cupboard, a desk and a sink. Comfortable for colleagues or friends travelling together.",
   },
   {
-    image: "80f5e81f-5b1a-4c06-b74d-be0c4f1cb62f",
+    image: "65ddcb30-4628-4d25-bed5-bca14cf92dd9",
     title: "Double Room (kingsize bed)",
     body: "One large bed for couples or anyone who likes room to stretch out.",
   },
   {
-    image: "4ab5375d-4d7c-4509-991f-4f1fbdc2d4a0",
+    image: "bf764a3d-79b1-41a4-96e3-2407bf4aecec",
     title: "Quadruple Room",
     body: "Four beds — ideal for a small team or a group of friends sharing.",
   },
   {
-    image: "df70fb04-c9d2-433d-8446-9cf8a0e8b629",
+    image: "bd181230-3e85-4097-943c-862ddbe4720a",
     title: "6-Bed Room",
     body: "Our most social option — six beds, dorm-style, the friendliest price.",
   },
@@ -66,7 +66,7 @@ export const ROOMS: SideSlide[] = [
 
 export const EVENT_SPACES: SideSlide[] = [
   {
-    image: "f6e38335-40a6-4b4c-bfc3-6471c067c38f",
+    image: "9f4f4c8e-ccc8-49d1-b300-123f64e0b780",
     title: "90 m² Conference Hall",
     body:
       "With stage, piano, A/V, lights & livestream setup.",
