@@ -6,10 +6,11 @@ export interface GalleryItem {
 }
 
 /**
- * Responsive masonry-style gallery: tiles of mixed natural aspect
- * ratios flow into columns (lively, not a vertical list). Images are
- * click-to-expand via the global ContentLightbox (they sit inside a
- * .prose-scoped container so the lightbox picks them up).
+ * Uniform square-tile gallery: photos crop to squares in a fixed 3-column
+ * grid, so the block always ends flush — no ragged masonry edge, no
+ * trailing photo. Tiles are click-to-expand via the global
+ * ContentLightbox (.gallery-grid is a lightbox scope) and can be arrowed
+ * through with ← / →.
  */
 export function Gallery({
   title,
@@ -22,23 +23,20 @@ export function Gallery({
   return (
     <section className="my-10">
       {title && <h2 className="h2 mb-5">{title}</h2>}
-      <div className="prose max-w-none [column-gap:1rem] columns-2 md:columns-3">
+      <div className="gallery-grid grid grid-cols-3 gap-2 md:gap-3">
         {items.map((it, i) => (
-          <figure key={i} className="mb-4 break-inside-avoid">
+          <div
+            key={i}
+            className="relative aspect-square overflow-hidden rounded-lg bg-slate-100"
+          >
             <Image
               src={it.imageUrl}
               alt={it.caption ?? ""}
-              width={800}
-              height={600}
-              sizes="(max-width: 768px) 50vw, 33vw"
-              className="w-full h-auto rounded-xl"
+              fill
+              sizes="(max-width: 1024px) 33vw, 360px"
+              className="object-cover cursor-zoom-in transition-transform duration-300 hover:scale-105"
             />
-            {it.caption && (
-              <figcaption className="mt-1 text-xs text-slate-500">
-                {it.caption}
-              </figcaption>
-            )}
-          </figure>
+          </div>
         ))}
       </div>
     </section>
