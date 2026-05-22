@@ -36,6 +36,28 @@ export async function getCarousel(id: number): Promise<CarouselWithItems | null>
   return enhanced[0] as CarouselWithItems;
 }
 
+/**
+ * All carousels whose title starts with "gallery" (case-insensitive).
+ * Powers the standalone /gallery page — editors add or remove galleries
+ * purely in Directus by naming a carousel e.g. "gallery: The House".
+ */
+export async function getGalleryCarousels(): Promise<CarouselWithItems[]> {
+  const data = await readItems<CarouselWithItems>("carousels", {
+    fields: CAROUSEL_FIELDS,
+    filter: { title: { _istarts_with: "gallery" } },
+    sort: ["title"],
+    limit: -1,
+  });
+  if (data.length === 0) return [];
+  const enhanced = await enhanceNestedWithImageUrls(
+    data,
+    "carousel_items",
+    "image",
+    "image_url",
+  );
+  return enhanced as CarouselWithItems[];
+}
+
 export async function getCarousels(ids: number[]): Promise<CarouselWithItems[]> {
   if (!ids || !Array.isArray(ids) || ids.length === 0) {
     console.error("Valid carousel IDs array is required");
