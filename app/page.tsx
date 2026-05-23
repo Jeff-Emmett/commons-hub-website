@@ -1,11 +1,13 @@
 import { getAllPublishedPosts } from "@/lib/actions/getPost";
 import { getEventPage } from "@/lib/actions/getEventPage";
+import { getGalleryCarousels } from "@/lib/actions/getCarousels";
 import { readSingleton } from "@/lib/directus/client";
 import {
   HomeJourney,
   type HomeSlide,
   type HomeTile,
   type HomePost,
+  type HomePhoto,
 } from "@/components/home/HomeJourney";
 
 const DIRECTUS_ASSET_BASE = (
@@ -52,9 +54,10 @@ async function loadHeroSlides(): Promise<HomeSlide[]> {
 }
 
 export default async function Home() {
-  const [posts, upcoming] = await Promise.all([
+  const [posts, upcoming, galleries] = await Promise.all([
     getAllPublishedPosts(),
     getEventPage("upcoming"),
+    getGalleryCarousels(),
   ]);
   const slides = await loadHeroSlides();
   const nextEvent = upcoming[0] as
@@ -78,5 +81,34 @@ export default async function Home() {
     imageUrl: asset(p.main_image) ?? asset(p.main_icon),
   }));
 
-  return <HomeJourney slides={slides} tiles={tiles} posts={postTiles} />;
+  // Round-robin across galleries so the preview shows variety, not just one set.
+  const galleryItemsByCarousel = galleries.map((g) =>
+    (g.carousel_items ?? [])
+      .map((it) => (it as { image_url?: string }).image_url ?? "")
+      .filter(Boolean),
+  );
+  const previewPhotos: HomePhoto[] = [];
+  const PREVIEW_LIMIT = 8;
+  let idx = 0;
+  while (previewPhotos.length < PREVIEW_LIMIT) {
+    let added = false;
+    for (const items of galleryItemsByCarousel) {
+      if (idx < items.length) {
+        previewPhotos.push({ imageUrl: items[idx] });
+        added = true;
+        if (previewPhotos.length >= PREVIEW_LIMIT) break;
+      }
+    }
+    if (!added) break;
+    idx++;
+  }
+
+  return (
+    <HomeJourney
+      slides={slides}
+      tiles={tiles}
+      posts={postTiles}
+      galleryPreview={previewPhotos}
+    />
+  );
 }

@@ -20,14 +20,18 @@ export interface HomePost {
   slug: string;
   imageUrl: string | null;
 }
+export interface HomePhoto {
+  imageUrl: string;
+}
 
 interface HomeJourneyProps {
   slides: HomeSlide[];
   tiles: HomeTile[];
   posts: HomePost[];
+  galleryPreview?: HomePhoto[];
 }
 
-export function HomeJourney({ slides, tiles, posts }: HomeJourneyProps) {
+export function HomeJourney({ slides, tiles, posts, galleryPreview = [] }: HomeJourneyProps) {
   return (
     <main className="home">
       {/* Section 1 — scroll-pinned hero: scroll pans slides right→left,
@@ -106,6 +110,44 @@ export function HomeJourney({ slides, tiles, posts }: HomeJourneyProps) {
         </div>
 
       </section>
+
+      {/* Section 4 — gallery preview, links through to /gallery */}
+      {galleryPreview.length > 0 && (
+        <section className="bg-white px-8 md:px-16 pb-20">
+          <div className="max-w-5xl mx-auto w-full">
+            <div className="flex items-baseline justify-between mb-6">
+              <h2 className="text-2xl font-semibold">From the gallery</h2>
+              <Link
+                href="/gallery"
+                className="text-sm font-medium text-slate-600 hover:text-slate-900 underline underline-offset-4"
+              >
+                View all photos →
+              </Link>
+            </div>
+            <Link
+              href="/gallery"
+              aria-label="Open photo gallery"
+              className="group grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3"
+            >
+              {galleryPreview.map((p, i) => (
+                <div
+                  key={i}
+                  className="relative overflow-hidden rounded-lg bg-slate-100"
+                  style={{ aspectRatio: '1 / 1' }}
+                >
+                  <Image
+                    src={p.imageUrl}
+                    alt=""
+                    fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 240px"
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+              ))}
+            </Link>
+          </div>
+        </section>
+      )}
 
       <SiteFooter />
     </main>
