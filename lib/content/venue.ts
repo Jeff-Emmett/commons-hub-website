@@ -22,13 +22,13 @@ export function toPinned(slides: SideSlide[]): PinnedSlide[] {
 // Shared by both the Accommodation and Event Venue pages (spec).
 export const COMMON_AREAS: SideSlide[] = [
   {
-    image: "f785f6eb-8efa-4f52-8d53-9c58fb2f7034",
+    image: "8c809368-1ad5-4e56-b837-5b44df57b278",
     title: "Lounge",
     body:
       "The heart of the house — vintage couches, a vinyl record player, board games, and a community library.",
   },
   {
-    image: "8baf69c4-ca40-4662-9754-25c89c58f9e0",
+    image: "207602ff-b38e-4ff1-aab4-85aaeb57dce5",
     title: "Kitchen",
     body:
       "Once a restaurant kitchen — now home to late-night cooking sessions. Stocked with enough pots and pans to feed a small revolution.",
@@ -66,13 +66,13 @@ export const ROOMS: SideSlide[] = [
 
 export const EVENT_SPACES: SideSlide[] = [
   {
-    image: "9f4f4c8e-ccc8-49d1-b300-123f64e0b780",
+    image: "e622aeb9-d965-4c91-94b9-4afa01e2ad3d",
     title: "90 m² Conference Hall",
     body:
       "With stage, piano, A/V, lights & livestream setup.",
   },
   {
-    image: "4e7c8805-b7f5-4743-ba18-aa44ebf99568",
+    image: "04f111ce-b393-4007-ab9c-7945d09bbfcd",
     title: "90 m² Maker Hall",
     body:
       "With laser cutter, 3D printer, sound lab, ping-pong & foosball.",

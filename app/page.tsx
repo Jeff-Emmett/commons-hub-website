@@ -29,7 +29,7 @@ interface NamedCarousel {
 }
 
 const TILE_ACCOMMODATION = "dfa256d9-8691-4491-aeeb-e21150921494";
-const TILE_EVENT = "7ec81ee4-28e4-40fe-ad00-f1fe0e4ddbbc";
+const TILE_EVENT = "f5d57b34-9a42-44ee-834b-5aae6453d56d";
 const TILE_ABOUT = "728e404d-4a88-4ce2-b623-1654d21cfef9";
 
 async function loadHeroSlides(): Promise<HomeSlide[]> {
