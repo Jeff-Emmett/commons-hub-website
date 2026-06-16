@@ -1,8 +1,7 @@
 'use client';
 
-import Image from 'next/image';
-import Link from 'next/link';
 import { SectionNav } from '@/components/SectionNav';
+import { TeamSlider } from '@/components/about/TeamSlider';
 
 export interface TeamMember {
   name: string;
@@ -13,7 +12,6 @@ export interface TeamMember {
 
 const SECTIONS = [
   { id: 'team', label: 'Team' },
-  { id: 'community', label: 'Community' },
   { id: 'history', label: 'History' },
   { id: 'contact', label: 'Contact' },
 ];
@@ -26,55 +24,27 @@ export function AboutGuide({ team }: { team: TeamMember[] }) {
       <div className="flex-1 min-w-0 space-y-20">
         <section id="team" className="scroll-mt-28">
           <h2 className="h1 mb-8">Team</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            {team.map((m) => (
-              <div key={m.name} className="flex gap-4">
-                <div className="relative w-24 h-24 shrink-0 rounded-full overflow-hidden bg-slate-200">
-                  {m.imageUrl && (
-                    <Image
-                      src={m.imageUrl}
-                      alt={m.name}
-                      fill
-                      sizes="96px"
-                      className="object-cover"
-                    />
-                  )}
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold">{m.name}</h3>
-                  {m.role && <p className="text-sm text-slate-500 mb-1">{m.role}</p>}
-                  {m.bio && (
-                    <div
-                      className="text-sm text-slate-700 about-bio"
-                      dangerouslySetInnerHTML={{ __html: m.bio }}
-                    />
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section id="community" className="scroll-mt-28">
-          <h2 className="h1 mb-6">Community</h2>
-          <p className="text-lg text-slate-700 mb-4">
-            The commons hub harbors artists, dreamers, hackers and tinkerers —
-            together with the partners and sponsors who make the place possible.
-          </p>
-          <Link
-            href="/page/community"
-            className="text-slate-900 font-medium hover:underline"
-          >
-            Partners, sponsors &amp; the wider community →
-          </Link>
+          <TeamSlider team={team} />
         </section>
 
         <section id="history" className="scroll-mt-28">
           <h2 className="h1 mb-6">History</h2>
+
+          <h3 className="text-xl font-semibold mb-2">The House</h3>
+          <p className="text-lg text-slate-700 mb-6">
+            Built in 1860 as a countryside inn, the house was transformed into
+            an artist colony in 2013. It has hosted retreats and gatherings
+            since 2020, and was formalized as the Commons Hub in 2023.
+          </p>
+
+          <h3 className="text-xl font-semibold mb-2">The Village</h3>
           <p className="text-lg text-slate-700">
-            From a former guesthouse in Hirschwang to a communal hub for
-            regenerative systems design — the building has been reshaped, event
-            by event, by the people who pass through it.
+            Reichenau an der Rax was a 19th-century summer residence of the
+            nobility — leaving behind dozens of villas, castles and pavilions.
+            Hirschwang, the tiny village the Commons Hub sits in, always stayed
+            industrial: wood, iron ore, a battery factory and a paper mill. Both
+            villages have been in slow decay ever since — the ground we&apos;re
+            now helping to bring back to life.
           </p>
         </section>
 

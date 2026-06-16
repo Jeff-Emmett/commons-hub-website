@@ -53,12 +53,13 @@ export const ROOMS: SideSlide[] = [
     body: "One large bed for couples or anyone who likes room to stretch out.",
   },
   {
-    image: "bf764a3d-79b1-41a4-96e3-2407bf4aecec",
+    // photo swapped with 6-Bed Room per spec (images were mismatched)
+    image: "bd181230-3e85-4097-943c-862ddbe4720a",
     title: "Quadruple Room",
     body: "Four beds — ideal for a small team or a group of friends sharing.",
   },
   {
-    image: "bd181230-3e85-4097-943c-862ddbe4720a",
+    image: "bf764a3d-79b1-41a4-96e3-2407bf4aecec",
     title: "6-Bed Room",
     body: "Our most social option — six beds, dorm-style, the friendliest price.",
   },

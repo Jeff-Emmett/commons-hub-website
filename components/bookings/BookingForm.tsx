@@ -30,16 +30,17 @@ const DOUBLE_ROOM_KEYS = new Set(['double_twin', 'double_king']);
 interface EventPackage {
   key: 'small' | 'medium' | 'large' | 'xlarge' | 'call';
   label: string;
+  includes: string;  // spaces included in the package
   capacity: string;
   day_rate_excl_vat: number; // 0 for "let's have a call"
 }
 
 const EVENT_PACKAGES: EventPackage[] = [
-  { key: 'small',  label: 'Small',                  capacity: 'max. 20 guests',  day_rate_excl_vat: 200 },
-  { key: 'medium', label: 'Medium',                 capacity: 'max. 30 guests',  day_rate_excl_vat: 500 },
-  { key: 'large',  label: 'Large',                  capacity: 'max. 65 guests',  day_rate_excl_vat: 700 },
-  { key: 'xlarge', label: 'Extra Large',            capacity: 'max. 100 guests', day_rate_excl_vat: 1000 },
-  { key: 'call',   label: "I don't know yet",       capacity: '',                day_rate_excl_vat: 0 },
+  { key: 'small',  label: 'Small',       includes: 'Seminar Room + Common Areas',                              capacity: 'max. 20 guests',  day_rate_excl_vat: 200 },
+  { key: 'medium', label: 'Mid',         includes: 'Seminar Room, Conference Hall + Common Areas',             capacity: 'max. 30 guests',  day_rate_excl_vat: 500 },
+  { key: 'large',  label: 'Big',         includes: 'Seminar Room, Conference Hall, Maker Hall + Common Areas', capacity: 'max. 65 guests',  day_rate_excl_vat: 700 },
+  { key: 'xlarge', label: 'Extra Big',   includes: 'Everything above',                                         capacity: 'max. 100 guests', day_rate_excl_vat: 1000 },
+  { key: 'call',   label: "I don't know yet", includes: "Tell us your plan and we'll find the right fit",     capacity: '',                day_rate_excl_vat: 0 },
 ];
 
 // ─────────────────────────────────────────────────────────────
@@ -64,7 +65,6 @@ const stayFormSchema = baseSchema.extend({
 
 const eventFormSchema = baseSchema.extend({
   event_size_package: z.enum(['small', 'medium', 'large', 'xlarge', 'call']),
-  event_title: z.string().optional(),
   event_description: z.string().optional(),
 }).refine((d) => new Date(d.check_out) > new Date(d.check_in), {
   message: 'End date must be after start date',
@@ -187,11 +187,8 @@ function StayForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-6 rounded-lg shadow-md">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-6">
+          {/* Field order per spec: guests + accommodation type, then dates, then name + email. */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <FieldText label="Your name *" error={errors.name?.message} {...register('name')} />
-            <FieldText label="Email *" type="email" error={errors.email?.message} {...register('email')} />
-            <FieldText label="Check-in *" type="date" min={today} error={errors.check_in?.message} {...register('check_in')} />
-            <FieldText label="Check-out *" type="date" min={today} error={errors.check_out?.message} {...register('check_out')} />
             <FieldText
               label="Number of guests *"
               type="number"
@@ -206,6 +203,10 @@ function StayForm() {
                 </option>
               ))}
             </FieldSelect>
+            <FieldText label="Check-in *" type="date" min={today} error={errors.check_in?.message} {...register('check_in')} />
+            <FieldText label="Check-out *" type="date" min={today} error={errors.check_out?.message} {...register('check_out')} />
+            <FieldText label="Your name *" error={errors.name?.message} {...register('name')} />
+            <FieldText label="Email *" type="email" error={errors.email?.message} {...register('email')} />
           </div>
 
           <FieldTextarea label="Anything we should know?" {...register('message')} />
@@ -302,28 +303,49 @@ function EventForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-6 rounded-lg shadow-md">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-6">
+          {/* Field order per spec: pick a package, then dates, then contact, then message. */}
+          <fieldset>
+            <legend className="block text-sm font-medium text-gray-700 mb-3">Choose your package *</legend>
+            <div className="space-y-3">
+              {EVENT_PACKAGES.map((p) => (
+                <label
+                  key={p.key}
+                  className="flex cursor-pointer items-start gap-3 rounded-lg border border-gray-200 p-4 transition-colors hover:border-gray-400 has-[:checked]:border-slate-900 has-[:checked]:bg-slate-50"
+                >
+                  <input
+                    type="radio"
+                    value={p.key}
+                    className="mt-1 h-4 w-4 shrink-0 accent-slate-900"
+                    {...register('event_size_package')}
+                  />
+                  <span className="min-w-0">
+                    <span className="flex flex-wrap items-baseline gap-x-2">
+                      <span className="font-semibold text-slate-900">{p.label}</span>
+                      {p.day_rate_excl_vat > 0 && (
+                        <span className="text-sm text-slate-600">
+                          {formatEur(p.day_rate_excl_vat)}/day · {p.capacity}
+                        </span>
+                      )}
+                    </span>
+                    <span className="block text-sm text-slate-600">{p.includes}</span>
+                  </span>
+                </label>
+              ))}
+            </div>
+            {errors.event_size_package?.message && (
+              <p className="mt-1 text-sm text-red-600">{errors.event_size_package.message}</p>
+            )}
+          </fieldset>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <FieldText label="Your name *" error={errors.name?.message} {...register('name')} />
-            <FieldText label="Email *" type="email" error={errors.email?.message} {...register('email')} />
             <FieldText label="Start date *" type="date" min={today} error={errors.check_in?.message} {...register('check_in')} />
             <FieldText label="End date *" type="date" min={today} error={errors.check_out?.message} {...register('check_out')} />
-            <FieldSelect
-              label="Event size *"
-              error={errors.event_size_package?.message}
-              {...register('event_size_package')}
-            >
-              {EVENT_PACKAGES.map((p) => (
-                <option key={p.key} value={p.key}>
-                  {p.label}
-                  {p.day_rate_excl_vat > 0 ? ` — ${formatEur(p.day_rate_excl_vat)}/day, ${p.capacity}` : ''}
-                </option>
-              ))}
-            </FieldSelect>
-            <FieldText label="Event title (optional)" {...register('event_title')} />
+            <FieldText label="Your name *" error={errors.name?.message} {...register('name')} />
+            <FieldText label="Email *" type="email" error={errors.email?.message} {...register('email')} />
           </div>
 
           <FieldTextarea
-            label="Tell us about the event"
+            label="Anything we should know? (optional)"
             placeholder="Tone, audience, programme, anything we should know..."
             {...register('event_description')}
           />

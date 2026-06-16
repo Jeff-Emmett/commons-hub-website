@@ -12,11 +12,11 @@ export const metadata = {
 export default function AccommodationPage() {
   return (
     <main className="page-sections">
-      {/* Section 1 — Common Areas (scroll-pinned, same model as Home) */}
-      <PinnedCarousel headline="Common Areas" slides={toPinned(COMMON_AREAS)} />
-
-      {/* Section 2 — Our Rooms (scroll-pinned) */}
+      {/* Section 1 — Our Rooms (scroll-pinned) — rooms first, then common areas (spec) */}
       <PinnedCarousel headline="Our Rooms" slides={toPinned(ROOMS)} />
+
+      {/* Section 2 — Common Areas (scroll-pinned, same model as Home) */}
+      <PinnedCarousel headline="Common Areas" slides={toPinned(COMMON_AREAS)} />
 
       {/* Section 3 — Book your stay (form left, sticky price calc right) */}
       <section className="px-6 py-12 max-w-6xl mx-auto">

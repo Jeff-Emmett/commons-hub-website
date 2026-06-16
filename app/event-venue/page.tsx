@@ -13,11 +13,11 @@ export const metadata = {
 export default function EventVenuePage() {
   return (
     <main className="page-sections">
-      {/* Section 1 — Common Areas (scroll-pinned, same model as Home) */}
-      <PinnedCarousel headline="Common Areas" slides={toPinned(COMMON_AREAS)} />
-
-      {/* Section 2 — Event Spaces (scroll-pinned) */}
+      {/* Section 1 — Event Spaces (scroll-pinned) — event spaces first, then common areas (spec) */}
       <PinnedCarousel headline="Event Spaces" slides={toPinned(EVENT_SPACES)} />
+
+      {/* Section 2 — Common Areas (scroll-pinned, same model as Home) */}
+      <PinnedCarousel headline="Common Areas" slides={toPinned(COMMON_AREAS)} />
 
       {/* Section 3 — Book Event Space (form left, sticky price calc right) */}
       <section className="px-6 py-12 max-w-6xl mx-auto">

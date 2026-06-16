@@ -13,7 +13,9 @@ const SCOPES = [
 ];
 
 function srcOf(el: HTMLImageElement): string {
-  return el.currentSrc || el.src || '';
+  // Prefer a full-resolution original (data-full) when a tile exposes one —
+  // grid thumbnails are served at ~360px and would otherwise open upscaled.
+  return el.dataset.full || el.currentSrc || el.src || '';
 }
 
 /**

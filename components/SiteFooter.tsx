@@ -21,8 +21,9 @@ const COLUMNS: { heading: string; links: { label: string; href: string }[] }[] =
   {
     heading: "Community",
     links: [
-      { label: "Sponsors", href: "/category/sponsors" },
-      { label: "Partners", href: "/category/partners" },
+      // Sponsors link removed until we actually have sponsors (spec 4e).
+      { label: "Community & Partners", href: "/community" },
+      { label: "Nature & Surroundings", href: "/surroundings" },
       { label: "Impressum", href: "/page/impressum" },
     ],
   },

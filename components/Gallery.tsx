@@ -34,6 +34,10 @@ export function Gallery({
               alt={it.caption ?? ""}
               fill
               sizes="(max-width: 1024px) 33vw, 360px"
+              // Grid tiles load the 360px-optimized source; expose the full-res
+              // original so the lightbox can open it at full page size, not the
+              // upscaled thumbnail.
+              data-full={it.imageUrl}
               className="object-cover cursor-zoom-in transition-transform duration-300 hover:scale-105"
             />
           </div>
