@@ -165,9 +165,10 @@ main.page-sections > * {
     margin-top: 0;
     margin-bottom: 33px;
     font-family: Urbanist, sans-serif;
-    font-size: 60px;
+    font-size: clamp(36px, 9vw, 60px);
     font-weight: 400;
     line-height: 108%;
+    overflow-wrap: break-word;
   }
 
   .h2 {
@@ -176,9 +177,10 @@ main.page-sections > * {
     margin-top: 0;
     margin-bottom: 28px;
     font-family: Urbanist, sans-serif;
-    font-size: 42px;
+    font-size: clamp(30px, 6.5vw, 42px);
     font-weight: 400;
     line-height: 112%;
+    overflow-wrap: break-word;
   }
 
   .h3 {
@@ -187,9 +189,10 @@ main.page-sections > * {
     margin-top: 0;
     margin-bottom: 24px;
     font-family: Urbanist, sans-serif;
-    font-size: 35px;
+    font-size: clamp(26px, 5.5vw, 35px);
     font-weight: 400;
     line-height: 115%;
+    overflow-wrap: break-word;
   }
 
   .h4 {
@@ -230,9 +233,10 @@ main.page-sections > * {
     margin-top: 0;
     margin-bottom: 33px;
     font-family: Urbanist, sans-serif;
-    font-size: 60px;
+    font-size: clamp(36px, 9vw, 60px);
     font-weight: 400;
     line-height: 108%;
+    overflow-wrap: break-word;
   }
 
   h2 {
@@ -241,9 +245,10 @@ main.page-sections > * {
     margin-top: 0;
     margin-bottom: 28px;
     font-family: Urbanist, sans-serif;
-    font-size: 42px;
+    font-size: clamp(30px, 6.5vw, 42px);
     font-weight: 400;
     line-height: 112%;
+    overflow-wrap: break-word;
   }
 
   h3 {
@@ -252,9 +257,10 @@ main.page-sections > * {
     margin-top: 0;
     margin-bottom: 24px;
     font-family: Urbanist, sans-serif;
-    font-size: 35px;
+    font-size: clamp(26px, 5.5vw, 35px);
     font-weight: 400;
     line-height: 115%;
+    overflow-wrap: break-word;
   }
 
   h4 {

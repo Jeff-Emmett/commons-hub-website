@@ -393,11 +393,13 @@ interface FieldTextProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 const FieldText = React.forwardRef<HTMLInputElement, FieldTextProps>(
-  function FieldText({ label, error, ...rest }, ref) {
+  function FieldText({ label, error, id, ...rest }, ref) {
+    const reactId = React.useId();
+    const fieldId = id ?? rest.name ?? reactId;
     return (
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
-        <input ref={ref} className="formfield" {...rest} />
+        <label htmlFor={fieldId} className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+        <input ref={ref} id={fieldId} className="formfield" {...rest} />
         {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
       </div>
     );
@@ -411,11 +413,13 @@ interface FieldSelectProps extends React.SelectHTMLAttributes<HTMLSelectElement>
 }
 
 const FieldSelect = React.forwardRef<HTMLSelectElement, FieldSelectProps>(
-  function FieldSelect({ label, error, children, ...rest }, ref) {
+  function FieldSelect({ label, error, children, id, ...rest }, ref) {
+    const reactId = React.useId();
+    const fieldId = id ?? rest.name ?? reactId;
     return (
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
-        <select ref={ref} className="formfield" {...rest}>
+        <label htmlFor={fieldId} className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+        <select ref={ref} id={fieldId} className="formfield" {...rest}>
           {children}
         </select>
         {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
@@ -429,11 +433,13 @@ interface FieldTextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaEl
 }
 
 const FieldTextarea = React.forwardRef<HTMLTextAreaElement, FieldTextareaProps>(
-  function FieldTextarea({ label, ...rest }, ref) {
+  function FieldTextarea({ label, id, ...rest }, ref) {
+    const reactId = React.useId();
+    const fieldId = id ?? rest.name ?? reactId;
     return (
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
-        <textarea ref={ref} rows={4} className="formfield" {...rest} />
+        <label htmlFor={fieldId} className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+        <textarea ref={ref} id={fieldId} rows={4} className="formfield" {...rest} />
       </div>
     );
   },
