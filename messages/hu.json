@@ -1,0 +1,55 @@
+{
+  "_meta": { "locale": "hu", "source": false, "needsReview": true },
+  "common": {
+    "home": "Főoldal",
+    "menu": "Menü",
+    "login": "Bejelentkezés",
+    "logout": "Kijelentkezés",
+    "admin": "Admin",
+    "readMore": "Tovább",
+    "bookNow": "Foglalás",
+    "sendInquiry": "Érdeklődés küldése",
+    "subscribe": "Feliratkozás",
+    "loading": "Betöltés…"
+  },
+  "footer": {
+    "visit": "Látogatás",
+    "discover": "Fedezze fel",
+    "community": "Közösség",
+    "tagline": "Közösségi vendégház és rendezvényhelyszín az osztrák Alpokban.",
+    "location": "Reichenau an der Rax, Ausztria"
+  },
+  "links": {
+    "accommodation": "Szállás",
+    "eventVenue": "Rendezvényhelyszín",
+    "eventToolbox": "Rendezvény-eszköztár",
+    "events": "Események",
+    "blog": "Blog",
+    "gallery": "Galéria",
+    "about": "Rólunk",
+    "communityPartners": "Közösség és partnerek",
+    "natureSurroundings": "Természet és környék",
+    "impressum": "Impresszum"
+  },
+  "booking": {
+    "numberOfGuests": "Vendégek száma",
+    "roomType": "Szobatípus",
+    "checkIn": "Érkezés",
+    "checkOut": "Távozás",
+    "yourName": "Az Ön neve",
+    "email": "E-mail",
+    "notes": "Van valami, amit tudnunk kellene?",
+    "choosePackage": "Válassza ki a csomagját",
+    "startDate": "Kezdő dátum",
+    "endDate": "Záró dátum",
+    "estimatedTotal": "Becsült végösszeg",
+    "submit": "Érdeklődés küldése"
+  },
+  "newsletter": {
+    "heading": "Iratkozzon fel hírlevelünkre",
+    "emailPlaceholder": "az@email.com"
+  },
+  "language": {
+    "label": "Nyelv"
+  }
+}

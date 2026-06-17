@@ -1,0 +1,55 @@
+{
+  "_meta": { "locale": "en", "source": true },
+  "common": {
+    "home": "Home",
+    "menu": "Menu",
+    "login": "Log in",
+    "logout": "Log out",
+    "admin": "Admin",
+    "readMore": "Read more",
+    "bookNow": "Book now",
+    "sendInquiry": "Send inquiry",
+    "subscribe": "Subscribe",
+    "loading": "Loading…"
+  },
+  "footer": {
+    "visit": "Visit",
+    "discover": "Discover",
+    "community": "Community",
+    "tagline": "A communal guesthouse & events venue in the Austrian Alps.",
+    "location": "Reichenau an der Rax, Austria"
+  },
+  "links": {
+    "accommodation": "Accommodation",
+    "eventVenue": "Event Venue",
+    "eventToolbox": "Event Toolbox",
+    "events": "Events",
+    "blog": "Blog",
+    "gallery": "Gallery",
+    "about": "About",
+    "communityPartners": "Community & Partners",
+    "natureSurroundings": "Nature & Surroundings",
+    "impressum": "Impressum"
+  },
+  "booking": {
+    "numberOfGuests": "Number of guests",
+    "roomType": "Room type",
+    "checkIn": "Check-in",
+    "checkOut": "Check-out",
+    "yourName": "Your name",
+    "email": "Email",
+    "notes": "Anything we should know?",
+    "choosePackage": "Choose your package",
+    "startDate": "Start date",
+    "endDate": "End date",
+    "estimatedTotal": "Estimated total",
+    "submit": "Send inquiry"
+  },
+  "newsletter": {
+    "heading": "Subscribe to our newsletter",
+    "emailPlaceholder": "your@email.com"
+  },
+  "language": {
+    "label": "Language"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "_meta": { "locale": "de", "source": false, "needsReview": true },
+  "common": {
+    "home": "Start",
+    "menu": "Menü",
+    "login": "Anmelden",
+    "logout": "Abmelden",
+    "admin": "Admin",
+    "readMore": "Mehr lesen",
+    "bookNow": "Jetzt buchen",
+    "sendInquiry": "Anfrage senden",
+    "subscribe": "Abonnieren",
+    "loading": "Wird geladen…"
+  },
+  "footer": {
+    "visit": "Besuchen",
+    "discover": "Entdecken",
+    "community": "Gemeinschaft",
+    "tagline": "Ein gemeinschaftliches Gästehaus & Veranstaltungsort in den österreichischen Alpen.",
+    "location": "Reichenau an der Rax, Österreich"
+  },
+  "links": {
+    "accommodation": "Unterkunft",
+    "eventVenue": "Veranstaltungsort",
+    "eventToolbox": "Event-Toolbox",
+    "events": "Veranstaltungen",
+    "blog": "Blog",
+    "gallery": "Galerie",
+    "about": "Über uns",
+    "communityPartners": "Gemeinschaft & Partner",
+    "natureSurroundings": "Natur & Umgebung",
+    "impressum": "Impressum"
+  },
+  "booking": {
+    "numberOfGuests": "Anzahl der Gäste",
+    "roomType": "Zimmertyp",
+    "checkIn": "Anreise",
+    "checkOut": "Abreise",
+    "yourName": "Ihr Name",
+    "email": "E-Mail",
+    "notes": "Gibt es etwas, das wir wissen sollten?",
+    "choosePackage": "Wählen Sie Ihr Paket",
+    "startDate": "Startdatum",
+    "endDate": "Enddatum",
+    "estimatedTotal": "Geschätzte Gesamtsumme",
+    "submit": "Anfrage senden"
+  },
+  "newsletter": {
+    "heading": "Abonnieren Sie unseren Newsletter",
+    "emailPlaceholder": "ihre@email.com"
+  },
+  "language": {
+    "label": "Sprache"
+  }
+}

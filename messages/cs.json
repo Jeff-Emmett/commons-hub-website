@@ -1,0 +1,55 @@
+{
+  "_meta": { "locale": "cs", "source": false, "needsReview": true },
+  "common": {
+    "home": "Domů",
+    "menu": "Menu",
+    "login": "Přihlásit se",
+    "logout": "Odhlásit se",
+    "admin": "Admin",
+    "readMore": "Číst více",
+    "bookNow": "Rezervovat",
+    "sendInquiry": "Odeslat poptávku",
+    "subscribe": "Odebírat",
+    "loading": "Načítání…"
+  },
+  "footer": {
+    "visit": "Navštivte",
+    "discover": "Objevte",
+    "community": "Komunita",
+    "tagline": "Komunitní penzion a místo konání akcí v rakouských Alpách.",
+    "location": "Reichenau an der Rax, Rakousko"
+  },
+  "links": {
+    "accommodation": "Ubytování",
+    "eventVenue": "Místo konání",
+    "eventToolbox": "Sada nástrojů pro akce",
+    "events": "Akce",
+    "blog": "Blog",
+    "gallery": "Galerie",
+    "about": "O nás",
+    "communityPartners": "Komunita a partneři",
+    "natureSurroundings": "Příroda a okolí",
+    "impressum": "Tiráž"
+  },
+  "booking": {
+    "numberOfGuests": "Počet hostů",
+    "roomType": "Typ pokoje",
+    "checkIn": "Příjezd",
+    "checkOut": "Odjezd",
+    "yourName": "Vaše jméno",
+    "email": "E-mail",
+    "notes": "Měli bychom něco vědět?",
+    "choosePackage": "Vyberte si balíček",
+    "startDate": "Datum začátku",
+    "endDate": "Datum konce",
+    "estimatedTotal": "Odhadovaná celková cena",
+    "submit": "Odeslat poptávku"
+  },
+  "newsletter": {
+    "heading": "Přihlaste se k odběru newsletteru",
+    "emailPlaceholder": "vas@email.com"
+  },
+  "language": {
+    "label": "Jazyk"
+  }
+}
