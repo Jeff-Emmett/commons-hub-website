@@ -1,0 +1,565 @@
+# Native review — Hungarian (HU)
+
+Machine-translated first pass. Tick each box once a native speaker has
+confirmed or corrected the HU text in the source file. Correct values
+directly in `messages/hu.json` (UI) or `content/snapshot/hu/*.json`
+(content), then re-run a build. See docs/i18n-plan.md.
+
+**Summary:** 166 to review · 6 unchanged (verify/translate) · 38 long-form left in English.
+
+## 1. To review — machine-translated (166)
+
+- [ ] `messages · common.home`
+  - EN: Home
+  - HU: Főoldal
+- [ ] `messages · common.menu`
+  - EN: Menu
+  - HU: Menü
+- [ ] `messages · common.login`
+  - EN: Log in
+  - HU: Bejelentkezés
+- [ ] `messages · common.logout`
+  - EN: Log out
+  - HU: Kijelentkezés
+- [ ] `messages · common.readMore`
+  - EN: Read more
+  - HU: Tovább
+- [ ] `messages · common.bookNow`
+  - EN: Book now
+  - HU: Foglalás
+- [ ] `messages · common.sendInquiry`
+  - EN: Send inquiry
+  - HU: Érdeklődés küldése
+- [ ] `messages · common.subscribe`
+  - EN: Subscribe
+  - HU: Feliratkozás
+- [ ] `messages · common.loading`
+  - EN: Loading…
+  - HU: Betöltés…
+- [ ] `messages · footer.visit`
+  - EN: Visit
+  - HU: Látogatás
+- [ ] `messages · footer.discover`
+  - EN: Discover
+  - HU: Fedezze fel
+- [ ] `messages · footer.community`
+  - EN: Community
+  - HU: Közösség
+- [ ] `messages · footer.tagline`
+  - EN: A communal guesthouse &amp; events venue in the Austrian Alps.
+  - HU: Közösségi vendégház és rendezvényhelyszín az osztrák Alpokban.
+- [ ] `messages · footer.location`
+  - EN: Reichenau an der Rax, Austria
+  - HU: Reichenau an der Rax, Ausztria
+- [ ] `messages · links.accommodation`
+  - EN: Accommodation
+  - HU: Szállás
+- [ ] `messages · links.eventVenue`
+  - EN: Event Venue
+  - HU: Rendezvényhelyszín
+- [ ] `messages · links.eventToolbox`
+  - EN: Event Toolbox
+  - HU: Rendezvény-eszköztár
+- [ ] `messages · links.events`
+  - EN: Events
+  - HU: Események
+- [ ] `messages · links.gallery`
+  - EN: Gallery
+  - HU: Galéria
+- [ ] `messages · links.about`
+  - EN: About
+  - HU: Rólunk
+- [ ] `messages · links.communityPartners`
+  - EN: Community &amp; Partners
+  - HU: Közösség és partnerek
+- [ ] `messages · links.natureSurroundings`
+  - EN: Nature &amp; Surroundings
+  - HU: Természet és környék
+- [ ] `messages · links.impressum`
+  - EN: Impressum
+  - HU: Impresszum
+- [ ] `messages · booking.numberOfGuests`
+  - EN: Number of guests
+  - HU: Vendégek száma
+- [ ] `messages · booking.roomType`
+  - EN: Room type
+  - HU: Szobatípus
+- [ ] `messages · booking.checkIn`
+  - EN: Check-in
+  - HU: Érkezés
+- [ ] `messages · booking.checkOut`
+  - EN: Check-out
+  - HU: Távozás
+- [ ] `messages · booking.yourName`
+  - EN: Your name
+  - HU: Az Ön neve
+- [ ] `messages · booking.email`
+  - EN: Email
+  - HU: E-mail
+- [ ] `messages · booking.notes`
+  - EN: Anything we should know?
+  - HU: Van valami, amit tudnunk kellene?
+- [ ] `messages · booking.choosePackage`
+  - EN: Choose your package
+  - HU: Válassza ki a csomagját
+- [ ] `messages · booking.startDate`
+  - EN: Start date
+  - HU: Kezdő dátum
+- [ ] `messages · booking.endDate`
+  - EN: End date
+  - HU: Záró dátum
+- [ ] `messages · booking.estimatedTotal`
+  - EN: Estimated total
+  - HU: Becsült végösszeg
+- [ ] `messages · booking.submit`
+  - EN: Send inquiry
+  - HU: Érdeklődés küldése
+- [ ] `messages · newsletter.heading`
+  - EN: Subscribe to our newsletter
+  - HU: Iratkozzon fel hírlevelünkre
+- [ ] `messages · newsletter.emailPlaceholder`
+  - EN: your@email.com
+  - HU: az@email.com
+- [ ] `messages · language.label`
+  - EN: Language
+  - HU: Nyelv
+- [ ] `accordions#3 · accordion_items[2].content`
+  - EN: &lt;ul>&lt;li>&lt;p style="text-align: left">&lt;strong>Grow our community&lt;/strong> through events and partnerships&lt;/p>&lt;/li>&lt;li>&lt;p style="text-align: left">&lt;strong>Support applied systems design&lt;/strong> via grants and experiments&lt;/p>&lt;/li>&lt;li>&lt;p style="text-align: left">&lt;strong>Strengthen the Hub as economic engine&lt;/strong> nurtur …[truncated]
+  - HU: &lt;ul>&lt;li>&lt;p style="text-align: left">&lt;strong>Növeljük közösségünket&lt;/strong> események és partnerségek révén&lt;/p>&lt;/li>&lt;li>&lt;p style="text-align: left">&lt;strong>Támogassuk az alkalmazott rendszertervezést&lt;/strong> támogatásokon és kísérleteken keresztül&lt;/p>&lt;/li>&lt;li>&lt;p style="text-align: left">&lt;strong>Erősítsük a Hubot, mint …[truncated]
+- [ ] `accordions#4 · accordion_items[0].content`
+  - EN: &lt;p style="text-align: left">&lt;/p>&lt;p style="text-align: left">&lt;span style="color: rgb(0, 0, 0)">The guest house offers 30 beds distributed in 2 double rooms and 5 dormitories.&lt;/span>&lt;/p>&lt;p style="text-align: left">&lt;a target="_blank" rel="noopener noreferrer" class="text-blue-600 underline button" href="/category/guesthou …[truncated]
+  - HU: &lt;p style="text-align: left">&lt;/p>&lt;p style="text-align: left">&lt;span style="color: rgb(0, 0, 0)">A vendégház 30 ágyat kínál, amely 2 dupla szobában és 5 kollégiumban van elosztva.&lt;/span>&lt;/p>&lt;p style="text-align: left">&lt;a target="_blank" rel="noopener noreferrer" class="text-blue-600 underline button" href="/category/guest …[truncated]
+- [ ] `accordions#4 · accordion_items[2].content`
+  - EN: &lt;p style="text-align: left">If you have an idea for an event but only limited capacity to organise it, we got your back. Be it a hackathon, an (un)conference, or a retreat – we have long-standing experience in running events and are happy to help you bring your vision to life.&amp;nbsp;&lt;/p>&lt;p style="text-align: left">Our s …[truncated]
+  - HU: &lt;p style="text-align: left">The Hub accommodates up to 30 people in five dorms and four double rooms. Sheets and towels are provided, the bathrooms are located on the floor.&lt;/p>
+- [ ] `accordions#6 · accordion_items[0].content`
+  - EN: &lt;p style="text-align: left">The Hub accommodates up to 30 people in five dorms and four double rooms. Sheets and towels are provided, the bathrooms are located on the floor.&lt;/p>
+  - HU: &lt;p style="text-align: left">A cozy welcome area combines living room comfort and old-school bar charm, featuring ample couches, board games, and a vinyl record player for a relaxed, inviting atmosphere.&lt;/p>
+- [ ] `accordions#6 · accordion_items[1].content`
+  - EN: &lt;p style="text-align: left">A cozy welcome area combines living room comfort and old-school bar charm, featuring ample couches, board games, and a vinyl record player for a relaxed, inviting atmosphere.&lt;/p>
+  - HU: &lt;p style="text-align: left">The entire outside area of around 2000m² can be used by our guests. The front yard is an excellent spot for leisure time and relaxed evenings by the fire. The back garden is where you’ll find our veggies, berries and herbs, and ample space to touch some actual grass.&lt;/p>
+- [ ] `accordions#6 · accordion_items[2].content`
+  - EN: &lt;p style="text-align: left">The entire outside area of around 2000m² can be used by our guests. The front yard is an excellent spot for leisure time and relaxed evenings by the fire. The back garden is where you’ll find our veggies, berries and herbs, and ample space to touch some actual grass.&lt;/p>
+  - HU: &lt;p style="text-align: left">Our Co-working provides a calm working environment, screens and keyboards, bicycles can be borrowed to explore the surroundings, several workshops contain lots of tools and materials like fabric, paint and wood to become creative, and a piano and other instruments are available for a jam.&lt;/p …[truncated]
+- [ ] `accordions#6 · accordion_items[3].content`
+  - EN: &lt;p style="text-align: left">Our Co-working provides a calm working environment, screens and keyboards, bicycles can be borrowed to explore the surroundings, several workshops contain lots of tools and materials like fabric, paint and wood to become creative, and a piano and other instruments are available for a jam.&lt;/p …[truncated]
+  - HU: &lt;p style="text-align: left">90m² fit up to 75 seats facing a 3x6m stage with a massive sound system and a ceiling-mounted projector with a 133’’ drop-down screen. Wireless microphones, two wall-mounted cameras and a tripod-mounted camera feed into a 4-channel video mixer that supports live video streaming and productio …[truncated]
+- [ ] `accordions#7 · accordion_items[0].content`
+  - EN: &lt;p style="text-align: left">90m² fit up to 75 seats facing a 3x6m stage with a massive sound system and a ceiling-mounted projector with a 133’’ drop-down screen. Wireless microphones, two wall-mounted cameras and a tripod-mounted camera feed into a 4-channel video mixer that supports live video streaming and productio …[truncated]
+  - HU: &lt;p style="text-align: left">Next to the main stage, the Event Hall, also offering 90m², is a more open space that lends itself to workshops, breakout sessions and as space that can be used for co-working. Typically, events start their mornings in a big circle to map out the day’s schedule on a whiteboard.&amp;nbsp;&lt;/p>
+- [ ] `accordions#7 · accordion_items[1].content`
+  - EN: &lt;p style="text-align: left">Next to the main stage, the Event Hall, also offering 90m², is a more open space that lends itself to workshops, breakout sessions and as space that can be used for co-working. Typically, events start their mornings in a big circle to map out the day’s schedule on a whiteboard.&amp;nbsp;&lt;/p>
+  - HU: &lt;p style="text-align: left">As a part of the event hall, a fully equipped plug-and-play podcast studio enables spontaneous and well-planned media production. Guests can easily record their thoughts, presentations, and conversations without being bogged down by technical or spatial challenges.&lt;/p>
+- [ ] `accordions#7 · accordion_items[2].content`
+  - EN: &lt;p style="text-align: left">As a part of the event hall, a fully equipped plug-and-play podcast studio enables spontaneous and well-planned media production. Guests can easily record their thoughts, presentations, and conversations without being bogged down by technical or spatial challenges.&lt;/p>
+  - HU: &lt;p style="text-align: left">The 40m² co-working doubles as a dedicated seminar room for smaller events, featuring a 65’’ TV, 20 chairs, a whiteboard, and adaptable and versatile tables and seating arrangements, ideal for workshops or meetings.&lt;/p>
+- [ ] `accordions#7 · accordion_items[3].content`
+  - EN: &lt;p style="text-align: left">The 40m² co-working doubles as a dedicated seminar room for smaller events, featuring a 65’’ TV, 20 chairs, a whiteboard, and adaptable and versatile tables and seating arrangements, ideal for workshops or meetings.&lt;/p>
+  - HU: &lt;p style="text-align: left">Numerous beaches along river Schwarza invite for swimming and sun bathing in walking distance from the Hub&lt;/p>
+- [ ] `accordions#11 · accordion_items[0].content`
+  - EN: &lt;p style="text-align: left">Numerous beaches along river Schwarza invite for swimming and sun bathing in walking distance from the Hub&lt;/p>
+  - HU: &lt;p style="text-align: left">Although its imperial past is long gone, Reichenau an der Rax remains a cultural hub with two musical pavilions and a classical theatre. Its six-week summer festival features two daily plays, along with literature readings, classical music, and other artsy events. Other remnants of the monar …[truncated]
+- [ ] `accordions#12 · accordion_items[0].content`
+  - EN: &lt;p style="text-align: left">Although its imperial past is long gone, Reichenau an der Rax remains a cultural hub with two musical pavilions and a classical theatre. Its six-week summer festival features two daily plays, along with literature readings, classical music, and other artsy events. Other remnants of the monar …[truncated]
+  - HU: &lt;p style="text-align: left">3D printer, laser cutter, wood workshop, soundlab, and other tools are waiting for your creativity&lt;/p>
+- [ ] `accordions#13 · accordion_items[0].content`
+  - EN: &lt;p style="text-align: left">3D printer, laser cutter, wood workshop, soundlab, and other tools are waiting for your creativity&lt;/p>
+  - HU: &lt;p style="text-align: left">The &lt;strong>commons hub&lt;/strong> garden thrives with raised beds, fruit trees, and a buzzing beehive, creating a vibrant permaculture space. Join us to care for, maintain and expand it, and enjoy its fruits with us!&lt;/p>
+- [ ] `accordions#14 · accordion_items[0].content`
+  - EN: &lt;p style="text-align: left">The &lt;strong>commons hub&lt;/strong> garden thrives with raised beds, fruit trees, and a buzzing beehive, creating a vibrant permaculture space. Join us to care for, maintain and expand it, and enjoy its fruits with us!&lt;/p>
+  - HU: &lt;p style="text-align: left">Over 2,000 documented climbing routes — many multi-pitch — make the Schneeberg/Rax massif a prime destination for climbers from Vienna, Bratislava, Budapest and beyond. Trad, sport, and via-ferrata lines start within walking distance of the Hub.&lt;/p>
+- [ ] `accordions#15 · accordion_items[0].content`
+  - EN: &lt;p style="text-align: left">Over 2,000 documented climbing routes — many multi-pitch — make the Schneeberg/Rax massif a prime destination for climbers from Vienna, Bratislava, Budapest and beyond. Trad, sport, and via-ferrata lines start within walking distance of the Hub.&lt;/p>
+  - HU: &lt;p style="text-align: left">The Commons Hub maintains a community wiki where residents and visitors document trails, local lore, recipes, fabrication tips, and ongoing experiments. Ask at the front desk (read: in the kitchen) for an account — anyone staying at the Hub can contribute.&lt;/p>
+- [ ] `accordions#16 · accordion_items[0].content`
+  - EN: &lt;p style="text-align: left">The Commons Hub maintains a community wiki where residents and visitors document trails, local lore, recipes, fabrication tips, and ongoing experiments. Ask at the front desk (read: in the kitchen) for an account — anyone staying at the Hub can contribute.&lt;/p>
+  - HU: &lt;p style="text-align: left">A Commons Hub egy közösségi wikit üzemeltet, ahol a lakók és látogatók dokumentálják az ösvényeket, helyi legendákat, recepteket, gyártási tippeket és folyamatban lévő kísérleteket. Kérdezzen a recepción (olvasd: a konyhában) egy fiókért — bárki, aki a Hubban tartózkodik, hozzájárulhat.&lt;/p>
+- [ ] `carousels#55 · title`
+  - EN: TESTIMONIALS
+  - HU: Vélemények
+- [ ] `carousels#55 · carousel_items[0].quote`
+  - EN: &lt;p style="text-align: center">&lt;em>"The Commons Hub is a beautiful physical space which engenders equally beautiful social and intellectual spaces." &amp;nbsp;&lt;/em>&lt;/p>&lt;p style="text-align: center">&lt;strong>Dr Michael Zargham, BlockScience (CEO)&lt;/strong>&lt;/p>
+  - HU: &lt;p style="text-align: center">&lt;em>"A Commons Hub egy gyönyörű fizikai tér, amely egyenlőképpen szép társadalmi és intellektuális terek kialakulását eredményezi." &amp;nbsp;&lt;/em>&lt;/p>&lt;p style="text-align: center">&lt;strong>Dr Michael Zargham, BlockScience (CEO)&lt;/strong>&lt;/p>
+- [ ] `carousels#55 · carousel_items[1].quote`
+  - EN: &lt;p style="text-align: center">&lt;em>"Commons Hub is a bastion for IRL community and action learning commoning. The landscape and accommodations foster long-form thought, lively discourse, and meaningful relationship building."&lt;/em>&lt;/p>&lt;p style="text-align: center">&lt;strong>Will Szal, Regen Foundation&lt;/strong>&lt;/p>
+  - HU: &lt;p style="text-align: center">&lt;em>"A Commons Hub egy bástya az IRL közösség és az akciótanulás közös gyakorlata számára. A táj és a szállások elősegítik a hosszú formájú gondolkodást, az élénk vitát és a jelentőségteljes kapcsolatok építését."&lt;/em>&lt;/p>&lt;p style="text-align: center">&lt;strong>Will Szal, Regen Foundation&lt;/s …[truncated]
+- [ ] `carousels#55 · carousel_items[2].quote`
+  - EN: &lt;p style="text-align: center">&lt;em>"The Commons Hub is pushing the boundaries of crypto and post-capitalism through imaginative experiments and productive dialogue. I’ve seriously enjoyed my time at the Hub and benefited from the broader network this node has spawned."&amp;nbsp;&lt;/em>&lt;/p>&lt;p style="text-align: center">&lt;strong …[truncated]
+  - HU: &lt;p style="text-align: center">&lt;em>"A Commons Hub a kriptó és a posztkapitalizmus határait feszegeti képzeletgazdag kísérletekkel és produktív párbeszéddel. Nagyon élveztem az időmet a Hubban, és profitáltam a szélesebb hálózatból, amelyet ez a csomópont létrehozott."&lt;/em>&lt;/p>&lt;p style="text-align: center">&lt;strong>Ori Sh …[truncated]
+- [ ] `carousels#56 · title`
+  - EN: SURROUNDINGS
+  - HU: Környezet
+- [ ] `carousels#56 · carousel_items[0].quote`
+  - EN: &lt;p style="text-align: center">The river Schwarza&lt;/p>
+  - HU: &lt;p style="text-align: center">A Schwarza folyó&lt;/p>
+- [ ] `carousels#56 · carousel_items[1].quote`
+  - EN: &lt;p style="text-align: center">Rax in winter&lt;/p>
+  - HU: &lt;p style="text-align: center">Rax télen&lt;/p>
+- [ ] `carousels#56 · carousel_items[2].quote`
+  - EN: &lt;p style="text-align: center">Hiking &amp;amp; rock climbing paradise!&lt;/p>
+  - HU: &lt;p style="text-align: center">Túrázás és sziklamászás paradicsom!&lt;/p>
+- [ ] `carousels#56 · carousel_items[3].quote`
+  - EN: &lt;p style="text-align: center">Getting ready for the hike!&lt;/p>
+  - HU: &lt;p style="text-align: center">Felkészülés a túrára!&lt;/p>
+- [ ] `carousels#57 · title`
+  - EN: home_hero
+  - HU: otthon_hős
+- [ ] `carousels#57 · carousel_items[0].quote`
+  - EN: &lt;p>Welcome to the &lt;b>commons hub&lt;/b>,&lt;br>a communal guesthouse and events venue in the Austrian Alps.&lt;/p>
+  - HU: &lt;p>Üdvözöljük a &lt;b>commons hub&lt;/b>-ban,&lt;br>egy közösségi vendégház és eseményhelyszín az osztrák Alpokban.&lt;/p>
+- [ ] `carousels#57 · carousel_items[1].quote`
+  - EN: &lt;p>A home to artists, hackers, and tinkerers exploring new perspectives across technology, economy, society, and nature.&lt;/p>
+  - HU: &lt;p>Otthon a művészeknek, hackereknek és barkácsolóknak, akik új perspektívákat fedeznek fel a technológia, gazdaság, társadalom és természet terén.&lt;/p>
+- [ ] `carousels#57 · carousel_items[2].quote`
+  - EN: &lt;p>From private celebrations to week-long retreats, the commons hub’s laid back but intentional vibe makes for unforgettable experiences.&lt;/p>
+  - HU: &lt;p>A magánünnepségektől a hétig tartó visszavonulásokig, a commons hub laza, de szándékos hangulata felejthetetlen élményeket teremt.&lt;/p>
+- [ ] `carousels#57 · carousel_items[3].quote`
+  - EN: &lt;p>Minimal formalities. Maximum freedom.&lt;br>The kind of place that feels familiar, even if it’s your first time.&lt;/p>
+  - HU: &lt;p>Minimális formalitások. Maximális szabadság.&lt;br>Az a fajta hely, ami ismerősnek tűnik, még ha először jársz is ott.&lt;/p>
+- [ ] `carousels#58 · title`
+  - EN: gallery: Commons Hub
+  - HU: galéria: Commons Hub
+- [ ] `categories#84 · summary`
+  - EN: Interested in sponsoring the &lt;strong>commons hub&lt;/strong> in 2026? Let us know!
+  - HU: Érdekel a &lt;strong>commons hub&lt;/strong> szponzorálása 2026‑ban? Tudassa velünk!
+- [ ] `categories#84 · title`
+  - EN: SPONSORS
+  - HU: SZPONZOROK
+- [ ] `categories#85 · summary`
+  - EN: Stunning nature and cultural history
+  - HU: Lenyűgöző természet és kulturális történelem
+- [ ] `categories#85 · title`
+  - EN: SURROUNDINGS
+  - HU: Környezet
+- [ ] `categories#86 · title`
+  - EN: HISTORY
+  - HU: TÖRTÉNELEM
+- [ ] `categories#87 · summary`
+  - EN: Want to collaborate with the &lt;strong>commons hub&lt;/strong> in 2026?
+  - HU: Szeretne együttműködni a &lt;strong>commons hub&lt;/strong>-val 2026-ban?
+- [ ] `categories#87 · title`
+  - EN: PARTNERS
+  - HU: PARTNEREK
+- [ ] `categories#88 · title`
+  - EN: GUESTHOUSE
+  - HU: VENDÉGHÁZ
+- [ ] `categories#89 · body`
+  - EN: &lt;p style="text-align: left">Our event spaces accommodate up to 100 guests and provide a range of technical equipment and other amenities as well as plenty of cozy side spots perfect for smaller group discussions or breakout sessions.&lt;/p>&lt;p style="text-align: left">&lt;a target="_blank" rel="noopener noreferrer" class="tex …[truncated]
+  - HU: &lt;p style="text-align: left">Rendezvénytermeink akár 100 vendéget is befogadnak, és számos technikai felszerelést valamint egyéb kényelmi szolgáltatást kínálnak, továbbá rengeteg hangulatos mellékhelyet biztosítanak, amelyek tökéletesek kisebb csoportos megbeszélésekhez vagy szünetes ülésekhez.&lt;/p>&lt;p style="text-align:  …[truncated]
+- [ ] `categories#89 · title`
+  - EN: EVENT LOCATION
+  - HU: ESMÉNY HELYE
+- [ ] `categories#91 · summary`
+  - EN: a brief overview of our theoretical foundations and the long-vision driving our project
+  - HU: rövid áttekintés elméleti alapjainkról és a hosszú távú vízióról, amely a projektünket hajtja
+- [ ] `categories#91 · title`
+  - EN: FOUNDATIONS &amp; VISION
+  - HU: ALAPOK &amp; LÁTÁS
+- [ ] `categories#92 · summary`
+  - EN: Our community is defined by its diversity, sense of communality, and solidarity. Connections formed here often transcend work, evolving into deep and lasting friendships.
+  - HU: Közösségünket sokszínűség, közösségi érzet és szolidaritás jellemzi. Az itt kialakult kapcsolatok gyakran túlmutatnak a munkán, mély és tartós barátságokká alakulva.
+- [ ] `categories#92 · title`
+  - EN: COMMUNITY
+  - HU: KÖZÖSSÉG
+- [ ] `categories#93 · body`
+  - EN: &lt;p style="text-align: center">The Commons Hub operates the first validator node of the Interchain backed by an intentional, place-based Web3 community. Our ambition for the Cosmos ecosystem is to open pluralistic discussions around culture and politics to steer the evolution of the Interchain towards a democratic, dist …[truncated]
+  - HU: &lt;p style="text-align: center">A Commons Hub üzemelteti az első validátor csomópontot az Interchain-en, amelyet egy szándékos, helyalapú Web3 közösség támogat. A Cosmos ökoszisztémára vonatkozó ambíciónk az, hogy pluralista vitákat nyissunk a kultúra és politika körül, hogy irányítsuk az Interchain fejlődését egy demokr …[truncated]
+- [ ] `categories#93 · title`
+  - EN: VALIDATOR NODES
+  - HU: VALIDÁTOR CSOMÓPONTOK
+- [ ] `eventpages#113 · summary`
+  - EN: Mutual &amp; mesh credit, local vouchers, multilateral offsets, and other elements of alternative finance.
+  - HU: Kölcsönös &amp; hálózati hitel, helyi utalványok, multilaterális kompenzációk, és az alternatív finanszírozás egyéb elemei.
+- [ ] `eventpages#113 · title`
+  - EN: Collaborative Finance Gathering 3
+  - HU: Együttműködő Pénzügyi Találkozó 3
+- [ ] `eventpages#114 · summary`
+  - EN: The CCG turns 5!
+  - HU: A CCG betölt 5 évet!
+- [ ] `eventpages#115 · summary`
+  - EN: Rebuild, Renew, Reimagine: Hack the Hub 2025
+  - HU: Újraépítés, Megújulás, Újragondolás: Hack the Hub 2025
+- [ ] `eventpages#116 · summary`
+  - EN: Harvesting Hope and Renewal at &lt;strong>Solarpunk POW!&lt;/strong>
+  - HU: A remény és újjáéledés betakarítása a &lt;strong>Solarpunk POW!&lt;/strong>
+- [ ] `eventpages#116 · title`
+  - EN: SOLARPUNK POW!
+  - HU: SOLARPUNK ERŐ!
+- [ ] `eventpages#118 · summary`
+  - EN: Have you smelled the honey 🍯✨?
+  - HU: Érezted már a mézet 🍯✨?
+- [ ] `eventpages#118 · title`
+  - EN: Honey Harvest Weekend
+  - HU: Méz Betakarítási Hétvége
+- [ ] `eventpages#119 · summary`
+  - EN: Connect • Share • Climb – A Weekend of Skills, Stories, and Sends
+  - HU: Kapcsolódj • Oszd meg • Mászz – Egy hétvége a készségek, történetek és sikeres mászások
+- [ ] `eventpages#119 · title`
+  - EN: Commons Climb
+  - HU: Commons Mászás
+- [ ] `eventpages#120 · summary`
+  - EN: A 12 day christmas event in the Austrian Alps for hackers, tinkerers and digital nomads planning to go to the Chaos Communication Congress this year
+  - HU: Egy 12 napos karácsonyi esemény az osztrák Alpokban hackereknek, barkácsolóknak és digitális nomádoknak, akik idén a Chaos Communication Congressra készülnek.
+- [ ] `eventpages#120 · title`
+  - EN: commons christmas chaos
+  - HU: commons karácsonyi káosz
+- [ ] `eventpages#121 · summary`
+  - EN: The yearly gathering of the Crypto Commons Association, since 2021
+  - HU: A Crypto Commons Association éves találkozója, 2021 óta
+- [ ] `eventpages#121 · title`
+  - EN: Crypto Commons Gathering
+  - HU: Crypto Commons Találkozó
+- [ ] `eventpages#122 · title`
+  - EN: 4th Collaborative FInance Gathering
+  - HU: Negyedik Közös Pénzügyi Találkozó
+- [ ] `eventpages#123 · summary`
+  - EN: A four-week popup village prototyping future living in the valley of the commons
+  - HU: Egy négyhetes pop‑up falu, amely a közösség völgyében a jövőbeli életet prototípusként mutatja be.
+- [ ] `eventpages#123 · title`
+  - EN: Valley of the Commons PopUp Village
+  - HU: A Commons völgye PopUp falu
+- [ ] `eventpages#124 · summary`
+  - EN: Come and share in the spring rejuvenation of the hub before we welcome in the summer season
+  - HU: Gyere és vegyél részt a hub tavaszi megújulásában, mielőtt üdvözölnénk a nyári szezont.
+- [ ] `eventpages#125 · summary`
+  - EN: &lt;p>A pop-up physical hub for prefiguring postcapitalist futures through fiction, performance and play.&lt;/p>
+  - HU: &lt;p>Egy pop-up fizikai központ a posztkapitalista jövők előképzeléséhez fikción, előadáson és játékon keresztül.&lt;/p>
+- [ ] `eventpages#125 · title`
+  - EN: WORLDPLAY
+  - HU: VILÁGJÁTÉK
+- [ ] `eventpages#126 · summary`
+  - EN: &lt;p>From Alpine Origins to Modern Climbs&lt;/p>
+  - HU: &lt;p>Az alpesi eredetektől a modern mászásokig&lt;/p>
+- [ ] `eventpages#126 · title`
+  - EN: BOULDER &amp; BUILD
+  - HU: SZIKLA &amp; ÉPÍT
+- [ ] `eventpages#127 · summary`
+  - EN: &lt;p>Join us for an unforgettable journey into the world of AI agents&lt;/p>
+  - HU: &lt;p>Csatlakozz hozzánk egy felejthetetlen utazásra a mesterséges intelligencia ügynökök világába&lt;/p>
+- [ ] `eventpages#127 · title`
+  - EN: AI Agents Gathering
+  - HU: AI Ügynökök Gyűlése
+- [ ] `menu#2 · page_id.summary`
+  - EN: Checkout our upcoming and past events!
+  - HU: Nézze meg a közelgő és múltbeli eseményeinket!
+- [ ] `menu#2 · page_id.title`
+  - EN: EVENTS
+  - HU: ESEMÉNYEK
+- [ ] `menu#4 · page_id.title`
+  - EN: ACCOMMODATION
+  - HU: SZÁLLÁS
+- [ ] `menu#6 · page_id.title`
+  - EN: ABOUT
+  - HU: RÓLUNK
+- [ ] `menu#14 · page_id.title`
+  - EN: EVENT VENUE
+  - HU: eseményhelyszín
+- [ ] `menu#15 · page_id.summary`
+  - EN: Our community is defined by its diversity, sense of communality, and solidarity. Connections formed here often transcend work, evolving into deep and lasting friendships.
+  - HU: Közösségünket sokszínűség, közösségi érzet és szolidaritás jellemzi. Az itt kialakult kapcsolatok gyakran túlmutatnak a munkán, mély és tartós barátságokká alakulva.
+- [ ] `menu#15 · page_id.title`
+  - EN: COMMUNITY
+  - HU: KÖZÖSSÉG
+- [ ] `pages#2 · summary`
+  - EN: The &lt;strong>commons hub&lt;/strong> is an event venue, co-working and climbers’ base in the Austrian Alps, where great minds gather to explore and practice the Commons aided by emerging technologies.
+  - HU: A &lt;strong>commons hub&lt;/strong> egy rendezvényhelyszín, közös munkaterület és mászó bázis az osztrák Alpokban, ahol nagy elméket gyűlnek össze, hogy felfedezzék és gyakorolják a Commons‑t feltörekvő technológiák segítségével.
+- [ ] `pages#2 · title`
+  - EN: HUB
+  - HU: KÖZPONT
+- [ ] `pages#155 · summary`
+  - EN: Checkout our upcoming and past events!
+  - HU: Nézze meg a közelgő és múltbeli eseményeinket!
+- [ ] `pages#155 · title`
+  - EN: EVENTS
+  - HU: ESEMÉNYEK
+- [ ] `pages#156 · body`
+  - EN: &lt;p style="text-align: left">&lt;span style="font-size: 20px">Whether you need a place to stay, a venue for your event, or help planning it, we’re here to support you.&lt;/span>&lt;/p>&lt;p style="text-align: left">&lt;span style="font-size: 20px">Our spaces and services are designed for connection, collaboration, and creativity.&lt;/spa …[truncated]
+  - HU: &lt;p style="text-align: left">&lt;span style="font-size: 20px">Akár szállásra van szükséged, akár rendezvényed helyszínére, vagy segítségre a tervezésben, mi itt vagyunk, hogy támogassunk.&lt;/span>&lt;/p>&lt;p style="text-align: left">&lt;span style="font-size: 20px">A terek és szolgáltatások a kapcsolódásra, együttműködésre és kreati …[truncated]
+- [ ] `pages#156 · summary`
+  - EN: Our services range from classical guesthouse offers to hosting and organising events.
+  - HU: Szolgáltatásaink a klasszikus vendégházajánlatoktól a rendezvények fogadásáig és szervezéséig terjednek.
+- [ ] `pages#156 · title`
+  - EN: SERVICES
+  - HU: SZOLGÁLTATÁSOK
+- [ ] `pages#157 · summary`
+  - EN: Our community is defined by its diversity, sense of communality, and solidarity. Connections formed here often transcend work, evolving into deep and lasting friendships.
+  - HU: Közösségünket sokszínűség, közösségi érzet és szolidaritás jellemzi. Az itt kialakult kapcsolatok gyakran túlmutatnak a munkán, mély és tartós barátságokká alakulva.
+- [ ] `pages#157 · title`
+  - EN: COMMUNITY
+  - HU: KÖZÖSSÉG
+- [ ] `pages#159 · title`
+  - EN: ABOUT
+  - HU: RÓLUNK
+- [ ] `pages#160 · title`
+  - EN: Impressum
+  - HU: Impresszum
+- [ ] `pages#202 · summary`
+  - EN: An experimental playground for regenerative systems design
+  - HU: Kísérleti játszótér a regeneratív rendszerek tervezéséhez
+- [ ] `pages#202 · title`
+  - EN: HOME
+  - HU: Kezdőlap
+- [ ] `pages#204 · title`
+  - EN: ACCOMMODATION
+  - HU: SZÁLLÁS
+- [ ] `pages#206 · title`
+  - EN: EVENT VENUE
+  - HU: eseményhelyszín
+- [ ] `pages#207 · body`
+  - EN: &lt;p style="text-align: left">Situated right where the Viennese plains end and the Alps begin to rise, the &lt;strong>commons hub&lt;/strong> is surrounded by stunning natural sights and a nurturing cultural environment alike. The Hub itself also provides ample opportunities to get active - be it in our FabLab, the gardens, or …[truncated]
+  - HU: &lt;p style="text-align: left">Azonnal ott, ahol a bécsi síkság véget ér és az Alpok emelkedni kezdenek, a &lt;strong>commons hub&lt;/strong> lenyűgöző természeti látványokkal és egy tápláló kulturális környezettel van körülvéve. Maga a Hub is bőséges lehetőségeket kínál az aktív tevékenységre – legyen szó FabLabunkról, a kerte …[truncated]
+- [ ] `pages#207 · summary`
+  - EN: From outdoor sports and cultural program to gardening and tinkering in our FabLab, the commons hub provides for a wide range of activities.
+  - HU: Az outdoor sportoktól és kulturális programtól a kertészkedésig és a FabLabban való barkácsolásig a commons hub széles körű tevékenységeket kínál.
+- [ ] `pages#207 · title`
+  - EN: ACTIVITIES
+  - HU: TEVÉKENYSÉGEK
+- [ ] `pages#208 · title`
+  - EN: BLOG
+  - HU: blog
+- [ ] `posts#80 · summary`
+  - EN: Download the introduction!
+  - HU: Töltse le a bevezetőt!
+- [ ] `posts#80 · title`
+  - EN: Felix' PhD Defensio
+  - HU: Felix' PhD védése
+- [ ] `posts#84 · summary`
+  - EN: Commons Hub Community Lending Program
+  - HU: Commons Hub közösségi kölcsönzési program
+- [ ] `posts#84 · title`
+  - EN: Community Lending
+  - HU: Közösségi hitelezés
+- [ ] `posts#85 · title`
+  - EN: testing
+  - HU: tesztelés
+- [ ] `posts#86 · summary`
+  - EN: Outline of our long-term goal of building a Valley of the Commons
+  - HU: A Valley of the Commons építését célzó hosszú távú célunk vázlata
+- [ ] `posts#86 · title`
+  - EN: Valley of the Commons
+  - HU: A Commons völgye
+- [ ] `posts#88 · summary`
+  - EN: one year ago the commons hub was signed over!  ⏎ happy birthday commons hub, may you be for another 1000 years!
+  - HU: Egy évvel ezelőtt átadták a Commons Hub-ot! Boldog születésnapot, Commons Hub, legyen még további 1000 éve!
+- [ ] `posts#88 · title`
+  - EN: commons hub going full cycle
+  - HU: Commons Hub teljes körforgásra törekszik
+- [ ] `posts#89 · summary`
+  - EN: We opening up the possibility to rent one of the dorm rooms as a private room for month long stays from now until end of March 2026
+  - HU: Megnyitjuk a lehetőséget, hogy az egyik kollégiumi szobát magánszobaként egy hónapos tartózkodásra bérelhessék mostantól 2026 március végéig.
+- [ ] `posts#89 · title`
+  - EN: Come survive the european winter with us
+  - HU: Gyere túlélni velünk az európai telet.
+- [ ] `posts#91 · summary`
+  - EN: the springing has begun!
+  - HU: A tavasz elkezdődött!
+- [ ] `posts#91 · title`
+  - EN: Time for awakenings and preparation
+  - HU: Ideje az ébredéseknek és a felkészülésnek
+- [ ] `posts#83 · summary`
+  - EN: Envsioning the commons hub event campus as a monastery of the future - not to retreat from the world, but to shape it from the edge of known. ⏎
+  - HU: Az Commons Hub eseménykampuszt a jövő kolostoraként képzelve – nem azért, hogy visszavonuljunk a világtól, hanem hogy az ismert határainak széléről formáljuk.
+- [ ] `posts#83 · title`
+  - EN: EVENT CAMPUS
+  - HU: ESEMÉNY KAMPUSZ
+- [ ] `posts#82 · summary`
+  - EN: The commons hub is open, and this is just the beginning!
+  - HU: A Commons Hub nyitva van, és ez csak a kezdet!
+- [ ] `posts#82 · title`
+  - EN: HELLO WORLD: DOORS OPEN AT THE COMMONS HUB
+  - HU: SZIA VILÁG: AJTÓK NYÍLNAK A COMMONS HUB
+- [ ] `posts#90 · summary`
+  - EN: Come and share in the spring rejuvenation of the hub before we welcome in the summer season
+  - HU: Gyere és vegyél részt a hub tavaszi megújulásában, mielőtt üdvözölnénk a nyári szezont.
+- [ ] `posts#93 · body`
+  - EN: &lt;p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p>&lt;p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p>&lt;p>&lt;em>Placeholder content — populate later.&lt;/em>&lt;/p>
+  - HU: &lt;p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p>&lt;p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p>&lt;p>&lt;em>Helyőrző tartalom — később töltsd fel.&lt;/em>&lt;/p>
+- [ ] `posts#93 · summary`
+  - EN: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Placeholder summary — to be replaced.
+  - HU: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Helyőrző összefoglaló — cserélendő.
+- [ ] `posts#93 · title`
+  - EN: Gathering the Energy of the Commons
+  - HU: A közösség energiájának gyűjtése
+- [ ] `posts#92 · body`
+  - EN: &lt;p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p>&lt;p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu …[truncated]
+  - HU: &lt;p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p>&lt;p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu …[truncated]
+- [ ] `posts#92 · summary`
+  - EN: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Placeholder summary — to be replaced.
+  - HU: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Helyőrző összefoglaló — cserélendő.
+- [ ] `posts#92 · title`
+  - EN: 'Hack the Hub' Upgrades
+  - HU: 'Hack the Hub' Frissítések
+- [ ] `team_members#1 · bio`
+  - EN: &lt;p>Combining expertise in political and economic theory with a passion for community organizing, I craft narratives that connect technological innovation with broader societal transformation. I thrive on uniting diverse perspectives to elevate discussions beyond technical matters. I am a founder of the Crypto Commons A …[truncated]
+  - HU: &lt;p>Politikai és gazdaságelméleti szakértelmet közösségépítő szenvedéllyel ötvözve narratívákat alkotok, amelyek a technológiai innovációt szélesebb társadalmi átalakulással kapcsolják össze. Szeretek különböző nézőpontokat egyesíteni, hogy a vitát a technikai kérdések fölé emeljük. Alapítója vagyok a Crypto Commons Ass …[truncated]
+- [ ] `team_members#1 · role`
+  - EN: Co-Founder
+  - HU: Társalapító
+- [ ] `team_members#2 · bio`
+  - EN: &lt;p style="text-align: left">Coming from a civil engineering background, I got into IT during the 2017 neural network chess engine revolution. In 2020, I saw Hirschwangerhof’s potential and organized its first event—a 3-week hackathon and retreat—paving the way for the &lt;strong>commons hub&lt;/strong>. I’ve worked in comput …[truncated]
+  - HU: &lt;p style="text-align: left">Polgármérnöki háttérrel rendelkezve az IT-be kezdtem a 2017-es neurális hálózatos sakkmotor forradalom során. 2020-ban megláttam a Hirschwangerhof potenciálját, és megszerveztem első eseményét – egy háromhetes hackathon és visszavonulás –, amely útjába állította a &lt;strong>commons hub&lt;/strong …[truncated]
+- [ ] `team_members#2 · role`
+  - EN: Co-Founder
+  - HU: Társalapító
+- [ ] `team_members#3 · bio`
+  - EN: &lt;p>Daniel joined our team with a unique blend of practicality, intelligence, and charm. His exceptional problem-solving skills and calm approach to tackling tough situations have quickly made him an invaluable member of the group. With his upbeat attitude and ability to turn challenges into opportunities, Daniel plays  …[truncated]
+  - HU: &lt;p>Daniel egyedülálló gyakorlatiasság, intelligencia és báj keverékével csatlakozott csapatunkhoz. Kivételes problémamegoldó képességei és nyugodt hozzáállása a nehéz helyzetek kezeléséhez gyorsan felbecsülhetetlenné tették őt a csoportban. Felvidám hozzáállásával és azzal a képességével, hogy a kihívásokat lehetőségek …[truncated]
+- [ ] `team_members#3 · role`
+  - EN: Hospitality Manager
+  - HU: Vendéglátási menedzser
+
+## 2. Unchanged — verify or translate (6)
+
+Still identical to English: either a proper noun that should stay, or a
+string the MT pass skipped (timeout). Confirm or translate.
+
+- [ ] `messages · common.admin` — Admin
+- [ ] `messages · links.blog` — Blog
+- [ ] `eventpages#114 · title` — CRYPTO COMMONS GATHERING 2025
+- [ ] `eventpages#115 · title` — HACK THE HUB 2025
+- [ ] `eventpages#124 · title` — Hack the Hub 2026
+- [ ] `posts#90 · title` — Hack the Hub 2026
+
+## 3. Long-form left in English (38)
+
+Bodies over 600 chars were not machine-translated — they need human
+long-form translation into Hungarian.
+
+- [ ] `accordions#3 · accordion_items[0].content` — &lt;p style="text-align: left">&lt;strong>The Commons &lt;/strong>are shared resources jointly managed by a community according to a set of rules and social norms that e …[truncated]
+- [ ] `accordions#3 · accordion_items[1].content` — &lt;p style="text-align: left">As &lt;strong>an experimental playground for post-capitalist systems design&lt;/strong>, the commons hub explores the liberatory potential …[truncated]
+- [ ] `accordions#4 · accordion_items[1].content` — &lt;p style="text-align: left">The Hub hosts events such as work retreats, conferences, festivals, or weddings. For medium or big events, accommodation is reserved …[truncated]
+- [ ] `accordions#5 · accordion_items[0].content` — &lt;p style="text-align: left">Regen Network, built to promote ecological sustainability and regenerative agriculture, is an innovative platform we proudly support …[truncated]
+- [ ] `accordions#5 · accordion_items[1].content` — &lt;p style="text-align: left">Cosmos, known as the 'internet of blockchains', is designed to facilitate interoperability among various blockchain systems. To supp …[truncated]
+- [ ] `accordions#10 · accordion_items[0].content` — &lt;p style="text-align: left">The Schneeberg and Rax Plateau provide ample opportunities for hiking, biking, rock climbing, rafting, kayaking, swimming and mushro …[truncated]
+- [ ] `categories#85 · body` — &lt;p style="text-align: left">Situated right where the Viennese plains end and the Alps begin to rise, the &lt;strong>commons hub&lt;/strong> is surrounded by stunning  …[truncated]
+- [ ] `categories#86 · body` — &lt;p style="text-align: left">The &lt;strong>commons hub&lt;/strong> is housed in the historic Hirschwangerhof, a countryside inn built in 1860. Its history is closely  …[truncated]
+- [ ] `categories#87 · body` — &lt;h2 style="text-align: left">Partnerships&lt;/h2>&lt;p style="text-align: left">Partnerships with the &lt;strong>commons hub&lt;/strong> are about exploring ideas, building …[truncated]
+- [ ] `categories#88 · body` — &lt;p style="text-align: left">The &lt;strong>commons hub&lt;/strong> offers an intimate atmosphere that fosters deep and lasting connections among peers. Embedded in st …[truncated]
+- [ ] `categories#91 · body` — &lt;h3 style="text-align: left">FOUNDATIONS&lt;/h3>&lt;p style="text-align: left">&lt;span>&lt;strong>The Commons&lt;/strong> are shared resources jointly managed by a community  …[truncated]
+- [ ] `categories#92 · body` — &lt;p style="text-align: left">After four years of growth and countless events,&amp;nbsp; the community of the &lt;strong>commons hub&lt;/strong> is truly one of a kind. Roo …[truncated]
+- [ ] `eventpages#113 · body` — &lt;h2 style="text-align: left">Collaborative Finance 3&lt;/h2>&lt;p style="text-align: left">&lt;span style="font-size: 24px">&lt;strong>16-20 June, 2025&lt;/strong>&lt;/span>&lt;/p>&lt; …[truncated]
+- [ ] `eventpages#114 · body` — &lt;h2 style="text-align: left">&lt;span style="color: rgb(0, 0, 0)">Crypto Commons Gathering 2025&lt;/span>&lt;/h2>&lt;h4 style="text-align: left">&lt;span style="color: rgb(0,  …[truncated]
+- [ ] `eventpages#115 · body` — &lt;p style="text-align: left">&lt;/p>&lt;img class="max-w-full h-auto rounded-md" src="https://admin.commons-hub.at/assets/4a8a2e23-9a42-416c-bdce-19712f32622f">&lt;p styl …[truncated]
+- [ ] `eventpages#116 · body` — &lt;h2 style="text-align: left">SOLARPUNK POW&lt;/h2>&lt;h4 style="text-align: left">A Celebration of Resilience and Renewal&lt;/h4>&lt;h4 style="text-align: left">OCTOBER 5th …[truncated]
+- [ ] `eventpages#118 · body` — &lt;h3 style="text-align: left">&lt;strong>19th of July, 10:00 - 20th of July 14:00&lt;/strong>&lt;/h3>&lt;p style="text-align: left">&lt;br>You're invited to join us at the &lt;str …[truncated]
+- [ ] `eventpages#119 · body` — &lt;h1 style="text-align: left">Commons Climb&lt;/h1>&lt;h3 style="text-align: left">A Rock Climbing Community Gathering&lt;/h3>&lt;h5 style="text-align: left">&lt;span style="co …[truncated]
+- [ ] `eventpages#120 · body` — &lt;h1 style="text-align: left">&lt;span style="color: rgb(0, 0, 0)">&lt;strong>Commons Christmas Chaos&lt;/strong>&lt;/span>&lt;/h1>&lt;h3 style="text-align: left">COOKIES, HACKS &amp; …[truncated]
+- [ ] `eventpages#121 · body` — &lt;p style="text-align: left">The Crypto Commons Gathering (CCG) is an annual week-long retreat organised by the Crypto Commons Association in collaboration with  …[truncated]
+- [ ] `eventpages#122 · body` — &lt;h2 style="text-align: left">Collaborative Finance 4&lt;/h2>&lt;p style="text-align: left">&lt;strong>21-27 June, 2026&lt;/strong>&lt;/p>&lt;p style="text-align: left">CoFi 4 bri …[truncated]
+- [ ] `eventpages#123 · body` — &lt;p style="text-align: left">&lt;strong>VALLEY OF THE COMMONS&lt;/strong>&lt;br>&lt;em>August 24 – September 20, 2026&lt;/em>&lt;/p>&lt;p style="text-align: left">Valley of the Commo …[truncated]
+- [ ] `eventpages#124 · body` — &lt;h1 style="text-align: left">Hack the Hub!&lt;/h1>&lt;h3 style="text-align: left">27 March to 07 April, 2026&lt;/h3>&lt;p style="text-align: left">&lt;/p>&lt;img class="max-w-ful …[truncated]
+- [ ] `eventpages#125 · body` — &lt;h2 style="text-align:left">WORLDPLAY: To be Defined&lt;/h2>&lt;h4 style="text-align:left">June 7&amp;ndash;13, 2026 &amp;bull; Commons Hub, Austria&lt;/h4>&lt;p style="text-align: …[truncated]
+- [ ] `eventpages#126 · body` — &lt;h1>Boulder &amp;amp; Build&lt;/h1>&lt;h3>A Climbing and Community Adventure&lt;/h3>&lt;h3>July 18th - July 27th, 2025&lt;/h3>&lt;p>&lt;br>Join us for an immersive event combining the t …[truncated]
+- [ ] `eventpages#127 · body` — &lt;p>AI Agents Gathering and Hacker House in the Austrian Alps &amp;nbsp;&lt;/p>&lt;p>Join us for an unforgettable journey into the world of AI agents at the Commons Hub, a …[truncated]
+- [ ] `menu#6 · page_id.body` — &lt;p style="text-align: left">Felix and Emil Fritsch founded and run the &lt;strong>commons hub&lt;/strong> as a limited liability company.&lt;/p>&lt;p style="text-align: lef …[truncated]
+- [ ] `menu#15 · page_id.body` — &lt;p style="text-align: left">After four years of growth and countless events,&amp;nbsp; the community of the &lt;strong>commons hub&lt;/strong> is truly one of a kind. Roo …[truncated]
+- [ ] `pages#2 · body` — &lt;p style="text-align: left">Based in the Hirschwangerhof, a historic countryside inn one hour south of Vienna, the Commons Hub is nested in the Austrian Alps ne …[truncated]
+- [ ] `pages#157 · body` — &lt;p style="text-align: left">After four years of growth and countless events,&amp;nbsp; the community of the &lt;strong>commons hub&lt;/strong> is truly one of a kind. Roo …[truncated]
+- [ ] `pages#159 · body` — &lt;p style="text-align: left">Felix and Emil Fritsch founded and run the &lt;strong>commons hub&lt;/strong> as a limited liability company.&lt;/p>&lt;p style="text-align: lef …[truncated]
+- [ ] `pages#202 · body` — &lt;img class="max-w-full h-auto rounded-md" src="https://admin.commons-hub.at/assets/4ab5375d-4d7c-4509-991f-4f1fbdc2d4a0">&lt;p style="text-align: left">&lt;/p>&lt;h1 sty …[truncated]
+- [ ] `posts#88 · body` — &lt;h1 style="text-align: left">&lt;strong>Life of a building&lt;/strong>&lt;/h1>&lt;p style="text-align: justify">Four seasons have passed since the papers were signed and th …[truncated]
+- [ ] `posts#89 · body` — &lt;h2 style="text-align: left">Winter Co-Living &lt;/h2>&lt;p style="text-align: left">Need a place to get away for a month or two? Do you want to live in a winter wond …[truncated]
+- [ ] `posts#91 · body` — &lt;p style="text-align: left">I have been outside, finally, after a spell of heavy cloudage and have begun to detect signage of sprinage in the garten!&lt;/p>&lt;p styl …[truncated]
+- [ ] `posts#83 · body` — &lt;h1 style="text-align: left">&lt;span style="color: rgb(0, 0, 0)">A Campus at the Edge of Known&lt;/span>&lt;/h1>&lt;h3 style="text-align: left">&lt;span style="color: rgb(0,  …[truncated]
+- [ ] `posts#82 · body` — &lt;h1 style="text-align: left">&lt;span style="color: rgb(0, 0, 0)">&lt;strong>Hello World: Doors Open at the Commons Hub&lt;/strong>&lt;/span>&lt;/h1>&lt;h3 style="text-align: lef …[truncated]
+- [ ] `posts#90 · body` — &lt;h1 style="text-align: left">Hack the Hub!&lt;/h1>&lt;p style="text-align: left">27 March to 07 April, 2026&lt;/p>&lt;p style="text-align: left">(pic) need to get a sprout  …[truncated]

@@ -1,0 +1,561 @@
+# Native review — Czech (CS)
+
+Machine-translated first pass. Tick each box once a native speaker has
+confirmed or corrected the CS text in the source file. Correct values
+directly in `messages/cs.json` (UI) or `content/snapshot/cs/*.json`
+(content), then re-run a build. See docs/i18n-plan.md.
+
+**Summary:** 164 to review · 8 unchanged (verify/translate) · 38 long-form left in English.
+
+## 1. To review — machine-translated (164)
+
+- [ ] `messages · common.home`
+  - EN: Home
+  - CS: Domů
+- [ ] `messages · common.login`
+  - EN: Log in
+  - CS: Přihlásit se
+- [ ] `messages · common.logout`
+  - EN: Log out
+  - CS: Odhlásit se
+- [ ] `messages · common.readMore`
+  - EN: Read more
+  - CS: Číst více
+- [ ] `messages · common.bookNow`
+  - EN: Book now
+  - CS: Rezervovat
+- [ ] `messages · common.sendInquiry`
+  - EN: Send inquiry
+  - CS: Odeslat poptávku
+- [ ] `messages · common.subscribe`
+  - EN: Subscribe
+  - CS: Odebírat
+- [ ] `messages · common.loading`
+  - EN: Loading…
+  - CS: Načítání…
+- [ ] `messages · footer.visit`
+  - EN: Visit
+  - CS: Navštivte
+- [ ] `messages · footer.discover`
+  - EN: Discover
+  - CS: Objevte
+- [ ] `messages · footer.community`
+  - EN: Community
+  - CS: Komunita
+- [ ] `messages · footer.tagline`
+  - EN: A communal guesthouse &amp; events venue in the Austrian Alps.
+  - CS: Komunitní penzion a místo konání akcí v rakouských Alpách.
+- [ ] `messages · footer.location`
+  - EN: Reichenau an der Rax, Austria
+  - CS: Reichenau an der Rax, Rakousko
+- [ ] `messages · links.accommodation`
+  - EN: Accommodation
+  - CS: Ubytování
+- [ ] `messages · links.eventVenue`
+  - EN: Event Venue
+  - CS: Místo konání
+- [ ] `messages · links.eventToolbox`
+  - EN: Event Toolbox
+  - CS: Sada nástrojů pro akce
+- [ ] `messages · links.events`
+  - EN: Events
+  - CS: Akce
+- [ ] `messages · links.gallery`
+  - EN: Gallery
+  - CS: Galerie
+- [ ] `messages · links.about`
+  - EN: About
+  - CS: O nás
+- [ ] `messages · links.communityPartners`
+  - EN: Community &amp; Partners
+  - CS: Komunita a partneři
+- [ ] `messages · links.natureSurroundings`
+  - EN: Nature &amp; Surroundings
+  - CS: Příroda a okolí
+- [ ] `messages · links.impressum`
+  - EN: Impressum
+  - CS: Tiráž
+- [ ] `messages · booking.numberOfGuests`
+  - EN: Number of guests
+  - CS: Počet hostů
+- [ ] `messages · booking.roomType`
+  - EN: Room type
+  - CS: Typ pokoje
+- [ ] `messages · booking.checkIn`
+  - EN: Check-in
+  - CS: Příjezd
+- [ ] `messages · booking.checkOut`
+  - EN: Check-out
+  - CS: Odjezd
+- [ ] `messages · booking.yourName`
+  - EN: Your name
+  - CS: Vaše jméno
+- [ ] `messages · booking.email`
+  - EN: Email
+  - CS: E-mail
+- [ ] `messages · booking.notes`
+  - EN: Anything we should know?
+  - CS: Měli bychom něco vědět?
+- [ ] `messages · booking.choosePackage`
+  - EN: Choose your package
+  - CS: Vyberte si balíček
+- [ ] `messages · booking.startDate`
+  - EN: Start date
+  - CS: Datum začátku
+- [ ] `messages · booking.endDate`
+  - EN: End date
+  - CS: Datum konce
+- [ ] `messages · booking.estimatedTotal`
+  - EN: Estimated total
+  - CS: Odhadovaná celková cena
+- [ ] `messages · booking.submit`
+  - EN: Send inquiry
+  - CS: Odeslat poptávku
+- [ ] `messages · newsletter.heading`
+  - EN: Subscribe to our newsletter
+  - CS: Přihlaste se k odběru newsletteru
+- [ ] `messages · newsletter.emailPlaceholder`
+  - EN: your@email.com
+  - CS: vas@email.com
+- [ ] `messages · language.label`
+  - EN: Language
+  - CS: Jazyk
+- [ ] `accordions#3 · accordion_items[2].content`
+  - EN: &lt;ul>&lt;li>&lt;p style="text-align: left">&lt;strong>Grow our community&lt;/strong> through events and partnerships&lt;/p>&lt;/li>&lt;li>&lt;p style="text-align: left">&lt;strong>Support applied systems design&lt;/strong> via grants and experiments&lt;/p>&lt;/li>&lt;li>&lt;p style="text-align: left">&lt;strong>Strengthen the Hub as economic engine&lt;/strong> nurtur …[truncated]
+  - CS: &lt;ul>&lt;li>&lt;p style="text-align: left">&lt;strong>Rozvíjejte naši komunitu prostřednictvím akcí a partnerství&lt;/strong>&lt;/p>&lt;/li>&lt;li>&lt;p style="text-align: left">&lt;strong>Podporujte aplikovaný systémový design pomocí grantů a experimentů&lt;/strong>&lt;/p>&lt;/li>&lt;li>&lt;p style="text-align: left">&lt;strong>Posilujte Hub jako ekonomický motor …[truncated]
+- [ ] `accordions#4 · accordion_items[0].content`
+  - EN: &lt;p style="text-align: left">&lt;/p>&lt;p style="text-align: left">&lt;span style="color: rgb(0, 0, 0)">The guest house offers 30 beds distributed in 2 double rooms and 5 dormitories.&lt;/span>&lt;/p>&lt;p style="text-align: left">&lt;a target="_blank" rel="noopener noreferrer" class="text-blue-600 underline button" href="/category/guesthou …[truncated]
+  - CS: &lt;p style="text-align: left">&lt;/p>&lt;p style="text-align: left">&lt;span style="color: rgb(0, 0, 0)">Penzion nabízí 30 lůžek rozdělených mezi 2 dvoulůžkové pokoje a 5 spolkách.&lt;/span>&lt;/p>&lt;p style="text-align: left">&lt;a target="_blank" rel="noopener noreferrer" class="text-blue-600 underline button" href="/category/guesthouse"> …[truncated]
+- [ ] `accordions#4 · accordion_items[2].content`
+  - EN: &lt;p style="text-align: left">If you have an idea for an event but only limited capacity to organise it, we got your back. Be it a hackathon, an (un)conference, or a retreat – we have long-standing experience in running events and are happy to help you bring your vision to life.&amp;nbsp;&lt;/p>&lt;p style="text-align: left">Our s …[truncated]
+  - CS: &lt;p style="text-align: left">Pokud máte nápad na akci, ale jen omezené možnosti ji zorganizovat, jsme tu pro vás. Ať už jde o hackathon, (un)conference nebo retreat – máme dlouholeté zkušenosti s pořádáním akcí a rádi vám pomůžeme přetavit vaši vizi do reality.&amp;nbsp;&lt;/p>&lt;p style="text-align: left">Naše služby sahají od  …[truncated]
+- [ ] `accordions#6 · accordion_items[0].content`
+  - EN: &lt;p style="text-align: left">The Hub accommodates up to 30 people in five dorms and four double rooms. Sheets and towels are provided, the bathrooms are located on the floor.&lt;/p>
+  - CS: &lt;p style="text-align: left">Hub pojme až 30 osob v pěti kolejiích a čtyřech dvoulůžkových pokojích. Povlečení a ručníky jsou k dispozici, koupelny se nacházejí na patře.&lt;/p>
+- [ ] `accordions#6 · accordion_items[1].content`
+  - EN: &lt;p style="text-align: left">A cozy welcome area combines living room comfort and old-school bar charm, featuring ample couches, board games, and a vinyl record player for a relaxed, inviting atmosphere.&lt;/p>
+  - CS: &lt;p style="text-align: left">Útulný vítací prostor kombinuje komfort obývacího pokoje a kouzlo staromódního baru, s prostornými pohovkami, deskovými hrami a gramofonem na vinylové desky pro uvolněnou, přívětivou atmosféru.&lt;/p>
+- [ ] `accordions#6 · accordion_items[2].content`
+  - EN: &lt;p style="text-align: left">The entire outside area of around 2000m² can be used by our guests. The front yard is an excellent spot for leisure time and relaxed evenings by the fire. The back garden is where you’ll find our veggies, berries and herbs, and ample space to touch some actual grass.&lt;/p>
+  - CS: &lt;p style="text-align: left">Celá venkovní plocha o přibližně 2000 m² může být využita našimi hosty. Přední dvorek je vynikajícím místem pro volný čas a odpočinkové večery u ohně. Zadní zahrada je místo, kde najdete naše zeleninu, bobule i bylinky a dostatek prostoru na skutečnou trávu.&lt;/p>
+- [ ] `accordions#6 · accordion_items[3].content`
+  - EN: &lt;p style="text-align: left">Our Co-working provides a calm working environment, screens and keyboards, bicycles can be borrowed to explore the surroundings, several workshops contain lots of tools and materials like fabric, paint and wood to become creative, and a piano and other instruments are available for a jam.&lt;/p …[truncated]
+  - CS: &lt;p style="text-align: left">Naše coworkingové prostory poskytují klidné pracovní prostředí, monitory a klávesnice, lze si půjčit kola k prozkoumání okolí, několik dílen obsahuje spoustu nástrojů a materiálů jako látku, barvu a dřevo pro kreativitu, a piano a další nástroje jsou k dispozici pro jam session.&lt;/p>
+- [ ] `accordions#7 · accordion_items[0].content`
+  - EN: &lt;p style="text-align: left">90m² fit up to 75 seats facing a 3x6m stage with a massive sound system and a ceiling-mounted projector with a 133’’ drop-down screen. Wireless microphones, two wall-mounted cameras and a tripod-mounted camera feed into a 4-channel video mixer that supports live video streaming and productio …[truncated]
+  - CS: &lt;p style="text-align: left">90m² pojme až 75 míst k pohledu na scénu o rozměrech 3×6 m s masivním zvukovým systémem a projektorem namontovaným na stropě s 133’’ spouštěcí obrazovkou. Bezdrátová mikrofony, dvě kamery připevněné ke zdi a kamera na stativu jsou napojeny do čtyřkanálového video mixéru, který podporuje živý …[truncated]
+- [ ] `accordions#7 · accordion_items[1].content`
+  - EN: &lt;p style="text-align: left">Next to the main stage, the Event Hall, also offering 90m², is a more open space that lends itself to workshops, breakout sessions and as space that can be used for co-working. Typically, events start their mornings in a big circle to map out the day’s schedule on a whiteboard.&amp;nbsp;&lt;/p>
+  - CS: &lt;p style="text-align: left">Vedle hlavní scény, Event Hall, která také nabízí 90m², je otevřenější prostor, který se hodí na workshopy, rozdělené sekce a jako prostor pro coworking. Obvykle události začínají ráno ve velkém kruhu, aby si naplánovaly denní program na bílé tabuli.&amp;nbsp;&lt;/p>
+- [ ] `accordions#7 · accordion_items[2].content`
+  - EN: &lt;p style="text-align: left">As a part of the event hall, a fully equipped plug-and-play podcast studio enables spontaneous and well-planned media production. Guests can easily record their thoughts, presentations, and conversations without being bogged down by technical or spatial challenges.&lt;/p>
+  - CS: &lt;p style="text-align: left">Jako součást sálů pro akce plně vybavené plug‑and‑play podcastové studio umožňuje spontánní i dobře naplánovanou mediální produkci. Hosté mohou snadno nahrávat své myšlenky, prezentace i konverzace, aniž by je omezovaly technické nebo prostorové problémy.&lt;/p>
+- [ ] `accordions#7 · accordion_items[3].content`
+  - EN: &lt;p style="text-align: left">The 40m² co-working doubles as a dedicated seminar room for smaller events, featuring a 65’’ TV, 20 chairs, a whiteboard, and adaptable and versatile tables and seating arrangements, ideal for workshops or meetings.&lt;/p>
+  - CS: &lt;p style="text-align: left">40 m² coworking slouží také jako vyhrazená seminární místnost pro menší akce, vybavená 65’’ TV, 20 židlemi, bílou tabulí a přizpůsobitelnými a univerzálními stoly a sezeními, ideální pro workshopy nebo schůzky.&lt;/p>
+- [ ] `accordions#11 · accordion_items[0].content`
+  - EN: &lt;p style="text-align: left">Numerous beaches along river Schwarza invite for swimming and sun bathing in walking distance from the Hub&lt;/p>
+  - CS: &lt;p style="text-align: left">Mnoho pláží podél řeky Schwarza láká k plavání a slunění v docházkové vzdálenosti od Hubu&lt;/p>
+- [ ] `accordions#12 · accordion_items[0].content`
+  - EN: &lt;p style="text-align: left">Although its imperial past is long gone, Reichenau an der Rax remains a cultural hub with two musical pavilions and a classical theatre. Its six-week summer festival features two daily plays, along with literature readings, classical music, and other artsy events. Other remnants of the monar …[truncated]
+  - CS: &lt;p style="text-align: left">Ačkoli její císařská minulost je dávno pryč, Reichenau an der Rax zůstává kulturním centrem se dvěma hudebními pavilony a klasickým divadlem. Její šestitýdenní letní festival nabízí dva denní představení, spolu s čtením literatury, klasickou hudbou a dalšími uměleckými akcemi. Další pozůstat …[truncated]
+- [ ] `accordions#13 · accordion_items[0].content`
+  - EN: &lt;p style="text-align: left">3D printer, laser cutter, wood workshop, soundlab, and other tools are waiting for your creativity&lt;/p>
+  - CS: &lt;p style="text-align: left">3D tiskárna, laserový řezák, dřevěná dílna, zvukové laboratoře a další nástroje čekají na vaši kreativitu&lt;/p>
+- [ ] `accordions#14 · accordion_items[0].content`
+  - EN: &lt;p style="text-align: left">The &lt;strong>commons hub&lt;/strong> garden thrives with raised beds, fruit trees, and a buzzing beehive, creating a vibrant permaculture space. Join us to care for, maintain and expand it, and enjoy its fruits with us!&lt;/p>
+  - CS: &lt;p style="text-align: left">Zahrada &lt;strong>commons hub&lt;/strong> prosperuje díky vyvýšeným záhonům, ovocným stromům a bzučícímu úlu, čímž vytváří živý permakulturní prostor. Připojte se k nám, abyste o ni pečovali, udržovali ji a rozšiřovali, a užijte si její plody s námi!&lt;/p>
+- [ ] `accordions#15 · accordion_items[0].content`
+  - EN: &lt;p style="text-align: left">Over 2,000 documented climbing routes — many multi-pitch — make the Schneeberg/Rax massif a prime destination for climbers from Vienna, Bratislava, Budapest and beyond. Trad, sport, and via-ferrata lines start within walking distance of the Hub.&lt;/p>
+  - CS: &lt;p style="text-align: left">Více než 2 000 zdokumentovaných lezeckých cest — mnoho vícepodlažních — činí masív Schneeberg/Rax hlavní destinací pro lezce z Vídně, Bratislavy, Budapešti a dál. Trad, sport a via-ferrata trasy začínají v docházkové vzdálenosti od Hub.&lt;/p>
+- [ ] `accordions#16 · accordion_items[0].content`
+  - EN: &lt;p style="text-align: left">The Commons Hub maintains a community wiki where residents and visitors document trails, local lore, recipes, fabrication tips, and ongoing experiments. Ask at the front desk (read: in the kitchen) for an account — anyone staying at the Hub can contribute.&lt;/p>
+  - CS: &lt;p style="text-align: left">Commons Hub udržuje komunitní wiki, kde obyvatelé i návštěvníci dokumentují stezky, místní pověsti, recepty, tipy na výrobu a probíhající experimenty. Požádejte na recepci (čti: v kuchyni) o účet — kdokoli pobývající v Hubu může přispívat.&lt;/p>
+- [ ] `carousels#55 · title`
+  - EN: TESTIMONIALS
+  - CS: Reference
+- [ ] `carousels#55 · carousel_items[0].quote`
+  - EN: &lt;p style="text-align: center">&lt;em>"The Commons Hub is a beautiful physical space which engenders equally beautiful social and intellectual spaces." &amp;nbsp;&lt;/em>&lt;/p>&lt;p style="text-align: center">&lt;strong>Dr Michael Zargham, BlockScience (CEO)&lt;/strong>&lt;/p>
+  - CS: &lt;p style="text-align: center">&lt;em>"The Commons Hub je krásný fyzický prostor, který vytváří stejně krásné sociální a intelektuální prostory." &amp;nbsp;&lt;/em>&lt;/p>&lt;p style="text-align: center">&lt;strong>Dr Michael Zargham, BlockScience (CEO)&lt;/strong>&lt;/p>
+- [ ] `carousels#55 · carousel_items[1].quote`
+  - EN: &lt;p style="text-align: center">&lt;em>"Commons Hub is a bastion for IRL community and action learning commoning. The landscape and accommodations foster long-form thought, lively discourse, and meaningful relationship building."&lt;/em>&lt;/p>&lt;p style="text-align: center">&lt;strong>Will Szal, Regen Foundation&lt;/strong>&lt;/p>
+  - CS: &lt;p style="text-align: center">&lt;em>"Commons Hub je baštou pro komunitu IRL a akční učení commoningu. Krajina a ubytování podporují dlouhodobé myšlení, živou diskusi a smysluplné budování vztahů."&lt;/em>&lt;/p>&lt;p style="text-align: center">&lt;strong>Will Szal, Regen Foundation&lt;/strong>&lt;/p>
+- [ ] `carousels#55 · carousel_items[2].quote`
+  - EN: &lt;p style="text-align: center">&lt;em>"The Commons Hub is pushing the boundaries of crypto and post-capitalism through imaginative experiments and productive dialogue. I’ve seriously enjoyed my time at the Hub and benefited from the broader network this node has spawned."&amp;nbsp;&lt;/em>&lt;/p>&lt;p style="text-align: center">&lt;strong …[truncated]
+  - CS: &lt;p style="text-align: center">&lt;em>"Commons Hub posouvá hranice krypta a postkapitalismu prostřednictvím imaginativních experimentů a produktivního dialogu. Opravdu jsem si užil svůj čas v Hubu a těžil z širší sítě, kterou tento uzel vytvořil."&amp;nbsp;&lt;/em>&lt;/p>&lt;p style="text-align: center">&lt;strong>Ori Shimony, d0rg (spolu …[truncated]
+- [ ] `carousels#56 · title`
+  - EN: SURROUNDINGS
+  - CS: OKOLÍ
+- [ ] `carousels#56 · carousel_items[0].quote`
+  - EN: &lt;p style="text-align: center">The river Schwarza&lt;/p>
+  - CS: &lt;p style="text-align: center">Řeka Schwarza&lt;/p>
+- [ ] `carousels#56 · carousel_items[1].quote`
+  - EN: &lt;p style="text-align: center">Rax in winter&lt;/p>
+  - CS: &lt;p style="text-align: center">Rax v zimě&lt;/p>
+- [ ] `carousels#56 · carousel_items[2].quote`
+  - EN: &lt;p style="text-align: center">Hiking &amp;amp; rock climbing paradise!&lt;/p>
+  - CS: &lt;p style="text-align: center">Ráj pro pěší turistiku a horolezectví!&lt;/p>
+- [ ] `carousels#56 · carousel_items[3].quote`
+  - EN: &lt;p style="text-align: center">Getting ready for the hike!&lt;/p>
+  - CS: &lt;p style="text-align: center">Připravujeme se na túru!&lt;/p>
+- [ ] `carousels#57 · carousel_items[0].quote`
+  - EN: &lt;p>Welcome to the &lt;b>commons hub&lt;/b>,&lt;br>a communal guesthouse and events venue in the Austrian Alps.&lt;/p>
+  - CS: &lt;p>Vítejte v &lt;b>commons hub&lt;/b>,&lt;br>komunitním penzionu a místě konání akcí v rakouských Alpách.&lt;/p>
+- [ ] `carousels#57 · carousel_items[1].quote`
+  - EN: &lt;p>A home to artists, hackers, and tinkerers exploring new perspectives across technology, economy, society, and nature.&lt;/p>
+  - CS: &lt;p>Domov pro umělce, hackery a kutily zkoumající nové perspektivy v oblasti technologií, ekonomiky, společnosti i přírody.&lt;/p>
+- [ ] `carousels#57 · carousel_items[2].quote`
+  - EN: &lt;p>From private celebrations to week-long retreats, the commons hub’s laid back but intentional vibe makes for unforgettable experiences.&lt;/p>
+  - CS: &lt;p>Od soukromých oslav po týdenní ústraní, uvolněná ale záměrná atmosféra commons hubu přináší nezapomenutelné zážitky.&lt;/p>
+- [ ] `carousels#57 · carousel_items[3].quote`
+  - EN: &lt;p>Minimal formalities. Maximum freedom.&lt;br>The kind of place that feels familiar, even if it’s your first time.&lt;/p>
+  - CS: &lt;p>Minimální formality. Maximální svoboda.&lt;br>Typ místa, který se zdá být známý, i když je to vaše první návštěva.&lt;/p>
+- [ ] `carousels#58 · title`
+  - EN: gallery: Commons Hub
+  - CS: galerie: Commons Hub
+- [ ] `categories#84 · summary`
+  - EN: Interested in sponsoring the &lt;strong>commons hub&lt;/strong> in 2026? Let us know!
+  - CS: Zajímají vás sponzorství &lt;strong>commons hub&lt;/strong> v roce 2026? Dejte nám vědět!
+- [ ] `categories#84 · title`
+  - EN: SPONSORS
+  - CS: SPONZOŘI
+- [ ] `categories#85 · summary`
+  - EN: Stunning nature and cultural history
+  - CS: Úchvatná příroda a kulturní historie
+- [ ] `categories#85 · title`
+  - EN: SURROUNDINGS
+  - CS: OKOLÍ
+- [ ] `categories#86 · title`
+  - EN: HISTORY
+  - CS: HISTORIE
+- [ ] `categories#87 · summary`
+  - EN: Want to collaborate with the &lt;strong>commons hub&lt;/strong> in 2026?
+  - CS: Chcete spolupracovat s &lt;strong>commons hub&lt;/strong> v roce 2026?
+- [ ] `categories#87 · title`
+  - EN: PARTNERS
+  - CS: PARTNEŘI
+- [ ] `categories#88 · title`
+  - EN: GUESTHOUSE
+  - CS: PENZION
+- [ ] `categories#89 · body`
+  - EN: &lt;p style="text-align: left">Our event spaces accommodate up to 100 guests and provide a range of technical equipment and other amenities as well as plenty of cozy side spots perfect for smaller group discussions or breakout sessions.&lt;/p>&lt;p style="text-align: left">&lt;a target="_blank" rel="noopener noreferrer" class="tex …[truncated]
+  - CS: &lt;p style="text-align: left">Naše prostory pro akce pojmou až 100 hostů a nabízejí řadu technického vybavení a dalších služeb, stejně jako spoustu útulných menších míst ideálních pro menší skupinové diskuse nebo rozdělené sezení.&lt;/p>&lt;p style="text-align: left">&lt;a target="_blank" rel="noopener noreferrer" class="text-blu …[truncated]
+- [ ] `categories#89 · title`
+  - EN: EVENT LOCATION
+  - CS: MÍSTO KONÁNÍ
+- [ ] `categories#91 · summary`
+  - EN: a brief overview of our theoretical foundations and the long-vision driving our project
+  - CS: stručný přehled našich teoretických základů a dlouhodobé vize, která pohání náš projekt
+- [ ] `categories#91 · title`
+  - EN: FOUNDATIONS &amp; VISION
+  - CS: ZÁKLADY &amp; VIZE
+- [ ] `categories#92 · summary`
+  - EN: Our community is defined by its diversity, sense of communality, and solidarity. Connections formed here often transcend work, evolving into deep and lasting friendships.
+  - CS: Naše komunita je definována svou rozmanitostí, smyslem pro společenství a solidaritou. Spojení vytvořená zde často přesahují práci a přerůstají v hluboká a trvalá přátelství.
+- [ ] `categories#92 · title`
+  - EN: COMMUNITY
+  - CS: KOMUNITA
+- [ ] `categories#93 · body`
+  - EN: &lt;p style="text-align: center">The Commons Hub operates the first validator node of the Interchain backed by an intentional, place-based Web3 community. Our ambition for the Cosmos ecosystem is to open pluralistic discussions around culture and politics to steer the evolution of the Interchain towards a democratic, dist …[truncated]
+  - CS: &lt;p style="text-align: center">Commons Hub provozuje první validační uzel Interchainu podporovaný úmyslnou, místně založenou Web3 komunitou. Naším cílem pro ekosystém Cosmos je otevřít pluralitní diskuse o kultuře a politice, aby se nasměroval vývoj Interchainu k demokratické, distribuované, odolné globální infrastruktu …[truncated]
+- [ ] `categories#93 · title`
+  - EN: VALIDATOR NODES
+  - CS: VALIDÁTOROVÉ UZLY
+- [ ] `eventpages#113 · summary`
+  - EN: Mutual &amp; mesh credit, local vouchers, multilateral offsets, and other elements of alternative finance.
+  - CS: Vzájemný a síťový úvěr, místní poukázky, multilaterální kompenzace a další prvky alternativního financování.
+- [ ] `eventpages#113 · title`
+  - EN: Collaborative Finance Gathering 3
+  - CS: Společné finanční setkání 3
+- [ ] `eventpages#114 · summary`
+  - EN: The CCG turns 5!
+  - CS: CCG slaví 5 let!
+- [ ] `eventpages#114 · title`
+  - EN: CRYPTO COMMONS GATHERING 2025
+  - CS: SHROMÁŽDĚNÍ CRYPTO COMMONS 2025
+- [ ] `eventpages#115 · summary`
+  - EN: Rebuild, Renew, Reimagine: Hack the Hub 2025
+  - CS: Přestavět, obnovit, přetvořit: Hack the Hub 2025
+- [ ] `eventpages#115 · title`
+  - EN: HACK THE HUB 2025
+  - CS: Hackni HUB 2025
+- [ ] `eventpages#116 · summary`
+  - EN: Harvesting Hope and Renewal at &lt;strong>Solarpunk POW!&lt;/strong>
+  - CS: Sklízení naděje a obnovy v &lt;strong>Solarpunk POW!&lt;/strong>
+- [ ] `eventpages#116 · title`
+  - EN: SOLARPUNK POW!
+  - CS: SOLARPUNK BUM!
+- [ ] `eventpages#118 · summary`
+  - EN: Have you smelled the honey 🍯✨?
+  - CS: Už jsi cítil vůni medu 🍯✨?
+- [ ] `eventpages#118 · title`
+  - EN: Honey Harvest Weekend
+  - CS: Víkend sběru medu
+- [ ] `eventpages#119 · summary`
+  - EN: Connect • Share • Climb – A Weekend of Skills, Stories, and Sends
+  - CS: Spojte se • Sdílejte • Lezte – Víkend dovedností, příběhů a výstupů
+- [ ] `eventpages#119 · title`
+  - EN: Commons Climb
+  - CS: Commons Lezení
+- [ ] `eventpages#120 · summary`
+  - EN: A 12 day christmas event in the Austrian Alps for hackers, tinkerers and digital nomads planning to go to the Chaos Communication Congress this year
+  - CS: 12denní vánoční akce v rakouských Alpách pro hackery, kutily a digitální nomády plánující letos jet na Chaos Communication Congress
+- [ ] `eventpages#120 · title`
+  - EN: commons christmas chaos
+  - CS: commons vánoční chaos
+- [ ] `eventpages#121 · summary`
+  - EN: The yearly gathering of the Crypto Commons Association, since 2021
+  - CS: Roční setkání Crypto Commons Association, od roku 2021
+- [ ] `eventpages#121 · title`
+  - EN: Crypto Commons Gathering
+  - CS: Setkání Crypto Commons
+- [ ] `eventpages#122 · title`
+  - EN: 4th Collaborative FInance Gathering
+  - CS: 4. Spolupracující finanční setkání
+- [ ] `eventpages#123 · summary`
+  - EN: A four-week popup village prototyping future living in the valley of the commons
+  - CS: Čtyřtýdenní pop‑up vesnice prototypizující budoucí život v údolí společného majetku
+- [ ] `eventpages#123 · title`
+  - EN: Valley of the Commons PopUp Village
+  - CS: Údolí Commons pop‑up vesnice
+- [ ] `eventpages#124 · summary`
+  - EN: Come and share in the spring rejuvenation of the hub before we welcome in the summer season
+  - CS: Přijďte a podělte se o jarní oživení hubu, než přivítáme letní sezónu.
+- [ ] `eventpages#125 · summary`
+  - EN: &lt;p>A pop-up physical hub for prefiguring postcapitalist futures through fiction, performance and play.&lt;/p>
+  - CS: &lt;p>Pop-up fyzické centrum pro předobrazování postkapitalistických budoucností prostřednictvím fikce, performancí a hry.&lt;/p>
+- [ ] `eventpages#125 · title`
+  - EN: WORLDPLAY
+  - CS: Světová hra
+- [ ] `eventpages#126 · summary`
+  - EN: &lt;p>From Alpine Origins to Modern Climbs&lt;/p>
+  - CS: &lt;p>Od alpských počátků k moderním výstupům&lt;/p>
+- [ ] `eventpages#126 · title`
+  - EN: BOULDER &amp; BUILD
+  - CS: BALVAN &amp; STAVĚNÍ
+- [ ] `eventpages#127 · summary`
+  - EN: &lt;p>Join us for an unforgettable journey into the world of AI agents&lt;/p>
+  - CS: &lt;p>Připojte se k nám na nezapomenutelnou cestu do světa AI agentů&lt;/p>
+- [ ] `eventpages#127 · title`
+  - EN: AI Agents Gathering
+  - CS: Shromáždění AI agentů
+- [ ] `menu#2 · page_id.summary`
+  - EN: Checkout our upcoming and past events!
+  - CS: Podívejte se na naše nadcházející a minulé akce!
+- [ ] `menu#2 · page_id.title`
+  - EN: EVENTS
+  - CS: UDÁLOSTI
+- [ ] `menu#4 · page_id.title`
+  - EN: ACCOMMODATION
+  - CS: UBYTOVÁNÍ
+- [ ] `menu#6 · page_id.title`
+  - EN: ABOUT
+  - CS: MÍSTO KONÁNÍ
+- [ ] `menu#14 · page_id.title`
+  - EN: EVENT VENUE
+  - CS: Naše komunita je definována svou rozmanitostí, smyslem pro společenství a solidaritou. Spojení vytvořená zde často přesahují práci a přerůstají v hluboká a trvalá přátelství.
+- [ ] `menu#15 · page_id.summary`
+  - EN: Our community is defined by its diversity, sense of communality, and solidarity. Connections formed here often transcend work, evolving into deep and lasting friendships.
+  - CS: Naše komunita je definována svou rozmanitostí, smyslem pro společenství a solidaritou. Spojení vytvořená zde často přesahují práci a přerůstají v hluboká a trvalá přátelství.
+- [ ] `menu#15 · page_id.title`
+  - EN: COMMUNITY
+  - CS: KOMUNITA
+- [ ] `pages#2 · summary`
+  - EN: The &lt;strong>commons hub&lt;/strong> is an event venue, co-working and climbers’ base in the Austrian Alps, where great minds gather to explore and practice the Commons aided by emerging technologies.
+  - CS: The &lt;strong>commons hub&lt;/strong> je místo pro konání akcí, coworking a základna horolezců v rakouských Alpách, kde se shromažďují velké mysli, aby zkoumaly a praktikovali Commons s pomocí nových technologií.
+- [ ] `pages#155 · summary`
+  - EN: Checkout our upcoming and past events!
+  - CS: Podívejte se na naše nadcházející a minulé akce!
+- [ ] `pages#155 · title`
+  - EN: EVENTS
+  - CS: UDÁLOSTI
+- [ ] `pages#156 · body`
+  - EN: &lt;p style="text-align: left">&lt;span style="font-size: 20px">Whether you need a place to stay, a venue for your event, or help planning it, we’re here to support you.&lt;/span>&lt;/p>&lt;p style="text-align: left">&lt;span style="font-size: 20px">Our spaces and services are designed for connection, collaboration, and creativity.&lt;/spa …[truncated]
+  - CS: &lt;p style="text-align: left">&lt;span style="font-size: 20px">Ať už potřebujete místo k pobytu, prostor pro vaši akci nebo pomoc s jejím plánováním, jsme tu, abychom vás podpořili.&lt;/span>&lt;/p>&lt;p style="text-align: left">&lt;span style="font-size: 20px">Naše prostory a služby jsou navrženy pro spojení, spolupráci a kreativitu.&lt; …[truncated]
+- [ ] `pages#156 · summary`
+  - EN: Our services range from classical guesthouse offers to hosting and organising events.
+  - CS: Naše služby sahají od klasických nabídek penzionu po pořádání a organizaci akcí.
+- [ ] `pages#156 · title`
+  - EN: SERVICES
+  - CS: SLUŽBY
+- [ ] `pages#157 · summary`
+  - EN: Our community is defined by its diversity, sense of communality, and solidarity. Connections formed here often transcend work, evolving into deep and lasting friendships.
+  - CS: Naše komunita je definována svou rozmanitostí, smyslem pro společenství a solidaritou. Spojení vytvořená zde často přesahují práci a přerůstají v hluboká a trvalá přátelství.
+- [ ] `pages#157 · title`
+  - EN: COMMUNITY
+  - CS: KOMUNITA
+- [ ] `pages#159 · title`
+  - EN: ABOUT
+  - CS: MÍSTO KONÁNÍ
+- [ ] `pages#160 · title`
+  - EN: Impressum
+  - CS: Experimentální hřiště pro návrh regenerativních systémů
+- [ ] `pages#202 · summary`
+  - EN: An experimental playground for regenerative systems design
+  - CS: DOMOV
+- [ ] `pages#202 · title`
+  - EN: HOME
+  - CS: UBYTOVÁNÍ
+- [ ] `pages#204 · title`
+  - EN: ACCOMMODATION
+  - CS: UBYTOVÁNÍ
+- [ ] `pages#206 · title`
+  - EN: EVENT VENUE
+  - CS: Naše komunita je definována svou rozmanitostí, smyslem pro společenství a solidaritou. Spojení vytvořená zde často přesahují práci a přerůstají v hluboká a trvalá přátelství.
+- [ ] `pages#207 · body`
+  - EN: &lt;p style="text-align: left">Situated right where the Viennese plains end and the Alps begin to rise, the &lt;strong>commons hub&lt;/strong> is surrounded by stunning natural sights and a nurturing cultural environment alike. The Hub itself also provides ample opportunities to get active - be it in our FabLab, the gardens, or …[truncated]
+  - CS: Od venkovních sportů a kulturního programu po zahradničení a vymýšlení v našem FabLabu poskytuje commons hub širokou škálu aktivit.
+- [ ] `pages#207 · summary`
+  - EN: From outdoor sports and cultural program to gardening and tinkering in our FabLab, the commons hub provides for a wide range of activities.
+  - CS: AKTIVITY
+- [ ] `pages#207 · title`
+  - EN: ACTIVITIES
+  - CS: BLOG
+- [ ] `posts#80 · summary`
+  - EN: Download the introduction!
+  - CS: Stáhněte si úvod!
+- [ ] `posts#80 · title`
+  - EN: Felix' PhD Defensio
+  - CS: Felixova PhD Defensio
+- [ ] `posts#84 · summary`
+  - EN: Commons Hub Community Lending Program
+  - CS: Commons Hub Program komunitního půjčování
+- [ ] `posts#84 · title`
+  - EN: Community Lending
+  - CS: Komunitní půjčování
+- [ ] `posts#85 · title`
+  - EN: testing
+  - CS: testování
+- [ ] `posts#86 · summary`
+  - EN: Outline of our long-term goal of building a Valley of the Commons
+  - CS: Náčrt našeho dlouhodobého cíle vybudovat Valley of the Commons
+- [ ] `posts#86 · title`
+  - EN: Valley of the Commons
+  - CS: Údolí Commons
+- [ ] `posts#88 · summary`
+  - EN: one year ago the commons hub was signed over!  ⏎ happy birthday commons hub, may you be for another 1000 years!
+  - CS: před rokem byl Commons Hub předán!   ⏎ všechno nejlepší, commons hub, ať tě čeká dalších 1000 let!
+- [ ] `posts#88 · title`
+  - EN: commons hub going full cycle
+  - CS: commons hub jde do plného cyklu
+- [ ] `posts#89 · summary`
+  - EN: We opening up the possibility to rent one of the dorm rooms as a private room for month long stays from now until end of March 2026
+  - CS: Otevíráme možnost pronajmout jeden z pokojů v koleji jako soukromý pokoj na měsíční pobyty od nynějška až do konce března 2026.
+- [ ] `posts#89 · title`
+  - EN: Come survive the european winter with us
+  - CS: Přijď přežít evropskou zimu s námi
+- [ ] `posts#91 · summary`
+  - EN: the springing has begun!
+  - CS: Jaro začalo!
+- [ ] `posts#91 · title`
+  - EN: Time for awakenings and preparation
+  - CS: Čas na probuzení a přípravu
+- [ ] `posts#83 · summary`
+  - EN: Envsioning the commons hub event campus as a monastery of the future - not to retreat from the world, but to shape it from the edge of known. ⏎
+  - CS: Představujeme kampus událostí Commons Hub jako klášter budoucnosti - ne k ústupu od světa, ale k jeho formování z okraje známého.
+- [ ] `posts#83 · title`
+  - EN: EVENT CAMPUS
+  - CS: KAMPUS UDÁLOSTÍ
+- [ ] `posts#82 · summary`
+  - EN: The commons hub is open, and this is just the beginning!
+  - CS: Commons Hub je otevřený a toto je teprve začátek!
+- [ ] `posts#82 · title`
+  - EN: HELLO WORLD: DOORS OPEN AT THE COMMONS HUB
+  - CS: AHOJ SVĚTE: DVEŘE SE OTVÍRAJÍ V COMMONS HUB
+- [ ] `posts#90 · summary`
+  - EN: Come and share in the spring rejuvenation of the hub before we welcome in the summer season
+  - CS: Přijďte a podělte se o jarní oživení hubu, než přivítáme letní sezónu.
+- [ ] `posts#93 · body`
+  - EN: &lt;p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p>&lt;p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p>&lt;p>&lt;em>Placeholder content — populate later.&lt;/em>&lt;/p>
+  - CS: &lt;p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p>&lt;p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p>&lt;p>&lt;em>Obsah zástupného textu — doplňte později.&lt;/em>&lt;/p>
+- [ ] `posts#93 · summary`
+  - EN: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Placeholder summary — to be replaced.
+  - CS: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Zástupný souhrn — bude nahrazen.
+- [ ] `posts#93 · title`
+  - EN: Gathering the Energy of the Commons
+  - CS: Shromažďování energie Commons
+- [ ] `posts#92 · body`
+  - EN: &lt;p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p>&lt;p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu …[truncated]
+  - CS: &lt;p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p>&lt;p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu …[truncated]
+- [ ] `posts#92 · summary`
+  - EN: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Placeholder summary — to be replaced.
+  - CS: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Zástupný souhrn — bude nahrazen.
+- [ ] `posts#92 · title`
+  - EN: 'Hack the Hub' Upgrades
+  - CS: 'Hack the Hub' vylepšení
+- [ ] `team_members#1 · bio`
+  - EN: &lt;p>Combining expertise in political and economic theory with a passion for community organizing, I craft narratives that connect technological innovation with broader societal transformation. I thrive on uniting diverse perspectives to elevate discussions beyond technical matters. I am a founder of the Crypto Commons A …[truncated]
+  - CS: &lt;p>Společně s odborností v politické a ekonomické teorii a vášní pro komunitní organizaci vytvářím příběhy, které spojují technologickou inovaci se širší společenskou transformací. Rád sjednávám různé perspektivy, abych posunul diskuse nad rámec technických otázek. Jsem zakladatelem Crypto Commons Association a zeleno‑ …[truncated]
+- [ ] `team_members#1 · role`
+  - EN: Co-Founder
+  - CS: Spoluzakladatel
+- [ ] `team_members#2 · bio`
+  - EN: &lt;p style="text-align: left">Coming from a civil engineering background, I got into IT during the 2017 neural network chess engine revolution. In 2020, I saw Hirschwangerhof’s potential and organized its first event—a 3-week hackathon and retreat—paving the way for the &lt;strong>commons hub&lt;/strong>. I’ve worked in comput …[truncated]
+  - CS: &lt;p style="text-align: left">Pocházím z oboru stavebního inženýrství, do IT jsem se dostal během revoluce šachových motorů s neuronovými sítěmi v roce 2017. V roce 2020 jsem viděl potenciál Hirschwangerhof’s a uspořádal jeho první akci — tří týdenní hackathon a retreat — čímž otevřel cestu pro &lt;strong>commons hub&lt;/stron …[truncated]
+- [ ] `team_members#2 · role`
+  - EN: Co-Founder
+  - CS: Spoluzakladatel
+- [ ] `team_members#3 · bio`
+  - EN: &lt;p>Daniel joined our team with a unique blend of practicality, intelligence, and charm. His exceptional problem-solving skills and calm approach to tackling tough situations have quickly made him an invaluable member of the group. With his upbeat attitude and ability to turn challenges into opportunities, Daniel plays  …[truncated]
+  - CS: &lt;p>Daniel se připojil k našemu týmu s jedinečnou kombinací praktičnosti, inteligence a šarmu. Jeho výjimečné schopnosti řešit problémy a klidný přístup k řešení obtížných situací ho rychle učinily neocenitelným členem skupiny. Se svým optimistickým postojem a schopností proměňovat výzvy v příležitosti hraje Daniel klíč …[truncated]
+- [ ] `team_members#3 · role`
+  - EN: Hospitality Manager
+  - CS: Manažer pohostinství
+
+## 2. Unchanged — verify or translate (8)
+
+Still identical to English: either a proper noun that should stay, or a
+string the MT pass skipped (timeout). Confirm or translate.
+
+- [ ] `messages · common.menu` — Menu
+- [ ] `messages · common.admin` — Admin
+- [ ] `messages · links.blog` — Blog
+- [ ] `carousels#57 · title` — home_hero
+- [ ] `eventpages#124 · title` — Hack the Hub 2026
+- [ ] `pages#2 · title` — HUB
+- [ ] `pages#208 · title` — BLOG
+- [ ] `posts#90 · title` — Hack the Hub 2026
+
+## 3. Long-form left in English (38)
+
+Bodies over 600 chars were not machine-translated — they need human
+long-form translation into Czech.
+
+- [ ] `accordions#3 · accordion_items[0].content` — &lt;p style="text-align: left">&lt;strong>The Commons &lt;/strong>are shared resources jointly managed by a community according to a set of rules and social norms that e …[truncated]
+- [ ] `accordions#3 · accordion_items[1].content` — &lt;p style="text-align: left">As &lt;strong>an experimental playground for post-capitalist systems design&lt;/strong>, the commons hub explores the liberatory potential …[truncated]
+- [ ] `accordions#4 · accordion_items[1].content` — &lt;p style="text-align: left">The Hub hosts events such as work retreats, conferences, festivals, or weddings. For medium or big events, accommodation is reserved …[truncated]
+- [ ] `accordions#5 · accordion_items[0].content` — &lt;p style="text-align: left">Regen Network, built to promote ecological sustainability and regenerative agriculture, is an innovative platform we proudly support …[truncated]
+- [ ] `accordions#5 · accordion_items[1].content` — &lt;p style="text-align: left">Cosmos, known as the 'internet of blockchains', is designed to facilitate interoperability among various blockchain systems. To supp …[truncated]
+- [ ] `accordions#10 · accordion_items[0].content` — &lt;p style="text-align: left">The Schneeberg and Rax Plateau provide ample opportunities for hiking, biking, rock climbing, rafting, kayaking, swimming and mushro …[truncated]
+- [ ] `categories#85 · body` — &lt;p style="text-align: left">Situated right where the Viennese plains end and the Alps begin to rise, the &lt;strong>commons hub&lt;/strong> is surrounded by stunning  …[truncated]
+- [ ] `categories#86 · body` — &lt;p style="text-align: left">The &lt;strong>commons hub&lt;/strong> is housed in the historic Hirschwangerhof, a countryside inn built in 1860. Its history is closely  …[truncated]
+- [ ] `categories#87 · body` — &lt;h2 style="text-align: left">Partnerships&lt;/h2>&lt;p style="text-align: left">Partnerships with the &lt;strong>commons hub&lt;/strong> are about exploring ideas, building …[truncated]
+- [ ] `categories#88 · body` — &lt;p style="text-align: left">The &lt;strong>commons hub&lt;/strong> offers an intimate atmosphere that fosters deep and lasting connections among peers. Embedded in st …[truncated]
+- [ ] `categories#91 · body` — &lt;h3 style="text-align: left">FOUNDATIONS&lt;/h3>&lt;p style="text-align: left">&lt;span>&lt;strong>The Commons&lt;/strong> are shared resources jointly managed by a community  …[truncated]
+- [ ] `categories#92 · body` — &lt;p style="text-align: left">After four years of growth and countless events,&amp;nbsp; the community of the &lt;strong>commons hub&lt;/strong> is truly one of a kind. Roo …[truncated]
+- [ ] `eventpages#113 · body` — &lt;h2 style="text-align: left">Collaborative Finance 3&lt;/h2>&lt;p style="text-align: left">&lt;span style="font-size: 24px">&lt;strong>16-20 June, 2025&lt;/strong>&lt;/span>&lt;/p>&lt; …[truncated]
+- [ ] `eventpages#114 · body` — &lt;h2 style="text-align: left">&lt;span style="color: rgb(0, 0, 0)">Crypto Commons Gathering 2025&lt;/span>&lt;/h2>&lt;h4 style="text-align: left">&lt;span style="color: rgb(0,  …[truncated]
+- [ ] `eventpages#115 · body` — &lt;p style="text-align: left">&lt;/p>&lt;img class="max-w-full h-auto rounded-md" src="https://admin.commons-hub.at/assets/4a8a2e23-9a42-416c-bdce-19712f32622f">&lt;p styl …[truncated]
+- [ ] `eventpages#116 · body` — &lt;h2 style="text-align: left">SOLARPUNK POW&lt;/h2>&lt;h4 style="text-align: left">A Celebration of Resilience and Renewal&lt;/h4>&lt;h4 style="text-align: left">OCTOBER 5th …[truncated]
+- [ ] `eventpages#118 · body` — &lt;h3 style="text-align: left">&lt;strong>19th of July, 10:00 - 20th of July 14:00&lt;/strong>&lt;/h3>&lt;p style="text-align: left">&lt;br>You're invited to join us at the &lt;str …[truncated]
+- [ ] `eventpages#119 · body` — &lt;h1 style="text-align: left">Commons Climb&lt;/h1>&lt;h3 style="text-align: left">A Rock Climbing Community Gathering&lt;/h3>&lt;h5 style="text-align: left">&lt;span style="co …[truncated]
+- [ ] `eventpages#120 · body` — &lt;h1 style="text-align: left">&lt;span style="color: rgb(0, 0, 0)">&lt;strong>Commons Christmas Chaos&lt;/strong>&lt;/span>&lt;/h1>&lt;h3 style="text-align: left">COOKIES, HACKS &amp; …[truncated]
+- [ ] `eventpages#121 · body` — &lt;p style="text-align: left">The Crypto Commons Gathering (CCG) is an annual week-long retreat organised by the Crypto Commons Association in collaboration with  …[truncated]
+- [ ] `eventpages#122 · body` — &lt;h2 style="text-align: left">Collaborative Finance 4&lt;/h2>&lt;p style="text-align: left">&lt;strong>21-27 June, 2026&lt;/strong>&lt;/p>&lt;p style="text-align: left">CoFi 4 bri …[truncated]
+- [ ] `eventpages#123 · body` — &lt;p style="text-align: left">&lt;strong>VALLEY OF THE COMMONS&lt;/strong>&lt;br>&lt;em>August 24 – September 20, 2026&lt;/em>&lt;/p>&lt;p style="text-align: left">Valley of the Commo …[truncated]
+- [ ] `eventpages#124 · body` — &lt;h1 style="text-align: left">Hack the Hub!&lt;/h1>&lt;h3 style="text-align: left">27 March to 07 April, 2026&lt;/h3>&lt;p style="text-align: left">&lt;/p>&lt;img class="max-w-ful …[truncated]
+- [ ] `eventpages#125 · body` — &lt;h2 style="text-align:left">WORLDPLAY: To be Defined&lt;/h2>&lt;h4 style="text-align:left">June 7&amp;ndash;13, 2026 &amp;bull; Commons Hub, Austria&lt;/h4>&lt;p style="text-align: …[truncated]
+- [ ] `eventpages#126 · body` — &lt;h1>Boulder &amp;amp; Build&lt;/h1>&lt;h3>A Climbing and Community Adventure&lt;/h3>&lt;h3>July 18th - July 27th, 2025&lt;/h3>&lt;p>&lt;br>Join us for an immersive event combining the t …[truncated]
+- [ ] `eventpages#127 · body` — &lt;p>AI Agents Gathering and Hacker House in the Austrian Alps &amp;nbsp;&lt;/p>&lt;p>Join us for an unforgettable journey into the world of AI agents at the Commons Hub, a …[truncated]
+- [ ] `menu#6 · page_id.body` — &lt;p style="text-align: left">Felix and Emil Fritsch founded and run the &lt;strong>commons hub&lt;/strong> as a limited liability company.&lt;/p>&lt;p style="text-align: lef …[truncated]
+- [ ] `menu#15 · page_id.body` — &lt;p style="text-align: left">After four years of growth and countless events,&amp;nbsp; the community of the &lt;strong>commons hub&lt;/strong> is truly one of a kind. Roo …[truncated]
+- [ ] `pages#2 · body` — &lt;p style="text-align: left">Based in the Hirschwangerhof, a historic countryside inn one hour south of Vienna, the Commons Hub is nested in the Austrian Alps ne …[truncated]
+- [ ] `pages#157 · body` — &lt;p style="text-align: left">After four years of growth and countless events,&amp;nbsp; the community of the &lt;strong>commons hub&lt;/strong> is truly one of a kind. Roo …[truncated]
+- [ ] `pages#159 · body` — &lt;p style="text-align: left">Felix and Emil Fritsch founded and run the &lt;strong>commons hub&lt;/strong> as a limited liability company.&lt;/p>&lt;p style="text-align: lef …[truncated]
+- [ ] `pages#202 · body` — &lt;img class="max-w-full h-auto rounded-md" src="https://admin.commons-hub.at/assets/4ab5375d-4d7c-4509-991f-4f1fbdc2d4a0">&lt;p style="text-align: left">&lt;/p>&lt;h1 sty …[truncated]
+- [ ] `posts#88 · body` — &lt;h1 style="text-align: left">&lt;strong>Life of a building&lt;/strong>&lt;/h1>&lt;p style="text-align: justify">Four seasons have passed since the papers were signed and th …[truncated]
+- [ ] `posts#89 · body` — &lt;h2 style="text-align: left">Winter Co-Living &lt;/h2>&lt;p style="text-align: left">Need a place to get away for a month or two? Do you want to live in a winter wond …[truncated]
+- [ ] `posts#91 · body` — &lt;p style="text-align: left">I have been outside, finally, after a spell of heavy cloudage and have begun to detect signage of sprinage in the garten!&lt;/p>&lt;p styl …[truncated]
+- [ ] `posts#83 · body` — &lt;h1 style="text-align: left">&lt;span style="color: rgb(0, 0, 0)">A Campus at the Edge of Known&lt;/span>&lt;/h1>&lt;h3 style="text-align: left">&lt;span style="color: rgb(0,  …[truncated]
+- [ ] `posts#82 · body` — &lt;h1 style="text-align: left">&lt;span style="color: rgb(0, 0, 0)">&lt;strong>Hello World: Doors Open at the Commons Hub&lt;/strong>&lt;/span>&lt;/h1>&lt;h3 style="text-align: lef …[truncated]
+- [ ] `posts#90 · body` — &lt;h1 style="text-align: left">Hack the Hub!&lt;/h1>&lt;p style="text-align: left">27 March to 07 April, 2026&lt;/p>&lt;p style="text-align: left">(pic) need to get a sprout  …[truncated]
