@@ -1,5 +1,7 @@
+"use client";
+
 import Link from "next/link";
-import { getTranslations } from "next-intl/server";
+import { useTranslations } from "next-intl";
 
 const COLUMNS: { heading: string; links: { key: string; href: string }[] }[] = [
   {
@@ -29,8 +31,8 @@ const COLUMNS: { heading: string; links: { key: string; href: string }[] }[] = [
   },
 ];
 
-export default async function SiteFooter() {
-  const t = await getTranslations();
+export default function SiteFooter() {
+  const t = useTranslations();
   return (
     <footer className="bg-white text-slate-600 border-t border-gray-200 mt-16">
       <div className="max-w-6xl mx-auto px-8 py-14 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
