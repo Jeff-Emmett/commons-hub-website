@@ -1,43 +1,42 @@
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 
-const COLUMNS: { heading: string; links: { label: string; href: string }[] }[] = [
+const COLUMNS: { heading: string; links: { key: string; href: string }[] }[] = [
   {
-    heading: "Visit",
+    heading: "visit",
     links: [
-      { label: "Accommodation", href: "/accommodation" },
-      { label: "Event Venue", href: "/event-venue" },
-      { label: "Event Toolbox", href: "/event-toolbox" },
+      { key: "accommodation", href: "/accommodation" },
+      { key: "eventVenue", href: "/event-venue" },
+      { key: "eventToolbox", href: "/event-toolbox" },
     ],
   },
   {
-    heading: "Discover",
+    heading: "discover",
     links: [
-      { label: "Events", href: "/events" },
-      { label: "Blog", href: "/blog" },
-      { label: "Gallery", href: "/gallery" },
-      { label: "About", href: "/about" },
+      { key: "events", href: "/events" },
+      { key: "blog", href: "/blog" },
+      { key: "gallery", href: "/gallery" },
+      { key: "about", href: "/about" },
     ],
   },
   {
-    heading: "Community",
+    heading: "community",
     links: [
-      // Sponsors link removed until we actually have sponsors (spec 4e).
-      { label: "Community & Partners", href: "/community" },
-      { label: "Nature & Surroundings", href: "/surroundings" },
-      { label: "Impressum", href: "/page/impressum" },
+      { key: "communityPartners", href: "/community" },
+      { key: "natureSurroundings", href: "/surroundings" },
+      { key: "impressum", href: "/page/impressum" },
     ],
   },
 ];
 
-export default function SiteFooter() {
+export default async function SiteFooter() {
+  const t = await getTranslations();
   return (
     <footer className="bg-white text-slate-600 border-t border-gray-200 mt-16">
       <div className="max-w-6xl mx-auto px-8 py-14 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
         <div>
           <p className="text-slate-900 text-lg font-semibold">Commons Hub</p>
-          <p className="mt-3 text-sm leading-relaxed">
-            A communal guesthouse &amp; events venue in the Austrian Alps.
-          </p>
+          <p className="mt-3 text-sm leading-relaxed">{t("footer.tagline")}</p>
           <a
             href="mailto:office@commons-hub.at"
             className="mt-3 inline-block text-sm text-slate-900 font-medium hover:underline"
@@ -48,7 +47,7 @@ export default function SiteFooter() {
         {COLUMNS.map((col) => (
           <div key={col.heading}>
             <p className="text-slate-900 text-sm font-semibold uppercase tracking-wide mb-3">
-              {col.heading}
+              {t(`footer.${col.heading}`)}
             </p>
             <ul className="space-y-2">
               {col.links.map((l) => (
@@ -57,7 +56,7 @@ export default function SiteFooter() {
                     href={l.href}
                     className="text-sm hover:text-slate-900 transition-colors"
                   >
-                    {l.label}
+                    {t(`links.${l.key}`)}
                   </Link>
                 </li>
               ))}
@@ -67,7 +66,7 @@ export default function SiteFooter() {
       </div>
       <div className="border-t border-gray-200">
         <div className="max-w-6xl mx-auto px-8 py-5 text-xs text-slate-500">
-          © {new Date().getFullYear()} Commons Hub · Reichenau an der Rax, Austria
+          © {new Date().getFullYear()} Commons Hub · {t("footer.location")}
         </div>
       </div>
     </footer>

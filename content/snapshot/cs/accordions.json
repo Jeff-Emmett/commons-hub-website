@@ -1,0 +1,470 @@
+[
+  {
+    "date_created": null,
+    "date_updated": null,
+    "id": "3",
+    "name_not_used": "FOUNDATIONS-VISION-MISSION",
+    "status": "published",
+    "user_created": null,
+    "user_updated": null,
+    "accordion_items": [
+      {
+        "accordion_id": "3",
+        "content": "<p style=\"text-align: left\"><strong>The Commons </strong>are shared resources jointly managed by a community according to a set of rules and social norms that ensure sustainable use and equitable access.</p><p style=\"text-align: left\"><strong>Post-Capitalism </strong>reorients production from capitalism’s imperative of capital accumulation towards the satisfaction of societal needs within planetary boundaries.</p><p style=\"text-align: left\"><strong>A regenerative future </strong>leverages the commons to restore natural ecosystems and repair the damage capitalist alienation has caused to our social fabric.</p><p style=\"text-align: left\"><strong>The liberatory potential </strong>of emerging technologies and horizontal social techniques lies in their ability to empower communal self-governance vis-a-vis centralised authority.</p>",
+        "date_created": "2025-06-30T18:01:10.716Z",
+        "date_updated": "2025-07-21T09:12:25.034Z",
+        "header": "FOUNDATIONS",
+        "id": "3",
+        "main_image": null,
+        "sort": "1",
+        "user_created": null,
+        "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
+      },
+      {
+        "accordion_id": "3",
+        "content": "<p style=\"text-align: left\">As <strong>an experimental playground for post-capitalist systems design</strong>, the commons hub explores the liberatory potential of emerging technologies&nbsp;and social techniques that facilitate horizontal communities.&nbsp;</p><p style=\"text-align: left\">Our aim is to create <strong>a testing ground for the commons </strong>that prototypes and applies these innovations, building a regenerative future in the here and now.</p><p style=\"text-align: left\">By offering decentralized communities a permanent physical home to socialize and connect, we provide a space to <strong>grow meaningful relationships and a shared culture</strong>.</p>",
+        "date_created": "2025-06-30T18:01:10.716Z",
+        "date_updated": "2025-07-21T09:12:20.229Z",
+        "header": "VISION",
+        "id": "4",
+        "main_image": null,
+        "sort": "2",
+        "user_created": null,
+        "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
+      },
+      {
+        "accordion_id": "3",
+        "content": "<ul><li><p style=\"text-align: left\"><strong>Rozvíjejte naši komunitu prostřednictvím akcí a partnerství</strong></p></li><li><p style=\"text-align: left\"><strong>Podporujte aplikovaný systémový design pomocí grantů a experimentů</strong></p></li><li><p style=\"text-align: left\"><strong>Posilujte Hub jako ekonomický motor podporující místní Commons</strong></p></li><li><p style=\"text-align: left\"><strong>Vytvořte živý znalostní hub spojující hnutí a akademickou sféru</strong></p></li></ul>",
+        "date_created": "2025-06-30T18:01:10.716Z",
+        "date_updated": "2025-07-21T09:12:34.817Z",
+        "header": "MISSION",
+        "id": "5",
+        "main_image": null,
+        "sort": "3",
+        "user_created": null,
+        "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
+      }
+    ],
+    "page_accordion": [
+      "1"
+    ],
+    "category_accordion": [],
+    "post_accordion": []
+  },
+  {
+    "date_created": "2025-07-01T11:27:47.247Z",
+    "date_updated": "2025-07-21T14:41:39.857Z",
+    "id": "4",
+    "name_not_used": "LODGING-EVENT HOSTING-EVENT ORGANIZATION",
+    "status": "published",
+    "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "user_updated": "258593a6-4999-4401-8ea6-5959100f1278",
+    "accordion_items": [
+      {
+        "accordion_id": "4",
+        "content": "<p style=\"text-align: left\"></p><p style=\"text-align: left\"><span style=\"color: rgb(0, 0, 0)\">Penzion nabízí 30 lůžek rozdělených mezi 2 dvoulůžkové pokoje a 5 spolkách.</span></p><p style=\"text-align: left\"><a target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 underline button\" href=\"/category/guesthouse\">Číst dál</a> <a target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 underline button\" href=\"/page/accommodation\">Rezervovat nyní</a></p>",
+        "date_created": "2025-07-01T11:30:03.166Z",
+        "date_updated": "2025-07-21T14:38:23.479Z",
+        "header": "LODGING",
+        "id": "6",
+        "main_image": "496f4b23-4e16-47f7-a508-5c270e7aaea2",
+        "sort": "-2",
+        "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+        "user_updated": "258593a6-4999-4401-8ea6-5959100f1278"
+      },
+      {
+        "accordion_id": "4",
+        "content": "<p style=\"text-align: left\">The Hub hosts events such as work retreats, conferences, festivals, or weddings. For medium or big events, accommodation is reserved for event participants.&nbsp;</p><p style=\"text-align: left\">We also provide an Event Playbook to all event organizers free of charge that supports event planning through templates for time management, content creation and economic calculation.</p><p style=\"text-align: left\"><a target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 underline button\" href=\"/category/event-location\">Read More</a> <a target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 underline button\" href=\"/page/venue\">Book Now</a></p>",
+        "date_created": "2025-07-01T11:31:13.093Z",
+        "date_updated": "2025-07-21T14:38:39.043Z",
+        "header": "EVENT HOSTING",
+        "id": "7",
+        "main_image": "f6e38335-40a6-4b4c-bfc3-6471c067c38f",
+        "sort": "-1",
+        "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+        "user_updated": "258593a6-4999-4401-8ea6-5959100f1278"
+      },
+      {
+        "accordion_id": "4",
+        "content": "<p style=\"text-align: left\">Pokud máte nápad na akci, ale jen omezené možnosti ji zorganizovat, jsme tu pro vás. Ať už jde o hackathon, (un)conference nebo retreat – máme dlouholeté zkušenosti s pořádáním akcí a rádi vám pomůžeme přetavit vaši vizi do reality.&nbsp;</p><p style=\"text-align: left\">Naše služby sahají od koncepčního plánování po praktickou přípravu akce, samotné provedení a závěrečné vyhodnocení. Kromě toho máme k dispozici širokou škálu odborníků, ať už jde o facilitátory, mediátory konfliktů, mediální týmy, učitele jógy nebo průvodce meditací.</p>",
+        "date_created": "2025-07-01T11:32:03.433Z",
+        "date_updated": "2025-07-01T11:51:20.541Z",
+        "header": "EVENT ORGANIZATION",
+        "id": "8",
+        "main_image": "c613c2dc-48fb-4d88-b3e6-243be43655c7",
+        "sort": "-1",
+        "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+        "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
+      }
+    ],
+    "page_accordion": [
+      "2"
+    ],
+    "category_accordion": [],
+    "post_accordion": []
+  },
+  {
+    "date_created": "2025-07-01T11:55:49.637Z",
+    "date_updated": "2025-09-25T15:32:11.508Z",
+    "id": "5",
+    "name_not_used": "COSMOS-REGEN",
+    "status": "published",
+    "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "user_updated": "258593a6-4999-4401-8ea6-5959100f1278",
+    "accordion_items": [
+      {
+        "accordion_id": "5",
+        "content": "<p style=\"text-align: left\">Regen Network, built to promote ecological sustainability and regenerative agriculture, is an innovative platform we proudly support by operating a validator node.</p><p style=\"text-align: left\">A commission rate of 10% allows us to maintain a reliable and resilient technical setup. <strong>Stake your $REGEN </strong>with us to contribute to the network's mission of sustainability and regeneration.</p><p style=\"text-align: left\"><a target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 underline button\" href=\"https://wallet.keplr.app/chains/regen?modal=validator&amp;chain=regen-1&amp;validator_address=regenvaloper1aymx97z6eanltjg8cwarf6hrmasmnvquhzdcr4\">Stake with us</a></p>",
+        "date_created": "2025-07-01T11:57:27.669Z",
+        "date_updated": null,
+        "header": "REGEN",
+        "id": "10",
+        "main_image": null,
+        "sort": "2",
+        "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+        "user_updated": null
+      },
+      {
+        "accordion_id": "5",
+        "content": "<p style=\"text-align: left\">Cosmos, known as the 'internet of blockchains', is designed to facilitate interoperability among various blockchain systems. To support this innovative project, we operate a validator node on the Cosmos chain.</p><p style=\"text-align: left\">A commission rate of 10% allows us to maintain a reliable and resilient technical setup. <strong>Stake your $ATOM with us</strong> to contribute to the network's security and growth.</p><p style=\"text-align: left\"><a target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 underline button\" href=\"https://wallet.keplr.app/chains/cosmos-hub?modal=validator&amp;chain=cosmoshub-4&amp;validator_address=cosmosvaloper1ehlmvdvgkpfcx8f07l929udjerc9mtyhl07ynp\">Stake with us</a></p>",
+        "date_created": "2025-07-01T11:56:53.666Z",
+        "date_updated": null,
+        "header": "COSMOS",
+        "id": "9",
+        "main_image": null,
+        "sort": "1",
+        "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+        "user_updated": null
+      }
+    ],
+    "page_accordion": [],
+    "category_accordion": [
+      "3"
+    ],
+    "post_accordion": []
+  },
+  {
+    "date_created": "2025-07-01T14:38:34.598Z",
+    "date_updated": "2025-07-01T14:43:13.137Z",
+    "id": "6",
+    "name_not_used": "GUESTHOUSE_ACC",
+    "status": "published",
+    "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "accordion_items": [
+      {
+        "accordion_id": "6",
+        "content": "<p style=\"text-align: left\">Hub pojme až 30 osob v pěti kolejiích a čtyřech dvoulůžkových pokojích. Povlečení a ručníky jsou k dispozici, koupelny se nacházejí na patře.</p>",
+        "date_created": "2025-07-01T14:40:34.580Z",
+        "date_updated": "2025-07-01T14:45:42.752Z",
+        "header": "Accommodation",
+        "id": "11",
+        "main_image": "80f5e81f-5b1a-4c06-b74d-be0c4f1cb62f",
+        "sort": "0",
+        "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+        "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
+      },
+      {
+        "accordion_id": "6",
+        "content": "<p style=\"text-align: left\">Útulný vítací prostor kombinuje komfort obývacího pokoje a kouzlo staromódního baru, s prostornými pohovkami, deskovými hrami a gramofonem na vinylové desky pro uvolněnou, přívětivou atmosféru.</p>",
+        "date_created": "2025-07-01T14:41:46.975Z",
+        "date_updated": "2025-07-01T14:45:55.827Z",
+        "header": "Bar & Lounge",
+        "id": "12",
+        "main_image": "48c365d2-e9f7-42ce-bc4e-49cca6b8299c",
+        "sort": "1",
+        "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+        "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
+      },
+      {
+        "accordion_id": "6",
+        "content": "<p style=\"text-align: left\">Celá venkovní plocha o přibližně 2000 m² může být využita našimi hosty. Přední dvorek je vynikajícím místem pro volný čas a odpočinkové večery u ohně. Zadní zahrada je místo, kde najdete naše zeleninu, bobule i bylinky a dostatek prostoru na skutečnou trávu.</p>",
+        "date_created": "2025-07-01T14:42:27.619Z",
+        "date_updated": "2025-07-01T14:46:08.149Z",
+        "header": "Gardens",
+        "id": "13",
+        "main_image": "8b60bc3d-0411-40c7-9970-832d583aef24",
+        "sort": "1",
+        "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+        "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
+      },
+      {
+        "accordion_id": "6",
+        "content": "<p style=\"text-align: left\">Naše coworkingové prostory poskytují klidné pracovní prostředí, monitory a klávesnice, lze si půjčit kola k prozkoumání okolí, několik dílen obsahuje spoustu nástrojů a materiálů jako látku, barvu a dřevo pro kreativitu, a piano a další nástroje jsou k dispozici pro jam session.</p>",
+        "date_created": "2025-07-01T14:43:02.155Z",
+        "date_updated": "2025-07-01T14:46:18.557Z",
+        "header": "Other Amenities",
+        "id": "14",
+        "main_image": "01de3901-23c4-4369-9854-9c6fe05ff9fb",
+        "sort": "3",
+        "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+        "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
+      }
+    ],
+    "page_accordion": [],
+    "category_accordion": [
+      "1"
+    ],
+    "post_accordion": []
+  },
+  {
+    "date_created": "2025-07-01T14:53:52.726Z",
+    "date_updated": "2025-07-01T14:57:11.053Z",
+    "id": "7",
+    "name_not_used": "EVENT_LOCATION_ACC",
+    "status": "published",
+    "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "accordion_items": [
+      {
+        "accordion_id": "7",
+        "content": "<p style=\"text-align: left\">90m² pojme až 75 míst k pohledu na scénu o rozměrech 3×6 m s masivním zvukovým systémem a projektorem namontovaným na stropě s 133’’ spouštěcí obrazovkou. Bezdrátová mikrofony, dvě kamery připevněné ke zdi a kamera na stativu jsou napojeny do čtyřkanálového video mixéru, který podporuje živý video streaming a produkci.</p>",
+        "date_created": "2025-07-01T14:54:23.864Z",
+        "date_updated": null,
+        "header": "Main Stage & Hall",
+        "id": "15",
+        "main_image": "f6e38335-40a6-4b4c-bfc3-6471c067c38f",
+        "sort": "0",
+        "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+        "user_updated": null
+      },
+      {
+        "accordion_id": "7",
+        "content": "<p style=\"text-align: left\">Vedle hlavní scény, Event Hall, která také nabízí 90m², je otevřenější prostor, který se hodí na workshopy, rozdělené sekce a jako prostor pro coworking. Obvykle události začínají ráno ve velkém kruhu, aby si naplánovaly denní program na bílé tabuli.&nbsp;</p>",
+        "date_created": "2025-07-01T14:55:59.133Z",
+        "date_updated": "2025-07-01T14:57:25.307Z",
+        "header": "Event Hall",
+        "id": "16",
+        "main_image": "df70fb04-c9d2-433d-8446-9cf8a0e8b629",
+        "sort": "0",
+        "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+        "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
+      },
+      {
+        "accordion_id": "7",
+        "content": "<p style=\"text-align: left\">Jako součást sálů pro akce plně vybavené plug‑and‑play podcastové studio umožňuje spontánní i dobře naplánovanou mediální produkci. Hosté mohou snadno nahrávat své myšlenky, prezentace i konverzace, aniž by je omezovaly technické nebo prostorové problémy.</p>",
+        "date_created": "2025-07-01T14:56:38.703Z",
+        "date_updated": "2025-07-01T14:57:32.499Z",
+        "header": "Video Podcast Studio",
+        "id": "17",
+        "main_image": "4e7c8805-b7f5-4743-ba18-aa44ebf99568",
+        "sort": "0",
+        "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+        "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
+      },
+      {
+        "accordion_id": "7",
+        "content": "<p style=\"text-align: left\">40 m² coworking slouží také jako vyhrazená seminární místnost pro menší akce, vybavená 65’’ TV, 20 židlemi, bílou tabulí a přizpůsobitelnými a univerzálními stoly a sezeními, ideální pro workshopy nebo schůzky.</p>",
+        "date_created": "2025-07-01T14:57:09.851Z",
+        "date_updated": "2025-07-01T14:57:41.482Z",
+        "header": "Co-Working Space",
+        "id": "18",
+        "main_image": "01de3901-23c4-4369-9854-9c6fe05ff9fb",
+        "sort": "0",
+        "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+        "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
+      }
+    ],
+    "page_accordion": [],
+    "category_accordion": [
+      "2"
+    ],
+    "post_accordion": []
+  },
+  {
+    "date_created": "2025-09-25T08:21:15.129Z",
+    "date_updated": "2025-09-25T11:49:31.183Z",
+    "id": "10",
+    "name_not_used": "HIKING & CLIMBING",
+    "status": "published",
+    "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
+    "user_updated": "258593a6-4999-4401-8ea6-5959100f1278",
+    "accordion_items": [
+      {
+        "accordion_id": "10",
+        "content": "<p style=\"text-align: left\">The Schneeberg and Rax Plateau provide ample opportunities for hiking, biking, rock climbing, rafting, kayaking, swimming and mushroom foraging. <br><br><strong>Hikes </strong>range from <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" class=\"text-blue-600 underline\" href=\"https://www.wieneralpen.at/a-1-wiener-wasserleitungsweg\">short walks along the river</a> up to <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" class=\"text-blue-600 underline\" href=\"https://www.bergfex.com/sommer/niederoesterreich/touren/\">multi-day tours up and across Rax and Schneeberg</a>, all starting from or near the Hub.</p><p style=\"text-align: left\">Over 2000 climbing routes, <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" class=\"text-blue-600 underline\" href=\"https://www.tiefoben.at/stadelwand-durststrecke/\">many of them multi-pitch</a>, make the area a prime destination for adventurers and rock climbers from Vienna, Bratislava, Budapest and beyond.&nbsp;</p>",
+        "date_created": "2025-09-25T08:36:55.208Z",
+        "date_updated": "2025-09-25T11:49:29.208Z",
+        "header": "HIKING",
+        "id": "24",
+        "main_image": "5c842eca-49ad-4afc-b48d-f90734bd0f2a",
+        "sort": "1",
+        "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
+        "user_updated": "258593a6-4999-4401-8ea6-5959100f1278"
+      }
+    ],
+    "page_accordion": [
+      "4"
+    ],
+    "category_accordion": [],
+    "post_accordion": []
+  },
+  {
+    "date_created": "2025-09-25T09:06:58.313Z",
+    "date_updated": "2025-09-25T10:17:33.746Z",
+    "id": "11",
+    "name_not_used": "(SUN)BATHING",
+    "status": "published",
+    "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
+    "user_updated": "258593a6-4999-4401-8ea6-5959100f1278",
+    "accordion_items": [
+      {
+        "accordion_id": "11",
+        "content": "<p style=\"text-align: left\">Mnoho pláží podél řeky Schwarza láká k plavání a slunění v docházkové vzdálenosti od Hubu</p>",
+        "date_created": "2025-09-25T10:17:00.542Z",
+        "date_updated": null,
+        "header": "(SUN)BATHING AT RIVER SCHWARZA",
+        "id": "25",
+        "main_image": "cd6d6942-cb5d-4913-958b-3ff38151e3d0",
+        "sort": "1",
+        "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
+        "user_updated": null
+      }
+    ],
+    "page_accordion": [
+      "5"
+    ],
+    "category_accordion": [],
+    "post_accordion": []
+  },
+  {
+    "date_created": "2025-09-25T10:18:13.755Z",
+    "date_updated": "2025-09-25T11:49:59.519Z",
+    "id": "12",
+    "name_not_used": "CULTURE",
+    "status": "published",
+    "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
+    "user_updated": "258593a6-4999-4401-8ea6-5959100f1278",
+    "accordion_items": [
+      {
+        "accordion_id": "12",
+        "content": "<p style=\"text-align: left\">Ačkoli její císařská minulost je dávno pryč, Reichenau an der Rax zůstává kulturním centrem se dvěma hudebními pavilony a klasickým divadlem. Její šestitýdenní letní festival nabízí dva denní představení, spolu s čtením literatury, klasickou hudbou a dalšími uměleckými akcemi. Další pozůstatky monarchie jsou různé císařské zámky, sídla a vily, které přispívají k ušlechtilému vzhledu města.</p>",
+        "date_created": "2025-09-25T10:25:16.313Z",
+        "date_updated": "2025-09-25T11:49:58.019Z",
+        "header": "THEATER FESTIVAL",
+        "id": "26",
+        "main_image": "f5d57b34-9a42-44ee-834b-5aae6453d56d",
+        "sort": "1",
+        "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
+        "user_updated": "258593a6-4999-4401-8ea6-5959100f1278"
+      }
+    ],
+    "page_accordion": [
+      "6"
+    ],
+    "category_accordion": [],
+    "post_accordion": []
+  },
+  {
+    "date_created": "2025-09-25T10:25:48.772Z",
+    "date_updated": "2025-09-25T11:14:52.038Z",
+    "id": "13",
+    "name_not_used": "FABLAB",
+    "status": "published",
+    "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
+    "user_updated": "258593a6-4999-4401-8ea6-5959100f1278",
+    "accordion_items": [
+      {
+        "accordion_id": "13",
+        "content": "<p style=\"text-align: left\">3D tiskárna, laserový řezák, dřevěná dílna, zvukové laboratoře a další nástroje čekají na vaši kreativitu</p>",
+        "date_created": "2025-09-25T11:13:48.966Z",
+        "date_updated": null,
+        "header": "Tinkering in our FabLab",
+        "id": "27",
+        "main_image": "40354452-c890-40b9-a4e7-0dc903bf84ac",
+        "sort": "1",
+        "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
+        "user_updated": null
+      }
+    ],
+    "page_accordion": [
+      "7"
+    ],
+    "category_accordion": [],
+    "post_accordion": []
+  },
+  {
+    "date_created": "2025-09-25T11:15:15.614Z",
+    "date_updated": "2025-09-25T11:23:33.217Z",
+    "id": "14",
+    "name_not_used": "GARDENING",
+    "status": "published",
+    "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
+    "user_updated": "258593a6-4999-4401-8ea6-5959100f1278",
+    "accordion_items": [
+      {
+        "accordion_id": "14",
+        "content": "<p style=\"text-align: left\">Zahrada <strong>commons hub</strong> prosperuje díky vyvýšeným záhonům, ovocným stromům a bzučícímu úlu, čímž vytváří živý permakulturní prostor. Připojte se k nám, abyste o ni pečovali, udržovali ji a rozšiřovali, a užijte si její plody s námi!</p>",
+        "date_created": "2025-09-25T11:23:31.092Z",
+        "date_updated": null,
+        "header": "Gardening around the Hub",
+        "id": "28",
+        "main_image": "6c51180b-02e5-423d-b679-421039048b32",
+        "sort": "1",
+        "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
+        "user_updated": null
+      }
+    ],
+    "page_accordion": [
+      "8"
+    ],
+    "category_accordion": [],
+    "post_accordion": []
+  },
+  {
+    "date_created": "2026-05-15T13:14:36.771Z",
+    "date_updated": null,
+    "id": "15",
+    "name_not_used": null,
+    "status": "published",
+    "user_created": null,
+    "user_updated": null,
+    "accordion_items": [
+      {
+        "accordion_id": "15",
+        "content": "<p style=\"text-align: left\">Více než 2 000 zdokumentovaných lezeckých cest — mnoho vícepodlažních — činí masív Schneeberg/Rax hlavní destinací pro lezce z Vídně, Bratislavy, Budapešti a dál. Trad, sport a via-ferrata trasy začínají v docházkové vzdálenosti od Hub.</p>",
+        "date_created": "2026-05-15T13:14:36.771Z",
+        "date_updated": null,
+        "header": "CLIMBING",
+        "id": "29",
+        "main_image": "5c842eca-49ad-4afc-b48d-f90734bd0f2a",
+        "sort": "1",
+        "user_created": null,
+        "user_updated": null
+      }
+    ],
+    "page_accordion": [
+      "9"
+    ],
+    "category_accordion": [],
+    "post_accordion": []
+  },
+  {
+    "date_created": "2026-05-15T13:14:36.771Z",
+    "date_updated": null,
+    "id": "16",
+    "name_not_used": null,
+    "status": "published",
+    "user_created": null,
+    "user_updated": null,
+    "accordion_items": [
+      {
+        "accordion_id": "16",
+        "content": "<p style=\"text-align: left\">Commons Hub udržuje komunitní wiki, kde obyvatelé i návštěvníci dokumentují stezky, místní pověsti, recepty, tipy na výrobu a probíhající experimenty. Požádejte na recepci (čti: v kuchyni) o účet — kdokoli pobývající v Hubu může přispívat.</p>",
+        "date_created": "2026-05-15T13:14:36.771Z",
+        "date_updated": null,
+        "header": "WIKI",
+        "id": "30",
+        "main_image": null,
+        "sort": "1",
+        "user_created": null,
+        "user_updated": null
+      }
+    ],
+    "page_accordion": [
+      "10"
+    ],
+    "category_accordion": [],
+    "post_accordion": []
+  }
+]

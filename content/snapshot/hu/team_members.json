@@ -1,0 +1,41 @@
+[
+  {
+    "bio": "<p>Politikai és gazdaságelméleti szakértelmet közösségépítő szenvedéllyel ötvözve narratívákat alkotok, amelyek a technológiai innovációt szélesebb társadalmi átalakulással kapcsolják össze. Szeretek különböző nézőpontokat egyesíteni, hogy a vitát a technikai kérdések fölé emeljük. Alapítója vagyok a Crypto Commons Association-nek és egy green-tech startupnak, valamint nemrég befejeztem PhD-met a <em>The Emergence of the Crypto Commons</em> témában.</p>",
+    "date_created": null,
+    "date_updated": "2025-07-01T13:34:40.204Z",
+    "id": "1",
+    "name": "Felix Fritsch, PhD",
+    "profile_image": "ea7b3476-3f53-48e9-8c0c-123833638f96",
+    "role": "Társalapító",
+    "sort": "1",
+    "status": "published",
+    "user_created": null,
+    "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
+  },
+  {
+    "bio": "<p style=\"text-align: left\">Polgármérnöki háttérrel rendelkezve az IT-be kezdtem a 2017-es neurális hálózatos sakkmotor forradalom során. 2020-ban megláttam a Hirschwangerhof potenciálját, és megszerveztem első eseményét – egy háromhetes hackathon és visszavonulás –, amely útjába állította a <strong>commons hub</strong>-ot. Dolgoztam számítógépes látás területén, indítottam egy zöld technológiai vállalatot, és építettem validátor csomópontokat a hub számára. Szeretek menő projekteket indítani és megvalósítani őket.</p>",
+    "date_created": null,
+    "date_updated": "2025-07-01T13:35:48.645Z",
+    "id": "2",
+    "name": "Emil Fritsch",
+    "profile_image": "8af2a289-fd98-4941-90ed-d841b4311491",
+    "role": "Társalapító",
+    "sort": "2",
+    "status": "published",
+    "user_created": null,
+    "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
+  },
+  {
+    "bio": "<p>Daniel egyedülálló gyakorlatiasság, intelligencia és báj keverékével csatlakozott csapatunkhoz. Kivételes problémamegoldó képességei és nyugodt hozzáállása a nehéz helyzetek kezeléséhez gyorsan felbecsülhetetlenné tették őt a csoportban. Felvidám hozzáállásával és azzal a képességével, hogy a kihívásokat lehetőségekké alakítja, Daniel kulcsszerepet játszik sikereinkben, és pozitív energiát hoz mindebbe, amit csinál.&nbsp;</p>",
+    "date_created": null,
+    "date_updated": "2025-07-01T13:34:59.770Z",
+    "id": "3",
+    "name": "Daniel Richard de Oliviera Figueiredo",
+    "profile_image": "afc3dfbe-59a9-4f2f-b4b1-f14237dda6b0",
+    "role": "Vendéglátási menedzser",
+    "sort": "3",
+    "status": "published",
+    "user_created": null,
+    "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
+  }
+]

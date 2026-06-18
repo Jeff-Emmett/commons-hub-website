@@ -6,6 +6,7 @@ import { MenuButton } from "@/components/ui/MenuButton";
 import ClientSideRout from "./ClientSideRouting";
 import { DynamicAuthButton } from "@/components/dynamic-auth-button";
 import { AdminButton } from "@/components/admin-button";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Database } from "@/lib/database.types";
 
 type Menu = Database['public']['Tables']['menu']['Row'] & {
@@ -115,6 +116,7 @@ function Header2({ menus }: Props) {
             {/* Right-aligned auth and admin buttons */}
             <div className="flex items-center border-l border-gray-200 px-6 h-full">
               <div className="flex items-center gap-2">
+                <LanguageSwitcher />
                 <DynamicAuthButton />
                 <AdminButton />
               </div>

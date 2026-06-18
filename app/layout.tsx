@@ -9,6 +9,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import ContentLightbox from "@/components/ContentLightbox"
 import ScrollIndicator from "@/components/ScrollIndicator"
 import { CarouselVisibilityProvider } from "@/lib/contexts/CarouselVisibilityContext"
+import { NextIntlClientProvider } from "next-intl"
+import { getLocale, getMessages } from "next-intl/server"
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -60,14 +62,17 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const menus = await getMenu();
-  
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   if (!menus) {
     return null;
   }
 
   return (
-    <html lang="en" prefix="og: http://ogp.me/ns#">
+    <html lang={locale} prefix="og: http://ogp.me/ns#">
       <body className={`${urbanist.className} antialiased`}>
+        <NextIntlClientProvider locale={locale} messages={messages}>
         <AuthProvider>
           <CarouselVisibilityProvider>
             {/* Header placeholder to maintain layout flow */}
@@ -88,6 +93,7 @@ export default async function RootLayout({
             <SpeedInsights />
           </CarouselVisibilityProvider>
         </AuthProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

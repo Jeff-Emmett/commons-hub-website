@@ -1,0 +1,83 @@
+[
+  {
+    "accordion_id": "3",
+    "date_created": "2025-07-01T09:28:00.508Z",
+    "date_updated": null,
+    "page_id": "2",
+    "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "user_updated": null,
+    "id": "1"
+  },
+  {
+    "accordion_id": "4",
+    "date_created": "2025-07-01T11:33:01.035Z",
+    "date_updated": null,
+    "page_id": "156",
+    "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "user_updated": null,
+    "id": "2"
+  },
+  {
+    "accordion_id": "10",
+    "date_created": "2025-09-25T09:06:11.899Z",
+    "date_updated": null,
+    "page_id": "207",
+    "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
+    "user_updated": null,
+    "id": "4"
+  },
+  {
+    "accordion_id": "11",
+    "date_created": "2025-09-25T11:24:17.136Z",
+    "date_updated": null,
+    "page_id": "207",
+    "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
+    "user_updated": null,
+    "id": "5"
+  },
+  {
+    "accordion_id": "12",
+    "date_created": "2025-09-25T11:24:20.528Z",
+    "date_updated": null,
+    "page_id": "207",
+    "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
+    "user_updated": null,
+    "id": "6"
+  },
+  {
+    "accordion_id": "13",
+    "date_created": "2025-09-25T11:24:21.875Z",
+    "date_updated": null,
+    "page_id": "207",
+    "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
+    "user_updated": null,
+    "id": "7"
+  },
+  {
+    "accordion_id": "14",
+    "date_created": "2025-09-25T11:24:24.192Z",
+    "date_updated": null,
+    "page_id": "207",
+    "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
+    "user_updated": null,
+    "id": "8"
+  },
+  {
+    "accordion_id": "15",
+    "date_created": "2026-05-15T13:14:36.771Z",
+    "date_updated": null,
+    "page_id": "207",
+    "user_created": null,
+    "user_updated": null,
+    "id": "9"
+  },
+  {
+    "accordion_id": "16",
+    "date_created": "2026-05-15T13:14:36.771Z",
+    "date_updated": null,
+    "page_id": "207",
+    "user_created": null,
+    "user_updated": null,
+    "id": "10"
+  }
+]
