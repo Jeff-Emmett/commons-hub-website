@@ -1,4 +1,5 @@
 import "server-only";
+import { USE_STATIC_CONTENT } from "@/lib/content/staticStore";
 
 const DIRECTUS_URL =
   process.env.DIRECTUS_URL?.replace(/\/$/, "") || "http://commons-hub-directus:8055";
@@ -64,6 +65,10 @@ export async function readItems<T>(
   query: DirectusQuery = {},
   token?: string,
 ): Promise<T[]> {
+  if (USE_STATIC_CONTENT) {
+    const { queryStatic, activeLocale } = await import("@/lib/content/staticStore");
+    return queryStatic<T>(collection, query, await activeLocale());
+  }
   try {
     const body = await request<{ data: T[] }>(
       `/items/${collection}${buildQuery(query)}`,
@@ -82,6 +87,10 @@ export async function readItem<T>(
   query: Omit<DirectusQuery, "filter" | "limit" | "offset" | "page"> = {},
   token?: string,
 ): Promise<T | null> {
+  if (USE_STATIC_CONTENT) {
+    const { getItemStatic, activeLocale } = await import("@/lib/content/staticStore");
+    return getItemStatic<T>(collection, id, await activeLocale());
+  }
   try {
     const body = await request<{ data: T }>(
       `/items/${collection}/${id}${buildQuery(query)}`,
@@ -183,6 +192,10 @@ export async function countItems(
   filter?: Record<string, unknown>,
   token?: string,
 ): Promise<number> {
+  if (USE_STATIC_CONTENT) {
+    const { countStatic, activeLocale } = await import("@/lib/content/staticStore");
+    return countStatic(collection, filter, await activeLocale());
+  }
   try {
     const params = new URLSearchParams();
     params.set("aggregate[count]", "*");
