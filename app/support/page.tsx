@@ -12,5 +12,10 @@ export async function generateMetadata() {
 
 export default async function SupportPage() {
   const stats = await getCampaignStats();
-  return <ArtizenSupport projectUrl={artizenProjectUrl()} stats={stats} />;
+  return (
+    <ArtizenSupport
+      projectUrl={artizenProjectUrl({ toCheckout: true })}
+      stats={stats}
+    />
+  );
 }

@@ -8,12 +8,12 @@
 // Artizen; this module only describes the campaign and (optionally) reads live
 // stats to render a native-feeling progress widget.
 //
-// Artizen's backend is Hasura GraphQL + on-chain Season contracts (originally
-// Ethereum mainnet). There is no documented public read endpoint, so live stats
-// are OPTIONAL: set ARTIZEN_STATS_URL to a JSON endpoint returning the shape in
+// Artizen is a Bubble.io app; checkout is crypto-wallet (Privy + WalletConnect,
+// settling on-chain) with the match/prize accounting bound to that flow. There
+// is no public stats API — live numbers are client-rendered, so stats are
+// OPTIONAL: set ARTIZEN_STATS_URL to a JSON endpoint returning the shape in
 // `ArtizenStats` and the widget lights up; leave it unset and the widget shows a
-// static "live on Artizen" badge + CTA. See docs/artizen-integration.md for how
-// to obtain a confirmed endpoint via a one-time browser network capture.
+// static "live on Artizen" badge + CTA. See docs/artizen-integration.md.
 
 export const ARTIZEN_CAMPAIGN = {
   /** Project slug as it appears in the Artizen URL. */
@@ -24,10 +24,20 @@ export const ARTIZEN_CAMPAIGN = {
   artifactPriceUsd: 10,
 } as const;
 
-/** Canonical deep link to the project page on Artizen. */
-export function artizenProjectUrl(): string {
+/**
+ * Deep link to the project page on Artizen.
+ *
+ * Pass `{ toCheckout: true }` to land the visitor directly on the fund-drive
+ * checkout widget instead of the top of the page. `scroll=fund-drive-checkout`
+ * is Artizen's own recognized anchor (used by their in-app "Boost" redirect),
+ * so it degrades to a normal page load if they ever drop it. There is no
+ * documented amount-prefill param — the checkout amount is set client-side —
+ * so we can only hand off to a primed checkout, not a pre-filled one.
+ */
+export function artizenProjectUrl(opts: { toCheckout?: boolean } = {}): string {
   const { projectSlug, season } = ARTIZEN_CAMPAIGN;
-  return `https://artizen.fund/index/p/${projectSlug}?season=${season}`;
+  const base = `https://artizen.fund/index/p/${projectSlug}?season=${season}`;
+  return opts.toCheckout ? `${base}&scroll=fund-drive-checkout` : base;
 }
 
 export interface ArtizenStats {
