@@ -29,7 +29,8 @@
     "about": "Über uns",
     "communityPartners": "Gemeinschaft & Partner",
     "natureSurroundings": "Natur & Umgebung",
-    "impressum": "Impressum"
+    "impressum": "Impressum",
+    "support": "Unterstütze uns"
   },
   "booking": {
     "numberOfGuests": "Anzahl der Gäste",
@@ -48,6 +49,31 @@
   "newsletter": {
     "heading": "Abonnieren Sie unseren Newsletter",
     "emailPlaceholder": "ihre@email.com"
+  },
+  "support": {
+    "metaTitle": "Unterstütze uns auf Artizen",
+    "metaDescription": "Unterstütze die Valley-of-the-Common-Kampagne des Commons Hub auf Artizen — jedes 10-$-Artifact, das du kaufst, schaltet Matching-Mittel frei.",
+    "kicker": "Saison {season} · Live auf Artizen",
+    "heading": "Unterstütze die Valley of the Common",
+    "intro": "Wir sammeln auf Artizen mit einem Community-Match. Kaufe ein 10-$-Artifact, und jeder Dollar, den du beiträgst, schaltet einen weiteren Dollar von jedem Fund frei, der uns unterstützt — solange die Matching-Mittel reichen.",
+    "cta": "Auf Artizen unterstützen",
+    "ctaNote": "Öffnet artizen.fund · 100 % gehen an das Projekt · Zahlung per Karte oder Krypto",
+    "statsRaised": "Bisher gesammelt",
+    "statsArtifacts": "Verkaufte Artifacts",
+    "statsMatch": "Match freigeschaltet",
+    "statsLiveNote": "Live von Artizen",
+    "statsFallback": "Aktuelle Summen findest du auf der Artizen-Projektseite.",
+    "howHeading": "So funktioniert's",
+    "step1Title": "Kaufe ein Artifact",
+    "step1Body": "Jedes Artifact ist eine 10-$-Open-Edition. 100 % des Preises gehen direkt an das Projekt — Artizen behält nichts ein.",
+    "step2Title": "Schalte das Match frei",
+    "step2Body": "Jeder $1 an Artifact-Verkäufen schaltet $1 von jedem unterstützenden Fund frei und vervielfacht deine Wirkung — solange die Matching-Mittel reichen.",
+    "step3Title": "Gewinne die Runde",
+    "step3Body": "Das meistverkaufte Projekt im Fund gewinnt den Geldpreis der Saison — deine Unterstützung hilft uns, in der Rangliste aufzusteigen.",
+    "teaserKicker": "Jetzt live auf Artizen",
+    "teaserHeading": "Hilf, die Valley of the Common zu finanzieren",
+    "teaserBody": "Kaufe ein 10-$-Artifact und schalte Matching-Mittel für den Commons Hub frei.",
+    "teaserCta": "Erfahre, wie du unterstützen kannst"
   },
   "language": {
     "label": "Sprache"

@@ -24,6 +24,7 @@ const COLUMNS: { heading: string; links: { key: string; href: string }[] }[] = [
   {
     heading: "community",
     links: [
+      { key: "support", href: "/support" },
       { key: "communityPartners", href: "/community" },
       { key: "natureSurroundings", href: "/surroundings" },
       { key: "impressum", href: "/page/impressum" },

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { PinnedCarousel } from '@/components/journey/PinnedCarousel';
 import NewsletterSignup from '@/components/NewsletterSignup';
+import ArtizenTeaser from '@/components/support/ArtizenTeaser';
 import SiteFooter from '@/components/SiteFooter';
 
 export interface HomeSlide {
@@ -110,6 +111,9 @@ export function HomeJourney({ slides, tiles, posts, galleryPreview = [] }: HomeJ
         </div>
 
       </section>
+
+      {/* Section 3.5 — Artizen campaign teaser → /support */}
+      <ArtizenTeaser />
 
       {/* Section 4 — gallery preview, links through to /gallery */}
       {galleryPreview.length > 0 && (

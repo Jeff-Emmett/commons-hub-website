@@ -14,6 +14,7 @@ const PUBLIC_PREFIXES = [
   "/event-venue",
   "/event-toolbox",
   "/about",
+  "/support",
   "/community",
   "/surroundings",
   "/pitchdecks",
