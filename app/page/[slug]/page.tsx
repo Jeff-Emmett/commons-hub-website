@@ -189,7 +189,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                         loading="lazy"
                         allowFullScreen
                         referrerPolicy="no-referrer-when-downgrade"
-                        src="https://www.google.com/maps/embed/v1/place?q=commons%20hub%20hirschwang&key=AIzaSyByUGav-hWsEfsBhAYrb_sFVZNlB67AooA&maptype=satellite&zoom=14"
+                        src={`https://www.google.com/maps/embed/v1/place?q=commons%20hub%20hirschwang&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_EMBED_KEY ?? ""}&maptype=satellite&zoom=14`}
                       ></iframe>
                     </div>
                   </div>
