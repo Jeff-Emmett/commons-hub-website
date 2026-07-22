@@ -8,6 +8,15 @@ services:
     restart: unless-stopped
     environment:
       HOSTNAME: 0.0.0.0
+      # Infisical machine identity (the only secrets in .env). entrypoint.sh uses
+      # these to fetch all deployment secrets from Infisical at container start and
+      # overlay them onto the vars below. Reaches Infisical over the shared
+      # traefik-public network at http://infisical:8080 (bypasses Cloudflare Access).
+      INFISICAL_CLIENT_ID: ${INFISICAL_CLIENT_ID}
+      INFISICAL_CLIENT_SECRET: ${INFISICAL_CLIENT_SECRET}
+      INFISICAL_PROJECT_SLUG: ${INFISICAL_PROJECT_SLUG:-commons-hub-app}
+      INFISICAL_ENV: ${INFISICAL_ENV:-prod}
+      INFISICAL_URL: ${INFISICAL_URL:-http://infisical:8080}
       NEXT_PUBLIC_DIRECTUS_URL: ${NEXT_PUBLIC_DIRECTUS_URL:-https://admin.commons-hub.at}
       DIRECTUS_URL: ${DIRECTUS_URL:-http://commons-hub-directus:8055}
       LISTMONK_URL: ${LISTMONK_URL:-http://commons-hub-listmonk:9000}
@@ -19,9 +28,10 @@ services:
       # the per-connection display name. With one SMTP messenger
       # configured, leave this unset so listmonk uses the default.
       LISTMONK_MESSENGER: ${LISTMONK_MESSENGER:-}
-      # Booking inquiry notification to office@commons-hub.at via Mailcow
-      # SMTP. Reply-To on each message is set to the customer's email so
-      # office staff can reply directly to them.
+      # Booking inquiry notifications. Real values (host/user/pass/from/recipients)
+      # come from Infisical prod via entrypoint.sh; the defaults below are just
+      # empty fallbacks. Reply-To on each message is the customer's email so staff
+      # can reply directly to them. Recipient list is MAIL_TO_OFFICE in Infisical.
       MAIL_SMTP_HOST: ${MAIL_SMTP_HOST:-}
       MAIL_SMTP_PORT: ${MAIL_SMTP_PORT:-587}
       MAIL_SMTP_USER: ${MAIL_SMTP_USER:-}
