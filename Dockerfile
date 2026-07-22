@@ -10,6 +10,11 @@ COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 ARG NEXT_PUBLIC_DIRECTUS_URL
 ENV NEXT_PUBLIC_DIRECTUS_URL=$NEXT_PUBLIC_DIRECTUS_URL
+# NEXT_PUBLIC_* are inlined at build time, so the Maps Embed key must be present
+# here (runtime Infisical injection is too late for client/SSR-inlined vars). This
+# key is PUBLIC by design — restricted by HTTP referrer in Google Cloud Console.
+ARG NEXT_PUBLIC_GOOGLE_MAPS_EMBED_KEY
+ENV NEXT_PUBLIC_GOOGLE_MAPS_EMBED_KEY=$NEXT_PUBLIC_GOOGLE_MAPS_EMBED_KEY
 RUN npm run build
 
 FROM node:20-alpine AS runner

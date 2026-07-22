@@ -5,6 +5,10 @@ services:
       context: .
       args:
         NEXT_PUBLIC_DIRECTUS_URL: ${NEXT_PUBLIC_DIRECTUS_URL:-https://admin.commons-hub.at}
+        # PUBLIC (HTTP-referrer-restricted) Maps Embed key. Inlined at build time;
+        # commit 400bc5e moved it out of source, so it must be supplied here or the
+        # map iframe renders with an empty key and breaks.
+        NEXT_PUBLIC_GOOGLE_MAPS_EMBED_KEY: ${NEXT_PUBLIC_GOOGLE_MAPS_EMBED_KEY:-AIzaSyByUGav-hWsEfsBhAYrb_sFVZNlB67AooA}
     restart: unless-stopped
     environment:
       HOSTNAME: 0.0.0.0
