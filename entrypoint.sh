@@ -80,4 +80,13 @@ else
   echo "[infisical] Starting with existing env vars"
 fi
 
+# Defensive fixup: MAIL_FROM was stored in Infisical with stray wrapping
+# double-quotes ('"Name <a@b>"'), which nodemailer parses into a broken address
+# ("Name  a"@b) that the SMTP server rejects (553 sender not owned). Strip a
+# single wrapping pair so the display-name form parses correctly.
+case "$MAIL_FROM" in
+  '"'*'"') MAIL_FROM=${MAIL_FROM#\"}; MAIL_FROM=${MAIL_FROM%\"}; export MAIL_FROM
+           echo "[infisical] normalized MAIL_FROM (stripped wrapping quotes)" ;;
+esac
+
 exec "$@"
