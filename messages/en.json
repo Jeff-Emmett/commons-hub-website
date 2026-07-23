@@ -1,5 +1,8 @@
 {
-  "_meta": { "locale": "en", "source": true },
+  "_meta": {
+    "locale": "en",
+    "source": true
+  },
   "common": {
     "home": "Home",
     "menu": "Menu",
@@ -10,7 +13,16 @@
     "bookNow": "Book now",
     "sendInquiry": "Send inquiry",
     "subscribe": "Subscribe",
-    "loading": "Loading…"
+    "loading": "Loading…",
+    "signUp": "Sign up"
+  },
+  "home": {
+    "bookStay": "Book your Stay",
+    "planRetreat": "Plan your Retreat",
+    "upcomingEvents": "Upcoming Events",
+    "readMore": "Read More",
+    "latestFromBlog": "Latest from the blog",
+    "scrollHint": "scroll, swipe, or use arrows →"
   },
   "footer": {
     "visit": "Visit",
@@ -48,7 +60,9 @@
   },
   "newsletter": {
     "heading": "Subscribe to our newsletter",
-    "emailPlaceholder": "your@email.com"
+    "emailPlaceholder": "your@email.com",
+    "tagline": "Subscribe for new events & announcements from the Commons Hub",
+    "submitting": "Subscribing…"
   },
   "support": {
     "metaTitle": "Support Us on Artizen",
@@ -76,6 +90,7 @@
     "teaserCta": "Learn how to support"
   },
   "language": {
-    "label": "Language"
+    "label": "Language",
+    "autoDetected": "Chosen automatically from your location."
   }
 }

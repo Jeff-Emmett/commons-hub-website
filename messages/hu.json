@@ -1,5 +1,9 @@
 {
-  "_meta": { "locale": "hu", "source": false, "needsReview": true },
+  "_meta": {
+    "locale": "hu",
+    "source": false,
+    "needsReview": true
+  },
   "common": {
     "home": "Főoldal",
     "menu": "Menü",
@@ -10,7 +14,16 @@
     "bookNow": "Foglalás",
     "sendInquiry": "Érdeklődés küldése",
     "subscribe": "Feliratkozás",
-    "loading": "Betöltés…"
+    "loading": "Betöltés…",
+    "signUp": "Regisztráció"
+  },
+  "home": {
+    "bookStay": "Foglalj szállást",
+    "planRetreat": "Tervezd meg a retreatet",
+    "upcomingEvents": "Közelgő események",
+    "readMore": "Tudj meg többet",
+    "latestFromBlog": "Legfrissebb a blogról",
+    "scrollHint": "görgess, húzd, vagy használd a nyilakat →"
   },
   "footer": {
     "visit": "Látogatás",
@@ -48,7 +61,9 @@
   },
   "newsletter": {
     "heading": "Iratkozzon fel hírlevelünkre",
-    "emailPlaceholder": "az@email.com"
+    "emailPlaceholder": "az@email.com",
+    "tagline": "Iratkozz fel a Commons Hub eseményeire és híreire",
+    "submitting": "Feliratkozás…"
   },
   "support": {
     "metaTitle": "Támogass minket az Artizenen",
@@ -76,6 +91,7 @@
     "teaserCta": "Tudd meg, hogyan támogathatsz"
   },
   "language": {
-    "label": "Nyelv"
+    "label": "Nyelv",
+    "autoDetected": "A nyelvet a tartózkodási helyed alapján választottuk ki."
   }
 }

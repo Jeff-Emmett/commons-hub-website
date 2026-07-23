@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import {
   useCallback,
   useEffect,
@@ -42,6 +43,7 @@ export function PinnedCarousel({
   autoplayMs = 5000,
   stepLockMs = 450,
 }: PinnedCarouselProps) {
+  const t = useTranslations('home');
   const n = Math.max(1, slides.length);
   const wrapRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
@@ -257,7 +259,7 @@ export function PinnedCarousel({
 
       {/* Hint */}
       <div className="absolute bottom-6 right-6 text-xs text-slate-400 select-none pointer-events-none">
-        scroll, swipe, or use arrows →
+        {t('scrollHint')}
       </div>
     </section>
   );

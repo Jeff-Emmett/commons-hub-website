@@ -162,7 +162,7 @@ function Header2({ menus }: Props) {
                     </div>
                     
                     {/* Auth and Admin buttons at the top of mobile menu */}
-                    <div className="flex flex-col gap-6 mb-10">
+                    <div className="flex flex-col gap-6 mb-8">
                       <div onClick={toggleMenu}>
                         <DynamicAuthButton />
                       </div>
@@ -170,6 +170,9 @@ function Header2({ menus }: Props) {
                         <AdminButton />
                       </div>
                     </div>
+
+                    {/* Language picker — the header dropdown is desktop-only */}
+                    <LanguageSwitcher variant="menu" className="mb-10" />
                     
                     {/* Menu items */}
                     <div className="flex flex-col gap-8">

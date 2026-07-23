@@ -1,5 +1,9 @@
 {
-  "_meta": { "locale": "cs", "source": false, "needsReview": true },
+  "_meta": {
+    "locale": "cs",
+    "source": false,
+    "needsReview": true
+  },
   "common": {
     "home": "Domů",
     "menu": "Menu",
@@ -10,7 +14,16 @@
     "bookNow": "Rezervovat",
     "sendInquiry": "Odeslat poptávku",
     "subscribe": "Odebírat",
-    "loading": "Načítání…"
+    "loading": "Načítání…",
+    "signUp": "Registrovat"
+  },
+  "home": {
+    "bookStay": "Rezervovat pobyt",
+    "planRetreat": "Naplánovat retreat",
+    "upcomingEvents": "Nadcházející akce",
+    "readMore": "Zjistit více",
+    "latestFromBlog": "Nejnovější z blogu",
+    "scrollHint": "posouvej, přejeď nebo použij šipky →"
   },
   "footer": {
     "visit": "Navštivte",
@@ -48,7 +61,9 @@
   },
   "newsletter": {
     "heading": "Přihlaste se k odběru newsletteru",
-    "emailPlaceholder": "vas@email.com"
+    "emailPlaceholder": "vas@email.com",
+    "tagline": "Odebírej novinky o akcích a oznámení z Commons Hubu",
+    "submitting": "Přihlašování…"
   },
   "support": {
     "metaTitle": "Podpořte nás na Artizenu",
@@ -76,6 +91,7 @@
     "teaserCta": "Zjistěte, jak podpořit"
   },
   "language": {
-    "label": "Jazyk"
+    "label": "Jazyk",
+    "autoDetected": "Jazyk jsme vybrali podle tvé polohy."
   }
 }

@@ -2,6 +2,7 @@ import { getAllPublishedPosts } from "@/lib/actions/getPost";
 import { getEventPage } from "@/lib/actions/getEventPage";
 import { getGalleryCarousels } from "@/lib/actions/getCarousels";
 import { readSingleton } from "@/lib/directus/client";
+import { getTranslations } from "next-intl/server";
 import {
   HomeJourney,
   type HomeSlide,
@@ -54,10 +55,11 @@ async function loadHeroSlides(): Promise<HomeSlide[]> {
 }
 
 export default async function Home() {
-  const [posts, upcoming, galleries] = await Promise.all([
+  const [posts, upcoming, galleries, t] = await Promise.all([
     getAllPublishedPosts(),
     getEventPage("upcoming"),
     getGalleryCarousels(),
+    getTranslations("home"),
   ]);
   const slides = await loadHeroSlides();
   const nextEvent = upcoming[0] as
@@ -65,14 +67,14 @@ export default async function Home() {
     | undefined;
 
   const tiles: HomeTile[] = [
-    { label: "Book your Stay", href: "/accommodation", imageUrl: asset(TILE_ACCOMMODATION) },
-    { label: "Plan your Retreat", href: "/event-venue", imageUrl: asset(TILE_EVENT) },
+    { label: t("bookStay"), href: "/accommodation", imageUrl: asset(TILE_ACCOMMODATION) },
+    { label: t("planRetreat"), href: "/event-venue", imageUrl: asset(TILE_EVENT) },
     {
-      label: "Upcoming Events",
+      label: t("upcomingEvents"),
       href: "/events",
       imageUrl: asset(nextEvent?.main_image) ?? asset(TILE_EVENT),
     },
-    { label: "Read More", href: "/about", imageUrl: asset(TILE_ABOUT) },
+    { label: t("readMore"), href: "/about", imageUrl: asset(TILE_ABOUT) },
   ];
 
   const postTiles: HomePost[] = posts.map((p) => ({

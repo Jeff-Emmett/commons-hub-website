@@ -1,5 +1,9 @@
 {
-  "_meta": { "locale": "de", "source": false, "needsReview": true },
+  "_meta": {
+    "locale": "de",
+    "source": false,
+    "needsReview": true
+  },
   "common": {
     "home": "Start",
     "menu": "Menü",
@@ -10,7 +14,16 @@
     "bookNow": "Jetzt buchen",
     "sendInquiry": "Anfrage senden",
     "subscribe": "Abonnieren",
-    "loading": "Wird geladen…"
+    "loading": "Wird geladen…",
+    "signUp": "Registrieren"
+  },
+  "home": {
+    "bookStay": "Übernachtung buchen",
+    "planRetreat": "Retreat planen",
+    "upcomingEvents": "Kommende Veranstaltungen",
+    "readMore": "Mehr erfahren",
+    "latestFromBlog": "Neues aus dem Blog",
+    "scrollHint": "scrollen, wischen oder Pfeiltasten →"
   },
   "footer": {
     "visit": "Besuchen",
@@ -48,7 +61,9 @@
   },
   "newsletter": {
     "heading": "Abonnieren Sie unseren Newsletter",
-    "emailPlaceholder": "ihre@email.com"
+    "emailPlaceholder": "ihre@email.com",
+    "tagline": "Abonniere neue Veranstaltungen & Ankündigungen vom Commons Hub",
+    "submitting": "Wird abonniert…"
   },
   "support": {
     "metaTitle": "Unterstütze uns auf Artizen",
@@ -76,6 +91,7 @@
     "teaserCta": "Erfahre, wie du unterstützen kannst"
   },
   "language": {
-    "label": "Sprache"
+    "label": "Sprache",
+    "autoDetected": "Automatisch anhand deines Standorts gewählt."
   }
 }

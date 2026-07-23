@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 export default function NewsletterSignup({
   compact = false,
@@ -9,6 +10,8 @@ export default function NewsletterSignup({
   compact?: boolean;
   center?: boolean;
 }) {
+  const t = useTranslations('newsletter');
+  const tc = useTranslations('common');
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -68,9 +71,7 @@ export default function NewsletterSignup({
   if (compact) {
     return (
       <div className={center ? 'flex flex-col items-center' : undefined}>
-        <h2 className="text-xl font-semibold mb-3">
-          Subscribe for new events &amp; announcements from the Commons Hub
-        </h2>
+        <h2 className="text-xl font-semibold mb-3">{t('tagline')}</h2>
         <form
           onSubmit={handleSubmit}
           className={`flex flex-col sm:flex-row gap-3 ${
@@ -82,7 +83,7 @@ export default function NewsletterSignup({
             name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
+            placeholder={t('emailPlaceholder')}
             required
             maxLength={255}
             disabled={isSubmitting}
@@ -93,7 +94,7 @@ export default function NewsletterSignup({
             disabled={isSubmitting}
             className="button whitespace-nowrap"
           >
-            {isSubmitting ? 'Subscribing...' : 'Subscribe'}
+            {isSubmitting ? t('submitting') : tc('subscribe')}
           </button>
         </form>
         {status && (
@@ -109,7 +110,7 @@ export default function NewsletterSignup({
   return (
     <div className="hero-wrapper w-inline-block py-2 border-y border-gray-100">
       <div className="hero-content">
-        <h2>Newsletter</h2>
+        <h2>{t('heading')}</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <input
@@ -118,7 +119,7 @@ export default function NewsletterSignup({
               name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
+              placeholder={t('emailPlaceholder')}
               required
               maxLength={255}
               disabled={isSubmitting}
@@ -130,7 +131,7 @@ export default function NewsletterSignup({
             disabled={isSubmitting}
             className="button w-full"
           >
-            {isSubmitting ? 'Subscribing...' : 'Subscribe'}
+            {isSubmitting ? t('submitting') : tc('subscribe')}
           </button>
           {status && (
             <p

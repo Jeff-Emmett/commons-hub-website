@@ -69,3 +69,39 @@ native-speaker review before it is treated as final.
 Add the code to `i18n/routing.ts`, add `messages/<code>.json`, add a label in
 `LanguageSwitcher`, and (Phase 3) translate the Directus content for it. No other
 changes required.
+
+## Phase 2b — Language UX (done)
+
+- **Switcher** (`components/LanguageSwitcher.tsx`) is a real dropdown, not a
+  bare `<select>`: globe + locale code trigger, native name over English name,
+  check mark on the active language, keyboard/ARIA behaviour from Radix. Two
+  variants — `header` (desktop) and `menu` (mobile drawer, where the popover
+  would be awkward). It is now mounted in **both** places.
+- **Auto-detection** (`lib/i18n/geo.ts` + `middleware.ts`): a visitor with no
+  `NEXT_LOCALE` cookie gets a language from **geo-IP** (`cf-ipcountry`, which
+  Cloudflare sets in front of commons-hub.at; `x-vercel-ip-country` /
+  `x-geo-country` as fallbacks), then from `Accept-Language`, then English.
+  AT/DE/CH/LI/LU → `de`, HU → `hu`, CZ → `cs`, SK → `sk`.
+  The middleware writes the locale onto the *request* as well as the response
+  cookie, so the very first page render is already translated. An explicit pick
+  in the switcher always wins — detection only runs when the cookie is absent,
+  and `NEXT_LOCALE_SOURCE` records which of the two chose it (shown as a
+  one-line note at the bottom of the dropdown when it was a guess).
+
+## Hazard: translated lookup keys
+
+Some snapshot `title` values are **machine keys the code queries verbatim** —
+`app/page.tsx` filters carousels on `title == "home_hero"`, `getGalleryCarousels()`
+on `title` starting with `"gallery"`. The first MT pass translated them
+(`home_hero` → `startseite_held`, `gallery: …` → `Galerie: …`), so those queries
+matched nothing and the **homepage hero and the entire gallery silently vanished
+in DE/HU/CS/SK** — the pages still rendered, just without those sections.
+
+Guards now in place:
+- `scripts/translate-snapshot.mjs` never translates snake_case identifiers and
+  preserves a `gallery:` prefix, translating only the prose after it.
+- `scripts/repair-snapshot-keys.mjs` fixes snapshots produced before that guard
+  (dry run by default, `--apply` to write).
+
+If a new lookup-by-title is ever added, add its key shape to both scripts — or
+better, look content up by `id`.

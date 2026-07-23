@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { PinnedCarousel } from '@/components/journey/PinnedCarousel';
 import NewsletterSignup from '@/components/NewsletterSignup';
 import ArtizenTeaser from '@/components/support/ArtizenTeaser';
@@ -33,6 +34,7 @@ interface HomeJourneyProps {
 }
 
 export function HomeJourney({ slides, tiles, posts, galleryPreview = [] }: HomeJourneyProps) {
+  const tr = useTranslations('home');
   return (
     <main className="home">
       {/* Section 1 — scroll-pinned hero: scroll pans slides right→left,
@@ -74,7 +76,7 @@ export function HomeJourney({ slides, tiles, posts, galleryPreview = [] }: HomeJ
       {/* Section 3 — all published blog posts (scrollable) + newsletter */}
       <section className="bg-white px-8 md:px-16 py-16">
         <div className="max-w-5xl mx-auto w-full">
-          <h2 className="text-2xl font-semibold mb-6">Latest from the blog</h2>
+          <h2 className="text-2xl font-semibold mb-6">{tr('latestFromBlog')}</h2>
           {posts.length > 0 && (
             <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 -mx-2 px-2">
               {posts.map((p) => (
