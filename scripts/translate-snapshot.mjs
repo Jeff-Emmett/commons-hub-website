@@ -42,6 +42,18 @@ const SKIP_VAL = /^(https?:\/\/|mailto:|#[0-9a-fA-F]{3,8}$|[0-9a-f]{8}-[0-9a-f]{
 const KEY_LIKE = /^[a-z0-9]+(?:_[a-z0-9]+)+$/;
 const KEEP_PREFIX = /^(gallery)(\s*:?\s*)/i;
 
+// Fields that must stay verbatim in every language because they are NAMES, not
+// prose. An event is one thing with one name: translating "Hack the Hub 2026"
+// into "Hack den Hub 2026" splits the same event across languages and stops it
+// matching the registration page, the poster and the ticket. Paths look like
+// `eventpages[3].title`.
+const PROTECTED_PATHS = [
+  /^eventpages\[\d+\]\.(title|seo_title_tag)$/,
+];
+const isProtected = (path) => PROTECTED_PATHS.some((rx) => rx.test(path));
+// "eventpages.json" -> "eventpages", the root of every path in that file.
+const collectionOf = (file) => file.replace(/\.json$/, "");
+
 // Splits "gallery: The House" into the machine prefix and the prose remainder.
 function splitPrefix(v) {
   const m = typeof v === "string" ? v.match(KEEP_PREFIX) : null;
@@ -67,36 +79,55 @@ function translatableUnit(key, v) {
 }
 
 // ---- collect unique strings ----
-function collect(node, key, out) {
-  if (Array.isArray(node)) { node.forEach((n) => collect(n, key, out)); return; }
-  if (node && typeof node === "object") {
-    for (const [k, v] of Object.entries(node)) collect(v, k, out);
+function collect(node, key, out, path = "") {
+  if (Array.isArray(node)) {
+    node.forEach((n, i) => collect(n, key, out, `${path}[${i}]`));
     return;
   }
+  if (node && typeof node === "object") {
+    for (const [k, v] of Object.entries(node)) collect(v, k, out, path ? `${path}.${k}` : k);
+    return;
+  }
+  if (isProtected(path)) return;
   const unit = translatableUnit(key, node);
   if (unit !== null) out.add(unit);
 }
 
-// Same traversal as collect(), but preserves order into an array — used to pair
-// EN strings with a previous run's translations by position (resume mode).
-function collectOrdered(node, key, out) {
-  if (Array.isArray(node)) { node.forEach((n) => collectOrdered(n, key, out)); return; }
-  if (node && typeof node === "object") {
-    for (const [k, v] of Object.entries(node)) collectOrdered(v, k, out);
+// Same traversal as collect(), but keyed by JSON path — used to pair EN strings
+// with a previous run's translations when resuming.
+//
+// This used to pair them BY POSITION, which silently corrupted whole locales:
+// `isTranslatableVal` is applied to the value, so a translation that failed a
+// test its English source passed (most often MAX_LEN — German runs ~15% longer
+// than English) dropped out of the array and shifted every later string by one.
+// The seed map then paired each English string with the NEXT field's
+// translation, so event titles ended up holding the following event's summary.
+// Pairing by path cannot drift: a filtered value simply has no partner.
+function collectByPath(node, key, out, path = "") {
+  if (Array.isArray(node)) {
+    node.forEach((n, i) => collectByPath(n, key, out, `${path}[${i}]`));
     return;
   }
-  const unit = translatableUnit(key, node);
-  if (unit !== null) out.push(unit);
+  if (node && typeof node === "object") {
+    for (const [k, v] of Object.entries(node)) {
+      collectByPath(v, k, out, path ? `${path}.${k}` : k);
+    }
+    return;
+  }
+  if (typeof node === "string") out.set(path, node);
 }
 
 // ---- rewrite using a translation map ----
-function rewrite(node, key, map) {
-  if (Array.isArray(node)) return node.map((n) => rewrite(n, key, map));
+function rewrite(node, key, map, path = "") {
+  if (Array.isArray(node)) return node.map((n, i) => rewrite(n, key, map, `${path}[${i}]`));
   if (node && typeof node === "object") {
     const o = {};
-    for (const [k, v] of Object.entries(node)) o[k] = rewrite(v, k, map);
+    for (const [k, v] of Object.entries(node)) {
+      o[k] = rewrite(v, k, map, path ? `${path}.${k}` : k);
+    }
     return o;
   }
+  if (isProtected(path)) return node;
   const unit = translatableUnit(key, node);
   if (unit !== null && map.has(unit)) return splitPrefix(node).prefix + map.get(unit);
   return node;
@@ -134,28 +165,37 @@ async function translateLang(lang) {
 
   // gather all unique strings across the whole snapshot for this lang
   const uniq = new Set();
-  for (const f of files) collect(JSON.parse(readFileSync(join(EN, f), "utf8")), "", uniq);
+  for (const f of files) {
+    collect(JSON.parse(readFileSync(join(EN, f), "utf8")), "", uniq, collectionOf(f));
+  }
   const items = [...uniq];
   console.log(`[${lang}] ${items.length} unique strings to translate`);
 
   const map = new Map();
   // Resume: seed from a previous run so we only call the LLM for gaps (strings
   // still equal to EN). Lets repeated runs converge coverage cheaply.
+  // MT_RESUME=0 skips it — required when the previous run is known-bad, since
+  // seeding would faithfully carry its mistakes forward.
   const outDir = join(SNAP, lang);
   let seeded = 0;
-  for (const f of files) {
-    const prev = join(outDir, f);
-    try {
-      const en = JSON.parse(readFileSync(join(EN, f), "utf8"));
-      const tr = JSON.parse(readFileSync(prev, "utf8"));
-      const ea = [], ta = [];
-      collectOrdered(en, "", ea); collectOrdered(tr, "", ta);
-      for (let i = 0; i < ea.length; i++) {
-        if (ta[i] !== undefined && ta[i] !== ea[i] && !map.has(ea[i])) {
-          map.set(ea[i], ta[i]); seeded++;
+  if (process.env.MT_RESUME !== "0") {
+    for (const f of files) {
+      const prev = join(outDir, f);
+      try {
+        const enMap = new Map(), trMap = new Map();
+        const root = collectionOf(f);
+        collectByPath(JSON.parse(readFileSync(join(EN, f), "utf8")), "", enMap, root);
+        collectByPath(JSON.parse(readFileSync(prev, "utf8")), "", trMap, root);
+        for (const [path, en] of enMap) {
+          const tr = trMap.get(path);
+          // Pair strictly by path; a missing or unchanged value seeds nothing.
+          if (tr === undefined || tr === en || isProtected(path)) continue;
+          const unit = translatableUnit(path.split(".").pop(), en);
+          if (unit === null || map.has(unit)) continue;
+          map.set(unit, splitPrefix(tr).rest ?? tr); seeded++;
         }
-      }
-    } catch { /* no previous file */ }
+      } catch { /* no previous file */ }
+    }
   }
   if (seeded) console.log(`  [${lang}] seeded ${seeded} from previous run`);
 
@@ -175,7 +215,8 @@ async function translateLang(lang) {
   mkdirSync(outDir, { recursive: true });
   for (const f of files) {
     const data = JSON.parse(readFileSync(join(EN, f), "utf8"));
-    writeFileSync(join(outDir, f), JSON.stringify(rewrite(data, "", map), null, 2));
+    writeFileSync(join(outDir, f),
+                  JSON.stringify(rewrite(data, "", map, collectionOf(f)), null, 2) + "\n");
   }
   writeFileSync(join(outDir, "_meta.json"),
     JSON.stringify({ locale: lang, source: "mt", model: MODEL, needsReview: true }, null, 2));

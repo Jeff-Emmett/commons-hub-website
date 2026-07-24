@@ -95,7 +95,7 @@
     "slug": "partners",
     "sort": "0",
     "status": "published",
-    "summary": "Szeretne együttműködni a <strong>commons hub</strong>-val 2026-ban?",
+    "summary": "Szeretne együttműködni a <strong>commons hub</strong>-dal 2026‑ban?",
     "title": "PARTNEREK",
     "use_icon_as_image": false,
     "user_created": null,
@@ -142,7 +142,7 @@
     "category_post": []
   },
   {
-    "body": "<p style=\"text-align: left\">Rendezvénytermeink akár 100 vendéget is befogadnak, és számos technikai felszerelést valamint egyéb kényelmi szolgáltatást kínálnak, továbbá rengeteg hangulatos mellékhelyet biztosítanak, amelyek tökéletesek kisebb csoportos megbeszélésekhez vagy szünetes ülésekhez.</p><p style=\"text-align: left\"><a target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 underline button\" href=\"/booking/event-hosting\">Foglalj most</a></p>",
+    "body": "<p style=\"text-align: left\">Az eseményhelyiségeink akár 100 vendéget is befogadnak, és számos technikai felszerelést valamint egyéb kényelmi szolgáltatást biztosítanak, továbbá rengeteg hangulatos mellékhelyet kínálnak, amelyek tökéletesek kisebb csoportos megbeszélésekhez vagy szünetes ülésekhez.</p><p style=\"text-align: left\"><a target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 underline button\" href=\"/booking/event-hosting\">Foglalj most</a></p>",
     "date_created": null,
     "date_updated": "2025-07-21T11:27:34.092Z",
     "id": "89",
@@ -154,7 +154,7 @@
     "sort": "1",
     "status": "published",
     "summary": "",
-    "title": "ESMÉNY HELYE",
+    "title": "ESEMÉNY HELYE",
     "use_icon_as_image": false,
     "user_created": null,
     "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5",
@@ -187,7 +187,7 @@
     "slug": "vision",
     "sort": "1",
     "status": "published",
-    "summary": "rövid áttekintés elméleti alapjainkról és a hosszú távú vízióról, amely a projektünket hajtja",
+    "summary": "rövid áttekintés elméleti alapjainkról és a projektünket hajtó hosszú távú vízióról",
     "title": "ALAPOK & LÁTÁS",
     "use_icon_as_image": false,
     "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
@@ -230,7 +230,7 @@
     "slug": "community",
     "sort": "1",
     "status": "published",
-    "summary": "Közösségünket sokszínűség, közösségi érzet és szolidaritás jellemzi. Az itt kialakult kapcsolatok gyakran túlmutatnak a munkán, mély és tartós barátságokká alakulva.",
+    "summary": "Közösségünket sokszínűsége, közösségi érzése és szolidaritása határozza meg. Itt kialakult kapcsolatok gyakran túlmutatnak a munkán, mély és tartós barátságokká alakulva.",
     "title": "KÖZÖSSÉG",
     "use_icon_as_image": false,
     "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
@@ -243,7 +243,7 @@
     "category_post": []
   },
   {
-    "body": "<p style=\"text-align: center\">A Commons Hub üzemelteti az első validátor csomópontot az Interchain-en, amelyet egy szándékos, helyalapú Web3 közösség támogat. A Cosmos ökoszisztémára vonatkozó ambíciónk az, hogy pluralista vitákat nyissunk a kultúra és politika körül, hogy irányítsuk az Interchain fejlődését egy demokratikus, elosztott, reziliens globális infrastruktúrá felé a Commons számára.</p>",
+    "body": "<p style=\"text-align: center\">The Commons Hub operates the first validator node of the Interchain backed by an intentional, place-based Web3 community. Our ambition for the Cosmos ecosystem is to open pluralistic discussions around culture and politics to steer the evolution of the Interchain towards a democratic, distributed, resilient global infrastructure for the Commons.</p>",
     "date_created": "2025-09-25T14:40:06.438Z",
     "date_updated": "2025-09-25T14:40:42.885Z",
     "id": "93",

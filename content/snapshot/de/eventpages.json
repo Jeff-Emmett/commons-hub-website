@@ -13,8 +13,8 @@
     "sort": "0",
     "startdatetime": "2025-06-16T10:00:00",
     "status": "published",
-    "summary": "Gegenseitiger & vernetzter Kredit, lokale Gutscheine, multilaterale Ausgleiche und andere Elemente der alternativen Finanzierung.",
-    "title": "Kollaboratives Finanztreffen 3",
+    "summary": "Gegenseitige & Mesh‑Kredite, lokale Gutscheine, multilaterale Ausgleiche und weitere Elemente der alternativen Finanzierung.",
+    "title": "Collaborative Finance Gathering 3",
     "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
     "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
   },
@@ -33,7 +33,7 @@
     "startdatetime": "2025-08-24T10:00:00",
     "status": "published",
     "summary": "Der CCG wird 5 Jahre alt!",
-    "title": "CRYPTO COMMONS TREFFEN 2025",
+    "title": "CRYPTO COMMONS GATHERING 2025",
     "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
     "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
   },
@@ -51,7 +51,7 @@
     "sort": null,
     "startdatetime": "2025-04-07T10:00:00",
     "status": "published",
-    "summary": "Wiederaufbauen, erneuern, neu vorstellen: Hack the Hub 2025",
+    "summary": "Wiederaufbauen, Erneuern, Neu vorstellen: Hack the Hub 2025",
     "title": "HACK THE HUB 2025",
     "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
     "user_updated": null
@@ -70,7 +70,7 @@
     "sort": null,
     "startdatetime": "2025-10-07T10:00:00",
     "status": "published",
-    "summary": "Ernte von Hoffnung und Erneuerung bei <strong>Solarpunk POW!</strong>",
+    "summary": "Ernte von Hoffnung und Erneuerung bei <strong>Solarpunk POW!</strong>",
     "title": "SOLARPUNK POW!",
     "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
     "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
@@ -89,8 +89,8 @@
     "sort": null,
     "startdatetime": "2025-07-19T10:00:00",
     "status": "published",
-    "summary": "Honigernte‑Wochenende",
-    "title": "Verbinden • Teilen • Klettern – Ein Wochenende voller Fähigkeiten, Geschichten und Erfolge",
+    "summary": "Hast du den Honig gerochen 🍯✨?",
+    "title": "Honey Harvest Weekend",
     "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
     "user_updated": null
   },
@@ -108,8 +108,8 @@
     "sort": null,
     "startdatetime": "2025-09-26T16:30:00",
     "status": "published",
-    "summary": "Commons Klettern",
-    "title": "Ein 12‑tägiges Weihnachts-Event in den österreichischen Alpen für Hacker, Tüftler und digitale Nomaden, die dieses Jahr zum Chaos Communication Congress gehen wollen.",
+    "summary": "Verbinden • Teilen • Klettern – Ein Wochenende voller Fähigkeiten, Geschichten und Durchstiege",
+    "title": "Commons Climb",
     "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
     "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
   },
@@ -127,8 +127,8 @@
     "sort": null,
     "startdatetime": "2025-12-15T10:00:00",
     "status": "published",
-    "summary": "Commons Weihnachtschaos",
-    "title": "Das jährliche Treffen der Crypto Commons Association, seit 2021",
+    "summary": "Ein 12‑tägiges Weihnachts-Event in den österreichischen Alpen für Hacker, Tüftler und digitale Nomaden, die dieses Jahr zum Chaos Communication Congress gehen wollen.",
+    "title": "commons christmas chaos",
     "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
     "user_updated": "258593a6-4999-4401-8ea6-5959100f1278"
   },
@@ -146,8 +146,8 @@
     "sort": null,
     "startdatetime": "2026-08-16T16:39:00",
     "status": "published",
-    "summary": "Crypto Commons Treffen",
-    "title": "4. Kollaboratives Finanztreffen",
+    "summary": "Das jährliche Treffen der Crypto Commons Association, seit 2021",
+    "title": "Crypto Commons Gathering",
     "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
     "user_updated": null
   },
@@ -166,7 +166,7 @@
     "startdatetime": "2026-06-21T18:00:00",
     "status": "published",
     "summary": "",
-    "title": "Ein vierwöchiges Pop‑up‑Dorf, das zukünftiges Wohnen im Tal der Commons prototypisiert.",
+    "title": "4th Collaborative FInance Gathering",
     "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
     "user_updated": "258593a6-4999-4401-8ea6-5959100f1278"
   },
@@ -184,8 +184,8 @@
     "sort": null,
     "startdatetime": "2026-08-24T10:00:00",
     "status": "published",
-    "summary": "Tal der Commons Pop‑up‑Dorf",
-    "title": "Komm und teile die Frühlingsverjüngung des Hubs, bevor wir den Sommer begrüßen.",
+    "summary": "Ein vierwöchiges Pop‑up‑Dorf, das zukünftiges Wohnen im Tal der Commons prototypisiert.",
+    "title": "Valley of the Commons PopUp Village",
     "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
     "user_updated": "258593a6-4999-4401-8ea6-5959100f1278"
   },
@@ -203,8 +203,8 @@
     "sort": null,
     "startdatetime": "2026-03-27T08:00:00",
     "status": "published",
-    "summary": "Hack den Hub 2026",
-    "title": "<p>Ein Pop‑up‑Physical‑Hub zur Vorwegnahme postkapitalistischer Zukünfte durch Fiktion, Performance und Spiel.</p>",
+    "summary": "Komm und nimm teil an der Frühlingsverjüngung des Hub, bevor wir den Sommer willkommen heißen.",
+    "title": "Hack the Hub 2026",
     "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
     "user_updated": "258593a6-4999-4401-8ea6-5959100f1278"
   },
@@ -222,8 +222,8 @@
     "sort": null,
     "startdatetime": "2026-06-07T10:00:00",
     "status": "published",
-    "summary": "WELTSPIEL",
-    "title": "<p>Von alpinen Ursprüngen zu modernen Klettertouren</p>",
+    "summary": "<p>Ein pop-up Physical-Hub zur Vorwegnahme postkapitalistischer Zukünfte durch Fiktion, Performance und Spiel.</p>",
+    "title": "WORLDPLAY",
     "user_created": null,
     "user_updated": null
   },
@@ -241,8 +241,8 @@
     "sort": null,
     "startdatetime": "2025-07-18T10:00:00",
     "status": "published",
-    "summary": "FELSEN & BAU",
-    "title": "<p>Begleiten Sie uns auf einer unvergesslichen Reise in die Welt der KI-Agenten</p>",
+    "summary": "<p>Von alpinen Ursprüngen zu modernen Klettertouren</p>",
+    "title": "BOULDER & BUILD",
     "user_created": null,
     "user_updated": null
   },
@@ -260,8 +260,8 @@
     "sort": null,
     "startdatetime": null,
     "status": "draft",
-    "summary": "Versammlung von KI‑Agenten",
-    "title": "Versammlung von KI‑Agenten",
+    "summary": "<p>Begleiten Sie uns auf einer unvergesslichen Reise in die Welt der KI-Agenten</p>",
+    "title": "AI Agents Gathering",
     "user_created": null,
     "user_updated": null
   }

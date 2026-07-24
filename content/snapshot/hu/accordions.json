@@ -34,7 +34,7 @@
       },
       {
         "accordion_id": "3",
-        "content": "<ul><li><p style=\"text-align: left\"><strong>Növeljük közösségünket</strong> események és partnerségek révén</p></li><li><p style=\"text-align: left\"><strong>Támogassuk az alkalmazott rendszertervezést</strong> támogatásokon és kísérleteken keresztül</p></li><li><p style=\"text-align: left\"><strong>Erősítsük a Hubot, mint gazdasági motor</strong> ápolva a helyi Commons-ot</p></li><li><p style=\"text-align: left\"><strong>Építsünk egy élő tudásközpontot</strong> amely összekapcsolja a mozgalmakat és az akadémiát</p></li></ul>",
+        "content": "<ul><li><p style=\"text-align: left\"><strong>Grow our community</strong> through events and partnerships</p></li><li><p style=\"text-align: left\"><strong>Support applied systems design</strong> via grants and experiments</p></li><li><p style=\"text-align: left\"><strong>Strengthen the Hub as economic engine</strong> nurturing local Commons</p></li><li><p style=\"text-align: left\"><strong>Build a living knowledge hub</strong> connecting movements and academia</p></li></ul>",
         "date_created": "2025-06-30T18:01:10.716Z",
         "date_updated": "2025-07-21T09:12:34.817Z",
         "header": "MISSION",
@@ -62,7 +62,7 @@
     "accordion_items": [
       {
         "accordion_id": "4",
-        "content": "<p style=\"text-align: left\"></p><p style=\"text-align: left\"><span style=\"color: rgb(0, 0, 0)\">A vendégház 30 ágyat kínál, amely 2 dupla szobában és 5 kollégiumban van elosztva.</span></p><p style=\"text-align: left\"><a target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 underline button\" href=\"/category/guesthouse\">Tovább olvasás</a> <a target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 underline button\" href=\"/page/accommodation\">Foglalj most</a></p>",
+        "content": "<p style=\"text-align: left\"></p><p style=\"text-align: left\"><span style=\"color: rgb(0, 0, 0)\">The guest house offers 30 beds distributed in 2 double rooms and 5 dormitories.</span></p><p style=\"text-align: left\"><a target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 underline button\" href=\"/category/guesthouse\">Read More</a> <a target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 underline button\" href=\"/page/accommodation\">Book Now</a></p>",
         "date_created": "2025-07-01T11:30:03.166Z",
         "date_updated": "2025-07-21T14:38:23.479Z",
         "header": "LODGING",
@@ -86,7 +86,7 @@
       },
       {
         "accordion_id": "4",
-        "content": "<p style=\"text-align: left\">The Hub accommodates up to 30 people in five dorms and four double rooms. Sheets and towels are provided, the bathrooms are located on the floor.</p>",
+        "content": "<p style=\"text-align: left\">If you have an idea for an event but only limited capacity to organise it, we got your back. Be it a hackathon, an (un)conference, or a retreat – we have long-standing experience in running events and are happy to help you bring your vision to life.&nbsp;</p><p style=\"text-align: left\">Our services range from conceptual planning to practical event preparation, running the event itself and wrap-up. In addition, we have a wide range of professionals we can draw on, be it facilitators, conflict mediators, media teams, yoga teachers or meditation guides.</p>",
         "date_created": "2025-07-01T11:32:03.433Z",
         "date_updated": "2025-07-01T11:51:20.541Z",
         "header": "EVENT ORGANIZATION",
@@ -154,7 +154,7 @@
     "accordion_items": [
       {
         "accordion_id": "6",
-        "content": "<p style=\"text-align: left\">A cozy welcome area combines living room comfort and old-school bar charm, featuring ample couches, board games, and a vinyl record player for a relaxed, inviting atmosphere.</p>",
+        "content": "<p style=\"text-align: left\">The Hub accommodates up to 30 people in five dorms and four double rooms. Sheets and towels are provided, the bathrooms are located on the floor.</p>",
         "date_created": "2025-07-01T14:40:34.580Z",
         "date_updated": "2025-07-01T14:45:42.752Z",
         "header": "Accommodation",
@@ -166,7 +166,7 @@
       },
       {
         "accordion_id": "6",
-        "content": "<p style=\"text-align: left\">The entire outside area of around 2000m² can be used by our guests. The front yard is an excellent spot for leisure time and relaxed evenings by the fire. The back garden is where you’ll find our veggies, berries and herbs, and ample space to touch some actual grass.</p>",
+        "content": "<p style=\"text-align: left\">A cozy welcome area combines living room comfort and old-school bar charm, featuring ample couches, board games, and a vinyl record player for a relaxed, inviting atmosphere.</p>",
         "date_created": "2025-07-01T14:41:46.975Z",
         "date_updated": "2025-07-01T14:45:55.827Z",
         "header": "Bar & Lounge",
@@ -178,7 +178,7 @@
       },
       {
         "accordion_id": "6",
-        "content": "<p style=\"text-align: left\">Our Co-working provides a calm working environment, screens and keyboards, bicycles can be borrowed to explore the surroundings, several workshops contain lots of tools and materials like fabric, paint and wood to become creative, and a piano and other instruments are available for a jam.</p>",
+        "content": "<p style=\"text-align: left\">The entire outside area of around 2000m² can be used by our guests. The front yard is an excellent spot for leisure time and relaxed evenings by the fire. The back garden is where you’ll find our veggies, berries and herbs, and ample space to touch some actual grass.</p>",
         "date_created": "2025-07-01T14:42:27.619Z",
         "date_updated": "2025-07-01T14:46:08.149Z",
         "header": "Gardens",
@@ -190,7 +190,7 @@
       },
       {
         "accordion_id": "6",
-        "content": "<p style=\"text-align: left\">90m² fit up to 75 seats facing a 3x6m stage with a massive sound system and a ceiling-mounted projector with a 133’’ drop-down screen. Wireless microphones, two wall-mounted cameras and a tripod-mounted camera feed into a 4-channel video mixer that supports live video streaming and production.</p>",
+        "content": "<p style=\"text-align: left\">A mi Co‑working nyugodt munkakörnyezetet biztosít, képernyőket és billentyűzeteket, kerékpárokat kölcsönözhetünk a környék felfedezéséhez, több műhely rengeteg eszközt és anyagot tartalmaz, mint például szövet, festék és fa, hogy kreatívak lehessünk, valamint egy zongora és más hangszerek állnak rendelkezésre egy jam‑hez.</p>",
         "date_created": "2025-07-01T14:43:02.155Z",
         "date_updated": "2025-07-01T14:46:18.557Z",
         "header": "Other Amenities",
@@ -218,7 +218,7 @@
     "accordion_items": [
       {
         "accordion_id": "7",
-        "content": "<p style=\"text-align: left\">Next to the main stage, the Event Hall, also offering 90m², is a more open space that lends itself to workshops, breakout sessions and as space that can be used for co-working. Typically, events start their mornings in a big circle to map out the day’s schedule on a whiteboard.&nbsp;</p>",
+        "content": "<p style=\"text-align: left\">90m² helyet biztosít akár 75 ülőhelynek egy 3x6m színpad felé, hatalmas hangrendszerrel és mennyezeti projektorral, amelyhez 133’’ leereszkedő vászon tartozik. Vezeték nélküli mikrofonok, két falra szerelt kamera és állványra rögzített kamera csatlakozik egy 4-csatornás videókeverőhöz, amely támogatja az élő videó streaminget és a produkciót.</p>",
         "date_created": "2025-07-01T14:54:23.864Z",
         "date_updated": null,
         "header": "Main Stage & Hall",
@@ -230,7 +230,7 @@
       },
       {
         "accordion_id": "7",
-        "content": "<p style=\"text-align: left\">As a part of the event hall, a fully equipped plug-and-play podcast studio enables spontaneous and well-planned media production. Guests can easily record their thoughts, presentations, and conversations without being bogged down by technical or spatial challenges.</p>",
+        "content": "<p style=\"text-align: left\">A főszínpad mellett, az Event Hall, amely 90m²-t is kínál, egy nyitottabb tér, amely alkalmas workshopokra, kisebb csoportos ülésekre és közös munkára. Általában a rendezvények reggeljeiket egy nagy körben kezdik, hogy a napirendet felvázolják egy fehértáblán.&nbsp;</p>",
         "date_created": "2025-07-01T14:55:59.133Z",
         "date_updated": "2025-07-01T14:57:25.307Z",
         "header": "Event Hall",
@@ -242,7 +242,7 @@
       },
       {
         "accordion_id": "7",
-        "content": "<p style=\"text-align: left\">The 40m² co-working doubles as a dedicated seminar room for smaller events, featuring a 65’’ TV, 20 chairs, a whiteboard, and adaptable and versatile tables and seating arrangements, ideal for workshops or meetings.</p>",
+        "content": "<p style=\"text-align: left\">Az eseményterem részeként egy teljesen felszerelt plug-and-play podcast stúdió lehetővé teszi a spontán és jól megtervezett média gyártást. A vendégek könnyedén felvehetik gondolataikat, előadásaikat és beszélgetéseiket anélkül, hogy technikai vagy térbeli kihívásokba ütköznének.</p>",
         "date_created": "2025-07-01T14:56:38.703Z",
         "date_updated": "2025-07-01T14:57:32.499Z",
         "header": "Video Podcast Studio",
@@ -254,7 +254,7 @@
       },
       {
         "accordion_id": "7",
-        "content": "<p style=\"text-align: left\">Numerous beaches along river Schwarza invite for swimming and sun bathing in walking distance from the Hub</p>",
+        "content": "<p style=\"text-align: left\">A 40m²-es közös munkaterület egy dedikált szemináriumi termékként szolgál kisebb eseményekhez, 65’’ TV-vel, 20 székkel, fehértáblával és alkalmazkodó, sokoldalú asztalokkal és ülőrendekkel, ideális workshopokhoz vagy megbeszélésekhez.</p>",
         "date_created": "2025-07-01T14:57:09.851Z",
         "date_updated": "2025-07-01T14:57:41.482Z",
         "header": "Co-Working Space",
@@ -310,7 +310,7 @@
     "accordion_items": [
       {
         "accordion_id": "11",
-        "content": "<p style=\"text-align: left\">Although its imperial past is long gone, Reichenau an der Rax remains a cultural hub with two musical pavilions and a classical theatre. Its six-week summer festival features two daily plays, along with literature readings, classical music, and other artsy events. Other remnants of the monarchy are various imperial castles, mansions and villas, which account for the noble appearance of the town.</p>",
+        "content": "<p style=\"text-align: left\">Számos strand a Schwarza folyó mentén hívja a fürdőzést és napozást, gyalogos távolságra a Hubtól</p>",
         "date_created": "2025-09-25T10:17:00.542Z",
         "date_updated": null,
         "header": "(SUN)BATHING AT RIVER SCHWARZA",
@@ -338,7 +338,7 @@
     "accordion_items": [
       {
         "accordion_id": "12",
-        "content": "<p style=\"text-align: left\">3D printer, laser cutter, wood workshop, soundlab, and other tools are waiting for your creativity</p>",
+        "content": "<p style=\"text-align: left\">Bár császári múltja már rég eltűnt, Reichenau an der Rax továbbra is kulturális központ marad két zenei pavilonnal és egy klasszikus színházzal. Hathetes nyári fesztiválja naponta két előadást kínál, valamint irodalmi felolvasásokat, klasszikus zenét és egyéb művészi eseményeket. A monarchia további maradványai különféle császári kastélyok, kúriák és villák, amelyek a város nemes megjelenéséért felelnek.</p>",
         "date_created": "2025-09-25T10:25:16.313Z",
         "date_updated": "2025-09-25T11:49:58.019Z",
         "header": "THEATER FESTIVAL",
@@ -366,7 +366,7 @@
     "accordion_items": [
       {
         "accordion_id": "13",
-        "content": "<p style=\"text-align: left\">The <strong>commons hub</strong> garden thrives with raised beds, fruit trees, and a buzzing beehive, creating a vibrant permaculture space. Join us to care for, maintain and expand it, and enjoy its fruits with us!</p>",
+        "content": "<p style=\"text-align: left\">3D nyomtató, lézervágó, fa műhely, hanglabor és más eszközök várják a kreativitásod</p>",
         "date_created": "2025-09-25T11:13:48.966Z",
         "date_updated": null,
         "header": "Tinkering in our FabLab",
@@ -394,7 +394,7 @@
     "accordion_items": [
       {
         "accordion_id": "14",
-        "content": "<p style=\"text-align: left\">Over 2,000 documented climbing routes — many multi-pitch — make the Schneeberg/Rax massif a prime destination for climbers from Vienna, Bratislava, Budapest and beyond. Trad, sport, and via-ferrata lines start within walking distance of the Hub.</p>",
+        "content": "<p style=\"text-align: left\">A commons hub kertje virágzik emelt ágyásokkal, gyümölcsfákkal és zümmögő méhkaptáról, élénk permakultúra teret teremtve. Csatlakozz hozzánk a gondozásban, karbantartásban és bővítésben, és élvezd a terméseit velünk!</p>",
         "date_created": "2025-09-25T11:23:31.092Z",
         "date_updated": null,
         "header": "Gardening around the Hub",
@@ -422,7 +422,7 @@
     "accordion_items": [
       {
         "accordion_id": "15",
-        "content": "<p style=\"text-align: left\">The Commons Hub maintains a community wiki where residents and visitors document trails, local lore, recipes, fabrication tips, and ongoing experiments. Ask at the front desk (read: in the kitchen) for an account — anyone staying at the Hub can contribute.</p>",
+        "content": "<p style=\"text-align: left\">Több mint 2 000 dokumentált mászóút — sok több szakaszos — teszi a Schneeberg/Rax hegységet kiemelkedő úti céllá a bécsi, pozsonyi, budapesti és további mászók számára. A trad, sport és via-ferrata vonalak a Hubtól gyalogos távolságra indulnak.</p>",
         "date_created": "2026-05-15T13:14:36.771Z",
         "date_updated": null,
         "header": "CLIMBING",
@@ -450,7 +450,7 @@
     "accordion_items": [
       {
         "accordion_id": "16",
-        "content": "<p style=\"text-align: left\">A Commons Hub egy közösségi wikit üzemeltet, ahol a lakók és látogatók dokumentálják az ösvényeket, helyi legendákat, recepteket, gyártási tippeket és folyamatban lévő kísérleteket. Kérdezzen a recepción (olvasd: a konyhában) egy fiókért — bárki, aki a Hubban tartózkodik, hozzájárulhat.</p>",
+        "content": "<p style=\"text-align: left\">A Commons Hub közösségi wikijét tartja fenn, ahol a lakók és látogatók dokumentálják az ösvényeket, helyi legendákat, recepteket, gyártási tippeket és folyamatban lévő kísérleteket. Kérjen a recepción (olvasd: a konyhában) egy fiókot — bárki, aki a Hub-ban tartózkodik, hozzájárulhat.</p>",
         "date_created": "2026-05-15T13:14:36.771Z",
         "date_updated": null,
         "header": "WIKI",

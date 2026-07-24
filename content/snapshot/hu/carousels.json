@@ -16,7 +16,7 @@
         "id": "61",
         "image": "ca0e915b-5a61-4b82-a7e7-d8c4c61902f0",
         "image_url": "https://api.commons-hub.at/storage/v1/object/public/website-images/1751301486616.jpg",
-        "quote": "<p style=\"text-align: center\"><em>\"A Commons Hub egy gyönyörű fizikai tér, amely egyenlőképpen szép társadalmi és intellektuális terek kialakulását eredményezi.\" &nbsp;</em></p><p style=\"text-align: center\"><strong>Dr Michael Zargham, BlockScience (CEO)</strong></p>",
+        "quote": "<p style=\"text-align: center\"><em>\"A Commons Hub egy gyönyörű fizikai tér, amely egyenlőképpen szép társadalmi és intellektuális tereket hoz létre.\" &nbsp;</em></p><p style=\"text-align: center\"><strong>Dr Michael Zargham, BlockScience (CEO)</strong></p>",
         "sort": null,
         "user_created": null,
         "user_updated": null
@@ -29,7 +29,7 @@
         "id": "62",
         "image": "08f2faf5-2e8b-4659-88e5-ad9bf9c1c0e0",
         "image_url": "https://api.commons-hub.at/storage/v1/object/public/website-images/1751301539314.jpg",
-        "quote": "<p style=\"text-align: center\"><em>\"A Commons Hub egy bástya az IRL közösség és az akciótanulás közös gyakorlata számára. A táj és a szállások elősegítik a hosszú formájú gondolkodást, az élénk vitát és a jelentőségteljes kapcsolatok építését.\"</em></p><p style=\"text-align: center\"><strong>Will Szal, Regen Foundation</strong></p>",
+        "quote": "<p style=\"text-align: center\"><em>\"Commons Hub egy bástya az IRL közösség és a cselekvés-alapú tanulási közösségek számára. A táj és a szálláshelyek elősegítik a hosszú formájú gondolkodást, az élénk vitát és a jelentős kapcsolatok építését.\"</em></p><p style=\"text-align: center\"><strong>Will Szal, Regen Foundation</strong></p>",
         "sort": null,
         "user_created": null,
         "user_updated": null
@@ -42,7 +42,7 @@
         "id": "63",
         "image": "c613c2dc-48fb-4d88-b3e6-243be43655c7",
         "image_url": "https://api.commons-hub.at/storage/v1/object/public/website-images/1751301590060.png",
-        "quote": "<p style=\"text-align: center\"><em>\"A Commons Hub a kriptó és a posztkapitalizmus határait feszegeti képzeletgazdag kísérletekkel és produktív párbeszéddel. Nagyon élveztem az időmet a Hubban, és profitáltam a szélesebb hálózatból, amelyet ez a csomópont létrehozott.\"</em></p><p style=\"text-align: center\"><strong>Ori Shimony, d0rg (co-founder)</strong></p>",
+        "quote": "<p style=\"text-align: center\"><em>\"A Commons Hub a kriptó és a posztkapitalizmus határait tolja ki képzeletgazdag kísérletekkel és termékeny párbeszéddel. Nagyon élveztem az időmet a Hubban, és hasznosnak találtam azt a szélesebb hálózatot, amelyet ez a csomópont létrehozott.\"</em></p><p style=\"text-align: center\"><strong>Ori Shimony, d0rg (társalapító)</strong></p>",
         "sort": null,
         "user_created": null,
         "user_updated": null
@@ -97,7 +97,7 @@
         "id": "66",
         "image": "dc537a4f-bfde-41d7-8b65-9fe0abcc7356",
         "image_url": "https://api.commons-hub.at/storage/v1/object/public/website-images/1751377438008.jpg",
-        "quote": "<p style=\"text-align: center\">Túrázás és sziklamászás paradicsom!</p>",
+        "quote": "<p style=\"text-align: center\">Túrázás &amp; sziklamászó paradicsom!</p>",
         "sort": null,
         "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
         "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
@@ -139,7 +139,7 @@
         "id": "68",
         "image": "2797cabf-78fb-4ccb-8191-79cbf3ee907c",
         "image_url": null,
-        "quote": "<p>Üdvözöljük a <b>commons hub</b>-ban,<br>egy közösségi vendégház és eseményhelyszín az osztrák Alpokban.</p>",
+        "quote": "<p>Üdvözöljük a <b>commons hub</b>-ban,<br>egy közösségi vendégház és rendezvényhelyszín az osztrák Alpokban.</p>",
         "sort": "1",
         "user_created": null,
         "user_updated": null
@@ -165,7 +165,7 @@
         "id": "70",
         "image": "4e0ad2e3-f8c5-49f7-9e97-1359112e46a7",
         "image_url": null,
-        "quote": "<p>A magánünnepségektől a hétig tartó visszavonulásokig, a commons hub laza, de szándékos hangulata felejthetetlen élményeket teremt.</p>",
+        "quote": "<p>A magánünnepségektől a hétig tartó visszavonulásokig, a commons hub laza, de szándékos hangulata felejthetetlen élményeket nyújt.</p>",
         "sort": "3",
         "user_created": null,
         "user_updated": null
@@ -178,7 +178,7 @@
         "id": "71",
         "image": "510e9867-fecc-4f72-8855-9c9e1b6e3828",
         "image_url": null,
-        "quote": "<p>Minimális formalitások. Maximális szabadság.<br>Az a fajta hely, ami ismerősnek tűnik, még ha először jársz is ott.</p>",
+        "quote": "<p>Minimális formalitások. Maximális szabadság.<br>Az a fajta hely, ami ismerősnek érzi magát, még ha először jár is.</p>",
         "sort": "4",
         "user_created": null,
         "user_updated": null

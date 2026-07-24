@@ -89,7 +89,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       <>
         <div className="max-w-6xl mx-auto px-6 py-12 flex gap-12">
           <AutoSectionNav containerId="cms-content" />
-          <div id="cms-content" className="flex-1 min-w-0">
+          <div id="cms-content" className="article-prose flex-1 min-w-0">
             {(Data?.title || Data?.summary) && (
               <header className="mb-10 border-b border-gray-100 pb-6">
                 {Data?.title && (

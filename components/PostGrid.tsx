@@ -36,7 +36,7 @@ export default function PostGrid({ posts }: Props) {
               </div>
               <div>
                 <div className="group relative max-w-xl">
-                  <h3 className="mt-3 text-lg font-semibold leading-6">
+                  <h3 className="article-prose mt-3 text-lg font-semibold leading-6">
                     <span className="absolute inset-0" />
                     {post.title}
                   </h3>

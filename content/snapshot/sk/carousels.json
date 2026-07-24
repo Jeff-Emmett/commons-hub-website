@@ -4,7 +4,7 @@
     "date_updated": null,
     "id": "55",
     "status": "published",
-    "title": "REFERENCIE",
+    "title": "Referencie",
     "user_created": null,
     "user_updated": null,
     "carousel_items": [
@@ -29,7 +29,7 @@
         "id": "62",
         "image": "08f2faf5-2e8b-4659-88e5-ad9bf9c1c0e0",
         "image_url": "https://api.commons-hub.at/storage/v1/object/public/website-images/1751301539314.jpg",
-        "quote": "<p style=\"text-align: center\"><em>\"Commons Hub je bastiónom pre IRL komunitu a akčné učenie v rámci commoningu. Krajina a ubytovanie podporujú dlhodobé premýšľanie, živú diskusiu a budovanie zmysluplných vzťahov.\"</em></p><p style=\"text-align: center\"><strong>Will Szal, Regen Foundation</strong></p>",
+        "quote": "<p style=\"text-align: center\"><em>\"Commons Hub je bastiónom pre IRL komunitu a akčné učenie commoningu. Krajina a ubytovanie podporujú dlhodobé premýšľanie, živú diskusiu a budovanie zmysluplných vzťahov.\"</em></p><p style=\"text-align: center\"><strong>Will Szal, Regen Foundation</strong></p>",
         "sort": null,
         "user_created": null,
         "user_updated": null
@@ -97,7 +97,7 @@
         "id": "66",
         "image": "dc537a4f-bfde-41d7-8b65-9fe0abcc7356",
         "image_url": "https://api.commons-hub.at/storage/v1/object/public/website-images/1751377438008.jpg",
-        "quote": "<p style=\"text-align: center\">Raj pre turistiku a lezenie po skalách!</p>",
+        "quote": "<p style=\"text-align: center\">Turistika &amp; lezenie po skalách – raj!</p>",
         "sort": null,
         "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
         "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
@@ -139,7 +139,7 @@
         "id": "68",
         "image": "2797cabf-78fb-4ccb-8191-79cbf3ee907c",
         "image_url": null,
-        "quote": "<p>Vitajte v <b>commons hub</b>,<br>spoločnom penzióne a mieste konania podujatí v rakúskych Alpách.</p>",
+        "quote": "<p>Vitajte v <b>commons hub</b>,<br>komunitnom penzióne a mieste pre podujatia v rakúskych Alpách.</p>",
         "sort": "1",
         "user_created": null,
         "user_updated": null
@@ -152,7 +152,7 @@
         "id": "69",
         "image": "44e402b8-7266-49da-aad2-dbe005e299f9",
         "image_url": null,
-        "quote": "<p>Domov pre umelcov, hackerov a vynálezcov skúmajúcich nové perspektívy v technológii, ekonomike, spoločnosti a prírode.</p>",
+        "quote": "<p>Domov pre umelcov, hackerov a vynálezcov objavujúcich nové perspektívy v oblasti technológií, ekonomiky, spoločnosti a prírody.</p>",
         "sort": "2",
         "user_created": null,
         "user_updated": null
@@ -165,7 +165,7 @@
         "id": "70",
         "image": "4e0ad2e3-f8c5-49f7-9e97-1359112e46a7",
         "image_url": null,
-        "quote": "<p>Od súkromných osláv po týždenné ústavy, uvoľnená ale zámerná atmosféra Commons Hub’s prináša nezabudnuteľné zážitky.</p>",
+        "quote": "<p>Od súkromných osláv po týždenné ústrany, uvoľnená, ale úmyselná atmosféra commons hubu prináša nezabudnuteľné zážitky.</p>",
         "sort": "3",
         "user_created": null,
         "user_updated": null
@@ -178,7 +178,7 @@
         "id": "71",
         "image": "510e9867-fecc-4f72-8855-9c9e1b6e3828",
         "image_url": null,
-        "quote": "<p>Minimálne formality. Maximálna sloboda.<br>Miesto, ktoré pôsobí známo, aj keď je to váš prvý raz.</p>",
+        "quote": "<p>Minimálne formality. Maximálna sloboda.<br>Miesto, ktoré pôsobí známo, aj keď je to váš prvýkrát.</p>",
         "sort": "4",
         "user_created": null,
         "user_updated": null

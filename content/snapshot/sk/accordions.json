@@ -34,7 +34,7 @@
       },
       {
         "accordion_id": "3",
-        "content": "<ul><li><p style=\"text-align: left\"><strong>Rozvíjajte našu komunitu</strong> prostredníctvom podujatí a partnerstiev</p></li><li><p style=\"text-align: left\"><strong>Podporte aplikovaný systémový dizajn</strong> prostredníctvom grantov a experimentov</p></li><li><p style=\"text-align: left\"><strong>Posilnite Hub ako ekonomický motor</strong> pestujúci miestne Commons</p></li><li><p style=\"text-align: left\"><strong>Vytvorte živý vedomostný hub</strong> spájajúci hnutia a akademickú sféru</p></li></ul>",
+        "content": "<ul><li><p style=\"text-align: left\"><strong>Rozvíjajte našu komunitu prostredníctvom podujatí a partnerstiev</strong></p></li><li><p style=\"text-align: left\"><strong>Podporte aplikovaný systémový dizajn prostredníctvom grantov a experimentov</strong></p></li><li><p style=\"text-align: left\"><strong>Posilnite Hub ako ekonomický motor, ktorý pestuje miestne Commons</strong></p></li><li><p style=\"text-align: left\"><strong>Vytvorte živý vedomostný hub spájajúci hnutia a akademickú sféru</strong></p></li></ul>",
         "date_created": "2025-06-30T18:01:10.716Z",
         "date_updated": "2025-07-21T09:12:34.817Z",
         "header": "MISSION",
@@ -62,7 +62,7 @@
     "accordion_items": [
       {
         "accordion_id": "4",
-        "content": "<p style=\"text-align: left\"></p><p style=\"text-align: left\"><span style=\"color: rgb(0, 0, 0)\">Penzión ponúka 30 lôžok rozdelených do 2 dvojlôžkových izieb a 5 internátov.</span></p><p style=\"text-align: left\"><a target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 underline button\" href=\"/category/guesthouse\">Čítať viac</a> <a target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 underline button\" href=\"/page/accommodation\">Rezervovať teraz</a></p>",
+        "content": "<p style=\"text-align: left\"></p><p style=\"text-align: left\"><span style=\"color: rgb(0, 0, 0)\">Hostinec ponúka 30 lôžok rozdelených do 2 dvojlôžkových izieb a 5 internátov.</span></p><p style=\"text-align: left\"><a target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 underline button\" href=\"/category/guesthouse\">Čítať viac</a> <a target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 underline button\" href=\"/page/accommodation\">Rezervovať teraz</a></p>",
         "date_created": "2025-07-01T11:30:03.166Z",
         "date_updated": "2025-07-21T14:38:23.479Z",
         "header": "LODGING",
@@ -86,7 +86,7 @@
       },
       {
         "accordion_id": "4",
-        "content": "<p style=\"text-align: left\">Ak máte nápad na podujatie, ale len obmedzené kapacity ho zorganizovať, sme tu pre vás. Či už ide o hackathon, (ne)konferenciu alebo retreat – máme dlhoročné skúsenosti s organizovaním podujatí a radi vám pomôžeme pretaviť vašu víziu do reality.&nbsp;</p><p style=\"text-align: left\">Naše služby zahŕňajú od koncepčného plánovania po praktickú prípravu podujatia, samotnú realizáciu aj následné vyhodnotenie. Okrem toho máme k dispozícii širokú škálu odborníkov, či už facilitátori, mediátori konfliktov, mediálne tímy, učitelia jogy alebo sprievodcovia meditáciou.</p>",
+        "content": "<p style=\"text-align: left\">Ak máte nápad na podujatie, ale len obmedzenú kapacitu ho zorganizovať, sme tu pre vás. Či už ide o hackathon, (ne)konferenciu alebo ústup – máme dlhoročné skúsenosti s organizovaním podujatí a radi vám pomôžeme pretaviť vašu víziu do reality.&nbsp;</p><p style=\"text-align: left\">Naše služby zahŕňajú od koncepčného plánovania po praktickú prípravu podujatia, samotnú realizáciu a následné ukončenie. Okrem toho máme k dispozícii širokú škálu odborníkov, či už ide o facilitátorov, mediátorov konfliktov, mediálne tímy, učiteľov jogy alebo sprievodcov meditáciou.</p>",
         "date_created": "2025-07-01T11:32:03.433Z",
         "date_updated": "2025-07-01T11:51:20.541Z",
         "header": "EVENT ORGANIZATION",
@@ -154,7 +154,7 @@
     "accordion_items": [
       {
         "accordion_id": "6",
-        "content": "<p style=\"text-align: left\">The Hub ubytováva až 30 ľudí v piatich internátoch a štyroch dvojlôžkových izbách. Posteľná bielizeň a uteráky sú zabezpečené, kúpeľne sa nachádzajú na poschodí.</p>",
+        "content": "<p style=\"text-align: left\">Hub ubytováva až 30 ľudí v piatich internátoch a štyroch dvojlôžkových izbách. Poťahy a uteráky sú zabezpečené, kúpeľne sa nachádzajú na poschodí.</p>",
         "date_created": "2025-07-01T14:40:34.580Z",
         "date_updated": "2025-07-01T14:45:42.752Z",
         "header": "Accommodation",
@@ -166,7 +166,7 @@
       },
       {
         "accordion_id": "6",
-        "content": "<p style=\"text-align: left\">Útulná uvítacia zóna spája pohodlie obývačky a staromódny šarm baru, ponúka veľa pohoviek, stolové hry a gramofón na vinilové platne pre uvoľnenú, príjemnú atmosféru.</p>",
+        "content": "<p style=\"text-align: left\">Útulná uvítacia zóna spája pohodlie obývačky s čarom starého baru, ponúkajúc množstvo pohoviek, stolových hier a gramofón na vinilové platne pre uvoľnenú, príjemnú atmosféru.</p>",
         "date_created": "2025-07-01T14:41:46.975Z",
         "date_updated": "2025-07-01T14:45:55.827Z",
         "header": "Bar & Lounge",
@@ -178,7 +178,7 @@
       },
       {
         "accordion_id": "6",
-        "content": "<p style=\"text-align: left\">Celá vonkajšia plocha približne 2000 m² môže byť využitá našimi hosťami. Predná záhrada je vynikajúcim miestom na voľný čas a uvoľnené večery pri ohni. Zadná záhrada je miesto, kde nájdete naše zeleninu, bobule a bylinky, a dostatok priestoru na dotyk skutočnej trávy.</p>",
+        "content": "<p style=\"text-align: left\">Celú vonkajšiu plochu približne 2000 m² môžu využívať naši hostia. Predná časť je vynikajúcim miestom na voľný čas a uvoľnené večery pri ohni. Zadná záhrada je miesto, kde nájdete naše zeleninu, bobule a bylinky, a dostatok priestoru na dotyk skutočnej trávy.</p>",
         "date_created": "2025-07-01T14:42:27.619Z",
         "date_updated": "2025-07-01T14:46:08.149Z",
         "header": "Gardens",
@@ -190,7 +190,7 @@
       },
       {
         "accordion_id": "6",
-        "content": "<p style=\"text-align: left\">Naše coworkingové priestory poskytujú pokojné pracovné prostredie, monitory a klávesnice, bicykle si môžete požičať na objavovanie okolia, niekoľko dielní obsahuje množstvo nástrojov a materiálov ako látka, farba a drevo pre tvorivosť, a piano a ďalšie nástroje sú k dispozícii na jam session.</p>",
+        "content": "<p style=\"text-align: left\">Naše Co‑working poskytuje pokojné pracovné prostredie, monitory a klávesnice, bicykle si môžete požičať na objavovanie okolia, niekoľko dielní obsahuje množstvo nástrojov a materiálov ako látka, farba a drevo pre tvorivosť, a piano a ďalšie nástroje sú k dispozícii na jam.</p>",
         "date_created": "2025-07-01T14:43:02.155Z",
         "date_updated": "2025-07-01T14:46:18.557Z",
         "header": "Other Amenities",
@@ -218,7 +218,7 @@
     "accordion_items": [
       {
         "accordion_id": "7",
-        "content": "<p style=\"text-align: left\">90 m² pojme až 75 miest smerujúcich k pódiu s rozmermi 3x6 m, masívnym zvukovým systémom a projektorom namontovaným na strop so znižovacou obrazovkou o veľkosti 133’’. Bezdrôtové mikrofóny, dve kamery namontované na stenách a kamera na statíve sú pripojené k 4‑kanálovému video mixéru, ktorý podporuje živý video streaming a produkciu.</p>",
+        "content": "<p style=\"text-align: left\">90m² pojme až 75 miest na sedenie oproti pódiu veľkosti 3x6m s masívnym zvukovým systémom a projektorom namontovaným na strope s 133’’ znižovacou obrazovkou. Bezdrôtové mikrofóny, dve kamery namontované na stene a kamera na statíve napájajú 4-kanálový video mixér, ktorý podporuje živé streamovanie videa a produkciu.</p>",
         "date_created": "2025-07-01T14:54:23.864Z",
         "date_updated": null,
         "header": "Main Stage & Hall",
@@ -230,7 +230,7 @@
       },
       {
         "accordion_id": "7",
-        "content": "<p style=\"text-align: left\">Vedľa hlavnej scény, Event Hall, ktorá tiež ponúka 90m², je otvorenejší priestor, ktorý sa hodí na workshopy, rozdelené sedenia a ako priestor, ktorý môže byť využitý pre coworking. Typicky podujatia začínajú svoje rána v veľkom kruhu, aby si na bielej tabuli naplánovali denný program.&nbsp;</p>",
+        "content": "<p style=\"text-align: left\">Vedľa hlavnej scény, Event Hall, ktorá tiež ponúka 90m², je otvorenejší priestor, ktorý sa hodí na workshopy, breakout sessiony a ako priestor, ktorý možno využiť na coworking. Typicky podujatia začínajú svoje rána v veľkom kruhu, aby si na bielej tabuli naplánovali denný program.&nbsp;</p>",
         "date_created": "2025-07-01T14:55:59.133Z",
         "date_updated": "2025-07-01T14:57:25.307Z",
         "header": "Event Hall",
@@ -242,7 +242,7 @@
       },
       {
         "accordion_id": "7",
-        "content": "<p style=\"text-align: left\">Ako súčasť podujatia v sále umožňuje plne vybavené plug-and-play štúdio pre podcasty spontánnu aj dobre naplánovanú mediálnu produkciu. Hostia môžu jednoducho zaznamenať svoje myšlienky, prezentácie a rozhovory bez toho, aby ich brzdili technické alebo priestorové problémy.</p>",
+        "content": "<p style=\"text-align: left\">V rámci podujatia je plne vybavené plug-and-play podcastové štúdio, ktoré umožňuje spontánnu aj dobre naplánovanú mediálnu produkciu. Hostia môžu jednoducho zaznamenať svoje myšlienky, prezentácie a rozhovory bez toho, aby ich brzdili technické alebo priestorové výzvy.</p>",
         "date_created": "2025-07-01T14:56:38.703Z",
         "date_updated": "2025-07-01T14:57:32.499Z",
         "header": "Video Podcast Studio",
@@ -254,7 +254,7 @@
       },
       {
         "accordion_id": "7",
-        "content": "<p style=\"text-align: left\">Spoločná pracovňa o rozlohe 40 m² slúži aj ako vyhradená seminárna miestnosť pre menšie podujatia, vybavená 65‑palcovým TV, 20 stoličkami, bielou tabuľou a prispôsobiteľnými a všestrannými stolmi a sedením, ideálnymi pre workshopy alebo stretnutia.</p>",
+        "content": "<p style=\"text-align: left\">40m² coworking slúži aj ako vyhradená seminárna miestnosť pre menšie podujatia, vybavená 65’’ TV, 20 stoličkami, bielou tabuľou a prispôsobiteľnými a všestrannými stolmi a sedením, ideálne pre workshopy alebo stretnutia.</p>",
         "date_created": "2025-07-01T14:57:09.851Z",
         "date_updated": "2025-07-01T14:57:41.482Z",
         "header": "Co-Working Space",
@@ -310,7 +310,7 @@
     "accordion_items": [
       {
         "accordion_id": "11",
-        "content": "<p style=\"text-align: left\">Početné pláže pozdĺž rieky Schwarza pozývajú na kúpanie a opaľovanie v pešej vzdialenosti od Hubu</p>",
+        "content": "<p style=\"text-align: left\">Početné pláže pozdĺž rieky Schwarza pozývajú na kúpanie a opaľovanie v pešej vzdialenosti od Hub</p>",
         "date_created": "2025-09-25T10:17:00.542Z",
         "date_updated": null,
         "header": "(SUN)BATHING AT RIVER SCHWARZA",
@@ -338,7 +338,7 @@
     "accordion_items": [
       {
         "accordion_id": "12",
-        "content": "<p style=\"text-align: left\">Hoci je jej cisárska minulosť dávno preč, Reichenau an der Rax zostáva kultúrnym centrom s dvoma hudobnými pavilónmi a klasickým divadlom. Jej šesťtýždňový letný festival ponúka dva denné predstavenia, spolu s čítaniami literatúry, klasickou hudbou a ďalšími umeleckými podujatiami. Ďalšie pozostatky monarchie sú rôzne cisárske zámky, sídla a vily, ktoré prispievajú k šľachtickému vzhľadu mesta.</p>",
+        "content": "<p style=\"text-align: left\">Aj keď je jeho cisárska minulosť dávno preč, Reichenau an der Rax zostáva kultúrnym centrom s dvoma hudobnými pavilónmi a klasickým divadlom. Jeho šesťtýždňový letný festival ponúka dva denné predstavenia, spolu s čítaniami literatúry, klasickou hudbou a ďalšími umeleckými podujatiami. Ďalšie pozostatky monarchie sú rôzne cisárske zámky, sídla a vily, ktoré prispievajú k šľachetnému vzhľadu mesta.</p>",
         "date_created": "2025-09-25T10:25:16.313Z",
         "date_updated": "2025-09-25T11:49:58.019Z",
         "header": "THEATER FESTIVAL",
@@ -394,7 +394,7 @@
     "accordion_items": [
       {
         "accordion_id": "14",
-        "content": "<p style=\"text-align: left\">Záhrada <strong>commons hub</strong> prosperuje s vyvýšenými záhonmi, ovocnými stromami a bzučivým úľom, čím vytvára živý permakultúrny priestor. Pripojte sa k nám, aby ste o ňu starali, udržiavali ju a rozširovali, a užívajte si jej plody s nami!</p>",
+        "content": "<p style=\"text-align: left\">Záhrada <strong>commons hub</strong> prosperuje vďaka vyvýšeným záhonom, ovocným stromom a bzučivému úľu, čím vytvára živý permakultúrny priestor. Pripojte sa k nám, aby ste o ňu starali, udržiavali ju a rozširovali, a užívali si jej plody s nami!</p>",
         "date_created": "2025-09-25T11:23:31.092Z",
         "date_updated": null,
         "header": "Gardening around the Hub",
@@ -422,7 +422,7 @@
     "accordion_items": [
       {
         "accordion_id": "15",
-        "content": "<p style=\"text-align: left\">Viac ako 2 000 zdokumentovaných lezeckých trás — mnohé viacstupňové — robí masív Schneeberg/Rax hlavným cieľom pre lezcov z Viedne, Bratislavy, Budapešti a ďalej. Trad, športové a via-ferrata trasy začínajú v pešej vzdialenosti od Hub.</p>",
+        "content": "<p style=\"text-align: left\">Viac ako 2,000 zdokumentovaných lezeckých trás — mnohé viacpásmové — robí masív Schneeberg/Rax hlavným cieľom pre lezcov z Viedne, Bratislavy, Budapešti a ďalej. Trad, sport a via-ferrata trasy začínajú v pešej vzdialenosti od Hubu.</p>",
         "date_created": "2026-05-15T13:14:36.771Z",
         "date_updated": null,
         "header": "CLIMBING",
@@ -450,7 +450,7 @@
     "accordion_items": [
       {
         "accordion_id": "16",
-        "content": "<p style=\"text-align: left\">Commons Hub udržiava komunitnú wiki, kde obyvatelia a návštevníci dokumentujú trasy, miestne legendy, recepty, tipy na výrobu a prebiehajúce experimenty. Opýtajte sa pri recepcii (čítaj: v kuchyni) na účet — ktokoľvek, kto zostáva v Hube, môže prispievať.</p>",
+        "content": "<p style=\"text-align: left\">Commons Hub udržiava komunitnú wiki, kde obyvatelia a návštevníci dokumentujú trasy, miestne legendy, recepty, tipy na výrobu a prebiehajúce experimenty. Požiadajte na recepcii (čítaj: v kuchyni) o účet — ktokoľvek, kto zostáva v Hube, môže prispievať.</p>",
         "date_created": "2026-05-15T13:14:36.771Z",
         "date_updated": null,
         "header": "WIKI",

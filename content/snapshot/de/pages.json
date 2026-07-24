@@ -19,8 +19,8 @@
     "slug": "hub",
     "sort": "1",
     "status": "published",
-    "summary": "Der <strong>commons hub</strong> ist ein Veranstaltungsort, Co‑Working- und Kletterbasis in den österreichischen Alpen, wo große Köpfe zusammenkommen, um die Commons zu erkunden und zu praktizieren, unterstützt von aufkommenden Technologien.",
-    "title": "HUB",
+    "summary": "Der <strong>commons hub</strong> ist ein Veranstaltungsort, Co‑Working‑ und Kletterbasis in den österreichischen Alpen, wo große Köpfe zusammenkommen, um das Commons zu erforschen und zu praktizieren, unterstützt durch aufkommende Technologien.",
+    "title": "ZENTRALE",
     "user_created": null,
     "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5",
     "page_accordion": [
@@ -109,7 +109,7 @@
     ]
   },
   {
-    "body": "<p style=\"text-align: left\"><span style=\"font-size: 20px\">Ob Sie einen Ort zum Übernachten, eine Veranstaltungsstätte für Ihr Event oder Hilfe bei der Planung benötigen, wir sind hier, um Sie zu unterstützen.</span></p><p style=\"text-align: left\"><span style=\"font-size: 20px\">Unsere Räume und Dienstleistungen sind auf Verbindung, Zusammenarbeit und Kreativität ausgerichtet.</span></p>",
+    "body": "<p style=\"text-align: left\"><span style=\"font-size: 20px\">Ob Sie einen Ort zum Übernachten, eine Veranstaltungsstätte für Ihr Event oder Hilfe bei der Planung benötigen, wir sind hier, um Sie zu unterstützen.</span></p><p style=\"text-align: left\"><span style=\"font-size: 20px\">Unsere Räume und Dienstleistungen sind für Verbindung, Zusammenarbeit und Kreativität konzipiert.</span></p>",
     "date_created": null,
     "date_updated": "2025-07-01T11:33:00.780Z",
     "icon_filename": null,
@@ -128,7 +128,7 @@
     "slug": "services",
     "sort": "0",
     "status": "published",
-    "summary": "Unsere Dienstleistungen reichen von klassischen Gästehausangeboten bis hin zum Hosting und zur Organisation von Veranstaltungen.",
+    "summary": "Unsere Dienstleistungen reichen von klassischen Gästehausangeboten bis hin zur Durchführung und Organisation von Veranstaltungen.",
     "title": "DIENSTLEISTUNGEN",
     "user_created": null,
     "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5",
@@ -169,7 +169,7 @@
     "sort": "0",
     "status": "published",
     "summary": "Unsere Gemeinschaft wird durch ihre Vielfalt, ihr Gemeinschaftsgefühl und Solidarität definiert. Die hier geknüpften Verbindungen gehen oft über die Arbeit hinaus und entwickeln sich zu tiefen und dauerhaften Freundschaften.",
-    "title": "Gemeinschaft",
+    "title": "GEMEINSCHAFT",
     "user_created": null,
     "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5",
     "page_accordion": [],
@@ -318,7 +318,7 @@
     "slug": "home",
     "sort": null,
     "status": "published",
-    "summary": "Ein experimenteller Spielplatz für die Gestaltung regenerativer Systeme",
+    "summary": "Ein experimenteller Spielplatz für regenerative Systemgestaltung",
     "title": "STARTSEITE",
     "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
     "user_updated": "258593a6-4999-4401-8ea6-5959100f1278",
@@ -413,7 +413,7 @@
     ]
   },
   {
-    "body": "<p style=\"text-align: left\">Direkt dort, wo die Wiener Ebene endet und die Alpen zu steigen beginnen, ist das <strong>commons hub</strong> von atemberaubenden Naturschönheiten und einem förderlichen kulturellen Umfeld umgeben. Das Hub selbst bietet ebenfalls zahlreiche Möglichkeiten, aktiv zu werden – sei es in unserem FabLab, den Gärten oder dem aufstrebenden Fitnessstudio.</p>",
+    "body": "<p style=\"text-align: left\">Direkt dort, wo die Wiener Ebene endet und die Alpen zu ragen beginnen, ist das <strong>commons hub</strong> von atemberaubenden Naturschönheiten und einem förderlichen kulturellen Umfeld umgeben. Auch das Hub selbst bietet zahlreiche Möglichkeiten, aktiv zu werden – sei es in unserem FabLab, den Gärten oder dem aufstrebenden Fitnessstudio.</p>",
     "date_created": "2025-09-25T08:20:27.681Z",
     "date_updated": "2025-09-25T11:57:26.972Z",
     "icon_filename": null,

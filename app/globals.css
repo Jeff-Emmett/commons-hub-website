@@ -159,6 +159,23 @@ main.page-sections > * {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   }
 
+  /* Editorial typography. The site-wide uppercase treatment below is the
+     brand's signage voice — right for navigation and page furniture, wrong for
+     an article, where it flattens sentence punctuation and slows reading.
+     Anything inside .article-prose keeps the capitalisation it was written in;
+     the class works both on a container and directly on a heading. */
+  .article-prose,
+  .article-prose :is(h1, h2, h3, h4, h5, h6),
+  .article-prose :is(.h1, .h2, .h3, .h4, .h5) {
+    text-transform: none;
+  }
+
+  /* Headings site-wide have margin-top: 0, so an inline photo would otherwise
+     sit flush against the heading that follows it. */
+  .article-prose img {
+    margin-block: 2rem;
+  }
+
   .h1 {
     color: var(--color-1);
     text-transform: uppercase;

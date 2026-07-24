@@ -4,7 +4,7 @@
     "date_updated": null,
     "id": "55",
     "status": "published",
-    "title": "REFERENZEN",
+    "title": "TESTIMONIALS",
     "user_created": null,
     "user_updated": null,
     "carousel_items": [
@@ -16,7 +16,7 @@
         "id": "61",
         "image": "ca0e915b-5a61-4b82-a7e7-d8c4c61902f0",
         "image_url": "https://api.commons-hub.at/storage/v1/object/public/website-images/1751301486616.jpg",
-        "quote": "<p style=\"text-align: center\"><em>„Der Commons Hub ist ein wunderschöner physischer Raum, der ebenso schöne soziale und intellektuelle Räume hervorbringt.“ &nbsp;</em></p><p style=\"text-align: center\"><strong>Dr Michael Zargham, BlockScience (CEO)</strong></p>",
+        "quote": "<p style=\"text-align: center\"><em>\"The Commons Hub is a beautiful physical space which engenders equally beautiful social and intellectual spaces.\" &nbsp;</em></p><p style=\"text-align: center\"><strong>Dr Michael Zargham, BlockScience (CEO)</strong></p>",
         "sort": null,
         "user_created": null,
         "user_updated": null
@@ -29,7 +29,7 @@
         "id": "62",
         "image": "08f2faf5-2e8b-4659-88e5-ad9bf9c1c0e0",
         "image_url": "https://api.commons-hub.at/storage/v1/object/public/website-images/1751301539314.jpg",
-        "quote": "<p style=\"text-align: center\"><em>\"Commons Hub ist ein Bollwerk für die IRL-Community und das Action‑Learning‑Commoning. Die Landschaft und Unterkünfte fördern langfristiges Denken, lebhafte Diskussionen und den Aufbau bedeutungsvoller Beziehungen.\"</em></p><p style=\"text-align: center\"><strong>Will Szal, Regen Foundation</strong></p>",
+        "quote": "<p style=\"text-align: center\"><em>\"Commons Hub is a bastion for IRL community and action learning commoning. The landscape and accommodations foster long-form thought, lively discourse, and meaningful relationship building.\"</em></p><p style=\"text-align: center\"><strong>Will Szal, Regen Foundation</strong></p>",
         "sort": null,
         "user_created": null,
         "user_updated": null
@@ -42,7 +42,7 @@
         "id": "63",
         "image": "c613c2dc-48fb-4d88-b3e6-243be43655c7",
         "image_url": "https://api.commons-hub.at/storage/v1/object/public/website-images/1751301590060.png",
-        "quote": "<p style=\"text-align: center\"><em>\"Der Commons Hub erweitert die Grenzen von Krypto und Postkapitalismus durch imaginative Experimente und produktiven Dialog. Ich habe meine Zeit im Hub sehr genossen und vom breiteren Netzwerk profitiert, das dieser Knoten hervorgebracht hat.\"</em></p><p style=\"text-align: center\"><strong>Ori Shimony, d0rg (co-founder)</strong></p>",
+        "quote": "<p style=\"text-align: center\"><em>\"The Commons Hub is pushing the boundaries of crypto and post-capitalism through imaginative experiments and productive dialogue. I’ve seriously enjoyed my time at the Hub and benefited from the broader network this node has spawned.\"&nbsp;</em></p><p style=\"text-align: center\"><strong>Ori Shimony, d0rg (co-founder)</strong></p>",
         "sort": null,
         "user_created": null,
         "user_updated": null
@@ -59,7 +59,7 @@
     "date_updated": "2025-07-01T13:47:52.409Z",
     "id": "56",
     "status": "published",
-    "title": "UMGEBUNG",
+    "title": "SURROUNDINGS",
     "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
     "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5",
     "carousel_items": [
@@ -71,7 +71,7 @@
         "id": "64",
         "image": "8fae4a22-bd3e-4571-bfa4-c5f837b0ec2d",
         "image_url": "https://api.commons-hub.at/storage/v1/object/public/website-images/1751377219927.JPG",
-        "quote": "<p style=\"text-align: center\">Der Fluss Schwarza</p>",
+        "quote": "<p style=\"text-align: center\">The river Schwarza</p>",
         "sort": null,
         "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
         "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
@@ -84,7 +84,7 @@
         "id": "65",
         "image": "3a067355-299b-4d68-a662-b1eadc74c38b",
         "image_url": "https://api.commons-hub.at/storage/v1/object/public/website-images/1751377277770.JPG",
-        "quote": "<p style=\"text-align: center\">Rax im Winter</p>",
+        "quote": "<p style=\"text-align: center\">Rax in winter</p>",
         "sort": null,
         "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
         "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
@@ -97,7 +97,7 @@
         "id": "66",
         "image": "dc537a4f-bfde-41d7-8b65-9fe0abcc7356",
         "image_url": "https://api.commons-hub.at/storage/v1/object/public/website-images/1751377438008.jpg",
-        "quote": "<p style=\"text-align: center\">Wandern &amp; Klettern Paradies!</p>",
+        "quote": "<p style=\"text-align: center\">Wander- und Kletterparadies!</p>",
         "sort": null,
         "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
         "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
@@ -165,7 +165,7 @@
         "id": "70",
         "image": "4e0ad2e3-f8c5-49f7-9e97-1359112e46a7",
         "image_url": null,
-        "quote": "<p>Von privaten Feiern bis zu einwöchigen Rückzügen sorgt die entspannte, aber zielgerichtete Atmosphäre des commons hub für unvergessliche Erlebnisse.</p>",
+        "quote": "<p>Von privaten Feiern bis hin zu einwöchigen Rückzügen sorgt die entspannte, aber zielgerichtete Atmosphäre des commons hub für unvergessliche Erlebnisse.</p>",
         "sort": "3",
         "user_created": null,
         "user_updated": null
@@ -178,7 +178,7 @@
         "id": "71",
         "image": "510e9867-fecc-4f72-8855-9c9e1b6e3828",
         "image_url": null,
-        "quote": "<p>Minimale Formalitäten. Maximale Freiheit.<br>Ein Ort, der sich vertraut anfühlt, selbst wenn es das erste Mal ist.</p>",
+        "quote": "<p>Minimale Formalitäten. Maximale Freiheit.<br>Die Art von Ort, die sich vertraut anfühlt, selbst wenn es dein erstes Mal ist.</p>",
         "sort": "4",
         "user_created": null,
         "user_updated": null

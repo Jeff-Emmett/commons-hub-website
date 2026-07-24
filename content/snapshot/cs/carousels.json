@@ -4,7 +4,7 @@
     "date_updated": null,
     "id": "55",
     "status": "published",
-    "title": "Reference",
+    "title": "REFERENCE",
     "user_created": null,
     "user_updated": null,
     "carousel_items": [
@@ -16,7 +16,7 @@
         "id": "61",
         "image": "ca0e915b-5a61-4b82-a7e7-d8c4c61902f0",
         "image_url": "https://api.commons-hub.at/storage/v1/object/public/website-images/1751301486616.jpg",
-        "quote": "<p style=\"text-align: center\"><em>\"The Commons Hub je krásný fyzický prostor, který vytváří stejně krásné sociální a intelektuální prostory.\" &nbsp;</em></p><p style=\"text-align: center\"><strong>Dr Michael Zargham, BlockScience (CEO)</strong></p>",
+        "quote": "<p style=\"text-align: center\"><em>\"Commons Hub je krásný fyzický prostor, který vytváří stejně krásné sociální a intelektuální prostory.\" &nbsp;</em></p><p style=\"text-align: center\"><strong>Dr Michael Zargham, BlockScience (CEO)</strong></p>",
         "sort": null,
         "user_created": null,
         "user_updated": null
@@ -29,7 +29,7 @@
         "id": "62",
         "image": "08f2faf5-2e8b-4659-88e5-ad9bf9c1c0e0",
         "image_url": "https://api.commons-hub.at/storage/v1/object/public/website-images/1751301539314.jpg",
-        "quote": "<p style=\"text-align: center\"><em>\"Commons Hub je baštou pro komunitu IRL a akční učení commoningu. Krajina a ubytování podporují dlouhodobé myšlení, živou diskusi a smysluplné budování vztahů.\"</em></p><p style=\"text-align: center\"><strong>Will Szal, Regen Foundation</strong></p>",
+        "quote": "<p style=\"text-align: center\"><em>\"Commons Hub je baštou pro komunitu IRL a akční učení společného užívání. Krajina a ubytování podporují dlouhodobé myšlení, živou diskusi a smysluplné budování vztahů.\"</em></p><p style=\"text-align: center\"><strong>Will Szal, Regen Foundation</strong></p>",
         "sort": null,
         "user_created": null,
         "user_updated": null
@@ -42,7 +42,7 @@
         "id": "63",
         "image": "c613c2dc-48fb-4d88-b3e6-243be43655c7",
         "image_url": "https://api.commons-hub.at/storage/v1/object/public/website-images/1751301590060.png",
-        "quote": "<p style=\"text-align: center\"><em>\"Commons Hub posouvá hranice krypta a postkapitalismu prostřednictvím imaginativních experimentů a produktivního dialogu. Opravdu jsem si užil svůj čas v Hubu a těžil z širší sítě, kterou tento uzel vytvořil.\"&nbsp;</em></p><p style=\"text-align: center\"><strong>Ori Shimony, d0rg (spoluzakladatel)</strong></p>",
+        "quote": "<p style=\"text-align: center\"><em>\"Commons Hub posouvá hranice krypta a postkapitalismu prostřednictvím imaginativních experimentů a produktivního dialogu. Opravdu jsem si užil svůj čas v Hubu a těžil z širší sítě, kterou tento uzel vytvořil.\"&nbsp;</em></p><p style=\"text-align: center\"><strong>Ori Shimony, d0rg (co-founder)</strong></p>",
         "sort": null,
         "user_created": null,
         "user_updated": null
@@ -71,7 +71,7 @@
         "id": "64",
         "image": "8fae4a22-bd3e-4571-bfa4-c5f837b0ec2d",
         "image_url": "https://api.commons-hub.at/storage/v1/object/public/website-images/1751377219927.JPG",
-        "quote": "<p style=\"text-align: center\">Řeka Schwarza</p>",
+        "quote": "<p style=\"text-align: center\">The river Schwarza</p>",
         "sort": null,
         "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
         "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
@@ -97,7 +97,7 @@
         "id": "66",
         "image": "dc537a4f-bfde-41d7-8b65-9fe0abcc7356",
         "image_url": "https://api.commons-hub.at/storage/v1/object/public/website-images/1751377438008.jpg",
-        "quote": "<p style=\"text-align: center\">Ráj pro pěší turistiku a horolezectví!</p>",
+        "quote": "<p style=\"text-align: center\">Hiking &amp; rock climbing paradise!</p>",
         "sort": null,
         "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
         "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
@@ -110,7 +110,7 @@
         "id": "67",
         "image": "8a03d349-e9e2-4afd-b8b1-18a976594c13",
         "image_url": "https://api.commons-hub.at/storage/v1/object/public/website-images/1751377667602.jpeg",
-        "quote": "<p style=\"text-align: center\">Připravujeme se na túru!</p>",
+        "quote": "<p style=\"text-align: center\">Getting ready for the hike!</p>",
         "sort": null,
         "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
         "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
@@ -139,7 +139,7 @@
         "id": "68",
         "image": "2797cabf-78fb-4ccb-8191-79cbf3ee907c",
         "image_url": null,
-        "quote": "<p>Vítejte v <b>commons hub</b>,<br>komunitním penzionu a místě konání akcí v rakouských Alpách.</p>",
+        "quote": "<p>Welcome to the <b>commons hub</b>,<br>a communal guesthouse and events venue in the Austrian Alps.</p>",
         "sort": "1",
         "user_created": null,
         "user_updated": null
@@ -165,7 +165,7 @@
         "id": "70",
         "image": "4e0ad2e3-f8c5-49f7-9e97-1359112e46a7",
         "image_url": null,
-        "quote": "<p>Od soukromých oslav po týdenní ústraní, uvolněná ale záměrná atmosféra commons hubu přináší nezapomenutelné zážitky.</p>",
+        "quote": "<p>Od soukromých oslav po týdenní ústraní, uvolněná, ale záměrná atmosféra commons hub přináší nezapomenutelné zážitky.</p>",
         "sort": "3",
         "user_created": null,
         "user_updated": null
@@ -178,7 +178,7 @@
         "id": "71",
         "image": "510e9867-fecc-4f72-8855-9c9e1b6e3828",
         "image_url": null,
-        "quote": "<p>Minimální formality. Maximální svoboda.<br>Typ místa, který se zdá být známý, i když je to vaše první návštěva.</p>",
+        "quote": "<p>Minimální formality. Maximální svoboda.<br>Druh místa, který se cítí známý, i když je to poprvé.</p>",
         "sort": "4",
         "user_created": null,
         "user_updated": null
