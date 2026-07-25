@@ -32,5 +32,4 @@ push origin main → Gitea webhook → deploy.jeffemmett.com/deploy/commons-hub-
 
 The server dir is a Gitea checkout pinned to `main`; server-only files (`.env`,
 `docker-compose.yml`) are untracked and preserved across deploys. Pushing `dev`
-does **not** deploy. See `docs/artizen-integration.md` for the campaign
-integration notes.
+does **not** deploy.

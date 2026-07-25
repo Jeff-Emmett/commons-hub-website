@@ -42,8 +42,7 @@
     "about": "Rólunk",
     "communityPartners": "Közösség és partnerek",
     "natureSurroundings": "Természet és környék",
-    "impressum": "Impresszum",
-    "support": "Támogass minket"
+    "impressum": "Impresszum"
   },
   "booking": {
     "numberOfGuests": "Vendégek száma",
@@ -64,31 +63,6 @@
     "emailPlaceholder": "az@email.com",
     "tagline": "Iratkozz fel a Commons Hub eseményeire és híreire",
     "submitting": "Feliratkozás…"
-  },
-  "support": {
-    "metaTitle": "Támogass minket az Artizenen",
-    "metaDescription": "Támogasd a Commons Hub Valley of the Common kampányát az Artizenen — minden megvásárolt 10 $-os Artifact kiegészítő támogatást szabadít fel.",
-    "kicker": "{season}. évad · Élőben az Artizenen",
-    "heading": "Támogasd a Valley of the Commont",
-    "intro": "Az Artizenen gyűjtünk közösségi kiegészítő támogatással. Vegyél egy 10 $-os Artifactot, és minden hozzájárult dollárod további egy dollárt szabadít fel minden minket támogató Fundtól — amíg a kiegészítő keret tart.",
-    "cta": "Támogatás az Artizenen",
-    "ctaNote": "Megnyitja az artizen.fund oldalt · 100% a projekté · fizetés kártyával vagy kriptóval",
-    "statsRaised": "Eddig összegyűlt",
-    "statsArtifacts": "Eladott Artifactok",
-    "statsMatch": "Felszabadított kiegészítés",
-    "statsLiveNote": "Élőben az Artizenről",
-    "statsFallback": "Az aktuális összegeket az Artizen projektoldalán találod.",
-    "howHeading": "Hogyan működik",
-    "step1Title": "Vegyél egy Artifactot",
-    "step1Body": "Minden Artifact egy 10 $-os nyílt kiadás. Az ár 100%-a közvetlenül a projekthez jut — az Artizen nem von le semmit.",
-    "step2Title": "Szabadítsd fel a kiegészítést",
-    "step2Body": "Minden 1 $ Artifact-eladás 1 $-t szabadít fel minden minket támogató Fundtól, megsokszorozva a hatásodat — amíg a kiegészítő keret tart.",
-    "step3Title": "Nyerd meg a fordulót",
-    "step3Body": "A Fund legtöbbet eladó projektje nyeri az évad pénzdíját, így a támogatásod segít feljebb jutni a ranglistán.",
-    "teaserKicker": "Most élőben az Artizenen",
-    "teaserHeading": "Segíts finanszírozni a Valley of the Commont",
-    "teaserBody": "Vegyél egy 10 $-os Artifactot, és szabadíts fel kiegészítő támogatást a Commons Hubnak.",
-    "teaserCta": "Tudd meg, hogyan támogathatsz"
   },
   "language": {
     "label": "Nyelv",

@@ -42,8 +42,7 @@
     "about": "O nás",
     "communityPartners": "Komunita a partneři",
     "natureSurroundings": "Příroda a okolí",
-    "impressum": "Tiráž",
-    "support": "Podpořte nás"
+    "impressum": "Tiráž"
   },
   "booking": {
     "numberOfGuests": "Počet hostů",
@@ -64,31 +63,6 @@
     "emailPlaceholder": "vas@email.com",
     "tagline": "Odebírej novinky o akcích a oznámení z Commons Hubu",
     "submitting": "Přihlašování…"
-  },
-  "support": {
-    "metaTitle": "Podpořte nás na Artizenu",
-    "metaDescription": "Podpořte kampaň Valley of the Common od Commons Hubu na Artizenu — každý zakoupený Artifact za 10 $ odemkne vyrovnávací příspěvek.",
-    "kicker": "Sezóna {season} · Živě na Artizenu",
-    "heading": "Podpořte Valley of the Common",
-    "intro": "Vybíráme prostředky na Artizenu s komunitním vyrovnáním. Kupte si Artifact za 10 $ a každý dolar, kterým přispějete, odemkne další dolar od každého Fundu, který nás podporuje — dokud vyrovnávací prostředky vydrží.",
-    "cta": "Podpořit na Artizenu",
-    "ctaNote": "Otevře artizen.fund · 100 % jde projektu · platba kartou nebo kryptem",
-    "statsRaised": "Zatím vybráno",
-    "statsArtifacts": "Prodané Artifacty",
-    "statsMatch": "Odemčené vyrovnání",
-    "statsLiveNote": "Živě z Artizenu",
-    "statsFallback": "Aktuální částky najdete na stránce projektu na Artizenu.",
-    "howHeading": "Jak to funguje",
-    "step1Title": "Kupte si Artifact",
-    "step1Body": "Každý Artifact je otevřená edice za 10 $. 100 % ceny jde přímo projektu — Artizen si nic nebere.",
-    "step2Title": "Odemkněte vyrovnání",
-    "step2Body": "Každý 1 $ z prodeje Artifactů odemkne 1 $ od každého podporujícího Fundu a znásobí váš dopad — dokud vyrovnávací prostředky vydrží.",
-    "step3Title": "Vyhrajte kolo",
-    "step3Body": "Nejprodávanější projekt ve Fundu vyhraje peněžní cenu sezóny, takže vaše podpora nám pomáhá stoupat v žebříčku.",
-    "teaserKicker": "Nyní živě na Artizenu",
-    "teaserHeading": "Pomozte financovat Valley of the Common",
-    "teaserBody": "Kupte si Artifact za 10 $ a odemkněte vyrovnávací prostředky pro Commons Hub.",
-    "teaserCta": "Zjistěte, jak podpořit"
   },
   "language": {
     "label": "Jazyk",

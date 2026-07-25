@@ -41,8 +41,7 @@
     "about": "About",
     "communityPartners": "Community & Partners",
     "natureSurroundings": "Nature & Surroundings",
-    "impressum": "Impressum",
-    "support": "Support us"
+    "impressum": "Impressum"
   },
   "booking": {
     "numberOfGuests": "Number of guests",
@@ -63,31 +62,6 @@
     "emailPlaceholder": "your@email.com",
     "tagline": "Subscribe for new events & announcements from the Commons Hub",
     "submitting": "Subscribing…"
-  },
-  "support": {
-    "metaTitle": "Support Us on Artizen",
-    "metaDescription": "Back the Commons Hub's Valley of the Common campaign on Artizen — every $10 Artifact you buy unlocks matching funds.",
-    "kicker": "Season {season} · Live on Artizen",
-    "heading": "Back the Valley of the Common",
-    "intro": "We're raising funds on Artizen with a community match. Buy a $10 Artifact and every dollar you contribute unlocks an additional dollar from each Fund backing us — while matching funds last.",
-    "cta": "Support on Artizen",
-    "ctaNote": "Opens artizen.fund · 100% goes to the project · pay by card or crypto",
-    "statsRaised": "Raised so far",
-    "statsArtifacts": "Artifacts sold",
-    "statsMatch": "Match unlocked",
-    "statsLiveNote": "Live from Artizen",
-    "statsFallback": "See live totals on the Artizen project page.",
-    "howHeading": "How it works",
-    "step1Title": "Buy an Artifact",
-    "step1Body": "Each Artifact is a $10 open edition. 100% of the price goes straight to the project — Artizen takes no cut.",
-    "step2Title": "Unlock the match",
-    "step2Body": "Every $1 in Artifact sales unlocks $1 from each Fund backing us, multiplying your impact — while matching funds last.",
-    "step3Title": "Win the round",
-    "step3Body": "The top-selling project in the Fund wins the season's cash prize, so your support helps us climb the leaderboard.",
-    "teaserKicker": "Now live on Artizen",
-    "teaserHeading": "Help fund the Valley of the Common",
-    "teaserBody": "Buy a $10 Artifact and unlock matching funds for the Commons Hub.",
-    "teaserCta": "Learn how to support"
   },
   "language": {
     "label": "Language",
