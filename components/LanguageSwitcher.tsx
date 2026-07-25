@@ -50,7 +50,8 @@ export function LanguageSwitcher({ variant = "header", className }: Props) {
   const [autoDetected, setAutoDetected] = useState(false);
 
   useEffect(() => {
-    setAutoDetected(readCookie(LOCALE_SOURCE_COOKIE) === "auto");
+    // Value is "auto" or "auto.<reason>" (e.g. "auto.geo-AT").
+    setAutoDetected(!!readCookie(LOCALE_SOURCE_COOKIE)?.startsWith("auto"));
   }, [locale]);
 
   const select = (next: string) => {

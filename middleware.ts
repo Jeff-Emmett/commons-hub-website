@@ -4,7 +4,7 @@ import {
   LOCALE_COOKIE,
   LOCALE_HEADER,
   LOCALE_SOURCE_COOKIE,
-  detectLocale,
+  detectLocaleWithReason,
   isLocale,
 } from "@/lib/i18n/geo";
 
@@ -36,6 +36,8 @@ function isPublic(pathname: string) {
 }
 
 const ONE_YEAR = 60 * 60 * 24 * 365;
+// Carries the detection reason from applyDetectedLocale() to persistLocale().
+const REASON_HEADER = "x-commons-locale-reason";
 
 /**
  * First-visit language detection (geo-IP → Accept-Language → English).
@@ -49,9 +51,10 @@ function applyDetectedLocale(request: NextRequest): boolean {
   const existing = request.cookies.get(LOCALE_COOKIE)?.value;
   if (isLocale(existing)) return false;
 
-  const locale = detectLocale(request.headers);
+  const { locale, reason } = detectLocaleWithReason(request.headers);
   request.cookies.set(LOCALE_COOKIE, locale);
   request.headers.set(LOCALE_HEADER, locale);
+  request.headers.set(REASON_HEADER, reason);
   return true;
 }
 
@@ -60,7 +63,9 @@ function persistLocale(request: NextRequest, response: NextResponse) {
   if (!locale) return response;
   const options = { path: "/", maxAge: ONE_YEAR, sameSite: "lax" as const };
   response.cookies.set(LOCALE_COOKIE, locale, options);
-  response.cookies.set(LOCALE_SOURCE_COOKIE, "auto", options);
+  // e.g. "auto.geo-AT" — token-safe, see detectLocaleWithReason().
+  const reason = request.headers.get(REASON_HEADER);
+  response.cookies.set(LOCALE_SOURCE_COOKIE, reason ? `auto.${reason}` : "auto", options);
   return response;
 }
 

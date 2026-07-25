@@ -70,9 +70,32 @@ export function localeFromAcceptLanguage(header: string | null): Locale | null {
  * the caller — this function is only consulted when that cookie is absent.
  */
 export function detectLocale(headers: Headers): Locale {
+  return detectLocaleWithReason(headers).locale;
+}
+
+/**
+ * As detectLocale, but also reports what decided it. The reason is written to
+ * the NEXT_LOCALE_SOURCE cookie, which makes a wrong guess diagnosable from the
+ * browser alone: "geo-AT" vs "lang-de.geonone" tells you immediately
+ * whether Cloudflare's visitor-location header reached the origin at all.
+ * (`Add visitor location headers` is a per-zone Managed Transform; without it
+ * cf-ipcountry never arrives and every visitor silently falls back to
+ * Accept-Language.)
+ */
+export function detectLocaleWithReason(headers: Headers): {
+  locale: Locale;
+  reason: string;
+} {
   const country = countryFromHeaders(headers);
-  if (country && COUNTRY_LOCALE[country]) return COUNTRY_LOCALE[country];
-  return localeFromAcceptLanguage(headers.get("accept-language")) ?? routing.defaultLocale;
+  if (country && COUNTRY_LOCALE[country]) {
+    return { locale: COUNTRY_LOCALE[country], reason: `geo-${country}` };
+  }
+  const fromLang = localeFromAcceptLanguage(headers.get("accept-language"));
+  // `geo-miss` = the header arrived but names a country we serve no language
+  // for; `geo-none` = no location header reached us at all.
+  const geoNote = country ? `geomiss-${country}` : "geonone";
+  if (fromLang) return { locale: fromLang, reason: `lang-${fromLang}.${geoNote}` };
+  return { locale: routing.defaultLocale, reason: `default.${geoNote}` };
 }
 
 export { isLocale };
