@@ -31,6 +31,15 @@ function transport(): Transporter | null {
 
 const ADDRESS_RE = /<\s*([^<>@\s]+@[^<>@\s]+?)\s*>|(?:^|[\s,;])([^<>@\s,;"]+@[^<>@\s,;"]+)/;
 
+/**
+ * What inquiry notifications are From when MAIL_FROM doesn't name a usable
+ * address. Note this is only the *header* — commons-hub.at is on Google
+ * Workspace, so Mailcow cannot DKIM-sign it and the address is DMARC-unaligned
+ * (the domain publishes p=none, so it is deliverable but costs spam score).
+ * The envelope sender stays the authenticated mailbox regardless.
+ */
+const DEFAULT_FROM = "Commons Hub <contact@commons-hub.at>";
+
 /** Drop one pair of wrapping double quotes (Infisical has stored MAIL_FROM that way). */
 function unwrapQuotes(value: string): string {
   const v = value.trim();
@@ -61,19 +70,13 @@ export function resolveFrom(
   smtpUser: string,
 ): { from: string; envelopeFrom: string } {
   const value = unwrapQuotes(configured || "");
-  const address = addressOf(value);
-  if (address) return { from: value, envelopeFrom: smtpUser };
+  if (addressOf(value)) return { from: value, envelopeFrom: smtpUser };
   if (/\w/.test(value)) {
-    // Display name only — keep it, but attach the mailbox we can actually send as.
     console.warn(
-      "mail: MAIL_FROM has no email address; treating it as a display name",
+      `mail: MAIL_FROM names no email address; falling back to ${DEFAULT_FROM}`,
     );
-    return {
-      from: `"${value.replace(/"/g, "")}" <${smtpUser}>`,
-      envelopeFrom: smtpUser,
-    };
   }
-  return { from: smtpUser, envelopeFrom: smtpUser };
+  return { from: DEFAULT_FROM, envelopeFrom: smtpUser };
 }
 
 /**
