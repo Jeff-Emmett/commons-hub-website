@@ -29,6 +29,53 @@ function transport(): Transporter | null {
   return cached;
 }
 
+const ADDRESS_RE = /<\s*([^<>@\s]+@[^<>@\s]+?)\s*>|(?:^|[\s,;])([^<>@\s,;"]+@[^<>@\s,;"]+)/;
+
+/** Drop one pair of wrapping double quotes (Infisical has stored MAIL_FROM that way). */
+function unwrapQuotes(value: string): string {
+  const v = value.trim();
+  return v.length > 1 && v.startsWith('"') && v.endsWith('"')
+    ? v.slice(1, -1).trim()
+    : v;
+}
+
+/** The bare address inside a From header, or null if there isn't one. */
+function addressOf(value: string): string | null {
+  const m = ADDRESS_RE.exec(value);
+  return (m?.[1] || m?.[2] || "").trim() || null;
+}
+
+/**
+ * Resolve the From header and the SMTP envelope sender separately.
+ *
+ * Mailcow enforces sender-login ownership, so the envelope sender must always
+ * be the authenticated mailbox. Critically, nodemailer derives the envelope
+ * from the message headers and falls back to Reply-To when the From header
+ * carries no parseable address — which silently put the *customer's* address in
+ * MAIL FROM and got every inquiry notification rejected with
+ * `553 Sender address rejected: not owned by user`. Pinning the envelope makes
+ * a malformed MAIL_FROM cosmetic instead of fatal.
+ */
+export function resolveFrom(
+  configured: string | undefined,
+  smtpUser: string,
+): { from: string; envelopeFrom: string } {
+  const value = unwrapQuotes(configured || "");
+  const address = addressOf(value);
+  if (address) return { from: value, envelopeFrom: smtpUser };
+  if (/\w/.test(value)) {
+    // Display name only — keep it, but attach the mailbox we can actually send as.
+    console.warn(
+      "mail: MAIL_FROM has no email address; treating it as a display name",
+    );
+    return {
+      from: `"${value.replace(/"/g, "")}" <${smtpUser}>`,
+      envelopeFrom: smtpUser,
+    };
+  }
+  return { from: smtpUser, envelopeFrom: smtpUser };
+}
+
 /**
  * Best-effort SMTP send. Returns true on success, false if SMTP isn't
  * configured or the send threw. Errors are logged, not propagated —
@@ -43,8 +90,8 @@ export async function sendMail(args: SendArgs): Promise<boolean> {
     });
     return false;
   }
-  const from =
-    process.env.MAIL_FROM || process.env.MAIL_SMTP_USER || "no-reply@localhost";
+  const smtpUser = process.env.MAIL_SMTP_USER || "no-reply@localhost";
+  const { from, envelopeFrom } = resolveFrom(process.env.MAIL_FROM, smtpUser);
   try {
     await t.sendMail({
       from,
@@ -53,6 +100,8 @@ export async function sendMail(args: SendArgs): Promise<boolean> {
       text: args.text,
       html: args.html,
       replyTo: args.replyTo,
+      // Never let header parsing decide who we authenticate as.
+      envelope: { from: envelopeFrom, to: args.to },
     });
     return true;
   } catch (err) {
