@@ -8,6 +8,7 @@ import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import ContentLightbox from "@/components/ContentLightbox"
 import ScrollIndicator from "@/components/ScrollIndicator"
+import { VisualEditing } from "@/components/VisualEditing"
 import { CarouselVisibilityProvider } from "@/lib/contexts/CarouselVisibilityContext"
 import { NextIntlClientProvider } from "next-intl"
 import { getLocale, getMessages } from "next-intl/server"
@@ -94,6 +95,7 @@ export default async function RootLayout({
           </CarouselVisibilityProvider>
         </AuthProvider>
         </NextIntlClientProvider>
+        <VisualEditing />
       </body>
     </html>
   );

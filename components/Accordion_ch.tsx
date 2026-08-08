@@ -12,7 +12,7 @@ type Props = {
   accordion: AccordionWithItems;
 };
 
-export default function Accordion_ch({ accordion }: Props) {
+export default function Accordion_ch({ accordion, editAttr }: Props & { editAttr?: Record<string, string> }) {
   // Ensure we have accordion items to render
   if (!accordion || !accordion.accordion_items || accordion.accordion_items.length === 0) {
     return null;
@@ -27,7 +27,7 @@ export default function Accordion_ch({ accordion }: Props) {
   });
 
   return (
-    <Accordion.Root type="multiple">
+    <Accordion.Root type="multiple" {...editAttr}>
       {sortedItems.map((item) => (
         <Accordion.Item
           value={`item-${item.id}`}

@@ -9,7 +9,7 @@ interface CarouselProps {
   carousel: CarouselWithItems;
 }
 
-export function Carousel({ carousel }: CarouselProps) {
+export function Carousel({ carousel, editAttr }: CarouselProps & { editAttr?: Record<string, string> }) {
 
   const [emblaRef, emblaApi] = useEmblaCarousel();
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -31,7 +31,7 @@ export function Carousel({ carousel }: CarouselProps) {
   const scrollTo = (index: number) => emblaApi && emblaApi.scrollTo(index);
 
   return (
-    <div className="hero-wrapper w-inline-block py-2 border-y border-gray-100">
+    <div className="hero-wrapper w-inline-block py-2 border-y border-gray-100" {...editAttr}>
       <div className="hero-content">
         <h2>{carousel?.title}</h2>
         <div className="carousel">

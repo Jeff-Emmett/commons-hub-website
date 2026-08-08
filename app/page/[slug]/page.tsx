@@ -17,6 +17,7 @@ import { getCategories } from "@/lib/actions/getCategory";
 import TrainDirections from "@/components/TrainDirections";
 import { Metadata } from "next";
 import { generatePageMetadata } from "@/lib/utils/generatePageMetadata";
+import { editAttr } from "@/lib/directus/editAttr";
 
 // Generate dynamic metadata for each page
 export async function generateMetadata(
@@ -119,7 +120,10 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         <div id="cms-content" className="flex-1 min-w-0">
 
             {(page?.title || page?.summary) && (
-              <header className="mb-10 border-b border-gray-100 pb-6">
+              <header
+                className="mb-10 border-b border-gray-100 pb-6"
+                {...editAttr("pages", page?.id, ["title", "summary"])}
+              >
                 {page?.title && (
                   <h1 className="h2 md:h1 mb-3 font-light">{page.title}</h1>
                 )}
@@ -144,7 +148,11 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
             {carousels.length > 0 &&
               carousels.map((carousel) => (
-                <CarouselOrGallery key={carousel.id} carousel={carousel} />
+                <CarouselOrGallery
+                  key={carousel.id}
+                  carousel={carousel}
+                  editAttr={editAttr("carousels", carousel.id, ["title"], "drawer")}
+                />
               ))}
 
             {page?.is_team && teamMembers.length > 0 && (
@@ -156,6 +164,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
             {page?.body && (
               <div
                 className="scroll-block-element"
+                {...editAttr("pages", page?.id, "body", "drawer")}
                 dangerouslySetInnerHTML={{
                   __html: page?.body,
                 }}
@@ -164,7 +173,11 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
             {accordions.length > 0 &&
               accordions.map((accordion) => (
-                <Accordion_ch key={accordion.id} accordion={accordion} />
+                <Accordion_ch
+                  key={accordion.id}
+                  accordion={accordion}
+                  editAttr={editAttr("accordions", accordion.id, ["title"], "drawer")}
+                />
               ))}
 
             {page?.is_map && (
@@ -213,7 +226,10 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                     route={`/category/${category.slug}`}
                     key={category.id}
                   >
-                    <HeroCategory category={category} />
+                    <HeroCategory
+                      category={category}
+                      editAttr={editAttr("categories", category.id, ["title", "summary"], "drawer")}
+                    />
                   </ClientSideRout>
                 ))
             }

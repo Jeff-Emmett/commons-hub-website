@@ -15,13 +15,15 @@ export interface GalleryItem {
 export function Gallery({
   title,
   items,
+  editAttr,
 }: {
   title?: string;
   items: GalleryItem[];
+  editAttr?: Record<string, string>;
 }) {
   if (!items.length) return null;
   return (
-    <section className="my-10">
+    <section className="my-10" {...editAttr}>
       {title && <h2 className="h2 mb-5">{title}</h2>}
       <div className="gallery-grid grid grid-cols-3 gap-2 md:gap-3">
         {items.map((it, i) => (

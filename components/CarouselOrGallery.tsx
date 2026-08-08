@@ -7,7 +7,7 @@ import type { CarouselWithItems } from "@/lib/actions/getCarousels";
  * renders as a responsive image grid instead of a slider — lets content
  * editors make galleries with zero schema/code, just in Directus.
  */
-export function CarouselOrGallery({ carousel }: { carousel: CarouselWithItems }) {
+export function CarouselOrGallery({ carousel, editAttr }: { carousel: CarouselWithItems; editAttr?: Record<string, string> }) {
   const title = (carousel.title ?? "").trim();
   const isGallery = /^gallery\b/i.test(title) || /^gallery:/i.test(title);
 
@@ -16,7 +16,7 @@ export function CarouselOrGallery({ carousel }: { carousel: CarouselWithItems })
       .map((it) => ({ imageUrl: (it as { image_url?: string }).image_url ?? "" }))
       .filter((it) => it.imageUrl);
     const display = title.replace(/^gallery:?\s*/i, "").trim();
-    return <Gallery title={display || undefined} items={items} />;
+    return <Gallery title={display || undefined} items={items} editAttr={editAttr} />;
   }
-  return <Carousel carousel={carousel} />;
+  return <Carousel carousel={carousel} editAttr={editAttr} />;
 }

@@ -7,9 +7,9 @@ type Props = {
   category: Database['public']['Tables']['categories']['Row'];
 };
 
-export default async function HeroCategory({ category }: Props) {
+export default async function HeroCategory({ category, editAttr }: Props & { editAttr?: Record<string, string> }) {
   return (
-    <div className="hero-wrapper w-inline-block py-2 border-y border-gray-100">
+    <div className="hero-wrapper w-inline-block py-2 border-y border-gray-100" {...editAttr}>
       <WhiteOverlay />
       <div className="hero-content">
         {/* <div className="mb-2">
