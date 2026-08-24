@@ -301,9 +301,11 @@ mail_log() {
   else return 1; fi
 }
 
+BOUNCE_CHECKED=1
 check_bounces() {
   local logs ids id sender_ids bad="" line
   logs=$(mail_log) || {
+    BOUNCE_CHECKED=0
     vlog "mail server is not on this host and MAIL_LOG_CMD is unset: bounce correlation SKIPPED"
     return 0; }
   sender_ids=$(printf '%s\n' "$logs" | grep -E "from=<($SENDERS)>" |
@@ -465,6 +467,17 @@ case "${1:-check}" in
       rc=1
     fi
     check_health || rc=1
+    # A clean run used to print nothing at all, which made a healthy watchdog
+    # and a dead one look identical in the log. Say so once per run instead,
+    # and name any check that did not actually run — the whole point of this
+    # file is that silence must never be mistaken for a pass.
+    if [ $rc -eq 0 ]; then
+      if [ "$BOUNCE_CHECKED" = 1 ]; then
+        log "ok"
+      else
+        log "ok (bounce correlation skipped: the mail server's log is not reachable from here)"
+      fi
+    fi
     # Only a fully clean run pings the heartbeat, so a monitor that watches for
     # silence also catches this script dying or the host going away.
     [ $rc -eq 0 ] && [ -n "$KUMA_PUSH_URL" ] && curl -fsS --max-time 10 "$KUMA_PUSH_URL" >/dev/null 2>&1
