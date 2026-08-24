@@ -1,10 +1,12 @@
 # Running commons-hub.at — runbook
 
-Where it lives, how to deploy it, and the three ways its forms have died so far.
+Where it lives, how to deploy it, and every way its forms have died so far.
 
-## Where it runs (since 2026-08-19)
+## Where it runs
 
-Netcup is gone. The site runs on **GX10** (`ssh gx10`), in the failover stack:
+The site runs on **GX10** (`ssh gx10`), in the failover stack. **Mail does not.**
+Mail moved back to netcup on 2026-08-24; the two live on different hosts now,
+and most of this document is about that seam.
 
 | | |
 |---|---|
@@ -13,7 +15,8 @@ Netcup is gone. The site runs on **GX10** (`ssh gx10`), in the failover stack:
 | build context | `./commons-hub-web` — **a git checkout of this repo, `main`** |
 | containers | `commons-hub-web`, `commons-hub-directus`, `commons-hub-directus-db` |
 | newsletter | `commons-hub-listmonk` + `-db`, project `commons-hub-newsletter` |
-| public path | Cloudflare tunnel → `cloudflared-failover` → `commons-hub-web:3000` (no traefik router) |
+| public path | Cloudflare tunnel → `cloudflared-failover` → `commons-hub-web:3000` |
+| mail | **netcup** (`159.195.32.209`), reached as `mail.rmail.online:587` |
 
 Infisical injection is **off** here; `.env.commons-hub` is the config.
 
@@ -32,6 +35,9 @@ curl -s https://commons-hub.at/api/health/forms      # expect {"ok":true,...}
 `git status` in that checkout must be clean. Anything it lists is a change that
 exists only on the box — the failure mode that made "is the fix deployed?"
 unanswerable for a week.
+
+Env-only changes still need `up -d --force-recreate`: a container's environment
+is fixed when it is created, so editing `.env.commons-hub` alone changes nothing.
 
 ## The forms
 
@@ -57,71 +63,103 @@ pipeline can be dead for days without a single visible symptom.
 41 6 * * 1   form-watchdog.sh drift
 ```
 
-Recipients live in `~/.config/commons-hub-watchdog.conf` (0600), never in this
-repo. Alerts go out through the mail container directly, so an alert still
-arrives when the app's own SMTP config is the broken thing.
+Recipients and the canary's credential file live in
+`~/.config/commons-hub-watchdog.conf` (0600), never in this repo.
 
 - **check** — `/api/health/forms`, plus `INQUIRY_NOTIFY_FAILED` markers in the
-  app log, plus bounces of anything the forms sent. Alerts once per hour per
-  problem and once more on recovery.
-- **canary** — one real message a day through the real relay, its fate read out
-  of the postfix log. This is the only check that sees a relay which accepts our
-  AUTH and then refuses the mail.
-- **drift** — containers configured with the public mail hostname (see below).
+  app log, plus bounces of anything the forms sent.
+- **canary** — one real message a day along the path a booking notification
+  takes. This is the only check that sees a relay which accepts our AUTH and
+  then refuses the mail.
+- **drift** — containers whose mail hostname resolves to the wrong host.
+
+### The watchdog's two transports, and why they differ
+
+An alert must not travel the path it is reporting on, so the two are separate:
+
+- **Alerts** go to `mail.rmail.online:25`, unauthenticated, to a mailbox the
+  mail server hosts itself. No credentials, so an alert survives a credential
+  problem — which is one of the things being watched. When mailcow runs on the
+  same host the alert is handed to the container directly instead.
+- **The canary** authenticates on `:587` with the **website's own** submission
+  credentials, read at run time from `.env.commons-hub` via `CANARY_CRED_FILE`,
+  and goes to an **external** mailbox. It uses the site's credentials on purpose:
+  those are the thing under test. Without them it falls back to a local mailbox
+  and says so in the log — that still proves the server accepts our mail, but
+  not the external hop, which is where two of the three failures actually were.
+
+Port 25 is **greylisted**: the first message to a new sender/recipient pair is
+deferred `451` and delivered on a retry. That is handled, and finding it exposed
+a real bug — the alert's cooldown stamp used to be written *before* the send, so
+a deferred alert was swallowed for an hour and reported to nobody. The stamp is
+now written only after the mail has actually left, and the canary retries across
+the greylist window before calling anything a failure.
 
 Set `KUMA_PUSH_URL` in the config to an Uptime Kuma *Push* monitor and Kuma will
 alert when the watchdog itself stops running — otherwise nothing watches the
 watcher.
 
-## The three traps, in the order they bit
+**Known gap:** with mail on another host, the watchdog cannot read the mail
+server's queue, so bounce correlation is **skipped** and says so rather than
+reporting a clean run. Point `MAIL_LOG_CMD` at a command that prints netcup's
+postfix log (it needs access this host does not currently have) to get it back.
 
-1. **The mail hostname is a hairpin.** `mail.rmail.online` is DDNS onto this
-   host's own WAN address. From inside a container it never connects
-   (`ECONNREFUSED`). Address the mail server by container name
-   (`MAIL_SMTP_HOST=postfix-mailcow`, container joined to
-   `mailcowdockerized_mailcow-network`) or map it with
-   `extra_hosts: ["mail.rmail.online:host-gateway"]`. Mailcow's certificate on
-   that internal hop is self-signed, hence `MAIL_SMTP_TLS_INSECURE=true` — only
-   ever for a hop that stays on the docker bridge.
+## The traps, in the order they bit
 
-2. **The `From:` domain must be verified at the relay.** Mail from
-   `jeffemmett.com` senders leaves through Resend, which rejects any `From:`
-   header on a domain it has not verified:
-   `550 The commons-hub.at domain is not verified`. The envelope sender looks
-   fine in the logs while every message bounces. Until `commons-hub.at` is
-   verified in Resend, `MAIL_FROM` stays on `jeffemmett.com` with a display
-   name, and `Reply-To` carries the guest.
+1. **A mail hostname that resolves to the machine you are on.**
+   `mail.rmail.online` is the mail server's public name. While mailcow ran on
+   GX10 the name pointed at GX10's own WAN address, and from inside a container
+   that hairpins and never connects (`ECONNREFUSED`) — so containers were given
+   `extra_hosts: ["mail.rmail.online:host-gateway"]`, or addressed the container
+   directly. **On 2026-08-24 mail moved to netcup and every one of those
+   mappings inverted**: the name now resolved to a host with no mail server, and
+   thirteen containers went quietly mute. All of them have been reverted — public
+   DNS is correct, so the right configuration is now *no* mapping at all. The
+   `drift` check follows the mail server and flags whichever direction is wrong.
 
-3. **Domains without that relay send direct from a residential IP.**
-   `news.commons-hub.at` (newsletter) has no relayhost, so Google refuses a
-   slice of it outright (`550-5.7.1 ... not authorized to send email directly`).
-   Verifying the domain at Resend and routing it through the relay is the fix.
+2. **The `From:` domain must be accepted by whatever relays the message.**
+   From GX10, mail left through Resend, which rejects any `From:` header on a
+   domain it has not verified (`550 The commons-hub.at domain is not verified`).
+   The envelope sender looks fine in the logs while every message bounces. From
+   netcup the mail now goes **direct to the recipient's MX**, so that particular
+   rejection is gone — but `MAIL_FROM` stays on `jeffemmett.com` with a display
+   name and `Reply-To` set to the guest, because `commons-hub.at` is a Google
+   Workspace domain: its MX is Google, its SPF authorizes only Google, and it is
+   not a domain this mail server owns. Sending as `contact@commons-hub.at` needs
+   that to change first, not just a config edit.
 
-## The same hairpin, everywhere else (2026-08-24)
+3. **A residential IP cannot deliver to Google.** `news.commons-hub.at` has no
+   relayhost, so from GX10 Google refused a slice of it outright
+   (`550-5.7.1 ... not authorized to send email directly`). **Resolved by the
+   move**: netcup's PTR is `mail.rmail.online`, forward and reverse agree, and
+   `news.commons-hub.at`'s SPF is `a:mail.rmail.online`, which now points there.
 
-The first `drift` run found 13 other containers on this host addressing mailcow
-by its public name. Fixed by adding the mapping to their compose files and
-recreating: `xhivart-mirror`, `xhivart-directus`, `cofi-register`, `emil-form`,
-`docmost`, `docmost-cl`, `docmost-voc`, `immich-server`, `zulip` — verified by
-resolving `mail.rmail.online` inside the container (now the host gateway) and
-opening 587.
+4. **Two `v=spf1` records is not twice the SPF, it is none.** `commons-hub.at`
+   published both `include:_spf.google.com` and a second record whose include
+   (`dc-aa8e722993._spfm.commons-hub.at`) did not exist in the zone. Multiple SPF
+   records are a PermError under RFC 7208, so receivers could treat everything as
+   unauthenticated. The dead record was deleted 2026-08-24; the apex now
+   publishes exactly `v=spf1 include:_spf.google.com ~all`.
 
-Two are patched in their compose file but **not yet recreated**, deliberately:
+## Recreating a service whose mail configuration changed
 
-- `rspace-online` — the running container was created from a compose file that
-  no longer defines it, so recreating from `docker-compose.yml` could quietly
-  change more than this one line. Needs its own deploy path.
-- `schedule-jeffemmett` — `docker compose config` still reports 4 secrets unset
-  from its directory, so a recreate risks starting it with blank credentials.
+Two things bite here:
 
-`immich_machine_learning` and `immich_proxy` inherit `SMTP_HOST` from the shared
-immich env file but never open an SMTP connection; they are in the watchdog's
-`DRIFT_IGNORE_CONTAINERS`, not fixed.
+- **`--force-recreate` is required.** `extra_hosts` and environment are written
+  when the container is created; editing the compose file changes nothing until
+  it is.
+- **Use the project name the container already has**, not the directory name:
 
-**If mail ever moves off this host, all of these invert** — a `host-gateway`
-mapping would then point at a machine with no mail server. The `drift` check
-follows the mail container: when it is not running here, it flags the mappings
-themselves instead.
+```bash
+p=$(docker inspect <container> --format '{{index .Config.Labels "com.docker.compose.project"}}')
+cd "$(docker inspect <container> --format '{{index .Config.Labels "com.docker.compose.project.working_dir"}}')"
+docker compose -p "$p" -f <the file from the labels> up -d --no-deps --force-recreate <service>
+```
+
+Without `-p` compose derives a different project, and the recreate fails with
+`Conflict. The container name is already in use`. Run `docker compose config -q`
+first: a project whose variables do not resolve from that directory will start
+with blank credentials rather than refusing.
 
 ## Replaying inquiries that were never emailed
 
@@ -134,8 +172,7 @@ docker exec commons-hub-directus-db sh -c \
 ```
 
 Resend each as a `[Delayed]` mail with `Reply-To` set to the guest, `From` on a
-relay-verified domain, piped to `docker exec -i
-mailcowdockerized-postfix-mailcow-1 sendmail -f <sender> <recipients>`, then
-confirm `status=sent` in the postfix log. There is no per-row "notified" flag,
-so **filter by `date_created`, never by `status`** — `status` is booking
-workflow state, and a naive sweep re-sends everything.
+domain the relay accepts, then confirm `status=sent` in the postfix log on the
+mail host. There is no per-row "notified" flag, so **filter by `date_created`,
+never by `status`** — `status` is booking workflow state, and a naive sweep
+re-sends everything.

@@ -21,20 +21,56 @@
 #   drift   (weekly)      containers still pointed at the public mail name,
 #           which resolves to this host's own WAN IP and never connects
 #
-# Alerts go out through the mail container directly, NOT through the app's SMTP
-# config — the thing most likely to be broken is the thing being watched.
+# Alerts never go through the app's SMTP config — the thing most likely to be
+# broken is the thing being watched. They go straight to the mail server: the
+# local mailcow container when mail runs on this host, otherwise plain SMTP on
+# port 25 to the public name, which the mail host accepts for its own domains
+# without credentials. So no secret has to live in this file either way.
 #
 #   ./form-watchdog.sh check|canary|drift [--verbose]
 #
 # Environment (all optional, defaults suit the GX10 failover stack):
-#   HEALTH_URL WEB_CONTAINER POSTFIX ALERT_TO ALERT_FROM STATE_DIR
-#   COOLDOWN (s, alert de-dup) WINDOW (docker logs lookback) KUMA_PUSH_URL
+#   HEALTH_URL WEB_CONTAINER POSTFIX MAIL_HOST MAIL_PORT MAIL_LOG_CMD
+#   ALERT_TO ALERT_FROM STATE_DIR COOLDOWN (s, alert de-dup)
+#   WINDOW (docker logs lookback) KUMA_PUSH_URL
 
 set -uo pipefail
 
 HEALTH_URL=${HEALTH_URL:-https://commons-hub.at/api/health/forms}
 WEB_CONTAINER=${WEB_CONTAINER:-commons-hub-web}
 POSTFIX=${POSTFIX:-mailcowdockerized-postfix-mailcow-1}
+# Mail has lived on this host and off it, and will again; nothing here may
+# assume either. When the local mailcow container is running we use it, else we
+# talk SMTP to the public name — the same path the website itself takes.
+MAIL_HOST=${MAIL_HOST:-mail.rmail.online}
+MAIL_PORT=${MAIL_PORT:-25}
+# Port 25 needs no credentials for the mail host's own domains, but it is
+# greylisted: the first alert to a new sender/recipient pair is deferred 451 and
+# goes out on a later run (see alert(), which retries until it is actually
+# sent). To make alerts immediate instead, point MAIL_PORT at 587 and supply
+# MAIL_USER/MAIL_PASS — authenticated submission is not greylisted. Inject the
+# password, never store it here:
+#   secretctl run --ref MAIL_PASS=isec://... -- form-watchdog.sh check
+MAIL_USER=${MAIL_USER:-}
+MAIL_PASS=${MAIL_PASS:-}
+# The canary is a different problem from an alert. An alert only has to reach
+# us, so it goes to a mailbox the mail server hosts itself and needs no
+# credentials. The canary has to cross the hop a BOOKING NOTIFICATION crosses:
+# authenticated submission, out to an external address. No mail server relays
+# off-site for an unauthenticated client, so the canary needs credentials --
+# deliberately the WEBSITE'S OWN, because those are the thing under test. They
+# are read from the deploy env file at run time; nothing is copied into this
+# repo, the config file, or a command line.
+CANARY_HOST=${CANARY_HOST:-$MAIL_HOST}
+CANARY_PORT=${CANARY_PORT:-587}
+CANARY_CRED_FILE=${CANARY_CRED_FILE:-}
+CANARY_USER=${CANARY_USER:-}
+CANARY_PASS=${CANARY_PASS:-}
+# A command printing the mail server's postfix log, when it is reachable from
+# here (e.g. "ssh mailhost docker logs --since 10m postfix"). Empty means the
+# mail server is remote and we cannot read it, so bounce correlation is SKIPPED
+# and said to be skipped, rather than silently reporting a clean run.
+MAIL_LOG_CMD=${MAIL_LOG_CMD:-}
 # No addresses are baked in: this file is public. Put them in the config file
 # below (root-owned, 0600) or the environment.
 CONFIG=${CONFIG:-/etc/default/commons-hub-watchdog}
@@ -50,6 +86,12 @@ ALERT_FROM=${ALERT_FROM:-}
 # Where the daily probe is delivered; an external mailbox, so the probe crosses
 # the same relay a real notification does. Defaults to the alert recipient.
 CANARY_TO=${CANARY_TO:-$ALERT_TO}
+# Resolved here, not with the defaults above: the config file is sourced
+# between the two, and it is the config file that names the credential file.
+if [ -z "$CANARY_USER" ] && [ -n "$CANARY_CRED_FILE" ] && [ -r "$CANARY_CRED_FILE" ]; then
+  CANARY_USER=$(sed -n 's/^WEB_MAIL_SMTP_USER=//p' "$CANARY_CRED_FILE" | head -1)
+  CANARY_PASS=$(sed -n 's/^WEB_MAIL_SMTP_PASS=//p' "$CANARY_CRED_FILE" | head -1)
+fi
 STATE_DIR=${STATE_DIR:-$HOME/.local/state/commons-hub-watchdog}
 COOLDOWN=${COOLDOWN:-3600}
 WINDOW=${WINDOW:-10m}
@@ -73,15 +115,83 @@ VERBOSE=0
 log() { printf '%s %s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$*"; }
 vlog() { [ "$VERBOSE" = 1 ] && log "$@"; return 0; }
 
+running() { [ "$(docker inspect -f '{{.State.Running}}' "$1" 2>/dev/null)" = "true" ]; }
+mail_is_local() { running "$POSTFIX"; }
+
 # --- alerting ---------------------------------------------------------------
 # One mail per problem per COOLDOWN, keyed so a persistent outage does not
 # become an hourly inbox flood, and a recovery is reported once.
+# One SMTP transaction, reporting the server's own final word on the message.
+# That verdict is the point: a relay that accepts our AUTH and then refuses the
+# mail is exactly the failure a connect-only probe cannot see.
+smtp_submit() {
+  local host=$1 port=$2 from=$3 to=$4 msg=$5
+  WD_MSG="$msg" python3 -c '
+import os, sys, smtplib
+host, port, sender, to = sys.argv[1], int(sys.argv[2]), sys.argv[3], sys.argv[4]
+rcpts = [r.strip() for r in to.split(",") if r.strip()]
+s = smtplib.SMTP(host, port, timeout=30)
+try:
+    s.ehlo()
+    # The mail server refuses a cleartext session outright ("550 5.7.1 Session
+    # encryption is required"), which is correct of it. Certificate
+    # verification stays ON: this hop crosses the public internet, and the name
+    # we connect to is the one on the certificate.
+    if s.has_extn("starttls"):
+        s.starttls()
+        s.ehlo()
+    user, pw = os.environ.get("SMTP_USER", ""), os.environ.get("SMTP_PASS", "")
+    if user and pw:
+        s.login(user, pw)
+    code, resp = s.docmd("MAIL", "FROM:<%s>" % sender)
+    if code != 250:
+        print("MAIL FROM refused: %d %s" % (code, resp.decode(errors="replace"))); sys.exit(1)
+    for r in rcpts:
+        code, resp = s.docmd("RCPT", "TO:<%s>" % r)
+        if code not in (250, 251):
+            print("RCPT %s refused: %d %s" % (r, code, resp.decode(errors="replace"))); sys.exit(1)
+    code, resp = s.data(os.environ["WD_MSG"].encode())
+    print("%d %s" % (code, resp.decode(errors="replace").strip().replace(chr(10), " ")))
+    sys.exit(0 if code == 250 else 1)
+finally:
+    try: s.quit()
+    except Exception: pass
+' "$host" "$port" "$from" "$to" 2>&1
+}
+
+# Greylisting defers the first message of a new sender/recipient pair with a
+# 4xx and asks us to come back. That is not a fault, so it must not read as
+# one: retry within the run, and only call it a failure if the server is still
+# saying no after the greylist window (rspamd's default is 5 minutes).
+smtp_submit_patient() {
+  local host=$1 port=$2 from=$3 to=$4 msg=$5 tries=${6:-6} out i
+  for i in $(seq 1 "$tries"); do
+    out=$(smtp_submit "$host" "$port" "$from" "$to" "$msg") && { printf '%s' "$out"; return 0; }
+    case "$out" in
+      *" 4"[0-9][0-9]" "*|*"4.7.1"*|*[Gg]reylist*)
+        vlog "deferred (attempt $i/$tries): $out"; [ "$i" -lt "$tries" ] && sleep 70 ;;
+      *) printf '%s' "$out"; return 1 ;;   # a 5xx is a real refusal, stop now
+    esac
+  done
+  printf '%s' "$out"
+  return 1
+}
+
 send_mail() {
-  local subject=$1 body=$2
-  printf 'From: Commons Hub watchdog <%s>\nTo: %s\nSubject: %s\n\n%s\n' \
-    "$ALERT_FROM" "$ALERT_TO" "$subject" "$body" |
-    docker exec -i "$POSTFIX" sendmail -f "$ALERT_FROM" "$ALERT_TO" ||
+  local subject=$1 body=$2 msg
+  msg=$(printf 'From: Commons Hub watchdog <%s>\nTo: %s\nSubject: %s\n\n%s\n' \
+        "$ALERT_FROM" "$ALERT_TO" "$subject" "$body")
+  if mail_is_local; then
+    printf '%s\n' "$msg" |
+      docker exec -i "$POSTFIX" sendmail -f "$ALERT_FROM" $(printf '%s' "$ALERT_TO" | tr ',' ' ') && return 0
     log "ALERT-SEND-FAILED could not hand the alert to $POSTFIX"
+    return 1
+  fi
+  local out
+  out=$(SMTP_USER="$MAIL_USER" SMTP_PASS="$MAIL_PASS" \
+        smtp_submit "$MAIL_HOST" "$MAIL_PORT" "$ALERT_FROM" "$ALERT_TO" "$msg") && return 0
+  log "ALERT-SEND-FAILED $MAIL_HOST:$MAIL_PORT refused the alert: $out"
+  return 1
 }
 
 alert() {
@@ -95,27 +205,38 @@ alert() {
       return 0
     fi
   fi
-  echo "$now" > "$stamp"
   log "ALERT [$key] $subject"
-  send_mail "[commons-hub forms] $subject" "$body"
+  # Record the alert as sent only if it was. Stamping first meant a refused
+  # alert -- a greylist 451, a mail server that had gone away -- was swallowed
+  # for a whole cooldown: the watchdog would report the outage to nobody and
+  # then go quiet about it. Leaving the stamp unwritten makes the next run
+  # try again, which is exactly what a deferral asks for.
+  if send_mail "[commons-hub forms] $subject" "$body"; then
+    echo "$now" > "$stamp"
+  else
+    log "ALERT-NOT-SENT [$key] will retry on the next run"
+  fi
 }
 
 clear_alert() {
   local key=$1 what=$2
   local stamp="$STATE_DIR/$key.alerted"
   [ -f "$stamp" ] || return 0
-  rm -f "$stamp"
   log "RECOVERED [$key]"
-  send_mail "[commons-hub forms] recovered: $what" \
-    "$what is healthy again as of $(date -u +%Y-%m-%dT%H:%M:%SZ)."
+  # Same rule in reverse: keep the stamp until the all-clear has actually gone
+  # out, so a deferred recovery notice is retried instead of lost.
+  if send_mail "[commons-hub forms] recovered: $what" \
+       "$what is healthy again as of $(date -u +%Y-%m-%dT%H:%M:%SZ)."; then
+    rm -f "$stamp"
+  else
+    log "RECOVERY-NOT-SENT [$key] will retry on the next run"
+  fi
 }
 
 # --- preconditions ----------------------------------------------------------
 # A `docker logs` against a container that is gone prints nothing, and a grep
 # over nothing finds nothing, so every log-based check below would report
 # "clean" precisely when the app has vanished. Fail loudly instead.
-running() { [ "$(docker inspect -f '{{.State.Running}}' "$1" 2>/dev/null)" = "true" ]; }
-
 require_containers() {
   local c missing=""
   for c in "$@"; do running "$c" || missing="$missing $c"; done
@@ -172,9 +293,19 @@ Replay: find the row by that email in booking_inquiries, resend with the
 
 # Correlate postfix's two lines per message: the queue id carries the sender on
 # one and the delivery status on another.
+# The mail server's log, from wherever it is. Returns non-zero when it cannot
+# be read at all — the caller must treat that as "unknown", never as "clean".
+mail_log() {
+  if mail_is_local; then docker logs --since "$WINDOW" "$POSTFIX" 2>&1
+  elif [ -n "$MAIL_LOG_CMD" ]; then eval "$MAIL_LOG_CMD" 2>&1
+  else return 1; fi
+}
+
 check_bounces() {
   local logs ids id sender_ids bad="" line
-  logs=$(docker logs --since "$WINDOW" "$POSTFIX" 2>&1)
+  logs=$(mail_log) || {
+    vlog "mail server is not on this host and MAIL_LOG_CMD is unset: bounce correlation SKIPPED"
+    return 0; }
   sender_ids=$(printf '%s\n' "$logs" | grep -E "from=<($SENDERS)>" |
                grep -oE '\b[A-F0-9]{8,14}:' | tr -d ':' | sort -u)
   [ -z "$sender_ids" ] && { vlog "no form mail in $WINDOW"; return 0; }
@@ -199,15 +330,47 @@ $bad"
 # perfectly fine. So put one real message through the real path each day and
 # read its fate out of the log.
 canary() {
-  local stamp msgid subject qid status
-  require_containers "$POSTFIX" || return 1
+  local stamp msgid subject qid status msg out
   stamp=$(date -u +%Y%m%dT%H%M%SZ)
   msgid="canary-$stamp@jeffemmett.com"
   subject="[canary] commons-hub form mail path $stamp"
-  printf 'From: Commons Hub <%s>\nTo: %s\nSubject: %s\nMessage-ID: <%s>\n\n%s\n' \
-    "$ALERT_FROM" "$CANARY_TO" "$subject" "$msgid" \
-    "Automated daily probe of the path a booking notification takes. No action needed." |
-    docker exec -i "$POSTFIX" sendmail -f "$ALERT_FROM" "$CANARY_TO"
+  msg=$(printf 'From: Commons Hub <%s>\nTo: %s\nSubject: %s\nMessage-ID: <%s>\n\n%s\n' \
+        "$ALERT_FROM" "$CANARY_TO" "$subject" "$msgid" \
+        "Automated daily probe of the path a booking notification takes. No action needed.")
+
+  if ! mail_is_local; then
+    # Mail is on another host. We cannot read its queue from here, so the
+    # verdict is the server's own response to DATA — which still catches the
+    # case this check exists for (submission accepted, MESSAGE refused). What
+    # it cannot see is a bounce generated after acceptance; set MAIL_LOG_CMD to
+    # get that back, and until then do not read a pass as proof of delivery.
+    local dest=$CANARY_TO host=$CANARY_HOST port=$CANARY_PORT
+    if [ -z "$CANARY_USER" ]; then
+      # Without credentials we cannot be relayed off-site, so fall back to a
+      # mailbox the server hosts. Say so: this still proves the server accepts
+      # our mail, but it no longer proves the external hop, which is where the
+      # last two failures actually were.
+      dest=$ALERT_TO; host=$MAIL_HOST; port=$MAIL_PORT
+      log "canary has no credentials (set CANARY_CRED_FILE): probing $host only, NOT the external hop"
+    fi
+    out=$(SMTP_USER="$CANARY_USER" SMTP_PASS="$CANARY_PASS" \
+          smtp_submit_patient "$host" "$port" "$ALERT_FROM" "$dest" "$msg")
+    if [ $? -ne 0 ]; then
+      alert canary "the mail server REFUSED the daily canary" \
+"$host:$port would not take a message from $ALERT_FROM to $dest.
+
+Server said: $out
+
+This is the form notification path. If the server refuses this, it refuses
+every booking notification too."
+      return 1
+    fi
+    log "canary accepted by $host for $dest ($out)"
+    clear_alert canary "the daily mail canary"
+    return 0
+  fi
+
+  printf '%s\n' "$msg" | docker exec -i "$POSTFIX" sendmail -f "$ALERT_FROM" "$CANARY_TO"
   sleep 45
   qid=$(docker logs --since 5m "$POSTFIX" 2>&1 | grep -F "message-id=<$msgid>" |
         grep -oE '\b[A-F0-9]{8,14}:' | head -1 | tr -d ':')
@@ -263,13 +426,23 @@ drift() {
     esac
   done
   [ -z "$found" ] && { log "no mail-hostname drift"; clear_alert drift "mail hostname configuration"; return 0; }
-  alert drift "containers point at $PUBLIC_MAIL_NAME with no host mapping" \
+  if [ "$mail_local" = 1 ]; then
+    alert drift "containers point at $PUBLIC_MAIL_NAME with no host mapping" \
 "These containers run on the mail host yet address the mail server by its
 public name, which resolves to this host's own WAN IP. Their mail either
 already fails or will the moment they retry. Point them at the mail
 container name on the mailcow network, or add
   extra_hosts: [\"$PUBLIC_MAIL_NAME:host-gateway\"]
 $found"
+  else
+    alert drift "containers still pin $PUBLIC_MAIL_NAME to THIS host, but mail left" \
+"The mail server is not running here any more, so these host-gateway mappings
+now resolve the mail name to a machine with no mail server — the same silent
+failure as before, in the opposite direction. Public DNS already points at the
+real mail host, so the fix is to DELETE the mapping and recreate:
+  docker compose -p <project> up -d --no-deps --force-recreate <service>
+$found"
+  fi
   return 1
 }
 
@@ -278,7 +451,13 @@ rc=0
 case "${1:-check}" in
   check)
     docker info >/dev/null 2>&1 || { log "FATAL docker is unreachable from this account"; exit 3; }
-    if require_containers "$WEB_CONTAINER" "$POSTFIX"; then
+    # Only the web container is unconditionally required. The mail container
+    # being absent is normal when mail lives on another host, and alerting on
+    # it there would cry wolf every five minutes forever.
+    REQUIRED="$WEB_CONTAINER"
+    mail_is_local && REQUIRED="$REQUIRED $POSTFIX"
+    # shellcheck disable=SC2086
+    if require_containers $REQUIRED; then
       clear_alert container "the form containers"
       check_dropped_notifications || rc=1
       check_bounces               || rc=1
