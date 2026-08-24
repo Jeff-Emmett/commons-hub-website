@@ -235,8 +235,13 @@ $(docker logs --since 5m "$POSTFIX" 2>&1 | grep "$qid" | tail -3)"
 # so from inside a container it hairpins and never connects. Only prints
 # variable NAMES -- values may hold credentials.
 drift() {
-  local c found="" envkeys hosts
+  local c found="" envkeys hosts mail_local=1
   docker info >/dev/null 2>&1 || { log "FATAL docker is unreachable from this account"; return 3; }
+  # If the mail server ever moves off this host, the fix below inverts: a
+  # host-gateway mapping would then point at a host with no mail server, and
+  # every one of these containers would break in the same silent way. So the
+  # check follows the mail server rather than assuming it stays.
+  running "$POSTFIX" || mail_local=0
   for c in $(docker ps --format '{{.Names}}'); do
     printf '%s' "$c" | grep -qE "$DRIFT_IGNORE_CONTAINERS" && continue
     envkeys=$(docker inspect "$c" --format '{{range .Config.Env}}{{println .}}{{end}}' 2>/dev/null |
@@ -245,8 +250,15 @@ drift() {
     [ -z "$envkeys" ] && continue
     hosts=$(docker inspect "$c" --format '{{.HostConfig.ExtraHosts}}' 2>/dev/null)
     case "$hosts" in
-      *"$PUBLIC_MAIL_NAME"*) vlog "$c uses $PUBLIC_MAIL_NAME but maps it via extra_hosts - ok" ;;
-      *) found="$found
+      *"$PUBLIC_MAIL_NAME"*)
+        if [ "$mail_local" = 1 ]; then
+          vlog "$c uses $PUBLIC_MAIL_NAME but maps it via extra_hosts - ok"
+        else
+          found="$found
+  $c: $envkeys (maps $PUBLIC_MAIL_NAME to THIS host, but the mail server is no longer here)"
+        fi ;;
+      *)
+        [ "$mail_local" = 1 ] && found="$found
   $c: $envkeys" ;;
     esac
   done

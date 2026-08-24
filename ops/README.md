@@ -97,6 +97,32 @@ watcher.
    slice of it outright (`550-5.7.1 ... not authorized to send email directly`).
    Verifying the domain at Resend and routing it through the relay is the fix.
 
+## The same hairpin, everywhere else (2026-08-24)
+
+The first `drift` run found 13 other containers on this host addressing mailcow
+by its public name. Fixed by adding the mapping to their compose files and
+recreating: `xhivart-mirror`, `xhivart-directus`, `cofi-register`, `emil-form`,
+`docmost`, `docmost-cl`, `docmost-voc`, `immich-server`, `zulip` — verified by
+resolving `mail.rmail.online` inside the container (now the host gateway) and
+opening 587.
+
+Two are patched in their compose file but **not yet recreated**, deliberately:
+
+- `rspace-online` — the running container was created from a compose file that
+  no longer defines it, so recreating from `docker-compose.yml` could quietly
+  change more than this one line. Needs its own deploy path.
+- `schedule-jeffemmett` — `docker compose config` still reports 4 secrets unset
+  from its directory, so a recreate risks starting it with blank credentials.
+
+`immich_machine_learning` and `immich_proxy` inherit `SMTP_HOST` from the shared
+immich env file but never open an SMTP connection; they are in the watchdog's
+`DRIFT_IGNORE_CONTAINERS`, not fixed.
+
+**If mail ever moves off this host, all of these invert** — a `host-gateway`
+mapping would then point at a machine with no mail server. The `drift` check
+follows the mail container: when it is not running here, it flags the mappings
+themselves instead.
+
 ## Replaying inquiries that were never emailed
 
 The row is in Directus; only the notification was lost.
