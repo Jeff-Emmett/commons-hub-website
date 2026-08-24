@@ -19,12 +19,25 @@ function transport(): Transporter | null {
   const user = process.env.MAIL_SMTP_USER;
   const pass = process.env.MAIL_SMTP_PASS;
   if (!host || !user || !pass) return null;
+  // When the app and the mail server share a host, `host` is the mail
+  // container's name on the docker network, not the public MX name: the
+  // public name resolves to the host's own WAN address, which is a hairpin
+  // that never connects. That container-internal hop still speaks STARTTLS,
+  // but presents mailcow's self-signed certificate, which Node rejects by
+  // default. MAIL_SMTP_TLS_INSECURE=true accepts it — set it ONLY for a hop
+  // that stays inside the docker bridge; never for a submission that crosses
+  // the internet.
+  const insecureTls = /^(1|true|yes)$/i.test(process.env.MAIL_SMTP_TLS_INSECURE || "");
+  if (insecureTls) {
+    console.warn(`mail: TLS certificate verification disabled for ${host}`);
+  }
   cached = nodemailer.createTransport({
     host,
     port,
     // STARTTLS on 587, implicit TLS on 465.
     secure: port === 465,
     auth: { user, pass },
+    tls: { rejectUnauthorized: !insecureTls },
   });
   return cached;
 }
