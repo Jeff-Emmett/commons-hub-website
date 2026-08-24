@@ -4,31 +4,44 @@ Where it lives, how to deploy it, and every way its forms have died so far.
 
 ## Where it runs
 
-The site runs on **GX10** (`ssh gx10`), in the failover stack. **Mail does not.**
-Mail moved back to netcup on 2026-08-24; the two live on different hosts now,
-and most of this document is about that seam.
+Everything runs on **netcup** (`ssh netcup-full`) — site, database, newsletter
+**and mail, on the same host**. That is the point: for a week the site lived on
+GX10 while mail lived here, and every failure in this document came from that
+seam. It was closed on 2026-08-24.
 
 | | |
 |---|---|
-| compose | `/home/mycopunk/apps/netcup-failover/docker-compose.commons-hub.yml` |
-| env | `.env.commons-hub` in the same directory (vars prefixed `WEB_`) |
-| build context | `./commons-hub-web` — **a git checkout of this repo**, tracking `gitea/main` |
-| containers | `commons-hub-web`, `commons-hub-directus`, `commons-hub-directus-db` |
-| newsletter | `commons-hub-listmonk` + `-db`, project `commons-hub-newsletter` |
-| public path | Cloudflare tunnel → `cloudflared-failover` → `commons-hub-web:3000` |
-| mail | **netcup** (`159.195.32.209`), reached as `mail.rmail.online:587` |
+| app compose | `/opt/apps/commons-hub-app/docker-compose.yml` (a checkout of this repo, tracking `gitea/main`) |
+| directus | `/opt/apps/commons-hub-directus/` |
+| newsletter | `/opt/apps/commons-hub-listmonk/` |
+| containers | `commons-hub-web`, `commons-hub-directus(-db)`, `commons-hub-listmonk(-db)`, `commons-hub-files` |
+| public path | Cloudflare (proxied **A record** → `159.195.32.209`) → traefik → `commons-hub-web:3000` |
+| mail | **local** mailcow, reached as `mail.rmail.online:587` via `extra_hosts: host-gateway` |
+| secrets | **Infisical** (`commons-hub-app`/prod), injected by `/opt/infisical/entrypoint-wrapper.sh`; only `INFISICAL_CLIENT_ID`/`SECRET` sit in `.env` |
 
-Infisical injection is **off** here; `.env.commons-hub` is the config.
+`docker compose config` will warn that `LISTMONK_TOKEN` and friends are unset.
+That is expected — those arrive from Infisical at container start, not from
+compose.
+
+**Why an A record and not the tunnel.** netcup's cloudflared is running an
+ingress config it loaded long ago — the file on disk is nine lines ending in a
+catch-all, but the running process is serving rules numbered into the seventies.
+Pointing the hostnames at the tunnel produced a 404 from a stale rule while
+traefik answered the identical request locally with a 200. A proxied A record
+goes straight to traefik and sidesteps that entirely, which is also how
+`wiki`, `staging` and `api` on this zone already work. **Do not restart
+cloudflared casually** to "fix" this: the running config has rules the file does
+not, and a restart would drop them.
+
+The old GX10 stack (`/home/mycopunk/apps/netcup-failover/docker-compose.commons-hub.yml`)
+is stopped, not deleted, with its volumes intact.
 
 ### Deploy
 
 ```bash
-ssh gx10
-cd /home/mycopunk/apps/netcup-failover/commons-hub-web && git pull
-cd .. && docker compose -f docker-compose.commons-hub.yml --env-file .env.commons-hub \
-        build commons-hub-web &&
-       docker compose -f docker-compose.commons-hub.yml --env-file .env.commons-hub \
-        up -d --no-deps commons-hub-web
+ssh netcup-full
+cd /opt/apps/commons-hub-app && git pull --ff-only
+docker compose build web && docker compose up -d web
 curl -s https://commons-hub.at/api/health/forms      # expect {"ok":true,...}
 ```
 
@@ -36,7 +49,10 @@ The checkout tracks **Gitea**, not GitHub. GitHub is a public mirror and pushing
 to it is gated, so a deploy that pulled from there could sit behind the actual
 head with nothing saying so. Gitea is where this repo is pushed first.
 
-`git status` in that checkout must be clean. Anything it lists is a change that
+`git status` in that checkout is **not** clean, deliberately: `docker-compose.yml`
+carries a local override adding the Infisical gated entrypoint, which is not in
+the repo. Preserve it across pulls — a `git checkout .` there would start the
+container with no secrets. Anything it lists is a change that
 exists only on the box — the failure mode that made "is the fix deployed?"
 unanswerable for a week.
 
@@ -61,7 +77,8 @@ pipeline can be dead for days without a single visible symptom.
 
 `ops/form-watchdog.sh`, installed on GX10 at `~/bin/form-watchdog.sh`, cron:
 
-On **GX10** (the web host):
+All of it on **netcup**, `/usr/local/bin/form-watchdog.sh`, config in
+`/etc/default/commons-hub-watchdog` (0600):
 
 ```
 */5 * * * *  form-watchdog.sh check
@@ -69,11 +86,8 @@ On **GX10** (the web host):
 41 6 * * 1   form-watchdog.sh drift
 ```
 
-On **netcup** (the mail host), same script, `/etc/default/commons-hub-watchdog`:
-
-```
-*/10 * * * * /usr/local/bin/form-watchdog.sh bounces
-```
+The `bounces` subcommand still exists for the case where site and mail are split
+across hosts again; it is not scheduled while they share one.
 
 Recipients and the canary's credential file live in
 `~/.config/commons-hub-watchdog.conf` (0600), never in this repo.
@@ -88,27 +102,21 @@ Recipients and the canary's credential file live in
   the postfix log is. Splitting it that way is why no cross-host access had to be
   invented; each half runs where its evidence lives.
 
-### The watchdog's two transports, and why they differ
+### The watchdog's transports
 
-An alert must not travel the path it is reporting on, so the two are separate:
+An alert must not travel the path it is reporting on. With mail on this host,
+both alerts and the canary are handed straight to the mail container's
+`sendmail` — no network, no credentials, nothing to drift. The canary's delivery
+is then read back out of the postfix log, which is the only check that catches a
+relay accepting our AUTH and then refusing the message.
 
-- **Alerts** go to `mail.rmail.online:25`, unauthenticated, to a mailbox the
-  mail server hosts itself. No credentials, so an alert survives a credential
-  problem — which is one of the things being watched. When mailcow runs on the
-  same host the alert is handed to the container directly instead.
-- **The canary** authenticates on `:587` with the **website's own** submission
-  credentials, read at run time from `.env.commons-hub` via `CANARY_CRED_FILE`,
-  and goes to an **external** mailbox. It uses the site's credentials on purpose:
-  those are the thing under test. Without them it falls back to a local mailbox
-  and says so in the log — that still proves the server accepts our mail, but
-  not the external hop, which is where two of the three failures actually were.
-
-Port 25 is **greylisted**: the first message to a new sender/recipient pair is
-deferred `451` and delivered on a retry. That is handled, and finding it exposed
-a real bug — the alert's cooldown stamp used to be written *before* the send, so
-a deferred alert was swallowed for an hour and reported to nobody. The stamp is
-now written only after the mail has actually left, and the canary retries across
-the greylist window before calling anything a failure.
+The script still carries the split-host machinery, because it earned it: when
+mail was remote, alerts went unauthenticated to port 25 (which is **greylisted**,
+deferring the first message to a new sender/recipient pair) and the canary needed
+the site's own credentials to be relayed off-site. Finding the greylist exposed a
+real bug — the alert's cooldown stamp was written *before* the send, so a
+deferred alert was swallowed for an hour and reported to nobody. The stamp is now
+written only after the mail has actually left.
 
 ### Who watches the watchdog
 
@@ -127,6 +135,16 @@ leaves it. The token was created and relayed without ever being printed, per
 
 ## The traps, in the order they bit
 
+0. **Splitting the site from its mail server.** Every other trap here is a
+   symptom of this one. For a week the site ran on GX10 and mail on netcup, and
+   that seam produced: a hairpinning hostname, a relay that refused our `From:`,
+   a residential IP Google rejected, a watchdog that could not read the mail log,
+   a canary that needed shared credentials to be relayed at all, and finally a
+   **fail2ban ban on GX10's entire WAN address** — triggered by *unrelated* GX10
+   services retrying stale mail passwords — which silently took the forms down
+   again. Same host means none of those exist. That is why the site now lives
+   next to its mail server.
+
 1. **A mail hostname that resolves to the machine you are on.**
    `mail.rmail.online` is the mail server's public name. While mailcow ran on
    GX10 the name pointed at GX10's own WAN address, and from inside a container
@@ -137,6 +155,9 @@ leaves it. The token was created and relayed without ever being printed, per
    thirteen containers went quietly mute. All of them have been reverted — public
    DNS is correct, so the right configuration is now *no* mapping at all. The
    `drift` check follows the mail server and flags whichever direction is wrong.
+   On this host the mapping is **correct and required** (`extra_hosts:
+   ["mail.rmail.online:host-gateway"]` on `commons-hub-web`), because mailcow is
+   here and the public name points at this machine's own WAN address.
 
 2. **The `From:` domain must be accepted by whatever relays the message.**
    From GX10, mail left through Resend, which rejects any `From:` header on a
