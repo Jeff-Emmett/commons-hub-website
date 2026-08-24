@@ -84,6 +84,15 @@ export async function POST(request: Request) {
   // authenticated sender; Reply-To is the customer so a "Reply" replies
   // directly to them. Skips silently when SMTP env isn't configured.
   const officeTo = process.env.MAIL_TO_OFFICE;
+  if (!officeTo) {
+    // Not a silent skip: with no recipient the inquiry reaches nobody, which
+    // is indistinguishable from working until someone asks where the bookings
+    // went. INQUIRY_NOTIFY_FAILED is the marker the watchdog greps for.
+    console.error(
+      "INQUIRY_NOTIFY_FAILED",
+      JSON.stringify({ reason: "no_recipient", email: data.email, id: created?.id }),
+    );
+  }
   if (officeTo) {
     const lines: string[] = [];
     const push = (label: string, value: unknown) => {
@@ -119,7 +128,7 @@ export async function POST(request: Request) {
         : `Event inquiry — ${data.name}${
             data.event_title ? ` (${data.event_title})` : ""
           }`;
-    await sendMail({
+    const sent = await sendMail({
       to: officeTo,
       subject,
       text,
@@ -128,6 +137,20 @@ export async function POST(request: Request) {
         `<pre style="font-family:ui-monospace,monospace;font-size:13px;background:#f6f6f6;padding:12px;border-radius:6px;white-space:pre-wrap">${safe}</pre>`,
       replyTo: data.email,
     });
+    // The visitor still gets a 200 — the inquiry IS stored, and asking them to
+    // retry would only duplicate it. But a dropped notification must leave a
+    // machine-readable trace: everything needed to find and replay the row,
+    // and a marker the watchdog alerts on. Three past outages were only found
+    // by a human noticing the silence.
+    console[sent ? "log" : "error"](
+      sent ? "INQUIRY_NOTIFY_OK" : "INQUIRY_NOTIFY_FAILED",
+      JSON.stringify({
+        id: created?.id,
+        inquiry_type: data.inquiry_type,
+        email: data.email,
+        check_in: data.check_in,
+      }),
+    );
   }
 
   // Optional legacy path: Listmonk transactional. Skip silently if not

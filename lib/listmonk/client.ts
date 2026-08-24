@@ -109,6 +109,29 @@ async function findSubscriberByEmail(
   return res.results?.[0] ?? null;
 }
 
+/**
+ * Probe listmonk: reachable, credentialed, and the configured list still
+ * exists. A newsletter signup fails at exactly these three points — after the
+ * host move the URL pointed at a container that no longer existed and every
+ * signup 502'd for five days with nothing watching.
+ */
+export async function pingListmonk(): Promise<{ up: boolean; code?: string }> {
+  if (!LISTMONK_TOKEN) return { up: false, code: "unconfigured" };
+  if (!LISTMONK_LIST_ID) return { up: false, code: "no_list_id" };
+  try {
+    await listmonkRequest<unknown>(`/api/lists/${LISTMONK_LIST_ID}`, { method: "GET" });
+    return { up: true };
+  } catch (err) {
+    console.error("listmonk: ping failed", err);
+    const status = (err as { status?: number }).status;
+    if (status === 401 || status === 403) return { up: false, code: "auth" };
+    if (status === 404) return { up: false, code: "missing_list" };
+    const msg = err instanceof Error ? err.message : String(err);
+    const code = /ENOTFOUND|EAI_AGAIN|getaddrinfo/i.test(msg) ? "dns" : "connect";
+    return { up: false, code };
+  }
+}
+
 export async function sendWelcome(email: string): Promise<void> {
   if (!LISTMONK_TEMPLATE_ID) {
     throw new Error("LISTMONK_TEMPLATE_ID is not configured");

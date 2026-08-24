@@ -93,6 +93,32 @@ export function resolveFrom(
 }
 
 /**
+ * Probe the SMTP hop without sending anything: connect, STARTTLS, AUTH.
+ * `false` here means every office notification is being dropped, which is the
+ * failure this app cannot see on its own — see app/api/health/forms.
+ */
+export async function verifyMail(): Promise<{ up: boolean; code?: string }> {
+  const t = transport();
+  if (!t) return { up: false, code: "unconfigured" };
+  try {
+    await t.verify();
+    return { up: true };
+  } catch (err) {
+    console.error("mail: verify failed", err);
+    const msg = err instanceof Error ? err.message : String(err);
+    // Coarse buckets only — the detail stays in the log, out of the response.
+    const code = /auth/i.test(msg)
+      ? "auth"
+      : /certificate|self.signed|tls/i.test(msg)
+        ? "tls"
+        : /ENOTFOUND|EAI_AGAIN|getaddrinfo/i.test(msg)
+          ? "dns"
+          : "connect";
+    return { up: false, code };
+  }
+}
+
+/**
  * Best-effort SMTP send. Returns true on success, false if SMTP isn't
  * configured or the send threw. Errors are logged, not propagated —
  * caller decides whether a missing notification should fail the request.
