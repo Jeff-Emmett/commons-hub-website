@@ -14,7 +14,9 @@
 # So: something must watch the path itself, not the inquiries.
 #
 #   check   (every 5 min) health endpoint + dropped-notification markers +
-#           bounces of anything the forms sent
+#           bounces of anything the forms sent (when the mail log is readable)
+#   bounces (every 10 min) the bounce half alone, to be run ON THE MAIL HOST
+#           when mail lives somewhere other than the web host
 #   canary  (daily)       one real message through the real relay, verified in
 #           the postfix log — catches the layer `check` cannot see, where the
 #           relay accepts our AUTH but rejects or bounces the mail
@@ -67,9 +69,11 @@ CANARY_CRED_FILE=${CANARY_CRED_FILE:-}
 CANARY_USER=${CANARY_USER:-}
 CANARY_PASS=${CANARY_PASS:-}
 # A command printing the mail server's postfix log, when it is reachable from
-# here (e.g. "ssh mailhost docker logs --since 10m postfix"). Empty means the
-# mail server is remote and we cannot read it, so bounce correlation is SKIPPED
-# and said to be skipped, rather than silently reporting a clean run.
+# here (e.g. "ssh mailhost docker logs --since 10m postfix"). Usually empty, and
+# that is fine: when mail lives on another host the bounce check runs THERE via
+# the `bounces` subcommand, where the log is local. Either way the check happens
+# somewhere and says where — what must never happen is silently reporting a
+# clean run because nothing was looked at.
 MAIL_LOG_CMD=${MAIL_LOG_CMD:-}
 # No addresses are baked in: this file is public. Put them in the config file
 # below (root-owned, 0600) or the environment.
@@ -96,6 +100,13 @@ STATE_DIR=${STATE_DIR:-$HOME/.local/state/commons-hub-watchdog}
 COOLDOWN=${COOLDOWN:-3600}
 WINDOW=${WINDOW:-10m}
 KUMA_PUSH_URL=${KUMA_PUSH_URL:-}
+# Kuma sits behind Cloudflare Access, which answers a push with a 302 to a login
+# page — a heartbeat that silently never lands, which is worse than none. The
+# push therefore goes over the WireGuard tunnel straight to the host, bypassing
+# Cloudflare entirely: plain HTTP is fine there because the tunnel is the
+# encryption, and the token never leaves it.
+#   KUMA_PUSH_CURL_OPTS="--resolve status.example.com:80:100.64.0.2"
+KUMA_PUSH_CURL_OPTS=${KUMA_PUSH_CURL_OPTS:-}
 # Envelope senders the website's two forms use.
 SENDERS=${SENDERS:-'claude@jeffemmett.com|welcome@news.commons-hub.at'}
 PUBLIC_MAIL_NAME=${PUBLIC_MAIL_NAME:-mail.rmail.online}
@@ -306,7 +317,7 @@ check_bounces() {
   local logs ids id sender_ids bad="" line
   logs=$(mail_log) || {
     BOUNCE_CHECKED=0
-    vlog "mail server is not on this host and MAIL_LOG_CMD is unset: bounce correlation SKIPPED"
+    vlog "mail server is elsewhere: bounce correlation runs THERE (\`form-watchdog.sh bounces\` on the mail host), not here"
     return 0; }
   sender_ids=$(printf '%s\n' "$logs" | grep -E "from=<($SENDERS)>" |
                grep -oE '\b[A-F0-9]{8,14}:' | tr -d ':' | sort -u)
@@ -475,15 +486,27 @@ case "${1:-check}" in
       if [ "$BOUNCE_CHECKED" = 1 ]; then
         log "ok"
       else
-        log "ok (bounce correlation skipped: the mail server's log is not reachable from here)"
+        log "ok (bounces checked on the mail host, not here)"
       fi
     fi
     # Only a fully clean run pings the heartbeat, so a monitor that watches for
     # silence also catches this script dying or the host going away.
-    [ $rc -eq 0 ] && [ -n "$KUMA_PUSH_URL" ] && curl -fsS --max-time 10 "$KUMA_PUSH_URL" >/dev/null 2>&1
+    if [ $rc -eq 0 ] && [ -n "$KUMA_PUSH_URL" ]; then
+      # shellcheck disable=SC2086
+      curl -fsS --max-time 10 $KUMA_PUSH_CURL_OPTS "$KUMA_PUSH_URL" >/dev/null 2>&1 ||
+        log "HEARTBEAT-FAILED could not reach the Kuma push endpoint"
+    fi
+    ;;
+  # Bounce correlation needs the mail server's log, so when mail and web are on
+  # different hosts it belongs on the MAIL host, where the log is local and no
+  # cross-host access has to be invented. Same script, same config, one job.
+  bounces)
+    docker info >/dev/null 2>&1 || { log "FATAL docker is unreachable from this account"; exit 3; }
+    require_containers "$POSTFIX" || exit 1
+    if check_bounces; then log "bounces ok"; else rc=1; fi
     ;;
   canary) canary || rc=1 ;;
   drift)  drift  || rc=1 ;;
-  *) echo "usage: $0 check|canary|drift [--verbose]" >&2; exit 2 ;;
+  *) echo "usage: $0 check|bounces|canary|drift [--verbose]" >&2; exit 2 ;;
 esac
 exit $rc

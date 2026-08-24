@@ -12,7 +12,7 @@ and most of this document is about that seam.
 |---|---|
 | compose | `/home/mycopunk/apps/netcup-failover/docker-compose.commons-hub.yml` |
 | env | `.env.commons-hub` in the same directory (vars prefixed `WEB_`) |
-| build context | `./commons-hub-web` — **a git checkout of this repo, `main`** |
+| build context | `./commons-hub-web` — **a git checkout of this repo**, tracking `gitea/main` |
 | containers | `commons-hub-web`, `commons-hub-directus`, `commons-hub-directus-db` |
 | newsletter | `commons-hub-listmonk` + `-db`, project `commons-hub-newsletter` |
 | public path | Cloudflare tunnel → `cloudflared-failover` → `commons-hub-web:3000` |
@@ -31,6 +31,10 @@ cd .. && docker compose -f docker-compose.commons-hub.yml --env-file .env.common
         up -d --no-deps commons-hub-web
 curl -s https://commons-hub.at/api/health/forms      # expect {"ok":true,...}
 ```
+
+The checkout tracks **Gitea**, not GitHub. GitHub is a public mirror and pushing
+to it is gated, so a deploy that pulled from there could sit behind the actual
+head with nothing saying so. Gitea is where this repo is pushed first.
 
 `git status` in that checkout must be clean. Anything it lists is a change that
 exists only on the box — the failure mode that made "is the fix deployed?"
@@ -57,10 +61,18 @@ pipeline can be dead for days without a single visible symptom.
 
 `ops/form-watchdog.sh`, installed on GX10 at `~/bin/form-watchdog.sh`, cron:
 
+On **GX10** (the web host):
+
 ```
 */5 * * * *  form-watchdog.sh check
 23 7 * * *   form-watchdog.sh canary
 41 6 * * 1   form-watchdog.sh drift
+```
+
+On **netcup** (the mail host), same script, `/etc/default/commons-hub-watchdog`:
+
+```
+*/10 * * * * /usr/local/bin/form-watchdog.sh bounces
 ```
 
 Recipients and the canary's credential file live in
@@ -72,6 +84,9 @@ Recipients and the canary's credential file live in
   takes. This is the only check that sees a relay which accepts our AUTH and
   then refuses the mail.
 - **drift** — containers whose mail hostname resolves to the wrong host.
+- **bounces** — the bounce half, run **on the mail host** because that is where
+  the postfix log is. Splitting it that way is why no cross-host access had to be
+  invented; each half runs where its evidence lives.
 
 ### The watchdog's two transports, and why they differ
 
@@ -95,14 +110,20 @@ a deferred alert was swallowed for an hour and reported to nobody. The stamp is
 now written only after the mail has actually left, and the canary retries across
 the greylist window before calling anything a failure.
 
-Set `KUMA_PUSH_URL` in the config to an Uptime Kuma *Push* monitor and Kuma will
-alert when the watchdog itself stops running — otherwise nothing watches the
-watcher.
+### Who watches the watchdog
 
-**Known gap:** with mail on another host, the watchdog cannot read the mail
-server's queue, so bounce correlation is **skipped** and says so rather than
-reporting a clean run. Point `MAIL_LOG_CMD` at a command that prints netcup's
-postfix log (it needs access this host does not currently have) to get it back.
+Uptime Kuma monitor **"commons-hub.at form pipeline watchdog"** (push, id 280).
+`check` pings it **only on a fully clean run**, so a heartbeat means "I ran and
+everything passed", not merely "I am alive". Fifteen-minute interval tolerates
+two missed runs before it pages.
+
+Kuma sits behind Cloudflare Access, which answers a push with a `302` to a login
+page — a heartbeat that silently never lands, which is worse than not having one.
+So the push goes over the **WireGuard tunnel** straight to the host and bypasses
+Cloudflare: `KUMA_PUSH_CURL_OPTS="--resolve status.jeffemmett.com:80:100.64.0.2"`.
+Plain HTTP is correct there — the tunnel is the encryption, and the token never
+leaves it. The token was created and relayed without ever being printed, per
+`dev-ops/netcup/uptime-kuma/mk-tailnet-monitors.py`, whose contract this follows.
 
 ## The traps, in the order they bit
 
@@ -160,6 +181,43 @@ Without `-p` compose derives a different project, and the recreate fails with
 `Conflict. The container name is already in use`. Run `docker compose config -q`
 first: a project whose variables do not resolve from that directory will start
 with blank credentials rather than refusing.
+
+## Recovering mail from a mailcow that has been switched off
+
+When mail moved GX10 → netcup on 2026-08-24, **100 messages delivered into
+GX10's mailcow between 19 and 24 August existed in no other copy.** Netcup's
+store had been frozen since 17 August, so its restore contained nothing from that
+window — the two stores were not, and never had been, supersets of each other.
+Nothing warned about this: both servers looked healthy, and the gap was only
+visible by asking the store what it held *by message date*:
+
+```bash
+docker exec <dovecot> doveadm search -u <user> mailbox INBOX   sentsince 2026-08-18 sentbefore 2026-08-19 | wc -l      # 0 == a hole
+```
+
+The recovery, which has a trap in the middle of it:
+
+1. Archive the stopped volume first, read-only, before anything can prune it:
+   `docker run --rm -v mailcowdockerized_vmail-vol-1:/vmail:ro -v $PWD:/out alpine tar czf /out/rescue.tgz -C /vmail .`
+2. **Those files are encrypted at rest** (mailcow's `mail_crypt`), with a key that
+   lives in that host's `crypt-vol`. Copying them to the other server gets you
+   `Decryption error: no private key available`, and copying the key across would
+   be far worse — the destination has its own, and its existing mail depends on it.
+3. So decrypt on the **source** host, by starting only what dovecot needs — no
+   postfix, so the machine cannot send or receive while you work:
+   `docker compose up -d mysql-mailcow redis-mailcow dovecot-mailcow`
+4. Export with encryption disabled **on write only**; the read path still
+   decrypts. This is the whole trick:
+   `doveadm -o plugin/mail_crypt_save_version=0 backup -u <user> maildir:/tmp/plain/<slug>`
+   (Plain `doveadm backup` re-encrypts with the source key and gets you nowhere.)
+5. Move the export to the mail host and import into a **separate, obviously named
+   folder** rather than INBOX — additive, greppable, and reversible by deleting it:
+   `doveadm import maildir:/tmp/plain/<slug> -u <user> Recovered-gx10-Aug2026 all`
+6. Stop the source stack again and verify a message actually reads:
+   `doveadm fetch -u <user> hdr mailbox "Recovered-gx10-Aug2026/INBOX" uid 1`
+
+Do not pipe `doveadm` through `head` while it works — SIGPIPE truncates the run
+and you get a partial export that looks like a complete one.
 
 ## Replaying inquiries that were never emailed
 
