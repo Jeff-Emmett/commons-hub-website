@@ -110,6 +110,10 @@ KUMA_PUSH_CURL_OPTS=${KUMA_PUSH_CURL_OPTS:-}
 # Envelope senders the website's two forms use.
 SENDERS=${SENDERS:-'claude@jeffemmett.com|welcome@news.commons-hub.at'}
 PUBLIC_MAIL_NAME=${PUBLIC_MAIL_NAME:-mail.rmail.online}
+# Port used to prove a container can actually reach the mail server.
+MAIL_PROBE_PORT=${MAIL_PROBE_PORT:-587}
+# Tiny image used to probe from inside a container's network namespace.
+PROBE_IMAGE=${PROBE_IMAGE:-busybox:latest}
 # The mail server naming ITSELF is not drift — MAILCOW_HOSTNAME is its own
 # identity, not a client target — and neither is any mailcow container.
 DRIFT_IGNORE_KEYS=${DRIFT_IGNORE_KEYS:-'^(MAILCOW_HOSTNAME|MAILCOW_PASS_SCHEME)$'}
@@ -407,11 +411,37 @@ $(docker logs --since 5m "$POSTFIX" 2>&1 | grep "$qid" | tail -3)"
 
 # --- drift ------------------------------------------------------------------
 # The trap that broke this twice: a container on the mail host configured with
-# the PUBLIC mail hostname. That name is DDNS onto this host's own WAN address,
-# so from inside a container it hairpins and never connects. Only prints
-# variable NAMES -- values may hold credentials.
+# the PUBLIC mail hostname, which can resolve to an address the container cannot
+# actually reach. Only prints variable NAMES -- values may hold credentials.
+#
+# It TESTS rather than assumes. The original version inferred breakage from the
+# config alone, which was right on a host behind residential NAT (no hairpin, so
+# the connection dies) and WRONG on one whose public IP is bound to its own
+# interface (the kernel routes it locally and it just works). On netcup that
+# inference flagged seventeen perfectly healthy containers. A monitor that cries
+# wolf gets muted, and a muted monitor is the thing this file exists to prevent,
+# so the check now opens a socket and believes the result.
+probe_container_mail() {
+  local c=$1
+  # Probed from OUTSIDE, in the container's own network namespace, so the answer
+  # is about the container's networking and not about what its image happens to
+  # ship. Embedding a probe via `docker exec` meant depending on nc or python
+  # being present -- and the python fallback's nested quoting silently produced
+  # empty output, which read as "cannot reach" and flagged five healthy
+  # containers. A monitor that invents failures gets ignored.
+  local net
+  net=$(docker inspect "$c" --format '{{.HostConfig.NetworkMode}}' 2>/dev/null)
+  if [ "$net" = "host" ]; then
+    # Shares this host's stack, so the host's own reachability is the answer.
+    nc -z -w6 "$PUBLIC_MAIL_NAME" "$MAIL_PROBE_PORT" >/dev/null 2>&1 && echo OPEN || echo FAIL
+    return 0
+  fi
+  docker run --rm --network "container:$c" "$PROBE_IMAGE" \
+    nc -z -w6 "$PUBLIC_MAIL_NAME" "$MAIL_PROBE_PORT" >/dev/null 2>&1 && echo OPEN || echo FAIL
+}
+
 drift() {
-  local c found="" envkeys hosts mail_local=1
+  local c found="" unverified="" envkeys hosts mail_local=1 mapped
   docker info >/dev/null 2>&1 || { log "FATAL docker is unreachable from this account"; return 3; }
   # If the mail server ever moves off this host, the fix below inverts: a
   # host-gateway mapping would then point at a host with no mail server, and
@@ -425,20 +455,29 @@ drift() {
               grep -vE "$DRIFT_IGNORE_KEYS" | tr '\n' ' ')
     [ -z "$envkeys" ] && continue
     hosts=$(docker inspect "$c" --format '{{.HostConfig.ExtraHosts}}' 2>/dev/null)
-    case "$hosts" in
-      *"$PUBLIC_MAIL_NAME"*)
-        if [ "$mail_local" = 1 ]; then
-          vlog "$c uses $PUBLIC_MAIL_NAME but maps it via extra_hosts - ok"
-        else
-          found="$found
+    mapped=0
+    case "$hosts" in *"$PUBLIC_MAIL_NAME"*) mapped=1 ;; esac
+
+    if [ "$mapped" = 1 ] && [ "$mail_local" = 0 ]; then
+      # Unambiguous: the mapping pins the mail name to a host that no longer
+      # runs a mail server. No probe needed, and a probe would pass against
+      # anything else listening on this box.
+      found="$found
   $c: $envkeys (maps $PUBLIC_MAIL_NAME to THIS host, but the mail server is no longer here)"
-        fi ;;
-      *)
-        [ "$mail_local" = 1 ] && found="$found
-  $c: $envkeys" ;;
+      continue
+    fi
+
+    case "$(probe_container_mail "$c")" in
+      OPEN) vlog "$c uses $PUBLIC_MAIL_NAME and reaches it - ok" ;;
+      *)    found="$found
+  $c: $envkeys (cannot reach $PUBLIC_MAIL_NAME:$MAIL_PROBE_PORT)" ;;
     esac
   done
+  [ -n "$unverified" ] && log "could not prove reachability for:$unverified"
   [ -z "$found" ] && { log "no mail-hostname drift"; clear_alert drift "mail hostname configuration"; return 0; }
+  # The offending list goes in the log too, not only in the alert mail: chasing
+  # "why did drift fire?" through a mailbox is how you end up ignoring it.
+  log "drift found:$found"
   if [ "$mail_local" = 1 ]; then
     alert drift "containers point at $PUBLIC_MAIL_NAME with no host mapping" \
 "These containers run on the mail host yet address the mail server by its
