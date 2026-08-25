@@ -23,15 +23,25 @@ seam. It was closed on 2026-08-24.
 That is expected — those arrive from Infisical at container start, not from
 compose.
 
-**Why an A record and not the tunnel.** netcup's cloudflared is running an
-ingress config it loaded long ago — the file on disk is nine lines ending in a
-catch-all, but the running process is serving rules numbered into the seventies.
-Pointing the hostnames at the tunnel produced a 404 from a stale rule while
-traefik answered the identical request locally with a 200. A proxied A record
-goes straight to traefik and sidesteps that entirely, which is also how
-`wiki`, `staging` and `api` on this zone already work. **Do not restart
-cloudflared casually** to "fix" this: the running config has rules the file does
-not, and a restart would drop them.
+**Why an A record and not the tunnel.** netcup's tunnel is **remotely
+managed**: cloudflared fetches its ingress from Cloudflare, not from
+`/root/.cloudflared/config.yml`, and that set is 457 rules ending in a
+`http_status:404` default. There is no rule for `commons-hub.at`, so pointing it
+at the tunnel hit the default and returned 404 while traefik served the identical
+request locally with 200. A proxied A record goes straight to traefik, which is
+how `wiki`, `staging` and `api` on this zone already work.
+
+To add a hostname to the tunnel instead, add the rule **remotely** (Zero Trust →
+Networks → Tunnels → Published routes). Note the API for this is a *full replace*
+of all 457 rules, so it is not something to script casually for one hostname.
+
+Restarting cloudflared is **safe** — it re-fetches the same remote config
+(verified 2026-08-25: rule count and every sampled hostname unchanged across a
+restart). What is *not* safe is trusting `config.yml`: it used to carry a
+nine-line `ingress:` block that was never in effect, and reading it as
+authoritative is what made this get diagnosed backwards the first time. That
+block has been removed and replaced with a comment saying where routing really
+lives.
 
 The old GX10 stack (`/home/mycopunk/apps/netcup-failover/docker-compose.commons-hub.yml`)
 is stopped, not deleted, with its volumes intact.
