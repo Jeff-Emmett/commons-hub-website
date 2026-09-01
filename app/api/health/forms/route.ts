@@ -39,6 +39,47 @@ const DIRECTUS_URL = (
   process.env.DIRECTUS_URL || "http://commons-hub-directus:8055"
 ).replace(/\/$/, "");
 
+/**
+ * A verified SMTP connection proves we can send. It does not prove there is
+ * anyone to send TO, and MAIL_TO_OFFICE not being set is a complete outage of
+ * the booking notification that looks exactly like health: the inquiry is
+ * stored, the visitor gets a 200, SMTP reports up, and the mail reaches nobody.
+ * The booking route already logs INQUIRY_NOTIFY_FAILED / no_recipient for it,
+ * but only once an inquiry has already been lost. This catches it before.
+ */
+function checkRecipient(): Status {
+  const raw = (process.env.MAIL_TO_OFFICE || "").trim();
+  if (!raw) return { up: false, code: "no_recipient" };
+
+  // Infisical has been observed storing values with their double quotes
+  // included — lib/mail/mailer.ts already unwraps MAIL_FROM for exactly that
+  // reason, and a quoted address here would be handed to nodemailer verbatim.
+  const unwrapped =
+    raw.length > 1 && raw.startsWith('"') && raw.endsWith('"')
+      ? raw.slice(1, -1).trim()
+      : raw;
+
+  // A list is legitimate: nodemailer accepts "a@b, Name <c@d>".
+  const parts = unwrapped.split(",").map((s) => s.trim()).filter(Boolean);
+  const addr = (s: string) => {
+    const m = s.match(/<([^>]+)>/);
+    return (m ? m[1] : s).trim();
+  };
+  const valid = parts.filter((p) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(addr(p)));
+
+  if (valid.length === parts.length && parts.length > 0) {
+    // Say so if only the quote-stripping saved it: the value is still stored
+    // wrong and the next thing to read it may not unwrap.
+    return unwrapped === raw ? { up: true } : { up: true, code: "quoted" };
+  }
+  // Counts only — this endpoint is public, so the value never appears here.
+  console.error(
+    "FORMS_HEALTH_RECIPIENT",
+    JSON.stringify({ parts: parts.length, valid: valid.length, quoted: unwrapped !== raw }),
+  );
+  return { up: false, code: "bad_recipient" };
+}
+
 async function pingDirectus(): Promise<Status> {
   try {
     const res = await fetch(`${DIRECTUS_URL}/server/health`, { cache: "no-store" });
@@ -69,17 +110,20 @@ export async function GET() {
     withTimeout(pingListmonk(), 8000, { up: false, code: "timeout" } as Status),
     withTimeout(pingDirectus(), 8000, { up: false, code: "timeout" } as Status),
   ]);
+  const recipient = checkRecipient();
 
   // Directus down => the inquiry itself is not stored; SMTP down => it is
-  // stored but nobody is told. Both are outages of a form, so both fail here.
-  const ok = smtp.up && listmonk.up && directus.up;
+  // stored but nobody is told; no recipient => it is stored, SMTP is fine, and
+  // it still reaches nobody. All three are outages of a form, so all three fail
+  // here.
+  const ok = smtp.up && listmonk.up && directus.up && recipient.up;
   if (!ok) {
     console.error(
       "FORMS_HEALTH_DEGRADED",
-      JSON.stringify({ smtp, listmonk, directus }),
+      JSON.stringify({ smtp, listmonk, directus, recipient }),
     );
   }
-  const body = { ok, smtp, listmonk, directus };
+  const body = { ok, smtp, listmonk, directus, recipient };
   memo = { at: Date.now(), body, ok };
   return NextResponse.json(body, {
     status: ok ? 200 : 503,
