@@ -23,7 +23,12 @@ services:
       INFISICAL_URL: ${INFISICAL_URL:-http://infisical:8080}
       NEXT_PUBLIC_DIRECTUS_URL: ${NEXT_PUBLIC_DIRECTUS_URL:-https://admin.commons-hub.at}
       DIRECTUS_URL: ${DIRECTUS_URL:-http://commons-hub-directus:8055}
-      LISTMONK_URL: ${LISTMONK_URL:-http://commons-hub-listmonk:9000}
+      # LISTMONK_URL default removed. It named commons-hub-listmonk, retired in
+      # the 2026-08-31 consolidation, so the default could only ever fail. The
+      # newsletter no longer uses it at all -- signups go to the broker -- and
+      # the code's own default now points at the shared instance for the one
+      # thing that still needs it, the booking-inquiry notification.
+      LISTMONK_URL: ${LISTMONK_URL:-}
       LISTMONK_TOKEN: ${LISTMONK_TOKEN}
       LISTMONK_LIST_ID: ${LISTMONK_LIST_ID}
       LISTMONK_TEMPLATE_ID: ${LISTMONK_TEMPLATE_ID}
@@ -45,7 +50,8 @@ services:
     networks:
       - traefik-public
       - commons-hub-directus-net
-      - commons-hub-listmonk-internal
+      # commons-hub-listmonk-internal removed: that instance no longer exists,
+      # and a public-facing site has no business on a listmonk database network.
     labels:
       - traefik.enable=true
       - traefik.docker.network=traefik-public
@@ -58,6 +64,4 @@ networks:
   traefik-public:
     external: true
   commons-hub-directus-net:
-    external: true
-  commons-hub-listmonk-internal:
     external: true
