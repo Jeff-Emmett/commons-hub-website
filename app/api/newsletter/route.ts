@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { subscribe, sendWelcome } from "@/lib/listmonk/client";
+import { subscribe } from "@/lib/listmonk/client";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -29,15 +29,9 @@ export async function POST(request: Request) {
     );
   }
 
-  try {
-    await sendWelcome(email);
-  } catch (err) {
-    console.error("newsletter welcome send failed:", err);
-    return NextResponse.json({
-      ok: true,
-      welcomeEmailQueued: false,
-    });
-  }
-
-  return NextResponse.json({ ok: true, welcomeEmailQueued: true });
+  /* No welcome is sent from here any more. The broker sends the opt-in
+     confirmation, and the welcome only once the person actually clicks it —
+     which is the difference between a list of people who agreed and a list of
+     people who typed their address into a footer. */
+  return NextResponse.json({ ok: true, pending: true });
 }

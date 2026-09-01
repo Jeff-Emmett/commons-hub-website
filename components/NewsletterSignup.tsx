@@ -39,10 +39,12 @@ export default function NewsletterSignup({
         setStatus(body.error ?? 'An error occurred. Please try again.');
         return;
       }
+      // Confirmed opt-in: they are NOT subscribed yet, and saying they are
+      // would be the one lie this form can tell. The list only gains them when
+      // they click the link.
       setStatus(
-        body.welcomeEmailQueued === false
-          ? "Thanks for subscribing! Welcome email's on its way shortly."
-          : 'Thanks for subscribing! Check your inbox for a welcome message.',
+        'Almost there — check your inbox and click the link to confirm. ' +
+          'Nobody can add you to this list but you.',
       );
       setEmail('');
     } catch (error) {

@@ -1,18 +1,40 @@
 import "server-only";
 
+/* Newsletter signups go through the newsletter broker; nothing else here does.
+ *
+ * They used to be written straight to listmonk's admin API from this container,
+ * with `status: "confirmed"` — so everyone who typed an address into the footer
+ * was recorded as having confirmed a subscription they were never asked about,
+ * on a list that is configured for double opt-in. The broker adds them
+ * UNCONFIRMED and sends the confirmation itself, from
+ * newsletter@news.commons-hub.at, and nobody joins the list until they click.
+ *
+ * It also means this container needs no listmonk token for signups. listmonk
+ * scopes subscriber permissions globally across every list, so a token here
+ * reached every other brand's audience on the shared instance.
+ *
+ * The `commons-hub.at` apex is on Google Workspace, which is why the sending
+ * address is on the `news.` subdomain — it has its own DKIM and SPF and cannot
+ * affect their primary mail. The broker owns that mapping.
+ */
+const BROKER_URL =
+  process.env.NEWSLETTER_BROKER_URL?.replace(/\/$/, "") ||
+  "http://newsletter-broker:8000";
+const NEWSLETTER_DOMAIN = process.env.NEWSLETTER_DOMAIN || "commons-hub.at";
+
+/* Still used by the booking-inquiry office notification below, which is a
+ * transactional send and not subscriber management. The default points at the
+ * shared instance: `commons-hub-listmonk` was retired in the 2026-08-31
+ * consolidation and no longer resolves, so the old default could only fail. */
 const LISTMONK_URL =
   process.env.LISTMONK_URL?.replace(/\/$/, "") ||
-  "http://commons-hub-listmonk:9000";
+  "http://clf-listmonk:9000";
 const LISTMONK_TOKEN = process.env.LISTMONK_TOKEN || "";
-const LISTMONK_LIST_ID = Number.parseInt(process.env.LISTMONK_LIST_ID || "0", 10);
-const LISTMONK_TEMPLATE_ID = Number.parseInt(
-  process.env.LISTMONK_TEMPLATE_ID || "0",
-  10,
-);
-// Multiple messengers may be configured on a shared instance (one per
-// co-located tenant). Pin the welcome send to the messenger that owns
-// the From: address, otherwise listmonk picks one round-robin and
-// mailcow rejects with "sender not owned by user".
+/* Was a workaround for one messenger per tenant, each owning its own From:
+   address, because listmonk picked one round-robin and mailcow answered
+   "sender not owned by user". The shared instance now authenticates as a single
+   account whose sender ACL covers every tenant address, so pinning is no longer
+   needed — kept only so an existing pin keeps working. */
 const LISTMONK_MESSENGER = process.env.LISTMONK_MESSENGER || "";
 
 type ListmonkResponse<T> = {
@@ -48,103 +70,65 @@ async function listmonkRequest<T>(
   return (body.data ?? ({} as T));
 }
 
-type SubscriberCreate = {
-  id: number;
-  uuid: string;
-  email: string;
-  status: string;
-};
-
-export type SubscribeResult =
-  | { kind: "subscribed"; subscriberId: number }
-  | { kind: "already_subscribed" };
+export type SubscribeResult = { kind: "subscribed" };
 
 export async function subscribe(email: string, name?: string): Promise<SubscribeResult> {
-  if (!LISTMONK_LIST_ID) {
-    throw new Error("LISTMONK_LIST_ID is not configured");
-  }
-  let subscriber: SubscriberCreate | null = null;
-  try {
-    subscriber = await listmonkRequest<SubscriberCreate>("/api/subscribers", {
-      method: "POST",
-      body: JSON.stringify({
-        email,
-        name: name ?? "",
-        status: "enabled",
-        lists: [LISTMONK_LIST_ID],
-      }),
-    });
-  } catch (err) {
-    const status = (err as { status?: number }).status;
-    const message = err instanceof Error ? err.message : "";
-    const isDuplicate =
-      status === 409 ||
-      /already exists|duplicate/i.test(message);
-    if (!isDuplicate) throw err;
-    subscriber = await findSubscriberByEmail(email);
-    if (!subscriber) throw err;
-  }
-
-  await listmonkRequest<true>("/api/subscribers/lists", {
-    method: "PUT",
-    body: JSON.stringify({
-      ids: [subscriber.id],
-      action: "add",
-      target_list_ids: [LISTMONK_LIST_ID],
-      status: "confirmed",
-    }),
+  const res = await fetch(`${BROKER_URL}/subscribe`, {
+    method: "POST",
+    cache: "no-store",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ domain: NEWSLETTER_DOMAIN, email, name: name ?? "" }),
+    signal: AbortSignal.timeout(30_000),
   });
 
-  return { kind: "subscribed", subscriberId: subscriber.id };
-}
+  if (!res.ok) {
+    // The broker answers with a real error rather than a cheerful "ok" when the
+    // write fails. Surface it: a signup that reports success while being
+    // discarded is the one failure nobody ever notices.
+    let detail = "";
+    try {
+      detail = ((await res.json()) as { detail?: string }).detail ?? "";
+    } catch {
+      /* non-JSON error body */
+    }
+    const err = new Error(detail || `newsletter broker responded ${res.status}`) as Error & {
+      status?: number;
+    };
+    err.status = res.status;
+    throw err;
+  }
 
-async function findSubscriberByEmail(
-  email: string,
-): Promise<SubscriberCreate | null> {
-  const query = encodeURIComponent(`subscribers.email = '${email.replace(/'/g, "''")}'`);
-  const res = await listmonkRequest<{ results: SubscriberCreate[] }>(
-    `/api/subscribers?query=${query}&per_page=1`,
-    { method: "GET" },
-  );
-  return res.results?.[0] ?? null;
+  return { kind: "subscribed" };
 }
 
 /**
- * Probe listmonk: reachable, credentialed, and the configured list still
- * exists. A newsletter signup fails at exactly these three points — after the
- * host move the URL pointed at a container that no longer existed and every
- * signup 502'd for five days with nothing watching.
+ * Probe the path a newsletter signup actually takes, which is now the broker
+ * and not listmonk. Probing the wrong hop is how this broke last time: the URL
+ * pointed at a container that no longer existed and every signup 502'd for five
+ * days with nothing watching.
+ *
+ * /health also reports the broker's tenant list, so a missing mapping for this
+ * domain — the failure that returns 400 on every signup — is caught here rather
+ * than by a visitor.
  */
 export async function pingListmonk(): Promise<{ up: boolean; code?: string }> {
-  if (!LISTMONK_TOKEN) return { up: false, code: "unconfigured" };
-  if (!LISTMONK_LIST_ID) return { up: false, code: "no_list_id" };
   try {
-    await listmonkRequest<unknown>(`/api/lists/${LISTMONK_LIST_ID}`, { method: "GET" });
+    const res = await fetch(`${BROKER_URL}/health`, {
+      cache: "no-store",
+      signal: AbortSignal.timeout(8000),
+    });
+    if (!res.ok) return { up: false, code: `http_${res.status}` };
+    const body = (await res.json()) as { tenants?: string[] };
+    if (!body.tenants?.includes(NEWSLETTER_DOMAIN)) {
+      return { up: false, code: "domain_not_mapped" };
+    }
     return { up: true };
   } catch (err) {
-    console.error("listmonk: ping failed", err);
-    const status = (err as { status?: number }).status;
-    if (status === 401 || status === 403) return { up: false, code: "auth" };
-    if (status === 404) return { up: false, code: "missing_list" };
+    console.error("newsletter broker: ping failed", err);
     const msg = err instanceof Error ? err.message : String(err);
     const code = /ENOTFOUND|EAI_AGAIN|getaddrinfo/i.test(msg) ? "dns" : "connect";
     return { up: false, code };
   }
-}
-
-export async function sendWelcome(email: string): Promise<void> {
-  if (!LISTMONK_TEMPLATE_ID) {
-    throw new Error("LISTMONK_TEMPLATE_ID is not configured");
-  }
-  const txBody: Record<string, unknown> = {
-    template_id: LISTMONK_TEMPLATE_ID,
-    subscriber_email: email,
-  };
-  if (LISTMONK_MESSENGER) txBody.messenger = LISTMONK_MESSENGER;
-  await listmonkRequest<true>("/api/tx", {
-    method: "POST",
-    body: JSON.stringify(txBody),
-  });
 }
 
 export interface TransactionalArgs {
@@ -157,8 +141,9 @@ export interface TransactionalArgs {
 /**
  * Generic transactional send. Caller supplies templateId and recipient;
  * the template body references {{.Tx.Data.foo}} for variables. Use this
- * for office-bound notifications (booking inquiries, etc.) — distinct
- * from sendWelcome which targets new subscribers.
+ * for office-bound notifications (booking inquiries, etc.). This is the only
+ * thing here that still needs LISTMONK_TOKEN — subscriber signups go through
+ * the broker and carry no credential at all.
  */
 export async function sendTransactional(args: TransactionalArgs): Promise<void> {
   const txBody: Record<string, unknown> = {
