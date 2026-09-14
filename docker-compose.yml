@@ -47,6 +47,22 @@ services:
       MAIL_SMTP_PASS: ${MAIL_SMTP_PASS:-}
       MAIL_FROM: ${MAIL_FROM:-}
       MAIL_TO_OFFICE: ${MAIL_TO_OFFICE:-}
+    # Mailcow runs on THIS host and mail.rmail.online is its public name, which
+    # resolves to this host's own WAN address -- from inside a container that
+    # hairpins and never connects. Map it to the host, where mailcow publishes
+    # 25/465/587. This is why the site now lives here: same-host mail needs no
+    # cross-host auth, and cannot be cut off by a fail2ban ban on another box.
+    extra_hosts:
+      - "mail.rmail.online:host-gateway"
+    volumes:
+      # Gated wrapper (INFISICAL_MIN_SECRETS) replacing the image's ungated
+      # /entrypoint.sh, which did nothing but inject. TASK-MEDIUM.46.
+      - /opt/infisical/entrypoint-wrapper.sh:/infisical-entrypoint.sh:ro
+    entrypoint:
+      - /infisical-entrypoint.sh
+    command:
+      - node
+      - server.js
     networks:
       - traefik-public
       - commons-hub-directus-net

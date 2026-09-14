@@ -108,7 +108,7 @@ KUMA_PUSH_URL=${KUMA_PUSH_URL:-}
 #   KUMA_PUSH_CURL_OPTS="--resolve status.example.com:80:100.64.0.2"
 KUMA_PUSH_CURL_OPTS=${KUMA_PUSH_CURL_OPTS:-}
 # Envelope senders the website's two forms use.
-SENDERS=${SENDERS:-'claude@jeffemmett.com|welcome@news.commons-hub.at'}
+SENDERS=${SENDERS:-'claude@jeffemmett.com|claudian@jeffemmett.com|welcome@news.commons-hub.at'}
 PUBLIC_MAIL_NAME=${PUBLIC_MAIL_NAME:-mail.rmail.online}
 # Port used to prove a container can actually reach the mail server.
 MAIL_PROBE_PORT=${MAIL_PROBE_PORT:-587}
