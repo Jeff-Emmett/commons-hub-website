@@ -75,7 +75,12 @@ services:
       - traefik.http.routers.commons-hub-web.entrypoints=web
       - traefik.http.routers.commons-hub-web.service=commons-hub-web
       - traefik.http.services.commons-hub-web.loadbalancer.server.port=3000
-
+      - traefik.http.routers.commons-hub-websecure.rule=Host(`commons-hub.at`) || Host(`www.commons-hub.at`)
+      - traefik.http.routers.commons-hub-websecure.entrypoints=websecure
+      - traefik.http.routers.commons-hub-websecure.tls.certresolver=letsencrypt-dns01
+      - traefik.http.routers.commons-hub-websecure.tls.domains[0].main=commons-hub.at
+      - traefik.http.routers.commons-hub-websecure.tls.domains[0].sans=*.commons-hub.at
+      - traefik.http.routers.commons-hub-websecure.service=commons-hub-web
 networks:
   traefik-public:
     external: true
