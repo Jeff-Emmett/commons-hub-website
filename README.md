@@ -12,6 +12,13 @@ npm run dev      # http://localhost:3000
 npm run build    # production build
 ```
 
+## Content (Directus CMS)
+
+All page content, translations, menu, footer, small texts and booking prices
+are edited in Directus at https://admin.commons-hub.at — no code change needed.
+Editor guide: [docs/cms/EDITOR-GUIDE.md](docs/cms/EDITOR-GUIDE.md); how it is
+wired and the schema/migration scripts: [docs/cms/README.md](docs/cms/README.md).
+
 ## Repositories
 
 - **Primary:** Gitea — `ssh://git@gitea.jeffemmett.com:223/jeffemmett/commons-hub-website.git`

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 type ProgressProps = {
   title?: string;
@@ -25,6 +26,7 @@ export default function Progress({
   label2="",
   label3="",
 }: ProgressProps) {
+  const t = useTranslations("progress");
   // Clamp percent to [0, 100]
   const safeTarget = Math.max(targetValue || 0, 1e-8);
   const targetPercent = Math.min(Math.max((currentValue / safeTarget) * 100, 0), 100);
@@ -73,7 +75,7 @@ export default function Progress({
 
   return (
     <div className={`scroll-block-element pb-4 px-8 md:px-32`}>
-      {title && <h3 className="mb-2 text-center text-2xl font-bold">AMOUNT PLEDGED</h3>}
+      {title && <h3 className="mb-2 text-center text-2xl font-bold">{t("pledged")}</h3>}
       <h3 className="mb-2 text-center text-2xl font-bold">{formatEUR(displayedValue)}</h3>
 
 

@@ -7,6 +7,11 @@
     "status": "published",
     "user_created": null,
     "user_updated": null,
+    "page_accordion": [
+      "1"
+    ],
+    "category_accordion": [],
+    "post_accordion": [],
     "accordion_items": [
       {
         "accordion_id": "3",
@@ -44,12 +49,7 @@
         "user_created": null,
         "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
       }
-    ],
-    "page_accordion": [
-      "1"
-    ],
-    "category_accordion": [],
-    "post_accordion": []
+    ]
   },
   {
     "date_created": "2025-07-01T11:27:47.247Z",
@@ -59,6 +59,11 @@
     "status": "published",
     "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
     "user_updated": "258593a6-4999-4401-8ea6-5959100f1278",
+    "page_accordion": [
+      "2"
+    ],
+    "category_accordion": [],
+    "post_accordion": [],
     "accordion_items": [
       {
         "accordion_id": "4",
@@ -96,12 +101,7 @@
         "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
         "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
       }
-    ],
-    "page_accordion": [
-      "2"
-    ],
-    "category_accordion": [],
-    "post_accordion": []
+    ]
   },
   {
     "date_created": "2025-07-01T11:55:49.637Z",
@@ -111,6 +111,11 @@
     "status": "published",
     "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
     "user_updated": "258593a6-4999-4401-8ea6-5959100f1278",
+    "page_accordion": [],
+    "category_accordion": [
+      "3"
+    ],
+    "post_accordion": [],
     "accordion_items": [
       {
         "accordion_id": "5",
@@ -136,12 +141,7 @@
         "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
         "user_updated": null
       }
-    ],
-    "page_accordion": [],
-    "category_accordion": [
-      "3"
-    ],
-    "post_accordion": []
+    ]
   },
   {
     "date_created": "2025-07-01T14:38:34.598Z",
@@ -151,6 +151,11 @@
     "status": "published",
     "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
     "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "page_accordion": [],
+    "category_accordion": [
+      "1"
+    ],
+    "post_accordion": [],
     "accordion_items": [
       {
         "accordion_id": "6",
@@ -200,12 +205,7 @@
         "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
         "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
       }
-    ],
-    "page_accordion": [],
-    "category_accordion": [
-      "1"
-    ],
-    "post_accordion": []
+    ]
   },
   {
     "date_created": "2025-07-01T14:53:52.726Z",
@@ -215,6 +215,11 @@
     "status": "published",
     "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
     "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5",
+    "page_accordion": [],
+    "category_accordion": [
+      "2"
+    ],
+    "post_accordion": [],
     "accordion_items": [
       {
         "accordion_id": "7",
@@ -264,12 +269,7 @@
         "user_created": "67202695-054e-48ad-8402-56f3a03c38c5",
         "user_updated": "67202695-054e-48ad-8402-56f3a03c38c5"
       }
-    ],
-    "page_accordion": [],
-    "category_accordion": [
-      "2"
-    ],
-    "post_accordion": []
+    ]
   },
   {
     "date_created": "2025-09-25T08:21:15.129Z",
@@ -279,6 +279,11 @@
     "status": "published",
     "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
     "user_updated": "258593a6-4999-4401-8ea6-5959100f1278",
+    "page_accordion": [
+      "4"
+    ],
+    "category_accordion": [],
+    "post_accordion": [],
     "accordion_items": [
       {
         "accordion_id": "10",
@@ -292,12 +297,7 @@
         "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
         "user_updated": "258593a6-4999-4401-8ea6-5959100f1278"
       }
-    ],
-    "page_accordion": [
-      "4"
-    ],
-    "category_accordion": [],
-    "post_accordion": []
+    ]
   },
   {
     "date_created": "2025-09-25T09:06:58.313Z",
@@ -307,6 +307,11 @@
     "status": "published",
     "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
     "user_updated": "258593a6-4999-4401-8ea6-5959100f1278",
+    "page_accordion": [
+      "5"
+    ],
+    "category_accordion": [],
+    "post_accordion": [],
     "accordion_items": [
       {
         "accordion_id": "11",
@@ -320,12 +325,7 @@
         "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
         "user_updated": null
       }
-    ],
-    "page_accordion": [
-      "5"
-    ],
-    "category_accordion": [],
-    "post_accordion": []
+    ]
   },
   {
     "date_created": "2025-09-25T10:18:13.755Z",
@@ -335,6 +335,11 @@
     "status": "published",
     "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
     "user_updated": "258593a6-4999-4401-8ea6-5959100f1278",
+    "page_accordion": [
+      "6"
+    ],
+    "category_accordion": [],
+    "post_accordion": [],
     "accordion_items": [
       {
         "accordion_id": "12",
@@ -348,12 +353,7 @@
         "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
         "user_updated": "258593a6-4999-4401-8ea6-5959100f1278"
       }
-    ],
-    "page_accordion": [
-      "6"
-    ],
-    "category_accordion": [],
-    "post_accordion": []
+    ]
   },
   {
     "date_created": "2025-09-25T10:25:48.772Z",
@@ -363,6 +363,11 @@
     "status": "published",
     "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
     "user_updated": "258593a6-4999-4401-8ea6-5959100f1278",
+    "page_accordion": [
+      "7"
+    ],
+    "category_accordion": [],
+    "post_accordion": [],
     "accordion_items": [
       {
         "accordion_id": "13",
@@ -376,12 +381,7 @@
         "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
         "user_updated": null
       }
-    ],
-    "page_accordion": [
-      "7"
-    ],
-    "category_accordion": [],
-    "post_accordion": []
+    ]
   },
   {
     "date_created": "2025-09-25T11:15:15.614Z",
@@ -391,6 +391,11 @@
     "status": "published",
     "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
     "user_updated": "258593a6-4999-4401-8ea6-5959100f1278",
+    "page_accordion": [
+      "8"
+    ],
+    "category_accordion": [],
+    "post_accordion": [],
     "accordion_items": [
       {
         "accordion_id": "14",
@@ -404,12 +409,7 @@
         "user_created": "258593a6-4999-4401-8ea6-5959100f1278",
         "user_updated": null
       }
-    ],
-    "page_accordion": [
-      "8"
-    ],
-    "category_accordion": [],
-    "post_accordion": []
+    ]
   },
   {
     "date_created": "2026-05-15T13:14:36.771Z",
@@ -419,6 +419,11 @@
     "status": "published",
     "user_created": null,
     "user_updated": null,
+    "page_accordion": [
+      "9"
+    ],
+    "category_accordion": [],
+    "post_accordion": [],
     "accordion_items": [
       {
         "accordion_id": "15",
@@ -432,12 +437,7 @@
         "user_created": null,
         "user_updated": null
       }
-    ],
-    "page_accordion": [
-      "9"
-    ],
-    "category_accordion": [],
-    "post_accordion": []
+    ]
   },
   {
     "date_created": "2026-05-15T13:14:36.771Z",
@@ -447,6 +447,11 @@
     "status": "published",
     "user_created": null,
     "user_updated": null,
+    "page_accordion": [
+      "10"
+    ],
+    "category_accordion": [],
+    "post_accordion": [],
     "accordion_items": [
       {
         "accordion_id": "16",
@@ -460,11 +465,6 @@
         "user_created": null,
         "user_updated": null
       }
-    ],
-    "page_accordion": [
-      "10"
-    ],
-    "category_accordion": [],
-    "post_accordion": []
+    ]
   }
 ]

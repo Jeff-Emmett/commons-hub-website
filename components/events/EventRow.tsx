@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 export interface EventCard {
   slug: string;
@@ -16,9 +17,10 @@ export interface EventCard {
  * Prev/Next page through the list in steps of three (spec).
  */
 export function EventRow({ events }: { events: EventCard[] }) {
+  const t = useTranslations('events');
   const [page, setPage] = useState(0);
   if (events.length === 0) {
-    return <p className="text-slate-500">Nothing here yet — check back soon.</p>;
+    return <p className="text-slate-500">{t('rowEmpty')}</p>;
   }
   const pages = Math.ceil(events.length / 3);
   const group = events.slice(page * 3, page * 3 + 3);

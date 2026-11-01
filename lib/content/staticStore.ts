@@ -3,12 +3,13 @@ import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import type { DirectusQuery } from "@/lib/directus/client";
 
-// Serves content from the captured snapshot (content/snapshot/<locale>/) when
-// Directus is deactivated. Toggle with USE_STATIC_CONTENT:
-//   unset / "true"  -> static snapshot (default; Directus off)
-//   "false"         -> live Directus
-// Reversible: flip the env var, no code change. See docs/i18n-plan.md.
-export const USE_STATIC_CONTENT = process.env.USE_STATIC_CONTENT !== "false";
+// Serves content from the captured snapshot (content/snapshot/<locale>/).
+// Directus is the live source; the snapshot is
+//   - the automatic fallback when Directus is unreachable (lib/directus/client.ts), and
+//   - the only source when USE_STATIC_CONTENT=true (emergency switch: Directus off,
+//     no code change).
+// Refresh it from Directus with scripts/capture-directus.mjs.
+export const USE_STATIC_CONTENT = process.env.USE_STATIC_CONTENT === "true";
 
 const SNAP_ROOT = join(process.cwd(), "content", "snapshot");
 const DEFAULT_LOCALE = "en";

@@ -1,6 +1,7 @@
 import ClientSideRout from "./ClientSideRout";
 import { Database } from "@/lib/database.types";
 import IconImage from "./IconImage";
+import { useTranslations } from "next-intl";
 
 type Post = Database['public']['Tables']['posts']['Row'];
 
@@ -9,6 +10,7 @@ type Props = {
 };
 
 export default function PostGrid({ posts }: Props) {
+  const t = useTranslations("posts");
   // Filter out posts that are not "published"
   const publishedPosts = posts.filter(post => post.status === 'published');
 
@@ -19,7 +21,7 @@ export default function PostGrid({ posts }: Props) {
   return (
     <div className="hero-wrapper w-inline-block py-2 border-y border-gray-100">
       <div className="hero-content">
-        <h2>News</h2>
+        <h2>{t("heading")}</h2>
         {publishedPosts.map((post) => (
           <ClientSideRout
             route={`/post/${post.slug}`}

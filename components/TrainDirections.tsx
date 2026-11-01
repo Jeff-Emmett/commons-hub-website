@@ -3,8 +3,10 @@
 import * as Accordion from "@radix-ui/react-accordion";
 import WhiteOverlay from "./WhiteOverlay";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 export default function TrainDirections() {
+  const t = useTranslations("map");
   const [openItems, setOpenItems] = useState<string[]>([]);
   const accordionId = "train";
   
@@ -44,7 +46,7 @@ export default function TrainDirections() {
         <Accordion.Header asChild>
           <div className="hero-content">
             <Accordion.Trigger className="AccordionTrigger pb-0 flex justify-between items-center w-full text-left">
-              <h2 className="h2">Travel by Train</h2>
+              <h2 className="h2">{t("train")}</h2>
               <svg
                 className="AccordionChevron"
                 width="24"

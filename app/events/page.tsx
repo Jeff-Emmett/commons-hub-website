@@ -3,16 +3,19 @@ import { getEventPage } from "@/lib/actions/getEventPage";
 import { EventRow, type EventCard } from "@/components/events/EventRow";
 import SiteFooter from "@/components/SiteFooter";
 import { SectionNav } from "@/components/SectionNav";
+import { getTranslations } from "next-intl/server";
+import { assetUrl, getPageContent, getSiteSettings, pageMetadata, sectionEdit } from "@/lib/cms/content";
 
-const DIRECTUS_ASSET_BASE = (
-  process.env.NEXT_PUBLIC_DIRECTUS_URL || "https://admin.commons-hub.at"
-).replace(/\/$/, "");
-
-export const metadata = {
-  title: "Events | Commons Hub",
-  description:
-    "Upcoming gatherings, hackathons and residencies at the Commons Hub in the Austrian Alps.",
-};
+// Content: Directus → Pages → "EVENTS" → Sections (intro, upcoming, calendar,
+// past); the events are Blog & Events → Events; the picture for an event
+// without one is Settings → Site settings → Event fallback image.
+export function generateMetadata() {
+  return pageMetadata("events", {
+    title: "Events",
+    description:
+      "Upcoming gatherings, hackathons and residencies at the Commons Hub in the Austrian Alps.",
+  });
+}
 
 interface EventRowData {
   id: number;
@@ -24,8 +27,8 @@ interface EventRowData {
   enddatetime: string | null;
 }
 
-function fmtDateRange(start: string | null, end: string | null): string {
-  if (!start) return "Dates TBA";
+function fmtDateRange(start: string | null, end: string | null, tba: string): string {
+  if (!start) return tba;
   const s = new Date(start);
   const e = end ? new Date(end) : null;
   const opts: Intl.DateTimeFormatOptions = { day: "numeric", month: "short", year: "numeric" };
@@ -38,23 +41,35 @@ function fmtDateRange(start: string | null, end: string | null): string {
   return `${s.toLocaleDateString("en-GB", opts)} – ${e.toLocaleDateString("en-GB", opts)}`;
 }
 
-// Used when an event has no main_image set, so a tile is never blank.
-const FALLBACK_IMAGE = "f6e38335-40a6-4b4c-bfc3-6471c067c38f";
-
-function toCards(rows: EventRowData[]): EventCard[] {
+function toCards(
+  rows: EventRowData[],
+  fallbackImage: string | null,
+  t: (key: "untitled" | "datesTba") => string,
+): EventCard[] {
   return rows.map((ev) => ({
     slug: ev.slug,
-    title: ev.title ?? "Untitled",
-    dateLabel: fmtDateRange(ev.startdatetime, ev.enddatetime),
-    imageUrl: `${DIRECTUS_ASSET_BASE}/assets/${ev.main_image ?? FALLBACK_IMAGE}`,
+    title: ev.title ?? t("untitled"),
+    dateLabel: fmtDateRange(ev.startdatetime, ev.enddatetime, t("datesTba")),
+    // fallbackImage keeps a tile from ever being blank.
+    imageUrl: assetUrl(ev.main_image ?? fallbackImage) ?? "",
   }));
 }
 
 export default async function EventsIndex() {
-  const [upcoming, past] = await Promise.all([
+  const [upcoming, past, page, site, t] = await Promise.all([
     getEventPage("upcoming") as Promise<EventRowData[]>,
     getEventPage("past") as Promise<EventRowData[]>,
+    getPageContent("events"),
+    getSiteSettings(),
+    getTranslations("events"),
   ]);
+  const { intro, upcoming: upS, calendar, past: pastS } = page?.sections ?? {};
+  const cards = (rows: EventRowData[]) => toCards(rows, site.event_fallback_image, (k) => t(k));
+  const nav = [
+    ["upcoming", upS],
+    ["calendar", calendar],
+    ["past", pastS],
+  ] as const;
 
   const allPlanned = [...upcoming].sort((a, b) =>
     (a.startdatetime ?? "").localeCompare(b.startdatetime ?? ""),
@@ -64,25 +79,26 @@ export default async function EventsIndex() {
     <>
       <div className="max-w-6xl mx-auto px-6 py-12 flex gap-12">
         <SectionNav
-          sections={[
-            { id: "upcoming", label: "Upcoming Events" },
-            { id: "calendar", label: "Event Calendar" },
-            { id: "past", label: "Past Events" },
-          ]}
+          sections={nav
+            .filter(([, sec]) => sec)
+            .map(([id, sec]) => ({ id, label: sec!.nav_label || sec!.heading }))}
         />
         <div className="flex-1 min-w-0">
-          <h1 className="h1 mb-10">Events</h1>
+          {intro && <h1 className="h1 mb-10" {...sectionEdit(intro)}>{intro.heading}</h1>}
 
-          <section id="upcoming" className="mb-16 scroll-mt-28">
-            <h2 className="h2 mb-6 text-center">Upcoming Events</h2>
-            <EventRow events={toCards(upcoming)} />
+          {upS && (
+          <section id="upcoming" className="mb-16 scroll-mt-28" {...sectionEdit(upS)}>
+            <h2 className="h2 mb-6 text-center">{upS.heading}</h2>
+            <EventRow events={cards(upcoming)} />
           </section>
+          )}
 
-          <section id="calendar" className="mb-16 scroll-mt-28">
-            <h2 className="h2 mb-4">Event Calendar</h2>
+          {calendar && (
+          <section id="calendar" className="mb-16 scroll-mt-28" {...sectionEdit(calendar)}>
+            <h2 className="h2 mb-4">{calendar.heading}</h2>
         <details className="rounded-lg border border-slate-200 bg-white" open>
           <summary className="cursor-pointer select-none px-4 py-3 font-medium text-slate-800 hover:bg-slate-50">
-            All planned events ({allPlanned.length})
+            {t("allPlanned", { count: allPlanned.length })}
           </summary>
           <ul className="px-4 pb-4">
             {allPlanned.map((ev) => (
@@ -97,21 +113,24 @@ export default async function EventsIndex() {
                   {ev.title}
                 </Link>
                 <span className="text-sm text-slate-500 tabular-nums whitespace-nowrap">
-                  {fmtDateRange(ev.startdatetime, ev.enddatetime)}
+                  {fmtDateRange(ev.startdatetime, ev.enddatetime, t("datesTba"))}
                 </span>
               </li>
             ))}
             {allPlanned.length === 0 && (
-              <li className="py-2 text-slate-500">No planned events yet.</li>
+              <li className="py-2 text-slate-500" dangerouslySetInnerHTML={{ __html: calendar.text }} />
             )}
           </ul>
         </details>
       </section>
+          )}
 
-          <section id="past" className="mb-16 scroll-mt-28">
-            <h2 className="h2 mb-6 text-center">Past Events</h2>
-            <EventRow events={toCards(past)} />
+          {pastS && (
+          <section id="past" className="mb-16 scroll-mt-28" {...sectionEdit(pastS)}>
+            <h2 className="h2 mb-6 text-center">{pastS.heading}</h2>
+            <EventRow events={cards(past)} />
           </section>
+          )}
         </div>
       </div>
       <SiteFooter />

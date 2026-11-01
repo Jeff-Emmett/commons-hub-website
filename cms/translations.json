@@ -1,0 +1,61 @@
+{
+  "_doc": "Which collections carry Directus translations, and which of their fields are translated. English lives in the collection's own fields; <collection>_translations rows hold the other languages and override only the fields that are filled in. Read by scripts/cms/directus-schema-apply.mjs (to build the schema) and lib/directus/translations.ts (to fetch and merge). `relations` lists the nested relations a query may expand, so the frontend knows which nested rows also need their translations.",
+  "languages": [
+    { "code": "de", "name": "Deutsch (German)" },
+    { "code": "hu", "name": "Magyar (Hungarian)" },
+    { "code": "cs", "name": "Čeština (Czech)" },
+    { "code": "sk", "name": "Slovenčina (Slovak)" }
+  ],
+  "collections": {
+    "pages": {
+      "fields": { "title": "input", "summary": "input-multiline", "body": "input-rich-text-html", "seo_title_tag": "input", "seo_description": "input-multiline" },
+      "relations": { "sections": "page_sections" }
+    },
+    "posts": {
+      "fields": { "title": "input", "summary": "input-multiline", "body": "input-rich-text-html", "seo_title_tag": "input", "seo_description": "input-multiline" }
+    },
+    "eventpages": {
+      "fields": { "title": "input", "summary": "input-multiline", "body": "input-rich-text-html", "seo_title_tag": "input", "seo_description": "input-multiline" }
+    },
+    "categories": {
+      "fields": { "title": "input", "summary": "input-multiline", "body": "input-rich-text-html", "seo_title_tag": "input", "seo_description": "input-multiline" }
+    },
+    "carousels": {
+      "fields": { "title": "input" },
+      "relations": { "carousel_items": "carousel_items" }
+    },
+    "carousel_items": {
+      "fields": { "quote": "input-rich-text-html" }
+    },
+    "accordions": {
+      "fields": {},
+      "relations": { "accordion_items": "accordion_items" }
+    },
+    "accordion_items": {
+      "fields": { "header": "input", "content": "input-rich-text-html" }
+    },
+    "team_members": {
+      "fields": { "role": "input", "bio": "input-multiline" }
+    },
+    "menu": {
+      "fields": { "label": "input" },
+      "relations": { "page_id": "pages" }
+    },
+    "page_sections": {
+      "fields": { "nav_label": "input", "heading": "input", "text": "input-multiline", "button_label": "input", "image_alt": "input" },
+      "relations": { "items": "section_items" }
+    },
+    "section_items": {
+      "fields": { "title": "input", "text": "input-multiline", "image_alt": "input", "link_label": "input", "hint": "input" }
+    },
+    "ui_strings": {
+      "fields": { "value": "input-multiline" }
+    },
+    "site_settings": {
+      "fields": { "seo_title_default": "input", "seo_description": "input-multiline", "og_description": "input-multiline", "twitter_description": "input-multiline" }
+    },
+    "booking_options": {
+      "fields": { "label": "input", "includes": "input", "capacity": "input" }
+    }
+  }
+}

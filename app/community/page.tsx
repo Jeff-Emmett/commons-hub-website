@@ -3,34 +3,34 @@ import Image from "next/image";
 import SiteFooter from "@/components/SiteFooter";
 import { PlaceholderImage } from "@/components/PlaceholderImage";
 import {
-  COMMUNITY_INTRO,
-  LOCAL_ASSOCIATIONS,
-  PARTNERS,
-  type CommunityEntity,
-} from "@/lib/content/community";
+  assetUrl,
+  getPageContent,
+  itemEdit,
+  pageMetadata,
+  sectionEdit,
+  type SectionItem,
+} from "@/lib/cms/content";
 
-const ASSET_BASE = (
-  process.env.NEXT_PUBLIC_DIRECTUS_URL || "https://admin.commons-hub.at"
-).replace(/\/$/, "");
+// Content: Directus → Pages → "Community & Partners" → Sections (intro,
+// associations, partners, cta). Each card is a section item: title, text,
+// link (empty = not clickable) and image (the logo; empty = placeholder).
+export function generateMetadata() {
+  return pageMetadata("community-partners", {
+    title: "Community",
+    description:
+      "The associations based at the Commons Hub and the network of partner spaces we work with.",
+  });
+}
 
-const logoUrl = (logo: string | null) =>
-  logo ? (logo.startsWith("http") ? logo : `${ASSET_BASE}/assets/${logo}`) : null;
-
-export const metadata = {
-  title: "Community | Commons Hub",
-  description:
-    "The associations based at the Commons Hub and the network of partner spaces we work with.",
-};
-
-function EntityCard({ entity }: { entity: CommunityEntity }) {
-  const url = logoUrl(entity.logo);
+function EntityCard({ entity }: { entity: SectionItem }) {
+  const url = assetUrl(entity.image);
   const body = (
     <div className="flex h-full flex-col gap-3">
       <div className="relative h-16 w-16">
         {url ? (
           <Image
             src={url}
-            alt={entity.name}
+            alt={entity.image_alt || entity.title}
             fill
             sizes="64px"
             className="object-contain"
@@ -41,10 +41,10 @@ function EntityCard({ entity }: { entity: CommunityEntity }) {
       </div>
       <div>
         <h3 className="font-semibold text-slate-900">
-          {entity.name}
-          {entity.href && <span className="text-slate-400"> ↗</span>}
+          {entity.title}
+          {entity.link && <span className="text-slate-400"> ↗</span>}
         </h3>
-        <p className="mt-1 text-sm text-slate-600">{entity.blurb}</p>
+        <p className="mt-1 text-sm text-slate-600" dangerouslySetInnerHTML={{ __html: entity.text }} />
       </div>
     </div>
   );
@@ -52,54 +52,76 @@ function EntityCard({ entity }: { entity: CommunityEntity }) {
   const cardClass =
     "rounded-lg border border-slate-200 p-5 transition-colors hover:border-slate-400";
 
-  return entity.href ? (
+  return entity.link ? (
     <a
-      href={entity.href}
+      href={entity.link}
       target="_blank"
       rel="noopener noreferrer"
       className={`block ${cardClass}`}
+      {...itemEdit(entity)}
     >
       {body}
     </a>
   ) : (
-    <div className={cardClass}>{body}</div>
+    <div className={cardClass} {...itemEdit(entity)}>
+      {body}
+    </div>
   );
 }
 
-export default function CommunityPage() {
+export default async function CommunityPage() {
+  const page = await getPageContent("community-partners");
+  const { intro, associations, partners, cta } = page?.sections ?? {};
+
   return (
     <main className="page-sections">
       <section className="max-w-6xl mx-auto px-6 py-12">
-        <h1 className="h1 mb-4">Community</h1>
-        <p className="max-w-3xl text-lg text-slate-700">{COMMUNITY_INTRO}</p>
+        {intro && (
+          <>
+            <h1 className="h1 mb-4" {...sectionEdit(intro)}>{intro.heading}</h1>
+            <p className="max-w-3xl text-lg text-slate-700" dangerouslySetInnerHTML={{ __html: intro.text }} />
+          </>
+        )}
 
         {/* Local associations hosted at the Hub (spec 4c) */}
-        <h2 className="h2 mt-14 mb-6">Associations hosted at the Hub</h2>
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {LOCAL_ASSOCIATIONS.map((e) => (
-            <EntityCard key={e.name} entity={e} />
-          ))}
-        </div>
+        {associations && (
+          <>
+            <h2 className="h2 mt-14 mb-6" {...sectionEdit(associations)}>{associations.heading}</h2>
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {associations.items.map((e) => (
+                <EntityCard key={e.id} entity={e} />
+              ))}
+            </div>
+          </>
+        )}
 
         {/* Partner network (spec 4d). No sponsors section by design (spec 4e). */}
-        <h2 className="h2 mt-14 mb-6">Partners</h2>
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {PARTNERS.map((e) => (
-            <EntityCard key={e.name} entity={e} />
-          ))}
-        </div>
+        {partners && (
+          <>
+            <h2 className="h2 mt-14 mb-6" {...sectionEdit(partners)}>{partners.heading}</h2>
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {partners.items.map((e) => (
+                <EntityCard key={e.id} entity={e} />
+              ))}
+            </div>
+          </>
+        )}
 
-        <div className="mt-14 border-t border-slate-100 pt-8">
-          <p className="text-slate-600">
-            Want to base your association at the Hub or partner with us?{" "}
-            <Link
-              href="/about#contact"
-              className="font-medium text-slate-900 hover:underline"
-            >
-              Get in touch →
-            </Link>
-          </p>
-        </div>
+        {cta && (
+          <div className="mt-14 border-t border-slate-100 pt-8" {...sectionEdit(cta)}>
+            <p className="text-slate-600">
+              <span dangerouslySetInnerHTML={{ __html: cta.text }} />{" "}
+              {cta.button_label && cta.button_link && (
+                <Link
+                  href={cta.button_link}
+                  className="font-medium text-slate-900 hover:underline"
+                >
+                  {cta.button_label}
+                </Link>
+              )}
+            </p>
+          </div>
+        )}
       </section>
       <SiteFooter />
     </main>

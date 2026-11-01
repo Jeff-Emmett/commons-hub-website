@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 
 interface InstagramFeedProps {
   /**
@@ -14,6 +15,7 @@ interface InstagramFeedProps {
 }
 
 export function InstagramFeed({ pinnedUrl, handle }: InstagramFeedProps) {
+  const t = useTranslations('instagram');
   useEffect(() => {
     if (!pinnedUrl) return;
     // Instagram's official embed script renders all <blockquote.instagram-media>
@@ -35,14 +37,14 @@ export function InstagramFeed({ pinnedUrl, handle }: InstagramFeedProps) {
   return (
     <section className="instagram-feed">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-2xl font-semibold">@{handle} on Instagram</h2>
+        <h2 className="text-2xl font-semibold">{t('heading', { handle })}</h2>
         <a
           href={`https://www.instagram.com/${handle}/`}
           target="_blank"
           rel="noopener noreferrer"
           className="text-sm underline text-slate-700 hover:text-slate-900"
         >
-          Follow →
+          {t('follow')}
         </a>
       </div>
       {pinnedUrl ? (
@@ -54,13 +56,13 @@ export function InstagramFeed({ pinnedUrl, handle }: InstagramFeedProps) {
           style={{ background: '#FFF', maxWidth: 540 }}
         >
           <a href={pinnedUrl} target="_blank" rel="noopener noreferrer">
-            View this post on Instagram
+            {t('viewPost')}
           </a>
         </blockquote>
       ) : (
         <div className="rounded-lg border border-slate-200 bg-slate-50 p-6 text-center">
           <p className="text-slate-700 mb-2">
-            See the latest from the Hub on Instagram.
+            {t('teaser')}
           </p>
           <a
             href={`https://www.instagram.com/${handle}/`}
@@ -68,7 +70,7 @@ export function InstagramFeed({ pinnedUrl, handle }: InstagramFeedProps) {
             rel="noopener noreferrer"
             className="button inline-block"
           >
-            Open @{handle}
+            {t('open', { handle })}
           </a>
         </div>
       )}

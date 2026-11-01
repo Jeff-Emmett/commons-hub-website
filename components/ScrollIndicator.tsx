@@ -2,10 +2,12 @@
 
 import { motion, useScroll } from "framer-motion";
 import { useCarouselLive } from "@/lib/contexts/CarouselVisibilityContext";
+import { useSite } from "@/components/SiteChrome";
 
 export default function ScrollIndicator() {
   const { scrollYProgress } = useScroll();
   const carouselLive = useCarouselLive();
+  const site = useSite();
 
   // Hide the left rail while a full-bleed carousel occupies the viewport.
   if (carouselLive) return null;
@@ -28,8 +30,9 @@ export default function ScrollIndicator() {
           id="w-node-b5adf061-a2f4-92e7-ad56-382778728fe2-78728fdd"
           className="social-sidebar-block"
         >
-          <a
-            href="https://t.me/joinchat/Vcg9sAXnJ1XY5BBn"
+          {site.telegram_url && (
+<a
+            href={site.telegram_url ?? undefined}
             target="_blank"
             className="sidebar-icon w-inline-block"
             aria-label="Crypto Commons Telegram Group"
@@ -48,8 +51,10 @@ export default function ScrollIndicator() {
               />
             </svg>
           </a>
-          <a
-            href="https://x.com/CommonsHubAT"
+)}
+          {site.x_url && (
+<a
+            href={site.x_url ?? undefined}
             target="_blank"
             className="sidebar-icon w-inline-block"
             aria-label="X (formerly Twitter)"
@@ -68,8 +73,10 @@ export default function ScrollIndicator() {
               />
             </svg>
           </a>
-          <a
-            href="https://www.instagram.com/commonshub/"
+)}
+          {site.instagram_url && (
+<a
+            href={site.instagram_url ?? undefined}
             target="_blank"
             className="sidebar-icon w-inline-block"
             aria-label="Instagram"
@@ -88,8 +95,10 @@ export default function ScrollIndicator() {
               />
             </svg>
           </a>
-          <a
-            href="http://www.youtube.com/@CommonsHub"
+)}
+          {site.youtube_url && (
+<a
+            href={site.youtube_url ?? undefined}
             target="_blank"
             className="sidebar-icon w-inline-block"
             aria-label="YouTube"
@@ -108,10 +117,12 @@ export default function ScrollIndicator() {
               />
             </svg>
           </a>
-          <a
-            href="mailto:office@commons-hub.at"
+)}
+          {site.contact_email && (
+<a
+            href={`mailto:${site.contact_email}`}
             className="sidebar-icon w-inline-block"
-            aria-label="Email Adress: office@commons-hub.at"
+            aria-label={`Email Adress: ${site.contact_email}`}
           >
             <div className="social-image w-embed">
               <svg
@@ -134,6 +145,7 @@ export default function ScrollIndicator() {
               </svg>
             </div>
           </a>
+)}
         </div>
       </div>
     </div>

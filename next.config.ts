@@ -3,6 +3,22 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
+// Images are served by Directus. Allow whichever instance this build points at
+// (staging uses its own), in addition to production.
+const directusAssets = (() => {
+  try {
+    const u = new URL(process.env.NEXT_PUBLIC_DIRECTUS_URL || "https://admin.commons-hub.at");
+    return {
+      protocol: u.protocol.replace(":", "") as "http" | "https",
+      hostname: u.hostname,
+      ...(u.port ? { port: u.port } : {}),
+      pathname: "/assets/**",
+    };
+  } catch {
+    return null;
+  }
+})();
+
 const nextConfig: NextConfig = {
   output: "standalone",
   reactStrictMode: true,
@@ -22,6 +38,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: 'https', hostname: 'admin.commons-hub.at', pathname: '/assets/**' },
       { protocol: 'http',  hostname: 'localhost' },
+      ...(directusAssets ? [directusAssets] : []),
     ],
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',

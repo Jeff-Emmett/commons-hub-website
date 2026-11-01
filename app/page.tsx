@@ -2,7 +2,7 @@ import { getAllPublishedPosts } from "@/lib/actions/getPost";
 import { getEventPage } from "@/lib/actions/getEventPage";
 import { getGalleryCarousels } from "@/lib/actions/getCarousels";
 import { readSingleton } from "@/lib/directus/client";
-import { getTranslations } from "next-intl/server";
+import { assetUrl, getPageContent, sectionEdit, itemEdit } from "@/lib/cms/content";
 import {
   HomeJourney,
   type HomeSlide,
@@ -11,12 +11,7 @@ import {
   type HomePhoto,
 } from "@/components/home/HomeJourney";
 
-const DIRECTUS_ASSET_BASE = (
-  process.env.NEXT_PUBLIC_DIRECTUS_URL || "https://admin.commons-hub.at"
-).replace(/\/$/, "");
-
-const asset = (uuid?: string | null) =>
-  uuid ? `${DIRECTUS_ASSET_BASE}/assets/${uuid}` : null;
+const asset = assetUrl;
 
 interface CarouselSlideRow {
   id: number;
@@ -29,9 +24,9 @@ interface NamedCarousel {
   carousel_items?: CarouselSlideRow[];
 }
 
-const TILE_ACCOMMODATION = "dfa256d9-8691-4491-aeeb-e21150921494";
-const TILE_EVENT = "f5d57b34-9a42-44ee-834b-5aae6453d56d";
-const TILE_ABOUT = "728e404d-4a88-4ce2-b623-1654d21cfef9";
+// The tile that links to /events shows the next upcoming event's photo when
+// there is one; its own image is the fallback.
+const NEXT_EVENT_TILE_LINK = "/events";
 
 async function loadHeroSlides(): Promise<HomeSlide[]> {
   const carousel = await readSingleton<NamedCarousel>("carousels", {
@@ -55,27 +50,29 @@ async function loadHeroSlides(): Promise<HomeSlide[]> {
 }
 
 export default async function Home() {
-  const [posts, upcoming, galleries, t] = await Promise.all([
+  // Content: Directus → Pages → "HOME" → Sections (tiles, blog, gallery_preview);
+  // the slideshow is the "home_hero" carousel.
+  const [posts, upcoming, galleries, page] = await Promise.all([
     getAllPublishedPosts(),
     getEventPage("upcoming"),
     getGalleryCarousels(),
-    getTranslations("home"),
+    getPageContent("home"),
   ]);
+  const s = page?.sections ?? {};
   const slides = await loadHeroSlides();
   const nextEvent = upcoming[0] as
     | { main_image?: string | null; title?: string | null }
     | undefined;
 
-  const tiles: HomeTile[] = [
-    { label: t("bookStay"), href: "/accommodation", imageUrl: asset(TILE_ACCOMMODATION) },
-    { label: t("planRetreat"), href: "/event-venue", imageUrl: asset(TILE_EVENT) },
-    {
-      label: t("upcomingEvents"),
-      href: "/events",
-      imageUrl: asset(nextEvent?.main_image) ?? asset(TILE_EVENT),
-    },
-    { label: t("readMore"), href: "/about", imageUrl: asset(TILE_ABOUT) },
-  ];
+  const tiles: HomeTile[] = (s.tiles?.items ?? [])
+    .filter((i) => i.title && i.link)
+    .map((i) => ({
+      label: i.title,
+      href: i.link as string,
+      imageUrl:
+        (i.link === NEXT_EVENT_TILE_LINK ? asset(nextEvent?.main_image) : null) ?? asset(i.image),
+      editAttr: itemEdit(i),
+    }));
 
   const postTiles: HomePost[] = posts.map((p) => ({
     title: p.title ?? "",
@@ -108,9 +105,21 @@ export default async function Home() {
   return (
     <HomeJourney
       slides={slides}
-      tiles={tiles}
+      tiles={s.tiles ? tiles : []}
+      tilesEdit={sectionEdit(s.tiles)}
       posts={postTiles}
-      galleryPreview={previewPhotos}
+      blog={s.blog ? { heading: s.blog.heading, editAttr: sectionEdit(s.blog) } : undefined}
+      galleryPreview={s.gallery_preview ? previewPhotos : []}
+      gallery={
+        s.gallery_preview
+          ? {
+              heading: s.gallery_preview.heading,
+              linkLabel: s.gallery_preview.button_label,
+              href: s.gallery_preview.button_link ?? "/gallery",
+              editAttr: sectionEdit(s.gallery_preview),
+            }
+          : undefined
+      }
     />
   );
 }

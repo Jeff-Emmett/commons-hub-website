@@ -25,7 +25,7 @@ export default function NewsletterSignup({
 
       const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       if (!email || !emailRegex.test(email) || email.length > 255) {
-        setStatus('Please enter a valid email address.');
+        setStatus(t('invalidEmail'));
         return;
       }
 
@@ -36,20 +36,17 @@ export default function NewsletterSignup({
       });
       const body = await res.json().catch(() => ({}));
       if (!res.ok) {
-        setStatus(body.error ?? 'An error occurred. Please try again.');
+        setStatus(body.error ?? t('error'));
         return;
       }
       // Confirmed opt-in: they are NOT subscribed yet, and saying they are
       // would be the one lie this form can tell. The list only gains them when
       // they click the link.
-      setStatus(
-        'Almost there — check your inbox and click the link to confirm. ' +
-          'Nobody can add you to this list but you.',
-      );
+      setStatus(t('confirm'));
       setEmail('');
     } catch (error) {
       console.error('Subscription error:', error);
-      setStatus('An error occurred. Please try again.');
+      setStatus(t('error'));
     } finally {
       setIsSubmitting(false);
     }

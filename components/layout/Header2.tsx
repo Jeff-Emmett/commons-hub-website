@@ -8,8 +8,11 @@ import { DynamicAuthButton } from "@/components/dynamic-auth-button";
 import { AdminButton } from "@/components/admin-button";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Database } from "@/lib/database.types";
+import { useSite } from "@/components/SiteChrome";
 
 type Menu = Database['public']['Tables']['menu']['Row'] & {
+  /** Optional shorter label (Directus: Header menu → Label). */
+  label?: string | null;
   pages: {
     id: number
     title: string | null
@@ -21,19 +24,16 @@ type Props = {
   menus: Menu[];
 };
 
-// Header-only label overrides, keyed by page slug. Keeps the live Directus
-// page title (and its SEO/heading) intact while showing a shorter nav label.
-const HEADER_LABEL_OVERRIDES: Record<string, string> = {
-  venue: "VENUE",
-};
-
+// A menu entry shows its own label when it has one (Directus: Header menu →
+// Label) -- e.g. "VENUE" for the "EVENT VENUE" page -- and otherwise the title
+// of the page it opens.
 function headerLabel(menuItem: Menu): string {
-  const slug = menuItem.pages?.slug ?? "";
-  return HEADER_LABEL_OVERRIDES[slug] ?? menuItem.pages?.title ?? "";
+  return menuItem.label || menuItem.pages?.title || "";
 }
 
 function Header2({ menus }: Props) {
   const [isOpen, setIsOpen] = useState(false);
+  const site = useSite();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -201,8 +201,9 @@ function Header2({ menus }: Props) {
                     {/* Social Media Icons */}
                     <div className="mt-auto pt-10">
                       <div className="flex flex-row gap-4 justify-between px-6">
-                        <a
-                          href="https://x.com/CommonsHubAT"
+                        {site.x_url && (
+<a
+                          href={site.x_url ?? undefined}
                           target="_blank"
                           className="sidebar-icon w-inline-block"
                           aria-label="X (formerly Twitter)"
@@ -221,8 +222,10 @@ function Header2({ menus }: Props) {
                             />
                           </svg>
                         </a>
-                        <a
-                          href="https://www.instagram.com/commonshub/"
+)}
+                        {site.instagram_url && (
+<a
+                          href={site.instagram_url ?? undefined}
                           target="_blank"
                           className="sidebar-icon w-inline-block"
                           aria-label="Instagram"
@@ -241,8 +244,10 @@ function Header2({ menus }: Props) {
                             />
                           </svg>
                         </a>
-                        <a
-                          href="http://www.youtube.com/@CommonsHub"
+)}
+                        {site.youtube_url && (
+<a
+                          href={site.youtube_url ?? undefined}
                           target="_blank"
                           className="sidebar-icon w-inline-block"
                           aria-label="YouTube"
@@ -261,10 +266,12 @@ function Header2({ menus }: Props) {
                             />
                           </svg>
                         </a>
-                        <a
-            href="mailto:office@commons-hub.at"
+)}
+                        {site.contact_email && (
+<a
+            href={`mailto:${site.contact_email}`}
             className="sidebar-icon w-inline-block"
-            aria-label="Email Adress: office@commons-hub.at"
+            aria-label={`Email Adress: ${site.contact_email}`}
           >
             <div className="social-image w-embed">
               <svg
@@ -287,6 +294,7 @@ function Header2({ menus }: Props) {
               </svg>
             </div>
           </a>
+)}
                       </div>
                     </div>
                   </div>

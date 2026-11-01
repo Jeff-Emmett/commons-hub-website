@@ -1,7 +1,9 @@
 'use client';
 
+import { Fragment } from 'react';
 import { SectionNav } from '@/components/SectionNav';
 import { TeamSlider } from '@/components/about/TeamSlider';
+import type { EditAttr } from '@/lib/directus/editAttr';
 
 export interface TeamMember {
   name: string;
@@ -10,59 +12,86 @@ export interface TeamMember {
   imageUrl: string | null;
 }
 
-const SECTIONS = [
-  { id: 'team', label: 'Team' },
-  { id: 'history', label: 'History' },
-  { id: 'contact', label: 'Contact' },
-];
+interface Block {
+  heading: string;
+  nav: string;
+  editAttr?: EditAttr;
+}
 
-export function AboutGuide({ team }: { team: TeamMember[] }) {
+interface AboutGuideProps {
+  team: TeamMember[];
+  /** A missing section (hidden in Directus) is not rendered. */
+  sections: {
+    team?: Block;
+    history?: Block & { items: { title: string; text: string }[] };
+    contact?: Block;
+  };
+  siteName: string;
+  address: string[];
+  email: string;
+}
+
+export function AboutGuide({ team, sections, siteName, address, email }: AboutGuideProps) {
+  const { team: teamS, history, contact } = sections;
+  const nav = (
+    [
+      ['team', teamS],
+      ['history', history],
+      ['contact', contact],
+    ] as const
+  )
+    .filter(([, b]) => b)
+    .map(([id, b]) => ({ id, label: b!.nav || b!.heading }));
+
   return (
     <div className="max-w-6xl mx-auto px-6 py-12 flex gap-12">
-      <SectionNav sections={SECTIONS} />
+      <SectionNav sections={nav} />
 
       <div className="flex-1 min-w-0 space-y-20">
-        <section id="team" className="scroll-mt-28">
-          <h2 className="h1 mb-8">Team</h2>
-          <TeamSlider team={team} />
-        </section>
+        {teamS && (
+          <section id="team" className="scroll-mt-28" {...teamS.editAttr}>
+            <h2 className="h1 mb-8">{teamS.heading}</h2>
+            <TeamSlider team={team} />
+          </section>
+        )}
 
-        <section id="history" className="scroll-mt-28">
-          <h2 className="h1 mb-6">History</h2>
+        {history && (
+          <section id="history" className="scroll-mt-28" {...history.editAttr}>
+            <h2 className="h1 mb-6">{history.heading}</h2>
 
-          <h3 className="text-xl font-semibold mb-2">The House</h3>
-          <p className="text-lg text-slate-700 mb-6">
-            Built in 1860 as a countryside inn, the house was transformed into
-            an artist colony in 2013. It has hosted retreats and gatherings
-            since 2020, and was formalized as the Commons Hub in 2023.
-          </p>
+            {history.items.map((item, i) => (
+              <Fragment key={i}>
+                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                <p
+                  className={`text-lg text-slate-700${i < history.items.length - 1 ? ' mb-6' : ''}`}
+                  dangerouslySetInnerHTML={{ __html: item.text }}
+                />
+              </Fragment>
+            ))}
+          </section>
+        )}
 
-          <h3 className="text-xl font-semibold mb-2">The Village</h3>
-          <p className="text-lg text-slate-700">
-            Reichenau an der Rax was a 19th-century summer residence of the
-            nobility — leaving behind dozens of villas, castles and pavilions.
-            Hirschwang, the tiny village the Commons Hub sits in, always stayed
-            industrial: wood, iron ore, a battery factory and a paper mill. Both
-            villages have been in slow decay ever since — the ground we&apos;re
-            now helping to bring back to life.
-          </p>
-        </section>
-
-        <section id="contact" className="scroll-mt-28">
-          <h2 className="h1 mb-6">Contact</h2>
-          <address className="not-italic text-lg text-slate-700 leading-relaxed">
-            Commons Hub<br />
-            Richard von Schoeller-Straße 9<br />
-            2651 Reichenau an der Rax<br />
-            Austria<br />
-            <a
-              className="text-slate-900 font-medium hover:underline"
-              href="mailto:office@commons-hub.at"
-            >
-              office@commons-hub.at
-            </a>
-          </address>
-        </section>
+        {contact && (
+          <section id="contact" className="scroll-mt-28" {...contact.editAttr}>
+            <h2 className="h1 mb-6">{contact.heading}</h2>
+            <address className="not-italic text-lg text-slate-700 leading-relaxed">
+              {siteName}<br />
+              {address.map((line) => (
+                <Fragment key={line}>
+                  {line}<br />
+                </Fragment>
+              ))}
+              {email && (
+                <a
+                  className="text-slate-900 font-medium hover:underline"
+                  href={`mailto:${email}`}
+                >
+                  {email}
+                </a>
+              )}
+            </address>
+          </section>
+        )}
       </div>
     </div>
   );

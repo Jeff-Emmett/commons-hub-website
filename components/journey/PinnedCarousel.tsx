@@ -10,6 +10,7 @@ import {
   type ReactNode,
 } from 'react';
 import { useRegisterLiveCarousel } from '@/lib/contexts/CarouselVisibilityContext';
+import type { EditAttr } from '@/lib/directus/editAttr';
 
 export interface PinnedSlide {
   imageUrl: string;
@@ -29,6 +30,8 @@ interface PinnedCarouselProps {
   stepLockMs?: number;
   /** Footer/extra node rendered inside the right text column (last slide). */
   children?: ReactNode;
+  /** Directus Visual Editor hook for the section this carousel renders. */
+  editAttr?: EditAttr;
 }
 
 /**
@@ -42,6 +45,7 @@ export function PinnedCarousel({
   headline,
   autoplayMs = 5000,
   stepLockMs = 450,
+  editAttr,
 }: PinnedCarouselProps) {
   const t = useTranslations('home');
   const n = Math.max(1, slides.length);
@@ -187,6 +191,7 @@ export function PinnedCarousel({
       ref={wrapRef}
       className="pinned-carousel relative w-full overflow-hidden bg-white"
       style={{ height: 'calc(100vh - 5rem)' }}
+      {...editAttr}
     >
       <div
         className="flex h-full"

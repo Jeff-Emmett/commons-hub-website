@@ -4,11 +4,17 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import { useTranslations } from 'next-intl';
 
 // ─────────────────────────────────────────────────────────────
-// Pricing (source of truth: spec doc)
+// Pricing
 // ─────────────────────────────────────────────────────────────
 
+// Labels and prices come from Directus (Settings → Booking prices), passed in
+// by the page as `rooms` / `packages`. The constants below are the built-in
+// set, used only when that list is unavailable. The option keys are fixed: the
+// inquiry API validates them (app/api/booking-inquiries/route.ts), which is why
+// editors can change a label or price but not add or remove an option.
 // Listed prices are VAT-inclusive (stay 10%, event 20%) — see PriceSummary notes.
 
 interface RoomRate {
@@ -47,32 +53,71 @@ const EVENT_PACKAGES: EventPackage[] = [
 // Schemas
 // ─────────────────────────────────────────────────────────────
 
-const baseSchema = z.object({
-  name: z.string().trim().min(1, 'Name is required'),
-  email: z.string().trim().email('Valid email is required'),
-  check_in: z.string().min(1, 'Check-in date is required'),
-  check_out: z.string().min(1, 'Check-out date is required'),
-  message: z.string().optional(),
-});
+type T = ReturnType<typeof useTranslations>;
 
-const stayFormSchema = baseSchema.extend({
-  guests: z.number().int().min(1, 'At least 1 guest is required'),
-  room_type: z.enum(['single', 'double_twin', 'double_king', 'shared']).optional(),
-}).refine((d) => new Date(d.check_out) > new Date(d.check_in), {
-  message: 'Check-out must be after check-in',
-  path: ['check_out'],
-});
+function schemas(t: T) {
+  const baseSchema = z.object({
+    name: z.string().trim().min(1, t('errors.name')),
+    email: z.string().trim().email(t('errors.email')),
+    check_in: z.string().min(1, t('errors.checkIn')),
+    check_out: z.string().min(1, t('errors.checkOut')),
+    message: z.string().optional(),
+  });
 
-const eventFormSchema = baseSchema.extend({
-  event_size_package: z.enum(['small', 'medium', 'large', 'xlarge', 'call']),
-  event_description: z.string().optional(),
-}).refine((d) => new Date(d.check_out) > new Date(d.check_in), {
-  message: 'End date must be after start date',
-  path: ['check_out'],
-});
+  const stayFormSchema = baseSchema.extend({
+    guests: z.number().int().min(1, t('errors.guests')),
+    room_type: z.enum(['single', 'double_twin', 'double_king', 'shared']).optional(),
+  }).refine((d) => new Date(d.check_out) > new Date(d.check_in), {
+    message: t('errors.checkOutAfter'),
+    path: ['check_out'],
+  });
 
-type StayValues = z.infer<typeof stayFormSchema>;
-type EventValues = z.infer<typeof eventFormSchema>;
+  const eventFormSchema = baseSchema.extend({
+    event_size_package: z.enum(['small', 'medium', 'large', 'xlarge', 'call']),
+    event_description: z.string().optional(),
+  }).refine((d) => new Date(d.check_out) > new Date(d.check_in), {
+    message: t('errors.endAfter'),
+    path: ['check_out'],
+  });
+
+  return { stayFormSchema, eventFormSchema };
+}
+
+type StayValues = z.infer<ReturnType<typeof schemas>['stayFormSchema']>;
+type EventValues = z.infer<ReturnType<typeof schemas>['eventFormSchema']>;
+
+/** A Directus booking_options row (see getBookingOptions in lib/cms/content.ts). */
+export interface BookingOptionInput {
+  option_key: string;
+  label: string;
+  includes: string;
+  capacity: string;
+  price_excl_vat: number;
+  city_tax_per_night: number;
+}
+
+function roomRatesFrom(rows?: BookingOptionInput[]): RoomRate[] {
+  const known = rows?.filter((r) => ROOM_RATES.some((d) => d.key === r.option_key));
+  if (!known?.length) return ROOM_RATES;
+  return known.map((r) => ({
+    key: r.option_key as RoomRate['key'],
+    label: r.label,
+    nightly_excl_vat: r.price_excl_vat,
+    city_tax_per_night: r.city_tax_per_night,
+  }));
+}
+
+function packagesFrom(rows?: BookingOptionInput[]): EventPackage[] {
+  const known = rows?.filter((r) => EVENT_PACKAGES.some((d) => d.key === r.option_key));
+  if (!known?.length) return EVENT_PACKAGES;
+  return known.map((r) => ({
+    key: r.option_key as EventPackage['key'],
+    label: r.label,
+    includes: r.includes,
+    capacity: r.capacity,
+    day_rate_excl_vat: r.price_excl_vat,
+  }));
+}
 
 // ─────────────────────────────────────────────────────────────
 // Component
@@ -80,6 +125,10 @@ type EventValues = z.infer<typeof eventFormSchema>;
 
 interface BookingFormProps {
   variant: 'stay' | 'event';
+  /** Room options from Directus (stay variant). */
+  rooms?: BookingOptionInput[];
+  /** Event packages from Directus (event variant). */
+  packages?: BookingOptionInput[];
 }
 
 function nightsBetween(checkIn: string, checkOut: string): number {
@@ -98,13 +147,19 @@ function formatEur(amount: number): string {
   }).format(amount);
 }
 
-export function BookingForm({ variant }: BookingFormProps) {
-  return variant === 'stay' ? <StayForm /> : <EventForm />;
+export function BookingForm({ variant, rooms, packages }: BookingFormProps) {
+  return variant === 'stay' ? (
+    <StayForm roomRates={roomRatesFrom(rooms)} />
+  ) : (
+    <EventForm eventPackages={packagesFrom(packages)} />
+  );
 }
 
 // ── Stay variant ─────────────────────────────────────────────
 
-function StayForm() {
+function StayForm({ roomRates }: { roomRates: RoomRate[] }) {
+  const t = useTranslations('booking');
+  const { stayFormSchema } = schemas(t);
   const today = new Date().toISOString().split('T')[0];
   const [submitState, setSubmitState] = useState<'idle' | 'sending' | 'ok' | 'error'>('idle');
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -141,7 +196,7 @@ function StayForm() {
 
   const nights = nightsBetween(watched.check_in || '', watched.check_out || '');
   const guests = Number(watched.guests) || 0;
-  const rate = ROOM_RATES.find((r) => r.key === watched.room_type) ?? ROOM_RATES[0];
+  const rate = roomRates.find((r) => r.key === watched.room_type) ?? roomRates[0];
   // Listed room price already includes 10% VAT. City tax is added on top
   // (it is part of the total, just itemised — never a separate add-on note).
   const lodging = rate.nightly_excl_vat * guests * nights;
@@ -163,22 +218,20 @@ function StayForm() {
       });
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
-        throw new Error(body.error ?? 'Failed to send inquiry');
+        throw new Error(body.error ?? t('failed'));
       }
       setSubmitState('ok');
       reset({ guests: 1, room_type: 'single' });
     } catch (err) {
       setSubmitState('error');
-      setSubmitError(err instanceof Error ? err.message : 'Failed to send inquiry');
+      setSubmitError(err instanceof Error ? err.message : t('failed'));
     }
   };
 
   if (submitState === 'ok') {
     return (
       <div className="bg-green-50 border border-green-200 rounded-lg p-6">
-        <p className="text-green-900 text-lg">
-          Thanks for your inquiry. Our team will get back to you shortly to discuss the next steps.
-        </p>
+        <p className="text-green-900 text-lg">{t('thanks')}</p>
       </div>
     );
   }
@@ -190,26 +243,26 @@ function StayForm() {
           {/* Field order per spec: guests + accommodation type, then dates, then name + email. */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <FieldText
-              label="Number of guests *"
+              label={`${t('numberOfGuests')} *`}
               type="number"
               min={1}
               error={errors.guests?.message}
               {...register('guests', { valueAsNumber: true })}
             />
-            <FieldSelect label="Room type" error={errors.room_type?.message} {...register('room_type')}>
-              {ROOM_RATES.map((r) => (
+            <FieldSelect label={t('roomType')} error={errors.room_type?.message} {...register('room_type')}>
+              {roomRates.map((r) => (
                 <option key={r.key} value={r.key}>
-                  {r.label} ({formatEur(r.nightly_excl_vat)} + {formatEur(r.city_tax_per_night)} city tax)
+                  {r.label} ({t('roomPrice', { price: formatEur(r.nightly_excl_vat), tax: formatEur(r.city_tax_per_night) })})
                 </option>
               ))}
             </FieldSelect>
-            <FieldText label="Check-in *" type="date" min={today} error={errors.check_in?.message} {...register('check_in')} />
-            <FieldText label="Check-out *" type="date" min={today} error={errors.check_out?.message} {...register('check_out')} />
-            <FieldText label="Your name *" error={errors.name?.message} {...register('name')} />
-            <FieldText label="Email *" type="email" error={errors.email?.message} {...register('email')} />
+            <FieldText label={`${t('checkIn')} *`} type="date" min={today} error={errors.check_in?.message} {...register('check_in')} />
+            <FieldText label={`${t('checkOut')} *`} type="date" min={today} error={errors.check_out?.message} {...register('check_out')} />
+            <FieldText label={`${t('yourName')} *`} error={errors.name?.message} {...register('name')} />
+            <FieldText label={`${t('email')} *`} type="email" error={errors.email?.message} {...register('email')} />
           </div>
 
-          <FieldTextarea label="Anything we should know?" {...register('message')} />
+          <FieldTextarea label={t('notes')} {...register('message')} />
 
           {submitState === 'error' && (
             <p className="text-red-600 text-sm" role="alert">{submitError}</p>
@@ -217,7 +270,7 @@ function StayForm() {
 
           <div className="flex justify-start">
             <button type="submit" disabled={isSubmitting} className="button w-full sm:w-auto">
-              {isSubmitting ? 'Sending…' : 'Send inquiry'}
+              {isSubmitting ? t('sending') : t('submit')}
             </button>
           </div>
         </div>
@@ -225,11 +278,12 @@ function StayForm() {
           <div className="lg:sticky lg:top-24">
             <PriceSummary
               rows={[
-                { label: `${formatEur(rate.nightly_excl_vat)} × ${guests} guest(s) × ${nights} night(s)`, amount: lodging },
-                { label: `City tax (${formatEur(rate.city_tax_per_night)} × ${guests} × ${nights})`, amount: cityTax },
+                { label: t('rowLodging', { price: formatEur(rate.nightly_excl_vat), guests, nights }), amount: lodging },
+                { label: t('rowCityTax', { tax: formatEur(rate.city_tax_per_night), guests, nights }), amount: cityTax },
               ]}
               total={total}
-              note="*Prices include 10% VAT."
+              totalLabel={t('estimatedTotal')}
+              note={t('vatStay')}
             />
           </div>
         </aside>
@@ -240,7 +294,9 @@ function StayForm() {
 
 // ── Event variant ────────────────────────────────────────────
 
-function EventForm() {
+function EventForm({ eventPackages }: { eventPackages: EventPackage[] }) {
+  const t = useTranslations('booking');
+  const { eventFormSchema } = schemas(t);
   const today = new Date().toISOString().split('T')[0];
   const [submitState, setSubmitState] = useState<'idle' | 'sending' | 'ok' | 'error'>('idle');
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -258,7 +314,7 @@ function EventForm() {
 
   const watched = useWatch({ control });
   const days = Math.max(1, nightsBetween(watched.check_in || '', watched.check_out || ''));
-  const pkg = EVENT_PACKAGES.find((p) => p.key === watched.event_size_package) ?? EVENT_PACKAGES[0];
+  const pkg = eventPackages.find((p) => p.key === watched.event_size_package) ?? eventPackages[0];
   // Package day-rate already includes 20% VAT — never added on top.
   const venue = pkg.day_rate_excl_vat * days;
   const total = venue;
@@ -279,22 +335,20 @@ function EventForm() {
       });
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
-        throw new Error(body.error ?? 'Failed to send inquiry');
+        throw new Error(body.error ?? t('failed'));
       }
       setSubmitState('ok');
       reset({ event_size_package: 'medium' });
     } catch (err) {
       setSubmitState('error');
-      setSubmitError(err instanceof Error ? err.message : 'Failed to send inquiry');
+      setSubmitError(err instanceof Error ? err.message : t('failed'));
     }
   };
 
   if (submitState === 'ok') {
     return (
       <div className="bg-green-50 border border-green-200 rounded-lg p-6">
-        <p className="text-green-900 text-lg">
-          Thanks for your inquiry. Our team will get back to you shortly to discuss the next steps.
-        </p>
+        <p className="text-green-900 text-lg">{t('thanks')}</p>
       </div>
     );
   }
@@ -305,9 +359,9 @@ function EventForm() {
         <div className="lg:col-span-2 space-y-6">
           {/* Field order per spec: pick a package, then dates, then contact, then message. */}
           <fieldset>
-            <legend className="block text-sm font-medium text-gray-700 mb-3">Choose your package *</legend>
+            <legend className="block text-sm font-medium text-gray-700 mb-3">{t('choosePackage')} *</legend>
             <div className="space-y-3">
-              {EVENT_PACKAGES.map((p) => (
+              {eventPackages.map((p) => (
                 <label
                   key={p.key}
                   className="flex cursor-pointer items-start gap-3 rounded-lg border border-gray-200 p-4 transition-colors hover:border-gray-400 has-[:checked]:border-slate-900 has-[:checked]:bg-slate-50"
@@ -323,7 +377,7 @@ function EventForm() {
                       <span className="font-semibold text-slate-900">{p.label}</span>
                       {p.day_rate_excl_vat > 0 && (
                         <span className="text-sm text-slate-600">
-                          {formatEur(p.day_rate_excl_vat)}/day · {p.capacity}
+                          {t('perDay', { price: formatEur(p.day_rate_excl_vat) })} · {p.capacity}
                         </span>
                       )}
                     </span>
@@ -338,15 +392,15 @@ function EventForm() {
           </fieldset>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <FieldText label="Start date *" type="date" min={today} error={errors.check_in?.message} {...register('check_in')} />
-            <FieldText label="End date *" type="date" min={today} error={errors.check_out?.message} {...register('check_out')} />
-            <FieldText label="Your name *" error={errors.name?.message} {...register('name')} />
-            <FieldText label="Email *" type="email" error={errors.email?.message} {...register('email')} />
+            <FieldText label={`${t('startDate')} *`} type="date" min={today} error={errors.check_in?.message} {...register('check_in')} />
+            <FieldText label={`${t('endDate')} *`} type="date" min={today} error={errors.check_out?.message} {...register('check_out')} />
+            <FieldText label={`${t('yourName')} *`} error={errors.name?.message} {...register('name')} />
+            <FieldText label={`${t('email')} *`} type="email" error={errors.email?.message} {...register('email')} />
           </div>
 
           <FieldTextarea
-            label="Anything we should know? (optional)"
-            placeholder="Tone, audience, programme, anything we should know..."
+            label={t('notesOptional')}
+            placeholder={t('notesPlaceholder')}
             {...register('event_description')}
           />
 
@@ -356,7 +410,7 @@ function EventForm() {
 
           <div className="flex justify-start">
             <button type="submit" disabled={isSubmitting} className="button w-full sm:w-auto">
-              {isSubmitting ? 'Sending…' : 'Send inquiry'}
+              {isSubmitting ? t('sending') : t('submit')}
             </button>
           </div>
         </div>
@@ -365,16 +419,15 @@ function EventForm() {
             {!isCallVariant && (
               <PriceSummary
                 rows={[
-                  { label: `${pkg.label} package — ${formatEur(pkg.day_rate_excl_vat)} / day × ${days} day(s)`, amount: venue },
+                  { label: t('rowPackage', { label: pkg.label, price: formatEur(pkg.day_rate_excl_vat), days }), amount: venue },
                 ]}
                 total={total}
-                note="*Prices include 20% VAT."
+                totalLabel={t('estimatedTotal')}
+                note={t('vatEvent')}
               />
             )}
             {isCallVariant && (
-              <div className="bg-slate-50 rounded-lg p-4 text-sm text-slate-700">
-                No need to estimate now — we&apos;ll figure out the right setup on a call.
-              </div>
+              <div className="bg-slate-50 rounded-lg p-4 text-sm text-slate-700">{t('callNote')}</div>
             )}
           </div>
         </aside>
@@ -454,7 +507,17 @@ interface PriceRow {
   amount: number;
 }
 
-function PriceSummary({ rows, total, note }: { rows: PriceRow[]; total: number; note?: string }) {
+function PriceSummary({
+  rows,
+  total,
+  totalLabel,
+  note,
+}: {
+  rows: PriceRow[];
+  total: number;
+  totalLabel: string;
+  note?: string;
+}) {
   if (total <= 0) return null;
   return (
     <div className="bg-slate-50 rounded-lg p-4 text-sm">
@@ -466,7 +529,7 @@ function PriceSummary({ rows, total, note }: { rows: PriceRow[]; total: number; 
           </li>
         ))}
         <li className="flex justify-between pt-2 border-t border-slate-200 font-semibold">
-          <span>Estimated total</span>
+          <span>{totalLabel}</span>
           <span className="tabular-nums">{formatEur(total)}</span>
         </li>
       </ul>

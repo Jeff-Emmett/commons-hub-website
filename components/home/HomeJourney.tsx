@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 import { PinnedCarousel } from '@/components/journey/PinnedCarousel';
 import NewsletterSignup from '@/components/NewsletterSignup';
 import SiteFooter from '@/components/SiteFooter';
+import type { EditAttr } from '@/lib/directus/editAttr';
 
 export interface HomeSlide {
   imageUrl: string;
@@ -15,6 +16,7 @@ export interface HomeTile {
   label: string;
   href: string;
   imageUrl: string | null;
+  editAttr?: EditAttr;
 }
 export interface HomePost {
   title: string;
@@ -28,11 +30,24 @@ export interface HomePhoto {
 interface HomeJourneyProps {
   slides: HomeSlide[];
   tiles: HomeTile[];
+  tilesEdit?: EditAttr;
   posts: HomePost[];
+  /** Blog row heading (Directus section home/blog); undefined hides the row. */
+  blog?: { heading: string; editAttr?: EditAttr };
   galleryPreview?: HomePhoto[];
+  /** Gallery preview heading + link (section home/gallery_preview). */
+  gallery?: { heading: string; linkLabel: string; href: string; editAttr?: EditAttr };
 }
 
-export function HomeJourney({ slides, tiles, posts, galleryPreview = [] }: HomeJourneyProps) {
+export function HomeJourney({
+  slides,
+  tiles,
+  tilesEdit,
+  posts,
+  blog,
+  galleryPreview = [],
+  gallery,
+}: HomeJourneyProps) {
   const tr = useTranslations('home');
   return (
     <main className="home">
@@ -41,7 +56,8 @@ export function HomeJourney({ slides, tiles, posts, galleryPreview = [] }: HomeJ
       {slides.length > 0 && <PinnedCarousel slides={slides} />}
 
       {/* Section 2 — 2×2 wide tiles, white bg, generous whitespace */}
-      <section className="bg-white px-8 md:px-16 py-20">
+      {tiles.length > 0 && (
+      <section className="bg-white px-8 md:px-16 py-20" {...tilesEdit}>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-12 w-full max-w-5xl mx-auto">
           {tiles.map((t) => (
             <Link
@@ -50,6 +66,7 @@ export function HomeJourney({ slides, tiles, posts, galleryPreview = [] }: HomeJ
               className="group relative block w-full overflow-hidden rounded-xl bg-slate-100"
               style={{ aspectRatio: '16 / 9' }}
               aria-label={t.label}
+              {...t.editAttr}
             >
               {t.imageUrl ? (
                 <Image
@@ -71,12 +88,15 @@ export function HomeJourney({ slides, tiles, posts, galleryPreview = [] }: HomeJ
           ))}
         </div>
       </section>
+      )}
 
       {/* Section 3 — all published blog posts (scrollable) + newsletter */}
       <section className="bg-white px-8 md:px-16 py-16">
         <div className="max-w-5xl mx-auto w-full">
-          <h2 className="text-2xl font-semibold mb-6">{tr('latestFromBlog')}</h2>
-          {posts.length > 0 && (
+          {blog && (
+            <h2 className="text-2xl font-semibold mb-6" {...blog.editAttr}>{blog.heading}</h2>
+          )}
+          {blog && posts.length > 0 && (
             <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 -mx-2 px-2">
               {posts.map((p) => (
                 <Link
@@ -114,21 +134,21 @@ export function HomeJourney({ slides, tiles, posts, galleryPreview = [] }: HomeJ
       </section>
 
       {/* Section 4 — gallery preview, links through to /gallery */}
-      {galleryPreview.length > 0 && (
-        <section className="bg-white px-8 md:px-16 pb-20">
+      {gallery && galleryPreview.length > 0 && (
+        <section className="bg-white px-8 md:px-16 pb-20" {...gallery.editAttr}>
           <div className="max-w-5xl mx-auto w-full">
             <div className="flex items-baseline justify-between mb-6">
-              <h2 className="text-2xl font-semibold">From the gallery</h2>
+              <h2 className="text-2xl font-semibold">{gallery.heading}</h2>
               <Link
-                href="/gallery"
+                href={gallery.href}
                 className="text-sm font-medium text-slate-600 hover:text-slate-900 underline underline-offset-4"
               >
-                View all photos →
+                {gallery.linkLabel}
               </Link>
             </div>
             <Link
-              href="/gallery"
-              aria-label="Open photo gallery"
+              href={gallery.href}
+              aria-label={tr('galleryAria')}
               className="group grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3"
             >
               {galleryPreview.map((p, i) => (

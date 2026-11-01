@@ -1,5 +1,6 @@
 import "server-only";
-import { USE_STATIC_CONTENT } from "@/lib/content/staticStore";
+import { USE_STATIC_CONTENT, activeLocale } from "@/lib/content/staticStore";
+import { mergeTranslations, withTranslations } from "@/lib/directus/translations";
 
 const DIRECTUS_URL =
   process.env.DIRECTUS_URL?.replace(/\/$/, "") || "http://commons-hub-directus:8055";
@@ -33,14 +34,26 @@ interface DirectusErrorResponse {
   errors?: Array<{ message: string; extensions?: { code?: string } }>;
 }
 
+/**
+ * Every public (token-less) read is cached by Next under this tag for at most
+ * REVALIDATE_SECONDS, and dropped at once when Directus calls /api/revalidate
+ * (the "Refresh website on content change" flow). Authenticated reads -- the
+ * in-app admin -- are never cached.
+ */
+export const CONTENT_TAG = "directus-content";
+const REVALIDATE_SECONDS = 60;
+
 async function request<T>(
   path: string,
   init: RequestInit & { token?: string } = {},
 ): Promise<T> {
   const { token, headers, ...rest } = init;
+  const isRead = !rest.method || rest.method === "GET";
   const res = await fetch(`${DIRECTUS_URL}${path}`, {
     ...rest,
-    cache: "no-store",
+    ...(isRead && !token
+      ? { next: { revalidate: REVALIDATE_SECONDS, tags: [CONTENT_TAG] } }
+      : { cache: "no-store" as const }),
     headers: {
       "content-type": "application/json",
       ...(token ? { authorization: `Bearer ${token}` } : {}),
@@ -60,24 +73,56 @@ async function request<T>(
   return body as T;
 }
 
+/** Directus unreachable or failing (not a 4xx about the query itself). */
+function isOutage(err: unknown): boolean {
+  const status = (err as { status?: number }).status;
+  return status === undefined || status >= 500;
+}
+
+/**
+ * The captured snapshot (content/snapshot/<locale>/), served when Directus is
+ * down so the site keeps its last known content instead of rendering empty.
+ * Refresh it with scripts/capture-directus.mjs.
+ */
+async function staticRows<T>(collection: string, query: DirectusQuery, locale: string): Promise<T[]> {
+  const { queryStatic } = await import("@/lib/content/staticStore");
+  return queryStatic<T>(collection, query, locale);
+}
+
 export async function readItems<T>(
   collection: string,
   query: DirectusQuery = {},
   token?: string,
 ): Promise<T[]> {
-  if (USE_STATIC_CONTENT) {
-    const { queryStatic, activeLocale } = await import("@/lib/content/staticStore");
-    return queryStatic<T>(collection, query, await activeLocale());
-  }
+  // Authenticated callers are the in-app admin editing raw rows: no language
+  // merging (it would save German into the English fields) and no fallback.
+  return readItemsAs<T>(collection, query, token ? undefined : await activeLocale(), token);
+}
+
+/**
+ * readItems for an explicit locale (undefined = raw rows, no merging). For
+ * callers that run before the request locale is resolvable, e.g. the next-intl
+ * request config itself.
+ */
+export async function readItemsAs<T>(
+  collection: string,
+  query: DirectusQuery,
+  locale: string | undefined,
+  token?: string,
+): Promise<T[]> {
+  if (USE_STATIC_CONTENT && locale) return staticRows<T>(collection, query, locale);
   try {
-    const body = await request<{ data: T[] }>(
-      `/items/${collection}${buildQuery(query)}`,
+    const q = locale ? withTranslations(collection, query, locale) : query;
+    const body = await request<{ data: T[] | T | null }>(
+      `/items/${collection}${buildQuery(q)}`,
       { token },
     );
-    return body.data ?? [];
+    // A singleton collection (site_settings) answers with one object, not rows.
+    const rows = Array.isArray(body.data) ? body.data : body.data ? [body.data] : [];
+    return locale ? mergeTranslations(rows) : rows;
   } catch (err) {
     console.error(`Directus readItems(${collection}) failed:`, (err as Error).message);
-    return [];
+    return locale && isOutage(err) ? staticRows<T>(collection, query, locale) : [];
   }
 }
 
@@ -87,16 +132,18 @@ export async function readItem<T>(
   query: Omit<DirectusQuery, "filter" | "limit" | "offset" | "page"> = {},
   token?: string,
 ): Promise<T | null> {
-  if (USE_STATIC_CONTENT) {
-    const { getItemStatic, activeLocale } = await import("@/lib/content/staticStore");
-    return getItemStatic<T>(collection, id, await activeLocale());
+  const locale = token ? undefined : await activeLocale();
+  if (USE_STATIC_CONTENT && locale) {
+    const { getItemStatic } = await import("@/lib/content/staticStore");
+    return getItemStatic<T>(collection, id, locale);
   }
   try {
+    const q = locale ? withTranslations(collection, query, locale) : query;
     const body = await request<{ data: T }>(
-      `/items/${collection}/${id}${buildQuery(query)}`,
+      `/items/${collection}/${id}${buildQuery(q)}`,
       { token },
     );
-    return body.data ?? null;
+    return locale ? mergeTranslations(body.data ?? null) : (body.data ?? null);
   } catch (err) {
     const status = (err as { status?: number }).status;
     if (status === 403 || status === 404) return null;
@@ -192,8 +239,8 @@ export async function countItems(
   filter?: Record<string, unknown>,
   token?: string,
 ): Promise<number> {
-  if (USE_STATIC_CONTENT) {
-    const { countStatic, activeLocale } = await import("@/lib/content/staticStore");
+  if (USE_STATIC_CONTENT && !token) {
+    const { countStatic } = await import("@/lib/content/staticStore");
     return countStatic(collection, filter, await activeLocale());
   }
   try {

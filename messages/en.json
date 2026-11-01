@@ -22,7 +22,8 @@
     "upcomingEvents": "Upcoming Events",
     "readMore": "Read More",
     "latestFromBlog": "Latest from the blog",
-    "scrollHint": "scroll, swipe, or use arrows →"
+    "scrollHint": "scroll, swipe, or use arrows →",
+    "galleryAria": "Open photo gallery"
   },
   "footer": {
     "visit": "Visit",
@@ -55,16 +56,86 @@
     "startDate": "Start date",
     "endDate": "End date",
     "estimatedTotal": "Estimated total",
-    "submit": "Send inquiry"
+    "submit": "Send inquiry",
+    "thanks": "Thanks for your inquiry. Our team will get back to you shortly to discuss the next steps.",
+    "sending": "Sending…",
+    "failed": "Failed to send inquiry",
+    "notesOptional": "Anything we should know? (optional)",
+    "notesPlaceholder": "Tone, audience, programme, anything we should know...",
+    "roomPrice": "{price} + {tax} city tax",
+    "rowLodging": "{price} × {guests} guest(s) × {nights} night(s)",
+    "rowCityTax": "City tax ({tax} × {guests} × {nights})",
+    "vatStay": "*Prices include 10% VAT.",
+    "vatEvent": "*Prices include 20% VAT.",
+    "perDay": "{price}/day",
+    "rowPackage": "{label} package — {price} / day × {days} day(s)",
+    "callNote": "No need to estimate now — we'll figure out the right setup on a call.",
+    "errors": {
+      "name": "Name is required",
+      "email": "Valid email is required",
+      "checkIn": "Check-in date is required",
+      "checkOut": "Check-out date is required",
+      "guests": "At least 1 guest is required",
+      "checkOutAfter": "Check-out must be after check-in",
+      "endAfter": "End date must be after start date"
+    }
   },
   "newsletter": {
     "heading": "Subscribe to our newsletter",
     "emailPlaceholder": "your@email.com",
     "tagline": "Subscribe for new events & announcements from the Commons Hub",
-    "submitting": "Subscribing…"
+    "submitting": "Subscribing…",
+    "invalidEmail": "Please enter a valid email address.",
+    "error": "An error occurred. Please try again.",
+    "confirm": "Almost there — check your inbox and click the link to confirm. Nobody can add you to this list but you."
   },
   "language": {
     "label": "Language",
     "autoDetected": "Chosen automatically from your location."
+  },
+  "gallery": {
+    "empty": "Photos coming soon."
+  },
+  "events": {
+    "datesTba": "Dates TBA",
+    "untitled": "Untitled",
+    "allPlanned": "All planned events ({count})",
+    "rowEmpty": "Nothing here yet — check back soon."
+  },
+  "eventGrid": {
+    "upcoming": "UPCOMING EVENTS",
+    "past": "PAST EVENTS",
+    "location": "Commons Hub, Austria",
+    "untitled": "Untitled Event",
+    "datesTba": "Dates TBA"
+  },
+  "map": {
+    "heading": "location",
+    "train": "Travel by Train"
+  },
+  "team": {
+    "heading": "TEAM",
+    "memberAlt": "Team member"
+  },
+  "posts": {
+    "heading": "News"
+  },
+  "progress": {
+    "pledged": "AMOUNT PLEDGED"
+  },
+  "instagram": {
+    "heading": "@{handle} on Instagram",
+    "follow": "Follow →",
+    "viewPost": "View this post on Instagram",
+    "teaser": "See the latest from the Hub on Instagram.",
+    "open": "Open @{handle}"
+  },
+  "placeholder": {
+    "photoNeeded": "Photo needed",
+    "aria": "Placeholder — photo needed: {label}"
+  },
+  "eventPage": {
+    "brand": "Commonshub",
+    "impressum": "Impressum"
   }
 }

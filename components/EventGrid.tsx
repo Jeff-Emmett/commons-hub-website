@@ -2,6 +2,7 @@ import ClientSideRout from "./ClientSideRout";
 import { getEventPage } from "@/lib/actions/getEventPage";
 // import { Database } from "@/lib/database.types";
 import IconImage from "./IconImage";
+import { getTranslations } from "next-intl/server";
 
 type Props = {
   filter?: 'upcoming' | 'past';
@@ -11,11 +12,11 @@ type Props = {
 // type Event = Database['public']['Tables']['eventpages']['Row'];
 
 export async function EventGrid({ filter = 'upcoming', title = "Events" }: Props) {
-  const sortedEvents = await getEventPage(filter);
+  const [sortedEvents, t] = await Promise.all([getEventPage(filter), getTranslations('eventGrid')]);
   
   // Use a fixed date formatting approach to avoid hydration errors
   const formatDateRange = (startDate: string | null, endDate: string | null) => {
-    if (!startDate || !endDate) return 'Dates TBA';
+    if (!startDate || !endDate) return t('datesTba');
     
     const start = new Date(startDate);
     const end = new Date(endDate);
@@ -71,12 +72,12 @@ export async function EventGrid({ filter = 'upcoming', title = "Events" }: Props
                 <div className="group relative max-w-xl">
                   <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
                     <span className="absolute inset-0" />
-                    {event.title || 'Untitled Event'}
+                    {event.title || t('untitled')}
                   </h3>
                   <p className="mt-5 text-sm leading-6 text-gray-600">
                     {formatDateRange(event.startdatetime, event.enddatetime)}
                   </p>
-                  <p className="mt-5 text-sm leading-6 text-gray-600">Commons Hub, Austria</p>
+                  <p className="mt-5 text-sm leading-6 text-gray-600">{t('location')}</p>
                 </div>
                 <div className="mt-6 flex border-t border-gray-900/5 pt-6">
                   <div className="relative flex items-center gap-x-4">

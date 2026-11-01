@@ -5,6 +5,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import { Database } from "@/lib/database.types";
 import { getImageUrlClient } from "@/lib/utils/getImageUrlClient";
+import { useTranslations } from "next-intl";
 
 type TeamMember = Database['public']['Tables']['team_members']['Row'];
 
@@ -13,6 +14,7 @@ type Props = {
 };
 
 export function TeamClient({ teamMembers }: Props) {
+  const t = useTranslations("team");
   const [memberImages, setMemberImages] = useState<Record<number, string>>({});
   console.log("starting TeamClient <TeamClient/>");
   console.log("teamMembers: ",JSON.stringify(teamMembers, null, 2))
@@ -66,7 +68,7 @@ export function TeamClient({ teamMembers }: Props) {
   return (
     <div className="hero-wrapper w-inline-block py-2 border-y border-gray-100">
       <div className="hero-content">
-        <h2>TEAM</h2>
+        <h2>{t("heading")}</h2>
         <div className="carousel">
           <div className="embla" ref={emblaRef}>
             <div className="embla__container">
@@ -74,7 +76,7 @@ export function TeamClient({ teamMembers }: Props) {
                 <div key={member.id} className="embla__slide justify-items-center">                  
                   <Image
                     src={memberImages[member.id] || "/placeholder.jpg"}
-                    alt={member.role || 'Team member'}
+                    alt={member.role || t('memberAlt')}
                     width={500}
                     height={500}
                     className="w-64 rounded-full shadow-lg object-cover object-top aspect-[1/1]"

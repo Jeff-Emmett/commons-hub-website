@@ -1,6 +1,7 @@
 import ClientSideRout from "@/components/ClientSideRout";
 import WhiteOverlay from "@/components/WhiteOverlay";
 import { getEventPageBySlug } from "@/lib/actions/getEventPage";
+import { getTranslations } from "next-intl/server";
 import ImageIcon from "@/components/ImageIcon";
 import { Metadata } from "next";
 import { generatePageMetadata } from "@/lib/utils/generatePageMetadata";
@@ -32,7 +33,7 @@ export async function generateMetadata(
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const page = await getEventPageBySlug(slug);
+  const [page, t] = await Promise.all([getEventPageBySlug(slug), getTranslations("eventPage")]);
 
   // let carousels: Database['public']['Tables']['carousels']['Row'][] = [];
   // if (page && page.page_carousel && Array.isArray(page.page_carousel)) {
@@ -95,14 +96,14 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                   className="footer-bottom"
                 >
                   <div className="bottom-details">
-                    <p className="bottom-link inline"> Commonshub</p>
+                    <p className="bottom-link inline"> {t("brand")}</p>
                   </div>
                   <div className="bottom-details">
                     <ClientSideRout
                       route={`/page/impressum`}
-                      ariaLabel="Impressum"
+                      ariaLabel={t("impressum")}
                     >
-                      <p className="bottom-link">Impressum</p>
+                      <p className="bottom-link">{t("impressum")}</p>
                     </ClientSideRout>
                   </div>
                 </div>

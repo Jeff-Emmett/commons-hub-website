@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "sort": 1,
+    "kind": "room",
+    "option_key": "single",
+    "label": "Single Room",
+    "includes": null,
+    "capacity": null,
+    "price_excl_vat": "85.00",
+    "city_tax_per_night": "4.70"
+  },
+  {
+    "id": 2,
+    "sort": 2,
+    "kind": "room",
+    "option_key": "double_twin",
+    "label": "Double Room (twin beds)",
+    "includes": null,
+    "capacity": null,
+    "price_excl_vat": "45.50",
+    "city_tax_per_night": "4.70"
+  },
+  {
+    "id": 3,
+    "sort": 3,
+    "kind": "room",
+    "option_key": "double_king",
+    "label": "Double Room (kingsize bed)",
+    "includes": null,
+    "capacity": null,
+    "price_excl_vat": "45.50",
+    "city_tax_per_night": "4.70"
+  },
+  {
+    "id": 4,
+    "sort": 4,
+    "kind": "room",
+    "option_key": "shared",
+    "label": "Shared (4–6 beds)",
+    "includes": null,
+    "capacity": null,
+    "price_excl_vat": "35.20",
+    "city_tax_per_night": "4.70"
+  },
+  {
+    "id": 5,
+    "sort": 5,
+    "kind": "event_package",
+    "option_key": "small",
+    "label": "Small",
+    "includes": "Seminar Room + Common Areas",
+    "capacity": "max. 20 guests",
+    "price_excl_vat": "200.00",
+    "city_tax_per_night": null
+  },
+  {
+    "id": 6,
+    "sort": 6,
+    "kind": "event_package",
+    "option_key": "medium",
+    "label": "Mid",
+    "includes": "Seminar Room, Conference Hall + Common Areas",
+    "capacity": "max. 30 guests",
+    "price_excl_vat": "500.00",
+    "city_tax_per_night": null
+  },
+  {
+    "id": 7,
+    "sort": 7,
+    "kind": "event_package",
+    "option_key": "large",
+    "label": "Big",
+    "includes": "Seminar Room, Conference Hall, Maker Hall + Common Areas",
+    "capacity": "max. 65 guests",
+    "price_excl_vat": "700.00",
+    "city_tax_per_night": null
+  },
+  {
+    "id": 8,
+    "sort": 8,
+    "kind": "event_package",
+    "option_key": "xlarge",
+    "label": "Extra Big",
+    "includes": "Everything above",
+    "capacity": "max. 100 guests",
+    "price_excl_vat": "1000.00",
+    "city_tax_per_night": null
+  },
+  {
+    "id": 9,
+    "sort": 9,
+    "kind": "event_package",
+    "option_key": "call",
+    "label": "I don't know yet",
+    "includes": "Tell us your plan and we'll find the right fit",
+    "capacity": "",
+    "price_excl_vat": "0.00",
+    "city_tax_per_night": null
+  }
+]

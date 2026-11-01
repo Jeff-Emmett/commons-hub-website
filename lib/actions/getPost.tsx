@@ -47,7 +47,7 @@ export async function getAllPublishedPosts(): Promise<PostWithRelations[]> {
   return readItems<PostWithRelations>("posts", {
     fields: POST_FIELDS,
     filter: publishedFilter(),
-    sort: "-date_created",
+    sort: ["-date_created", "-id"],
     limit: -1,
   });
 }
@@ -64,7 +64,7 @@ export async function getPostList() {
     }>("posts", {
       fields: ["id", "title", "slug", "status", "date_created", "date_updated"],
       filter: publishedFilter(),
-      sort: "-date_created",
+      sort: ["-date_created", "-id"],
       limit: -1,
     });
     return { error: null, posts };

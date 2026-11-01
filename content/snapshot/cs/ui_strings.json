@@ -1,0 +1,318 @@
+[
+  {
+    "key": "common.home",
+    "value": "Domů"
+  },
+  {
+    "key": "common.menu",
+    "value": "Menu"
+  },
+  {
+    "key": "common.login",
+    "value": "Přihlásit se"
+  },
+  {
+    "key": "common.logout",
+    "value": "Odhlásit se"
+  },
+  {
+    "key": "common.admin",
+    "value": "Admin"
+  },
+  {
+    "key": "common.readMore",
+    "value": "Číst více"
+  },
+  {
+    "key": "common.bookNow",
+    "value": "Rezervovat"
+  },
+  {
+    "key": "common.sendInquiry",
+    "value": "Odeslat poptávku"
+  },
+  {
+    "key": "common.subscribe",
+    "value": "Odebírat"
+  },
+  {
+    "key": "common.loading",
+    "value": "Načítání…"
+  },
+  {
+    "key": "common.signUp",
+    "value": "Registrovat"
+  },
+  {
+    "key": "home.scrollHint",
+    "value": "posouvej, přejeď nebo použij šipky →"
+  },
+  {
+    "key": "booking.numberOfGuests",
+    "value": "Number of guests"
+  },
+  {
+    "key": "booking.roomType",
+    "value": "Room type"
+  },
+  {
+    "key": "booking.checkIn",
+    "value": "Check-in"
+  },
+  {
+    "key": "booking.checkOut",
+    "value": "Check-out"
+  },
+  {
+    "key": "booking.yourName",
+    "value": "Your name"
+  },
+  {
+    "key": "booking.email",
+    "value": "Email"
+  },
+  {
+    "key": "booking.notes",
+    "value": "Anything we should know?"
+  },
+  {
+    "key": "booking.choosePackage",
+    "value": "Choose your package"
+  },
+  {
+    "key": "booking.startDate",
+    "value": "Start date"
+  },
+  {
+    "key": "booking.endDate",
+    "value": "End date"
+  },
+  {
+    "key": "booking.estimatedTotal",
+    "value": "Estimated total"
+  },
+  {
+    "key": "booking.submit",
+    "value": "Send inquiry"
+  },
+  {
+    "key": "newsletter.heading",
+    "value": "Přihlaste se k odběru newsletteru"
+  },
+  {
+    "key": "newsletter.emailPlaceholder",
+    "value": "vas@email.com"
+  },
+  {
+    "key": "newsletter.tagline",
+    "value": "Odebírej novinky o akcích a oznámení z Commons Hubu"
+  },
+  {
+    "key": "newsletter.submitting",
+    "value": "Přihlašování…"
+  },
+  {
+    "key": "language.label",
+    "value": "Jazyk"
+  },
+  {
+    "key": "language.autoDetected",
+    "value": "Jazyk jsme vybrali podle tvé polohy."
+  },
+  {
+    "key": "home.galleryAria",
+    "value": "Open photo gallery"
+  },
+  {
+    "key": "gallery.empty",
+    "value": "Photos coming soon."
+  },
+  {
+    "key": "events.datesTba",
+    "value": "Dates TBA"
+  },
+  {
+    "key": "events.untitled",
+    "value": "Untitled"
+  },
+  {
+    "key": "eventGrid.upcoming",
+    "value": "UPCOMING EVENTS"
+  },
+  {
+    "key": "eventGrid.past",
+    "value": "PAST EVENTS"
+  },
+  {
+    "key": "eventGrid.location",
+    "value": "Commons Hub, Austria"
+  },
+  {
+    "key": "eventGrid.untitled",
+    "value": "Untitled Event"
+  },
+  {
+    "key": "map.heading",
+    "value": "location"
+  },
+  {
+    "key": "map.train",
+    "value": "Travel by Train"
+  },
+  {
+    "key": "team.heading",
+    "value": "TEAM"
+  },
+  {
+    "key": "posts.heading",
+    "value": "News"
+  },
+  {
+    "key": "progress.pledged",
+    "value": "AMOUNT PLEDGED"
+  },
+  {
+    "key": "booking.sending",
+    "value": "Sending…"
+  },
+  {
+    "key": "booking.failed",
+    "value": "Failed to send inquiry"
+  },
+  {
+    "key": "booking.notesOptional",
+    "value": "Anything we should know? (optional)"
+  },
+  {
+    "key": "booking.notesPlaceholder",
+    "value": "Tone, audience, programme, anything we should know..."
+  },
+  {
+    "key": "booking.errors.name",
+    "value": "Name is required"
+  },
+  {
+    "key": "booking.errors.email",
+    "value": "Valid email is required"
+  },
+  {
+    "key": "booking.errors.checkIn",
+    "value": "Check-in date is required"
+  },
+  {
+    "key": "booking.errors.checkOut",
+    "value": "Check-out date is required"
+  },
+  {
+    "key": "booking.errors.guests",
+    "value": "At least 1 guest is required"
+  },
+  {
+    "key": "booking.errors.checkOutAfter",
+    "value": "Check-out must be after check-in"
+  },
+  {
+    "key": "booking.errors.endAfter",
+    "value": "End date must be after start date"
+  },
+  {
+    "key": "newsletter.invalidEmail",
+    "value": "Please enter a valid email address."
+  },
+  {
+    "key": "newsletter.error",
+    "value": "An error occurred. Please try again."
+  },
+  {
+    "key": "newsletter.confirm",
+    "value": "Almost there — check your inbox and click the link to confirm. Nobody can add you to this list but you."
+  },
+  {
+    "key": "booking.thanks",
+    "value": "Thanks for your inquiry. Our team will get back to you shortly to discuss the next steps."
+  },
+  {
+    "key": "booking.roomPrice",
+    "value": "{price} + {tax} city tax"
+  },
+  {
+    "key": "booking.rowLodging",
+    "value": "{price} × {guests} guest(s) × {nights} night(s)"
+  },
+  {
+    "key": "booking.rowCityTax",
+    "value": "City tax ({tax} × {guests} × {nights})"
+  },
+  {
+    "key": "booking.vatStay",
+    "value": "*Prices include 10% VAT."
+  },
+  {
+    "key": "booking.vatEvent",
+    "value": "*Prices include 20% VAT."
+  },
+  {
+    "key": "booking.perDay",
+    "value": "{price}/day"
+  },
+  {
+    "key": "booking.rowPackage",
+    "value": "{label} package — {price} / day × {days} day(s)"
+  },
+  {
+    "key": "booking.callNote",
+    "value": "No need to estimate now — we'll figure out the right setup on a call."
+  },
+  {
+    "key": "events.allPlanned",
+    "value": "All planned events ({count})"
+  },
+  {
+    "key": "events.rowEmpty",
+    "value": "Nothing here yet — check back soon."
+  },
+  {
+    "key": "eventGrid.datesTba",
+    "value": "Dates TBA"
+  },
+  {
+    "key": "team.memberAlt",
+    "value": "Team member"
+  },
+  {
+    "key": "instagram.heading",
+    "value": "@{handle} on Instagram"
+  },
+  {
+    "key": "instagram.follow",
+    "value": "Follow →"
+  },
+  {
+    "key": "instagram.viewPost",
+    "value": "View this post on Instagram"
+  },
+  {
+    "key": "instagram.teaser",
+    "value": "See the latest from the Hub on Instagram."
+  },
+  {
+    "key": "instagram.open",
+    "value": "Open @{handle}"
+  },
+  {
+    "key": "placeholder.photoNeeded",
+    "value": "Photo needed"
+  },
+  {
+    "key": "placeholder.aria",
+    "value": "Placeholder — photo needed: {label}"
+  },
+  {
+    "key": "eventPage.brand",
+    "value": "Commonshub"
+  },
+  {
+    "key": "eventPage.impressum",
+    "value": "Impressum"
+  }
+]

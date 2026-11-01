@@ -18,6 +18,9 @@ import TrainDirections from "@/components/TrainDirections";
 import { Metadata } from "next";
 import { generatePageMetadata } from "@/lib/utils/generatePageMetadata";
 import { editAttr } from "@/lib/directus/editAttr";
+import { notFound, redirect } from "next/navigation";
+import { getTranslations } from "next-intl/server";
+import { getSiteSettings } from "@/lib/cms/content";
 
 // Generate dynamic metadata for each page
 export async function generateMetadata(
@@ -46,7 +49,19 @@ export async function generateMetadata(
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const page = await getPageBySlug(slug);
+  const [page, site, t] = await Promise.all([
+    getPageBySlug(slug),
+    getSiteSettings(),
+    getTranslations(),
+  ]);
+
+  // A page with its own design (Directus: Pages → "fixed_route", e.g.
+  // /accommodation) is filled from its sections there, not rendered here.
+  const fixedRoute = (page as { fixed_route?: string | null } | null)?.fixed_route;
+  if (fixedRoute) {
+    if (fixedRoute.startsWith("/")) redirect(fixedRoute);
+    notFound(); // site-wide content holder (e.g. the footer), not a page
+  }
 
   // Fetch team members if this is a team page
   let teamMembers: Database['public']['Tables']['team_members']['Row'][] = [];
@@ -138,12 +153,12 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
             {/* Upcoming Events Section */}
             {page?.is_eventpage && (
-              <EventGrid title="UPCOMING EVENTS" filter="upcoming" />
+              <EventGrid title={t("eventGrid.upcoming")} filter="upcoming" />
             )}
 
             {/* Past Events Section */}
             {page?.is_eventpage && (
-              <EventGrid title="PAST EVENTS" filter="past" />
+              <EventGrid title={t("eventGrid.past")} filter="past" />
             )}
 
             {carousels.length > 0 &&
@@ -183,10 +198,11 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
             {page?.is_map && (
               <>
                 <div className="hero-content border-t">
-                  <h2 className="heading h2">location</h2>
-                  <div className="p mb-0">Austria</div>
-                  <div className="p mb-0">2651 Reichenau an der Rax</div>
-                  <div className="p">Richard von Schoeller-Straße 9</div>
+                  <h2 className="heading h2">{t("map.heading")}</h2>
+                  {/* Settings → Site settings → Address, shown country first. */}
+                  {[...site.address].reverse().map((line, i, all) => (
+                    <div key={line} className={i < all.length - 1 ? "p mb-0" : "p"}>{line}</div>
+                  ))}
                   <div
                     data-w-id="3c54adb5-0907-7961-a85c-afade22f192a"
                     className="hero-wrapper"

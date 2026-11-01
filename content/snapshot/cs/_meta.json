@@ -1,6 +1,5 @@
 {
   "locale": "cs",
-  "source": "mt",
-  "model": "local-flagship",
-  "needsReview": true
+  "source": "directus",
+  "captured_from": "admin.commons-hub.at (staging clone)"
 }
