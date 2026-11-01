@@ -813,6 +813,12 @@ main.page-sections > * {
       820px window, the header needs 815px in English and 912px in German
       (with the Sign-up link), so 960px leaves room for the longest locale.
    ───────────────────────────────────────────────────────────── */
+/* Product choice (Jeff, 2026-11-01): no "Sign up" link in the header.
+   /auth/sign-up itself still works. */
+header a[href="/auth/sign-up"] {
+  display: none !important;
+}
+
 @media (min-width: 768px) {
   body:has(> .scroll-indicator) {
     --rail-width: 5rem;
