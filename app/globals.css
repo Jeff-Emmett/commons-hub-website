@@ -800,3 +800,140 @@ main.page-sections > * {
   }
 
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Layout fixes (2026-11-01)
+   1. The fixed 80px left rail (.scroll-indicator) covered the first 80px of
+      full-width sections such as the hero slider: on desktop the body becomes
+      a two-column grid so content starts beside the rail.
+   2. Desktop nav items were fixed at 96px, so longer translated labels
+      ("VERANSTALTUNGEN", "GEMEINSCHAFT") overlapped and pushed the language /
+      login controls off-screen around 800–900px: items now size to their
+      label, and below 960px the mobile menu is used. Measured on staging at an
+      820px window, the header needs 815px in English and 912px in German
+      (with the Sign-up link), so 960px leaves room for the longest locale.
+   ───────────────────────────────────────────────────────────── */
+@media (min-width: 768px) {
+  body:has(> .scroll-indicator) {
+    --rail-width: 5rem;
+
+    display: grid;
+    grid-template-columns: var(--rail-width) minmax(0, 1fr);
+    grid-template-rows: 5rem minmax(calc(100vh - 5rem), auto) auto;
+    min-height: 100vh;
+    transition: grid-template-columns 250ms ease;
+  }
+
+  /* Add/remove .rail-hidden on <body> to animate the rail entrance. */
+  body:has(> .scroll-indicator).rail-hidden {
+    --rail-width: 0rem;
+  }
+
+  body:has(> .scroll-indicator) > div.h-20 {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  body:has(> .scroll-indicator) > .scroll-indicator {
+    grid-column: 1;
+    grid-row: 1 / -1;
+
+    position: sticky;
+    top: 5rem;
+    left: auto;
+    right: auto;
+
+    width: 5rem;
+    height: calc(100vh - 5rem);
+    margin-top: 5rem;
+    align-self: start;
+  }
+
+  body:has(> .scroll-indicator).rail-hidden > .scroll-indicator {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  /* Main content shifts right only on pages with the rail. */
+  body:has(> .scroll-indicator) > main,
+  body:has(> .scroll-indicator) > .max-w-6xl {
+    grid-column: 2;
+    grid-row: 2;
+    min-width: 0;
+  }
+
+  /* Body-level footers shift with the content. */
+  body:has(> .scroll-indicator) > footer {
+    grid-column: 2;
+    grid-row: 3;
+    min-width: 0;
+  }
+}
+
+/* Keep the existing mobile layout. */
+@media (max-width: 767px) {
+  body:has(> .scroll-indicator) {
+    display: block;
+    min-height: 0;
+  }
+}
+
+/* Use the mobile menu before translated labels can become unsafe. */
+@media (min-width: 768px) and (max-width: 959px) {
+  header [class~="hidden"][class~="md:flex"] {
+    display: none;
+  }
+
+  header [class~="md:hidden"] {
+    display: flex;
+  }
+}
+
+/* Intrinsic-width desktop navbar. */
+@media (min-width: 960px) {
+  header [class~="hidden"][class~="md:flex"] {
+    display: flex;
+    min-width: 0;
+  }
+
+  header [class~="md:hidden"] {
+    display: none;
+  }
+
+  header [class~="hidden"][class~="md:flex"] > nav {
+    display: flex;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  header [class~="hidden"][class~="md:flex"] > nav > a {
+    flex: 0 0 auto;
+    min-width: max-content;
+  }
+
+  header [class~="hidden"][class~="md:flex"] > nav > a > [class~="bg-animate"] {
+    width: auto !important;
+    min-width: max-content;
+    padding-inline: 0.5rem;
+    white-space: nowrap;
+  }
+
+  /* Remove the unused spacer after About. */
+  header [class~="hidden"][class~="md:flex"] > [class~="flex-grow"] {
+    flex: 0 0 0;
+    width: 0;
+    min-width: 0;
+  }
+
+  /* Protect language and login/loading controls. */
+  header [class~="hidden"][class~="md:flex"] > [class~="border-l"] {
+    flex: 0 0 auto;
+    min-width: max-content;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body:has(> .scroll-indicator) {
+    transition: none;
+  }
+}
